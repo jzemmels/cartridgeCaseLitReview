@@ -176,19 +176,19 @@ Lit review for cartridge case comparison algorithms
 
 - Roth et al. (2015) *Learning-based Ballistic Breech Face Impression Image Matching*
 
- - Synopsis
+  - Synopsis
 
- - Limitations
+  - Limitations
 
- - Contribution
+  - Contribution
 
 - Riva et al. (2016) *Objective Evaluation of Subclass Characteristics on Breech Face Marks*
 
- - Synopsis
+  - Synopsis
 
- - Limitations
+  - Limitations
 
- - Contribution
+  - Contribution
 
 - Tai and Eddy (2017) Forensic Data Matching Problems
 
@@ -206,19 +206,19 @@ Lit review for cartridge case comparison algorithms
 
 - Tai (2019) *Record Linkage and Matching Problems in Forensics*
 
- - Synopsis
+  - Synopsis
 
- - Limitations
+  - Limitations
 
- - Contributions
+  - Contributions
 
 - Riva et al. (2020) *Comparison and interpretation of impressed marks left by a firearm on cartridge cases – Towards an operational implementation of a likelihood ratio based technique*
 
- - Synopsis
+  - Synopsis
 
- - Limitations
+  - Limitations
 
- - Contributions
+  - Contributions
 
 ### Ballistics Papers
 
