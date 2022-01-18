@@ -136,6 +136,14 @@ Lit review for cartridge case comparison algorithms
 
 ### Cartridge Case Papers
 
+- Md Ghani et al. (2010) *Analysis of geometric moments as features for firearm identification*
+
+  - Synopsis:
+
+  - Limitations:
+
+  - Contribution:  
+
 - Fadul et al. (2011) *An Empirical Study to Improve the Scientific Foundation of Forensic Firearm and Tool Mark  Utilizing 10 Consecutively Manufactured Slides*
 
   - Synopsis:
@@ -150,11 +158,67 @@ Lit review for cartridge case comparison algorithms
 
   - Limitations
 
+- Gerules et al. (2013) *A survey of image processing techniques and statistics for ballistic specimens in forensic science*
+
+  - Synopsis:
+
+  - Limitations:
+
+  - Contribution:
+
+- Riva and Champod (2014) *Automatic Comparison and Evaluation of Impressions Left by a Firearm on Fired Cartridge Cases*
+
+  - Synopsis:
+
+  - Limitations:
+
+  - Contribution:
+
+- Roth et al. (2015) *Learning-based Ballistic Breech Face Impression Image Matching*
+
+ - Synopsis
+
+ - Limitations
+
+ - Contribution
+
+- Riva et al. (2016) *Objective Evaluation of Subclass Characteristics on Breech Face Marks*
+
+ - Synopsis
+
+ - Limitations
+
+ - Contribution
+
+- Tai and Eddy (2017) Forensic Data Matching Problems
+
+  - Synopsis
+
+  - Limitations
+
+  - Contribution
+
 - Tai and Eddy (2018) *A Fully Automatic Method for Comparing Cartridge Case Images*
 
   - Synopsis/Contribution:
 
   - Limitations
+
+- Tai (2019) *Record Linkage and Matching Problems in Forensics*
+
+ - Synopsis
+
+ - Limitations
+
+ - Contributions
+
+- Riva et al. (2020) *Comparison and interpretation of impressed marks left by a firearm on cartridge cases – Towards an operational implementation of a likelihood ratio based technique*
+
+ - Synopsis
+
+ - Limitations
+
+ - Contributions
 
 ### Ballistics Papers
 
