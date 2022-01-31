@@ -146,17 +146,19 @@ Lit review for cartridge case comparison algorithms
 
 - Fadul et al. (2011) *An Empirical Study to Improve the Scientific Foundation of Forensic Firearm and Tool Mark  Utilizing 10 Consecutively Manufactured Slides*
 
-  - Synopsis:
+  - Synopsis: Miami-Dade Police Department Crime Lab conducted a study using 10 consecutively manufactured 9mm Ruger sldies to assess the accuracy and reliability of conclusions made by 281 forensic examiners from 157 labs in 46 states & the District of Columbia. For each set of matching cartridge cases/bullets, examiners were given two known-match (or "known standards" as stated in the paper)specimens and a set of 15 questioned specimens - two of which matched to cartridge cases *not* provided as known standards to the examiner. They were tasked with determining whether any of the questioned specimens match to the known-match specimens. The overall error rate was 0.06%. For the two questioned specimens that came from outside of the known standard specimens, there were 188 eliminations (the correct conclusion), 138 inconclusives, and 4 false positives (the incorrect conclusion).
 
-  - Limitations:
+  - Limitations: From a sampling design perspective, a limitation of this study is that the specimens given to examiners were part of, as the 2016 PCAST report calls it, a "partly open set," meaning the examiners knew that 13 out of the 15 questioned specimens had to match one of the pairs of known-match specimens. Thus, if there were a particularly tricky questioned specimen, for example, the examiner could partially rely on a process of elimination to determine the correct matching specimens. Additionally, inconclusives, which made up 41.8% of all conclusions, were not considered erroneous and therefore were not considered in the error rate calculations.
 
-  - Contribution: For our purposes, the biggest contribution from this study is the set of cartridge cases that we commonly use to test the CMC method.
+  - Contribution: For our purposes, the biggest contribution from this study is the set of cartridge cases that we commonly use to test the CMC method. Parts of the study design, namely the usage of known match specimens to "learn" similarities & questioned scans to "test," are adapted in our CMC method validation procedure.
 
 - Weller et al. (2012) *Confocal microscopy analysis of breech face marks on fired cartridge cases from 10 consecutively manufactured pistol slides*
 
-  - Synopsis/Contribution:
+  - Synopsis: Nine test fires from 10 pistol slides were collected and a procedure similar to the CMC method for a grid size of 1 (i.e., the entire scan) is performed. Namely, one of the two scans is rotated and, for each rotation, the global CCF is calculated for every possible translation of one scan against the other, rotated scan. The authors select the maximum CCF value across all rotations/translations as the final similarity score. The results indicate that there is perfect separation between the non-match and match CCF scores.
 
-  - Limitations
+  - Limitations: The same vaguities in the CMC papers appear in this paper. For example, they provide the non-FFT formula for the CCF, yet do not indicate if this is actually how they calculate the CCF (which would presumably be intractable in-practice). They also indicate that a mask is created identifying "outliers" and "dropouts." They assert that these points are both excluded from the later registration calculations AND are "interpolated with respect to surrounding data." These two actions seem mutually exclusive, so it's ultimately unclear how the outliers/dropouts are defined and treated.
+
+  - Contribution: Similar to the Fadul data set, this set of scans is commonly used in the cartridge case literature and is available on the NBTRD.
 
 - Gerules et al. (2013) *A survey of image processing techniques and statistics for ballistic specimens in forensic science*
 
@@ -165,6 +167,14 @@ Lit review for cartridge case comparison algorithms
   - Limitations:
 
   - Contribution:
+
+- Baldwin et al. (2014) *A Study of False-Positive and False-Negative Error Rates in Cartridge Case Comparisons*
+
+  - Synopsis: The design of this study was similar to that of Fadul et al. (2011), except each of the 218 examiners were presented with 15 *separate* comparison problems. In particular, for each problem examiners were given one questioned sample and three known-match test fires, which might or might not have originated from the same source as the questioned sample.
+
+  - Limitations: The study does not assess the repeatability (an examiner making the same decision when shown the same scans at different times) nor reproducibility (homogeneity of conclusions across examiners on a particular comparison) of the conclusions. Additionally, like the Fadul study, inconclusives (making up 33.7% of conclusions), were again not considered in the error rate calculations.
+
+  - Contribution: This was the only study cited in the 2016 PCAST report to be "appropriately designed to test the foundational validity and estimate reliability." This indicates that future tests to, for example, assess the foundational validity and estimate reliability of the CMC method should follow a similar design.
 
 - Riva and Champod (2014) *Automatic Comparison and Evaluation of Impressions Left by a Firearm on Fired Cartridge Cases*
 
@@ -190,7 +200,15 @@ Lit review for cartridge case comparison algorithms
 
   - Contribution
 
-- Tai and Eddy (2017) Forensic Data Matching Problems
+- Tai and Eddy (2017) *Forensic Data Matching Problems*
+
+  - Synopsis
+
+  - Limitations
+
+  - Contribution
+
+- Warren and Sheets (2018) *Statistical Approaches to Type Determination of the Ejector Marks on Cartridge Cases*
 
   - Synopsis
 
@@ -200,11 +218,21 @@ Lit review for cartridge case comparison algorithms
 
 - Tai and Eddy (2018) *A Fully Automatic Method for Comparing Cartridge Case Images*
 
-  - Synopsis/Contribution:
+  - Synopsis: Details a procedure by which (2D) images of cartridge cases can be automatically preprocessed (using various image processing techniques), compared, and classified as matching/non-matching. For the comparison procedure, they propose a method that is almost identical to the comparison procedure in Weller et al. (2012).
+
+  - Limitations:
+
+  - Contribution: The cartridges and cartridges3D R packages are available on GitHub to reproduce the results shown in the paper. Much of the code provided in these packages was adapted for use in the cmcR package.
+
+- Tai (2019) *Record Linkage and Matching Problems in Forensics*
+
+  - Synopsis
 
   - Limitations
 
-- Tai (2019) *Record Linkage and Matching Problems in Forensics*
+  - Contributions
+
+- Giudice et al. (2019) *Siamese Ballistics Neural Network*
 
   - Synopsis
 
@@ -224,15 +252,57 @@ Lit review for cartridge case comparison algorithms
 
 - Biasotti (1959) *A Statistical Study of the Individual Characteristics of Fired Bullets*
 
+- Banno et al. (2004) *Three dimensional visualization and comparison of impressions on fired bullets*
+
+  - Synopsis:
+
+  - Limitations
+
+  - Contribution
+
+- Vorberger et al. (2008) *Surface Topography Analysis for a Feasibility Assessment of a National Ballistics Imaging Database*
+
+  - Synopsis:
+
+  - Limitations
+
+  - Contribution
+
+- Song et al. (2012) *Development of ballistics identificaiton - from image comparison to topography measurement in surface metrology*
+
+  - Synopsis:
+
+  - Limitations
+
+  - Contribution
+
 - Zheng et al. (2016) *NIST Ballistics Toolmark Research Database*
 
   - Link: [https://www.nist.gov/publications/nist-ballistics-toolmark-research-database#:~:text=The%20NIST%20Ballistics%20Toolmark%20Research,Justice's%20National%20Institute%20of%20Justice.](https://www.nist.gov/publications/nist-ballistics-toolmark-research-database#:~:text=The%20NIST%20Ballistics%20Toolmark%20Research,Justice's%20National%20Institute%20of%20Justice.)
 
-- Hare et al. (2017) *Automatic Matching of Bullet Land Impressions*
+- Vorburger et al. (2015) *Topography Measurements and Applications in Ballistics and Toolmark Identificaiton*
 
-  - Synopsis/Contribution:
+  - Synopsis:
 
   - Limitations
+
+  - Contribution
+
+- Hare et al. (2017) *Automatic Matching of Bullet Land Impressions*
+
+  - Synopsis: Proposes an automatic method for comparion 3D surface measurements of bullet land impressions by defining a set of similarity features and training/testing a random forest using a large number of comparisons. The procedure is able to correctly identify all 10,384 land-to-land matches of the James Hamby Study indicating that the defined feature space provides perfect separation between matches and non-matches.
+
+  - Limitations: 
+
+  - Contribution: The code used for this analysis is open-source in bulletr/bulletxtrctr for reproducibility purposes.
+
+- Duez et al. (2018) *Development and Valdiation of a Virtual Examination Tool for Firearm Forensics*
+
+  - Synopsis:
+
+  - Limitations
+
+  - Contribution
 
 - Vanderplas et al. (2020) *Comparison of three similarity scores for bullet LEA matching*
 
@@ -240,6 +310,21 @@ Lit review for cartridge case comparison algorithms
 
   - Limitations
 
+- Pisantanaroj et al. (2020) *Automated Firearm Classification from Bullet Markings Using Deep Learning*
+
+  - Synopsis:
+
+  - Limitations
+
+  - Contribution
+
+- Chapnick et al. (2021) *Results of the 3D Virtual Comparison Microscopy Error Rate (VCMER) Study for firearm forensics*
+
+  - Synopsis:
+
+  - Limitations
+
+  - Contribution
 
 ### Toolmark Papers
 
@@ -254,3 +339,49 @@ Lit review for cartridge case comparison algorithms
   - Synopsis/Contribution:
 
   - Limitations
+
+### Forensics Papers
+
+- NAS (2009) *Strengthening Forensic Science in the United States: A Path Forward*
+
+- PCAST (2016) *Forensic Science in Criminal Courts: Ensuring Scientific Validity of Feature-Comparison Methods*
+
+### Reproducibility Papers
+
+- Baggerly and Coombes (2009) *Deriving Chemosensitivity from Cell Lines: Forensic Bioinformatics and Reproducible Research in High-Throughput Biology*
+
+  - Synopsis: The authors examine results shared from several papers purporting to use a novel drug sensitivity technique (as of 2009) to predict patient response. Thanks to the data shared by the authors of the original papers, they were able to identify several small, yet significant mistakes that were made in the analysis that affected the final results and conclusions. Ultimately, the authors conclude that (1) raw data should be published for any study and (2) rather than using spreadsheet software like Excel, one should try to use scripting languages and report generating software like Sweave or knitr/rmarkdown to ensure that results in reports can consistently be reproduced.
+
+  - Limitations: 
+
+  - Contribution: This paper started a subfield of bioinformatics that the authors call "forensic bioinformatics." Apart from pointing out these errors, the authors also published a website that thoroughly documents their analysis to reproduce/understand the small errors [Website Link](https://bioinformatics.mdanderson.org/Supplements/ReproRsch-All/index.html).
+
+- Stodden (2011) *Trust your Science? Open Your Data and Code*
+
+- Peng (2011) *Reproducible Research in Computational Science*
+
+- Beggley and Ellis (2012)
+
+- Stodden et al. (2013) *Setting the Default to Reproducible: Reproducibility in Computational and Experimental Mathematics*
+
+- Freedman et al. (2015)
+
+- Desai and Kroll (2017) *Trust but Verify: A Guide to Algorithms and the Law*
+
+- Donoho (2017) *50 Years of Data Science*
+
+  - Synopsis: The author summarizes the last 50 years of the field of data science. Referencing Liberman (2010), the author discusses the development of a "Common Task Framework" (CTF) that involves "competitors" working towards a common task of improving prediction on private "refereed" test set by learning from a publicly available training data set - essentially Kaggle. However, this framework could also be used to describe how different research groups attempt to tackle the same data problems. The author calls the CTF framework, where many research groups are concentrated on a single task, the "secret sauce" of the predictive modeling (as opposed to inferential modeling) culture in terms of innovation. The author also discusses what he calls "Lesser Data Science," being mainly focused on the processing of "learning from data," to "Greater Data Science," which is a field of larger scope encompassing all steps between accessing/becoming acquainted with a data set to delivering results based on the data.
+ 
+  - Limitations: 
+
+  - Contribution: This paper is largely a summary/review of previous literature related to data science. Many of the concepts discussed, namely Common Task Framework and Greater Data Science tasks, could be used to describe/justify the development of the tools described in this presentation. 
+
+- National Academies of Sciences, Engineering, and Medicine (2019) *Reproducibility and Replicability in Science*
+
+  - Synopsis: The NASEM was tasked with assessing reproducibility and replicability in science. This report summarizes their findings and recommendations. Broadly, they recommend that open sharing of data and code used to derive published results should be provided by authors to make reproduction and replication easier.
+
+  - Limitations
+
+  - Contribution: Provides a definition for "*reproducibility* to mean computational reproducibility - obtaining consistent computational results using the same input data, computational steps, methods, and code, and conditions of analysis." The definition of "*replicability* to mean obtaining consistent results across studies aimed at answering the same scientific question, each of which has obtained its own data." Finally, *generalizability* "refers to the extetnd that results of a study apply in other contexts or populations that differ from the original one." By these definitions, it's clear that NIST has attained *internal* reproducibility. However, external reproducibility is not yet possible because we do not have access to the input (pre-processed) data, exact or computational steps, or code. Part of this work (the dissertation) will be determining whether *replicability* is possible, albeit with a new data set that is relatively small than what is necessary to establish replicability of the method in general.
+
+- Scott Long Presentation (3/6/20) *A Computing Workflow for Reproducible Results*
