@@ -262,19 +262,19 @@ Lit review for cartridge case comparison algorithms
 
 - Vorberger et al. (2008) *Surface Topography Analysis for a Feasibility Assessment of a National Ballistics Imaging Database*
 
-  - Synopsis:
+  - Synopsis: A study performed at NIST tried to determine whether "we" (being NIST researchers) can "distinguish and identify guns based on casings information sufficiently well to support a national ballistics identification system?" This question was ultimately answered in the affirmative, prompting the creation of the NIST Ballistics Toolmark Research Database (NBTRD). This report details various methods for collecting and comparing ballistics toolmark image data.
 
-  - Limitations
+  - Limitations: Similar to the future CMC papers, the authors are not very clear about precisely what algorithms they are using to perform the various registration and comparison procedures. For example, they provide the classical definition of the cross-correlation as a normalized moving product of two surface matrices, yet indicate in two sentences on page 55 that the "ACCF is implemented using frequency domain techniques in order to increase the speed of calculation" and that the "estimate of the optimal $\tau_x$ and $\tau_y$ [(registration translations)] is computed using a frequency domain approach." How this is actually implemented (e.g., how are missing values defined/treated?) is unclear.
 
-  - Contribution
+  - Contribution: This paper presented the idea of registering two cartridge cases using the maximum cross-correlation function over various rotations and translations before others. This would eventually lead to the development of the CMC-type methods.
 
 - Song et al. (2012) *Development of ballistics identificaiton - from image comparison to topography measurement in surface metrology*
 
-  - Synopsis:
+  - Synopsis: The authors discuss a procedure by which 2D optical and 3D topographical scans of bullets can be compared. In particular, this paper discusses how to compare bullet signatures extracted from a 3D topographical scan.
 
-  - Limitations
+  - Limitations: Few results are actually shared in this paper. Additionally, only conceptual descriptions are provided of the comparison procedure.
 
-  - Contribution
+  - Contribution: This was one of the first papers that NIST published that discussed the comparison of bullet signatures to identify matching/non-matching bullets.
 
 - Zheng et al. (2016) *NIST Ballistics Toolmark Research Database*
 
@@ -385,3 +385,41 @@ Lit review for cartridge case comparison algorithms
   - Contribution: Provides a definition for "*reproducibility* to mean computational reproducibility - obtaining consistent computational results using the same input data, computational steps, methods, and code, and conditions of analysis." The definition of "*replicability* to mean obtaining consistent results across studies aimed at answering the same scientific question, each of which has obtained its own data." Finally, *generalizability* "refers to the extetnd that results of a study apply in other contexts or populations that differ from the original one." By these definitions, it's clear that NIST has attained *internal* reproducibility. However, external reproducibility is not yet possible because we do not have access to the input (pre-processed) data, exact or computational steps, or code. Part of this work (the dissertation) will be determining whether *replicability* is possible, albeit with a new data set that is relatively small than what is necessary to establish replicability of the method in general.
 
 - Scott Long Presentation (3/6/20) *A Computing Workflow for Reproducible Results*
+
+### Visual Diagnostics Papers
+
+- Buja et al. (2009) Statistical inference for exploratory data analysis and model diagnostics
+
+  - Introduces protocols for using visual data summaries as statistics to reject or fail to reject an explicit or implicit null hypothesis. For example, in exploratory data anlaysis a null hypothesis may be that data are distributed symmetrically. A visualization of the data may indicate skewness which are grounds of rejecting the initial null hypothesis. Being able to pick out the visualization of real data out of a "lineup" of data simulated under the null hypothesis implies that a significant statistic (being the visualization).
+
+- Krause et al. (2017) A Workflow for Visual Diagnostics of Binary Classifiers using Instance-Level Explanations
+
+  - Introduces a workflow for explaining how a binary classifier arrived at its decision on *specific* data items. Treats the machine learning model as a black box, but provides a way to understand how model inputs are related to its output classification. READ THROUGH SECTIONS 3,4,5 AGAIN
+
+- Gomez et al. (2020) ViCE visual counterfactual explanations for machine learning models
+
+- Goode and Hofmann (2021) Visual diagnostics of an explainer model Tools for the assessment of LIME explanations
+
+- Hullman and Gelman (2021) Designing for Interactive Exploratory Data Analysis Requires Theories of Graphical Inference
+
+- Zhang et al. - 2021 - Visual Diagnostics for Constrained Optimisation with Application to Guided Tours
+
+Needed references for this section:
+
+- Alsallakh et al. (2014) Visual methods for analyzing probabilistic classification data
+
+- Amershi et al. (2015) Modeltracker: Redesigning performance analysis tools for machine learning
+
+- Cortez and Emberechts (2011) Opening black box data mining models using sensitivity analysis
+
+- Dasgupta et al. (2017) Familiarity vs trust: A comparative study of domain scientists' trust in visual analytics and conventional analysis methods
+
+- Kulesza et al. (2015) Principles of explanatory debugging to personalize interactive machine learning
+
+- Lim and Dey (2009) Assessing demand for intelligibility in context-aware applications
+
+- Lipton (2016) The mythos of model interpretability
+
+- Liu et al. (2017) Towards better analysis of machine learning models: A visual analytics perspective
+
+- Ren et al. (2017) Squares: Supporting interactive performance analysis for multiclass classifiers
