@@ -388,9 +388,27 @@ Lit review for cartridge case comparison algorithms
 
 ### Visual Diagnostics Papers
 
+- Lim and Dey (2009) Assessing demand for intelligibility in context-aware applications
+
 - Buja et al. (2009) Statistical inference for exploratory data analysis and model diagnostics
 
   - Introduces protocols for using visual data summaries as statistics to reject or fail to reject an explicit or implicit null hypothesis. For example, in exploratory data anlaysis a null hypothesis may be that data are distributed symmetrically. A visualization of the data may indicate skewness which are grounds of rejecting the initial null hypothesis. Being able to pick out the visualization of real data out of a "lineup" of data simulated under the null hypothesis implies that a significant statistic (being the visualization).
+
+- Cortez and Emberechts (2011) Opening black box data mining models using sensitivity analysis
+
+- Alsallakh et al. (2014) Visual methods for analyzing probabilistic classification data
+
+- Amershi et al. (2015) Modeltracker: Redesigning performance analysis tools for machine learning
+
+- Kulesza et al. (2015) Principles of explanatory debugging to personalize interactive machine learning
+
+- Lipton (2016) The mythos of model interpretability
+
+- Dasgupta et al. (2017) Familiarity vs trust: A comparative study of domain scientists' trust in visual analytics and conventional analysis methods
+
+- Liu et al. (2017) Towards better analysis of machine learning models: A visual analytics perspective
+
+- Ren et al. (2017) Squares: Supporting interactive performance analysis for multiclass classifiers
 
 - Krause et al. (2017) A Workflow for Visual Diagnostics of Binary Classifiers using Instance-Level Explanations
 
@@ -405,21 +423,3 @@ Lit review for cartridge case comparison algorithms
 - Zhang et al. - 2021 - Visual Diagnostics for Constrained Optimisation with Application to Guided Tours
 
 Needed references for this section:
-
-- Alsallakh et al. (2014) Visual methods for analyzing probabilistic classification data
-
-- Amershi et al. (2015) Modeltracker: Redesigning performance analysis tools for machine learning
-
-- Cortez and Emberechts (2011) Opening black box data mining models using sensitivity analysis
-
-- Dasgupta et al. (2017) Familiarity vs trust: A comparative study of domain scientists' trust in visual analytics and conventional analysis methods
-
-- Kulesza et al. (2015) Principles of explanatory debugging to personalize interactive machine learning
-
-- Lim and Dey (2009) Assessing demand for intelligibility in context-aware applications
-
-- Lipton (2016) The mythos of model interpretability
-
-- Liu et al. (2017) Towards better analysis of machine learning models: A visual analytics perspective
-
-- Ren et al. (2017) Squares: Supporting interactive performance analysis for multiclass classifiers
