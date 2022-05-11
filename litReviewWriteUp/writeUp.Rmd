@@ -4,17 +4,16 @@ author: "Joe Zemmels"
 output: 
   pdf_document:
       citation_package: natbib
-fontsize: 12pt
-header_includes: |
-  \usepackage[utf8]{inputenc}
-  \usepackage[english]{babel}
-  \usepackage{amsmath,amssymb,array}
-  \usepackage{booktabs}
-  \usepackage{subfig}
-  \usepackage{nameref}
-  \usepackage{natbib}
-  \usepackage{multirow}
-  \usepackage{setspace}\doublespacing
+header-includes:
+  - \usepackage{setspace}
+  - \doublespacing
+  - \usepackage[utf8]{inputenc}
+  - \usepackage[english]{babel}
+  - \usepackage{amsmath,amssymb,array}
+  - \usepackage{booktabs}
+  - \usepackage{subfig}
+  - \usepackage{nameref}
+  - \usepackage{natbib}
 urlcolor: blue
 link-citations: yes
 linkcolor: blue
@@ -34,9 +33,7 @@ source("code/supplementaryFunctions.R")
 ```
 
 
-A scientific method must be effective, accessible, and understandable for it to be accepted by the wider scientific community.
 As the need for computationally-intensive methods to analyze forensic data has grown, so too has the need for user-friendly tools to experiment with and improve upon these methods.
-
 In this work, we discuss developments to a particular class of algorithms used to compare cartridge case evidence known as the Congruent Matching Cells (CMC) method.
 Chapter [\#] discusses a modularization of the algorithm into a "pipeline" that enables reproducibility, experimentation, and comprehension.
 Chapter [\#] introduces novel pieces of this pipeline that we demonstrate provide improvements to the current state-of-the-art.
@@ -259,7 +256,7 @@ In the case of the cell-based comparison procedure discussed above, the total nu
 The criteria used to define "congruent matching" has changed across papers \citep{song_3d_2014,tong_fired_2014,tong_improved_2015,chen_convergence_2017} and will be discussed in greater detail in [Chapter].
 The authors of these papers have consistently used a decision boundary of six "Congruent Matching Cells" to distinguish matches from non-matches.
 
-\citet{Zhang2020} applies the Density-Based Spatial Clustering of Applications with Noise (DBSCAN) algorithm to the features from the cell-based comparison procedure to determine if any clusters form amongst the per-cell estimated registration values.
+\citet{Zhang2020} applies the Density-Based Spatial Clustering of Applications with Noise (DBSCAN) algorithm \citep{ester1996density} to the features from the cell-based comparison procedure to determine if any clusters form amongst the per-cell estimated registration values.
 This is based on the assumption that any cells that come to a consensus on their registration should form a cluster in translation $(x,y)$ and rotation $\theta$ space.
 \citet{Zhang2020} proposes a binary classifier based on whether any clusters are identified by the DBSCAN algorithm.
 If a cluster is found for a particular pairwise comparison, then that pair is classified as a "match" and otherwise as a "non-match."
@@ -339,78 +336,82 @@ An alternative is to develop algorithms from the ground-up to be intuitive for e
 \emph{Explainability} refers to the ability to identify the factors that contributed to the results of an algorithm \citep{Belle2021PrinciplesAP}.
 For example, understanding "why" a classifier predicted one class over another.
 
-[Discuss the benefit of diagnostics - cite Kathryn's LIME project, etc.].
+Myriad techniques exist to explain the results of an algorithm.
+These range from identifying instances of the training set that illuminate how the model operates \citep{Deng2018} to fitting more transparent models that approximate the complex model accurately \citep{Puiutta2020} to explaining the behavior of the algorithm in a small region of interest \citep{LIME,Goode2021}.
+Many of these methods require additional technical knowledge to interpret these explanations.
 
-[Narrow-in on visual diagnostics]
-[In this work, we develop a suite of visual diagnostic tools that can be used to explain the behavior of the cartridge case comparison pipeline.]
+A less technical approach is to use visualizations that facilitate understanding of model behavior.
+Properly constructed visuals enable both exploratory data analysis and diagnostics \citep{Buja2009}.
+Given that many of the procedures by which cartridge case evidence is captured, processed, and compared are based on image processing techniques, visual diagnostics seem like an intuitive mode of explanation for experts and lay-people alike. 
+In this work, we develop a suite of visual diagnostic tools that can be used to explain the behavior of the cartridge case comparison pipeline.
 
 ### Visual Diagnostic Features
+
+Much of the literature on "explainable" algorithms are focused on black-box machine learning algorithms such as Random Forests or Multi-layer Neural Networks.
+[More to say here?]
+Less focused is placed on constructing explainable features.
+Feature selection and engineering is a critical, often time-intensive step in the data analysis process that isn't often 
 
 We use the visual diagnostic tools discussed in Chapter [5] to develop a set of features.
 By definition, these features are human-interpretable unlike, for example, features that are calculated in the convolution layer of a convolutional neural network.
 The interpretability of these features imply that they can be explained to forensic examiners or lay-people.
 This will make it easier to introduce such methods into forensic labs and court rooms.
 
-Tools exist to explain a variety of models, but much of the literature on "explainable" algorithms are focused on machine learning algorithms such as Random Forests or Multi-layer Neural Networks.
-[More to say here?]
-Less focused is placed on constructing explainable features.
-Feature selection and engineering is a critical, often time-intensive step in the data analysis process that isn't often 
+<!-- ## Reproducibility, Comprehensibility, and Approachability of Algorithms -->
 
-## Reproducibility, Comprehensibility, and Approachability of Algorithms
+<!-- [Note that in the case of human intervention in the pipeline, it is difficult to quantify what we mean by "parameters."  -->
+<!-- For example, how would we measure the consistency, attentiveness, or skill of an individual performing manual pre-processing on a piece of evidence? -->
+<!-- This directly impacts the reproducibility of the pipeline as it is highly unlikely that the conditions under which a manual intervention occurred can be exactly reproduced. -->
+<!-- As we will see in [Chapter], ensuring reproducibility of the pipeline in this case all but requires providing a copy of the manually-processed data.] -->
 
-[Note that in the case of human intervention in the pipeline, it is difficult to quantify what we mean by "parameters." 
-For example, how would we measure the consistency, attentiveness, or skill of an individual performing manual pre-processing on a piece of evidence?
-This directly impacts the reproducibility of the pipeline as it is highly unlikely that the conditions under which a manual intervention occurred can be exactly reproduced.
-As we will see in [Chapter], ensuring reproducibility of the pipeline in this case all but requires providing a copy of the manually-processed data.]
+<!-- When evidence derived from a scientific method is presented to a judge or jury during court proceedings, there is an ethical imperative that the underlying scientific method be proven effective in its intended usage. -->
+<!-- Established in \cite{daubert}, the Daubert standard legally codifies this notion by requiring a scientific method to satisfy a set of criteria before being considered admissible. -->
+<!-- These criteria include that the method be generally accepted in the scientific community, that it can be and has been tested, and that it has a known error rate. -->
 
-When evidence derived from a scientific method is presented to a judge or jury during court proceedings, there is an ethical imperative that the underlying scientific method be proven effective in its intended usage.
-Established in \cite{daubert}, the Daubert standard legally codifies this notion by requiring a scientific method to satisfy a set of criteria before being considered admissible.
-These criteria include that the method be generally accepted in the scientific community, that it can be and has been tested, and that it has a known error rate.
+<!-- An impediment to achieving general acceptance of a scientific method is if the method is difficult to test by the wider scientific community, and therefore difficult to estimate its error rate [cite a paper on difficult to reproduce studies]. -->
+<!-- This prompts the question: how can we make scientific methods easier to test? -->
+<!-- Generally, "easier" implies that the method requires few resources or resources that the scientific community has access to.  -->
+<!-- In the case of computational algorithms, virtually everyone has access to a computer and therefore has the means to run (reasonably-sized) algorithms. -->
+<!-- Additional requirements include code and input data which, if not available, must be produced before an algorithm can be executed. -->
+<!-- This can be expensive and time-consuming [citation here]. -->
 
-An impediment to achieving general acceptance of a scientific method is if the method is difficult to test by the wider scientific community, and therefore difficult to estimate its error rate [cite a paper on difficult to reproduce studies].
-This prompts the question: how can we make scientific methods easier to test?
-Generally, "easier" implies that the method requires few resources or resources that the scientific community has access to. 
-In the case of computational algorithms, virtually everyone has access to a computer and therefore has the means to run (reasonably-sized) algorithms.
-Additional requirements include code and input data which, if not available, must be produced before an algorithm can be executed.
-This can be expensive and time-consuming [citation here].
+<!-- Comprehensibility = understanding what the algorithm is doing. Approachability = being able to use or change the algorithm yourself. -->
 
-Comprehensibility = understanding what the algorithm is doing. Approachability = being able to use or change the algorithm yourself.
+<!-- Baggerly and Coombes (2009) *Deriving Chemosensitivity from Cell Lines: Forensic Bioinformatics and Reproducible Research in High-Throughput Biology* -->
 
-Baggerly and Coombes (2009) *Deriving Chemosensitivity from Cell Lines: Forensic Bioinformatics and Reproducible Research in High-Throughput Biology*
+<!-- Donoho (2017) *50 Years of Data Science* -->
 
-Donoho (2017) *50 Years of Data Science*
+<!-- tidyverse functionality -->
 
-tidyverse functionality
+<!-- National Academies of Sciences, Engineering, and Medicine (2019) *Reproducibility and Replicability in Science* -->
 
-National Academies of Sciences, Engineering, and Medicine (2019) *Reproducibility and Replicability in Science*
+<!-- In cartridge case evidence, the Congruent Matching Cells (CMC) methods are one class of algorithms used to measure the similarity between two cartridge cases. -->
+<!-- Numerous authors have demonstrated the ability of the CMC methods to effectively distinguish between matching and non-matching pairs of cartridge cases. -->
+<!-- However, to-date only conceptual descriptions of the CMC methods, along with results derived from an internal implementation of the described algorithm, have been published for the wider scientific community. -->
+<!-- These published descriptions and results demonstrate that the authors' implementation of the CMC methods work as intended, yet fail to ensure others can reproduce or develop upon the published work without having to create their own implementation. -->
+<!-- By "reproduce," we mean \emph{computational reproducibility} as defined by the National Academy of Science, Engineering, and Medicine: -->
 
-In cartridge case evidence, the Congruent Matching Cells (CMC) methods are one class of algorithms used to measure the similarity between two cartridge cases.
-Numerous authors have demonstrated the ability of the CMC methods to effectively distinguish between matching and non-matching pairs of cartridge cases.
-However, to-date only conceptual descriptions of the CMC methods, along with results derived from an internal implementation of the described algorithm, have been published for the wider scientific community.
-These published descriptions and results demonstrate that the authors' implementation of the CMC methods work as intended, yet fail to ensure others can reproduce or develop upon the published work without having to create their own implementation.
-By "reproduce," we mean \emph{computational reproducibility} as defined by the National Academy of Science, Engineering, and Medicine:
+<!-- > Definition here -->
 
-> Definition here
+<!-- For a method to be widely accepted by the scientific community, results must be reproducible (by others). -->
 
-For a method to be widely accepted by the scientific community, results must be reproducible (by others).
+<!-- By definition, algorithms are repeatable assuming the same data are provided as input and a seed is set for any internal random number generation. -->
+<!-- That is to say, if the exact same procedure is performed on the same data on two separate occasions, then the results will be the same. -->
+<!-- However, reproducibility is still in-question for many forensic comparison algorithms. -->
+<!-- By reproducibility, we mean \emph{computational reproducibility} as defined by the [National Academy of Sciences, Engineering, and Medicine]: "obtaining consistent computational results using the same input data, computational steps, methods, code, and conditions of analysis." -->
+<!-- As we argue in [Chapter], many published forensic comparison algorithms fail to provide sufficient detail or resources to satisfy one or more of these criteria and, therefore, are not reproducible. -->
+<!-- In-short: if the code and data exist, then you should share it. -->
+<!-- Using a specific cartridge case comparison algorithm as an example, we detail a development process by which algorithms can not only satisfy reproducibility, but can also be more easily understood and accessed by the wider scientific community.  -->
 
-By definition, algorithms are repeatable assuming the same data are provided as input and a seed is set for any internal random number generation.
-That is to say, if the exact same procedure is performed on the same data on two separate occasions, then the results will be the same.
-However, reproducibility is still in-question for many forensic comparison algorithms.
-By reproducibility, we mean \emph{computational reproducibility} as defined by the [National Academy of Sciences, Engineering, and Medicine]: "obtaining consistent computational results using the same input data, computational steps, methods, code, and conditions of analysis."
-As we argue in [Chapter], many published forensic comparison algorithms fail to provide sufficient detail or resources to satisfy one or more of these criteria and, therefore, are not reproducible.
-In-short: if the code and data exist, then you should share it.
-Using a specific cartridge case comparison algorithm as an example, we detail a development process by which algorithms can not only satisfy reproducibility, but can also be more easily understood and accessed by the wider scientific community. 
+<!-- In Chapter 6, we introduce a taxonomy to classify various levels of computational reproducibility. -->
+<!-- We argue that currently-published versions of the CMC method are provided in the form of \emph{conceptual descriptions} while our implementation, paired with data that are open-source on the National Ballistics Toolmark Database [cite NBTRD], satisfies the definition of computational reproducibility provided by the NASEM [cite NASEM]. -->
 
-In Chapter 6, we introduce a taxonomy to classify various levels of computational reproducibility.
-We argue that currently-published versions of the CMC method are provided in the form of \emph{conceptual descriptions} while our implementation, paired with data that are open-source on the National Ballistics Toolmark Database [cite NBTRD], satisfies the definition of computational reproducibility provided by the NASEM [cite NASEM].
+<!-- Beyond considerations of reproducibility, which is a core tenet of science, are considerations of comprehensibility and approachability of an algorithm. -->
+<!-- [Discuss how pipeline aids in comprehension, experimentation]. -->
 
-Beyond considerations of reproducibility, which is a core tenet of science, are considerations of comprehensibility and approachability of an algorithm.
-[Discuss how pipeline aids in comprehension, experimentation].
+<!-- For data discussion: cite Vorberger et al. (2007), NBTRD, and TopMatch -->
 
-For data discussion: cite Vorberger et al. (2007), NBTRD, and TopMatch
-
-[Carpentry R package, gapminder reproducibility seminar] https://swcarpentry.github.io/r-novice-gapminder/
+<!-- [Carpentry R package, gapminder reproducibility seminar] https://swcarpentry.github.io/r-novice-gapminder/ -->
 
 <!-- ### Congruent Matching Cells Methodology -->
 
