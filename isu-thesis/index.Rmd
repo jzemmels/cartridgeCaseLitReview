@@ -67,7 +67,7 @@ In this work, we develop a method to supplement such an examination by providing
 \hypertarget{firearms-and-toolmarks-identification}{%
 \subsection{Firearms and Toolmarks Identification}\label{firearms-and-toolmarks-identification}}
 
-Firearms and toolmarks (F\&T) identification involves studying markings or impressions left by a hard surface, such as the metal of a firearm or other tool (e.g., screwdriver), on a softer surface \citep{Thompson2017}.
+Firearms and toolmarks (F \& T) identification involves studying markings or impressions left by a hard surface, such as the metal of a firearm or other tool (e.g., screwdriver), on a softer surface \citep{Thompson2017}.
 For example, a firearm barrel leaves toolmarks on a bullet as it travels through the barrel.
 In this work, we focus on impressions left on a cartridge during the firing process.
 
@@ -159,8 +159,8 @@ Note that the focus of this work is on the comparison of breech face impressions
 \hypertarget{an-overview-of-firearms-and-toolmarks-examinations}{%
 \subsubsection{An Overview of Firearms and Toolmarks Examinations}\label{an-overview-of-firearms-and-toolmarks-examinations}}
 
-Forensic firearm and toolmark (F\&T) identification has been performed in the United States for over 100 years \citep{Thompson2017}.
-For most of this time, trained F\&T examiners have used a \emph{comparison microscope}, such as the one shown in \autoref{fig:comparisonMicroscope}, to perform these examinations \citep{Zheng2014}.
+Forensic firearms and toolmarks (F \& T) identification has been performed in the United States for over 100 years \citep{Thompson2017}.
+For most of this time, trained F \& T examiners have used a \emph{comparison microscope}, such as the one shown in \autoref{fig:comparisonMicroscope}, to perform these examinations \citep{Zheng2014}.
 A comparison microscope consists of two compound microscopes that are joined via an \emph{optical bridge} which allows for viewing of the stages below each microscope simultaneously under the same eyepiece.
 The right image of \autoref{fig:comparisonMicroscope} shows an example of the view under a comparison microscope of two bullets with the white dotted line separating the two fields of view.
 
@@ -191,8 +191,8 @@ These characteristics relate to markings that are reproduced across a subgroup o
 For example, breech faces using the same milling machine may include markings that are unique to the milling machine \citep{firearmManufacturing}.
 As it can be difficult to distinguish between individual and subclass characteristics during an examination, an examiner's decision process may be affected if the existence of subclass characteristics is suspected.
 
-Many F\&T examiners in the United States adhere to the Association of Firearm and Toolmark Examiners (AFTE) Range of Conclusions when making their evidentiary conclusions \citep{AFTE1992}.
-According to these guidelines, there are six possible conclusions that can be made in a F\&T examination:
+Many F \& T examiners in the United States adhere to the Association of Firearms and Toolmarks Examiners (AFTE) Range of Conclusions when making their evidentiary conclusions \citep{AFTE1992}.
+According to these guidelines, there are six possible conclusions that can be made in a F \& T examination:
 
 \begin{enumerate}
 \item \textbf{Identification}: Agreement of a combination of individual characteristics and all discernible class characteristics where the extent of agreement exceeds that which can occur in the comparison of toolmarks made by different tools and is consistent with the agreement demonstrated by toolmarks known to have been produced by the same tool.
@@ -221,13 +221,13 @@ It should be noted that standard operating procedures for assessing and comparin
 For example, some labs collapse the three possible inconclusive decisions into a single decision \citep{Neuman2022} or prohibit examiners from making an elimination based on differences in individual characteristics \citep{Duez2017}.
 
 \hypertarget{why-should-firearm-and-toolmark-identification-change}{%
-\subsection{Why Should Firearm and Toolmark Identification Change?}\label{why-should-firearm-and-toolmark-identification-change}}
+\subsection{Why Should Firearms and Toolmarks Identification Change?}\label{why-should-firearm-and-toolmark-identification-change}}
 
-In 2009, the National Research Council released a report assessing a number of forensic disciplines including Firearm and Toolmark analysis.
-The report pointed out that F\&T analysis lacked a precisely defined process and that little research had been done to determine the reliability or repeatability of the methods.
+In 2009, the National Research Council released a report assessing a number of forensic disciplines including Firearms and Toolmarks analysis.
+The report pointed out that F \& T analysis lacked a precisely defined process and that little research had been done to determine the reliability or repeatability of the methods.
 Part of the recommendations from this study were to establish rigorously-validated laboratory procedures and \`\`develop automated techniques capable of enhancing forensic technologies \citep{council_strengthening_2009}."
 
-A number of studies have been performed to assess the reliability and repeatability of a firearm and toolmark examination (non-exhaustively: \citep{DeFrance2003,Hamby2009,fadulempirical2011,Stroman2014,Baldwin2014,Smith2016,MATTIJSSEN2020}).
+A number of studies have been performed to assess the reliability and repeatability of a firearms and toolmarks examination (non-exhaustively: \citep{DeFrance2003,Hamby2009,fadulempirical2011,Stroman2014,Baldwin2014,Smith2016,MATTIJSSEN2020}).
 All of these studies report extremely low error rates when examiners are asked to make conclusions for evidence for which the authors know ground truth (i.e., whether the bullets or cartridge cases are truly matching or non-matching).
 However, as pointed out in a 2016 report from the President's Council of Advisors on Science and Technology, many of these studies, save \citet{Baldwin2014}, were not \`\`appropriately designed to test the foundational validity and estimate reliability \citep{pcast2016}."
 The report asserts that additional, properly-designed studies should be performed to more rigorously establish the scientific validity of the discipline.
@@ -272,7 +272,7 @@ For example, the preprocessing step may include multiple sub-procedures to isola
 \autoref{fig:pipelineDiagram} shows three possible variations of the cartridge case comparison pipeline as well as the parameters requiring manual specification and alternative modules.
 The benefits of this modularization include easing the process of experimenting with different parameters/sub-procedures and improving the comprehensibility of the pipeline.
 
-{[}Update the pipeline diagram{]}
+[Update the pipeline diagram]
 
 \begin{figure}[!htbp]
 
@@ -284,7 +284,7 @@ The benefits of this modularization include easing the process of experimenting 
 \end{figure}
 
 In the following sections, we detail recent advances to each of the five steps in the pipeline outlined above.
-We narrow our focus to advances made in comparing F\&T evidence.
+We narrow our focus to advances made in comparing F \& T evidence.
 
 \hypertarget{digital-representations-of-evidence}{%
 \subsection{Digital Representations of Evidence}\label{digital-representations-of-evidence}}
@@ -408,7 +408,7 @@ Using these estimates, they are able to estimate the score-based likelihood rati
 This SLR can be viewed as a similarity score \citep{Garton2021}.
 
 In the case of the cell-based comparison procedure discussed above, the total number of cells that are deemed \`\`congruent matching" is used as a similarity score.
-The criteria used to define \`\`congruent matching" has changed across papers \citep{song_3d_2014,tong_fired_2014,tong_improved_2015,chen_convergence_2017} and will be discussed in greater detail in {[}Chapter{]}.
+The criteria used to define \`\`congruent matching" has changed across papers \citep{song_3d_2014,tong_fired_2014,tong_improved_2015,chen_convergence_2017} and will be discussed in greater detail in [Chapter].
 The authors of these papers have consistently used a decision boundary of six \`\`Congruent Matching Cells" to distinguish matches from non-matches.
 
 \citet{Zhang2020} applies the Density-Based Spatial Clustering of Applications with Noise (DBSCAN) algorithm \citep{Ester1996} to the features from the cell-based comparison procedure to determine if any clusters form amongst the per-cell estimated registration values.
@@ -436,9 +436,9 @@ This includes making code and data used in a paper easily-accessible to readers.
 Infrastructure already exists to ease the processing of developing, maintaining, and sharing open-source code and data.
 Data repositories such as the NIST Ballistics Toolmark Research Database \citep{Zheng2020} provide open access to raw data.
 \citet{Grning2018} discuss the use of package managers such as Conda \citep{anaconda}, container software such as Docker ([https://www.docker.com/](https://www.docker.com/)), and virtual machine software to preserve the entire data analysis environment in-perpetuity.
-For situations in which VMs or containers aren't available, software such as the manager R package allows users to \`\`compare package inventories across machines, users, and time to identify changes in functions and objects \citep{Rice2020}."
+For situations in which VMs or containers aren't available, software such as the `manager` R package allows users to \`\`compare package inventories across machines, users, and time to identify changes in functions and objects \citep{Rice2020}."
 \citet{Piccolo2016} reference repositories like Bioconductor \citep{Huber2015} that make it easy to document and distribute code.
-Further, software such as the knitr R package \citep{Xie2014} enable \`\`literate programming" in which prose and executed code can be interwoven to make it easier to understand the code's function.
+Further, software such as the `knitr` R package \citep{Xie2014} enable \`\`literate programming" in which prose and executed code can be interwoven to make it easier to understand the code's function.
 These tools make data, code, and derivative research findings more accessible, in terms of both acquisition and comprehensibility, to consumers and fellow researchers. 
 
 \hypertarget{diagnostic-tools}{%
@@ -466,7 +466,7 @@ Properly constructed visuals enable both exploratory data analysis and diagnosti
 Given that many of the procedures by which cartridge case evidence is captured, processed, and compared are based on image processing techniques, a visual diagnostic is an intuitive mode of explanation for experts and lay-people alike.
 In this work, we develop a suite of visual diagnostic tools that can be used to explain the behavior of the cartridge case comparison pipeline.
 
-{[}Discuss tidyverse tools for visual diagnostics. ggplot2, etc. Emphasize that rshiny enables users to actually physically engage with the analysis process.{]}
+[Discuss tidyverse tools for visual diagnostics. ggplot2, etc. Emphasize that rshiny enables users to actually physically engage with the analysis process.]
 
 \hypertarget{automating-and-improving-the-cartridge-case-identification-pipeline}{%
 \section{Automating and Improving the Cartridge Case Identification Pipeline}\label{automating-and-improving-the-cartridge-case-identification-pipeline}}
@@ -479,7 +479,7 @@ In this section, we review preliminaries needed to understand various sub-routin
 We first review image processing and computer vision algorithms that are commonly used in cartridge case comparison algorithms.
 Throughout this section, let $A$ and $B$ denote two images.
 Define these images to be 2D arrays of a given size where $A[m,n]$ and $B[m,n]$ each map to a spatially-ordered measurement value.
-For example, the measurement may be the height $z$ value of a cartridge case surface at a particular $[m,n]$ location.
+For example, the measurement may be the height $h$ value of a cartridge case surface at a particular $[m,n]$ location.
 
 \hypertarget{image-registration}{%
 \subsubsection{Image Registration}\label{image-registration}}
@@ -568,7 +568,7 @@ The Fast Fourier Transform (FFT) algorithm can be used to reduce the computation
 
 \autoref{fig:ccfTranslationExample} shows an example of two images $A$ and $B$ of dimension $100 \times 100$ and $21 \times 21$, respectively.
 The white boxes in both of the images are of dimension $10 \times 10$.
-The box in image A is centered on index {[}30,50{]} while the box in image B is centered on index {[}11,11{]}.
+The box in image A is centered on index [30,50] while the box in image B is centered on index [11,11].
 The right image shows the result of calculating the CCF using image $A$ as reference and $B$ as template.
 We see that the CCF achieves a maximum of 1, indicating a perfect match, at the translation value of $[m^\dagger,n^\dagger] = [22,-2]$.
 This represents that if image B were overlaid onto image A such that their center indices coincided, then image B would need to be shifted 22 units \`\`up" and 2 units \`\`left" to match perfectly with image A.
@@ -816,11 +816,11 @@ We see that seven points are classified in a single cluster and three points are
 \subsection{Features Based on Visual Diagnostics}\label{features-based-on-visual-diagnostics}}
 
 Much of the literature on \`\`explainable" algorithms are focused on black-box machine learning algorithms such as Random Forests or Multi-layer Neural Networks.
-{[}More to say here?{]}
+[More to say here?]
 Less focused is placed on constructing explainable features.
 Feature selection and engineering is a critical, often time-intensive step in the data analysis process that isn't often
 
-We use the visual diagnostic tools discussed in Chapter {[}5{]} to develop a set of features.
+We use the visual diagnostic tools discussed in Chapter [5] to develop a set of features.
 By definition, these features are human-interpretable unlike, for example, features that are calculated in the convolution layer of a convolutional neural network.
 The interpretability of these features imply that they can be explained to forensic examiners or lay-people.
 This will make it easier to introduce such methods into forensic labs and court rooms.
