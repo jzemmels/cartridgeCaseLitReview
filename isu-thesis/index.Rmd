@@ -16,6 +16,7 @@ formal: dissertation
 major: Statistics
 urlcolor: blue
 link-citations: true
+toc-depth: 2
 mprof:
   - Heike Hofmann
 member:
@@ -418,7 +419,27 @@ If a cluster is found for a particular pairwise comparison, then that pair is cl
 \hypertarget{reproducibility-of-comparison-pipelines}{%
 \subsection{Reproducibility of Comparison Pipelines}\label{reproducibility-of-comparison-pipelines}}
 
-{[}Discuss concepts related to reproducibility and repeatability in science (cite problems related to reproducibility), then narrow to algorithms (cite computational reproducibility papers), then narrow to forensic comparison algorithms, then end with how modularization enables reproducibility of forensic comparison algorithms.{]}
+\citet{nasem_2019} defines reproducibility as \`\`obtaining consistent computational results using the same input data, computational steps, methods, code, and conditions of analysis."
+While not exact in their definition of \`\`consistent," the authors do assert that, barring a few exceptions, it is reasonable to expect that the results obtained by a second researcher, after applying the exact same processing steps to the exact same data, be the exact same as the original results.
+Among the exceptions given is if the original researcher had made a mistake in writing the original source code.
+In either case, they assert that \`\`a study's data and code have to be available in order for others to reproduce and confirm results."
+Researchers can not only easily verify the results given data and code, they can also incorporate the materials into their own research and thus improve or accelerate discovery \citep{Stodden2018b}.
+
+A number of studies indicate that computationally reproducible research is sparse across various disciplines.
+\citet{Stodden2018a} and \citet{Stodden2018b} studied the reproducibility of articles sampled from the journals \emph{Science} and the \emph{Journal of Computational Physics}, respectively.
+In the former, \citet{Stodden2018a} found that only 3 of 204 randomly selected articles from \emph{Science} were \`\`straightforward to reproduce with minimal effort;" despite a journal policy requiring that all code and data used in the paper be made available to any reader.
+In the latter, \citet{Stodden2018b} found that zero of 306 randomly selected articles from the \emph{Journal of Computaional Physics} were \`\`straightforward to reproduce with minimal effort" and, at best, that five articles were \`\`reproducible after some tweaking."
+Similar findings were found in \citet{CChang2022} (29 of 59 economic papers reproducible), \citet{Iqbal2016} (zero of 268 biomedical papers provided raw data and 1 in 268 linked to a full study protocol), \citet{Duvendack2015} (50\% or more published articles include data or code in only 27 of 333 economics journals), and \citet{Gundersen2018} (24 of 400 AI conference papers included code).
+A common recommendation amongst these authors is the establishment of rigorous standards for reproducibility.
+This includes making code and data used in a paper easily-accessible to readers.
+
+Infrastructure already exists to ease the processing of developing, maintaining, and sharing open-source code and data.
+Data repositories such as the NIST Ballistics Toolmark Research Database \citep{Zheng2020} provide open access to raw data.
+\citet{Grning2018} discuss the use of package managers such as Conda \citep{anaconda}, container software such as Docker ([https://www.docker.com/](https://www.docker.com/)), and virtual machine software to preserve the entire data analysis environment in-perpetuity.
+For situations in which VMs or containers aren't available, software such as the manager R package allows users to \`\`compare package inventories across machines, users, and time to identify changes in functions and objects \citep{Rice2020}."
+\citet{Piccolo2016} reference repositories like Bioconductor \citep{Huber2015} that make it easy to document and distribute code.
+Further, software such as the knitr R package \citep{Xie2014} enable \`\`literate programming" in which prose and executed code can be interwoven to make it easier to understand the code's function.
+These tools make data, code, and derivative research findings more accessible, in terms of both acquisition and comprehensibility, to consumers and fellow researchers. 
 
 \hypertarget{diagnostic-tools}{%
 \section{Diagnostic Tools}\label{diagnostic-tools}}
