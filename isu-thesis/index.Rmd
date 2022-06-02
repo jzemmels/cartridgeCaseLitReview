@@ -26,7 +26,7 @@ member:
   - Richard Stone
   - Susan VanderPlas
 abstract: |
-  This is your abstract.
+  As the need for computationally-intensive methods to analyze forensic data has grown, so too has the need for user-friendly tools to experiment with and improve upon these methods. In this work, we discuss an algorithm used to objectively measure the similarity between cartridge cases. Chapter 2 discusses a modularization of the algorithm into a \`\`pipeline" that enables reproducibility, experimentation, and comprehension. Chapter 3 details a suite of diagnostic tools that illuminate the inner-workings of the algorithm and help determine when and why the algorithm does or does not \`\`work" correctly. Chapter 4 introduces novel pieces of this pipeline that we demonstrate are improvements to the current state-of-the-art.
 ---
 
 ```{r setup, include=FALSE}
@@ -49,12 +49,6 @@ knitr::opts_chunk$set(
 <!-- \hypertarget{literature-review}{% -->
 <!-- \chapter{LITERATURE REVIEW}\label{literature-review}} -->
 # LITERATURE REVIEW
-
-As the need for computationally-intensive methods to analyze forensic data has grown, so too has the need for user-friendly tools to experiment with and improve upon these methods.
-In this work, we discuss an algorithm used to objectively measure the similarity between cartridge cases.
-Chapter 2 discusses a modularization of the algorithm into a \`\`pipeline" that enables reproducibility, experimentation, and comprehension.
-Chapter 3 details a suite of diagnostic tools that illuminate the inner-workings of the algorithm and help determine when and why the algorithm does or does not \`\`work" correctly.
-Chapter 4 introduces novel pieces of this pipeline that we demonstrate are improvements to the current state-of-the-art.
 
 <!-- \hypertarget{preliminaries-forensic-examinations}{% -->
 <!-- \section{Preliminaries: Forensic Examinations}\label{preliminaries-forensic-examinations}} -->
