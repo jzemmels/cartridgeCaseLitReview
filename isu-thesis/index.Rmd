@@ -573,6 +573,7 @@ The right image shows the result of calculating the CCF using image $A$ as refer
 We see that the CCF achieves a maximum of 1, indicating a perfect match, at the translation value of $[m^\dagger,n^\dagger] = [22,-2]$.
 This represents that if image B were overlaid onto image A such that their center indices coincided, then image B would need to be shifted 22 units \`\`up" and 2 units \`\`left" to match perfectly with image A.
 
+ 
 \begin{figure}[!htbp]
 
 {\centering \includegraphics[width=\textwidth]{thesis_files/figure-latex/unnamed-chunk-13-1} 
