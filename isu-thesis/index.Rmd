@@ -272,7 +272,7 @@ For example, the preprocessing step may include multiple sub-procedures to isola
 \autoref{fig:pipelineDiagram} shows three possible variations of the cartridge case comparison pipeline as well as the parameters requiring manual specification and alternative modules.
 The benefits of this modularization include easing the process of experimenting with different parameters/sub-procedures and improving the comprehensibility of the pipeline.
 
-[Update the pipeline diagram] 
+[Update the pipeline diagram]
 
 \begin{figure}[!htbp]
 
