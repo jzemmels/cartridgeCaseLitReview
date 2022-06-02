@@ -38,6 +38,7 @@ jobs:
       - name: Build site
         run: |
           setwd("./isu-thesis/")
+          print(getwd())
           bookdown::render_book('index.rmd')
           setwd("../")
         shell: Rscript {0}
