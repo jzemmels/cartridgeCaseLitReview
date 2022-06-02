@@ -576,7 +576,7 @@ This represents that if image B were overlaid onto image A such that their cente
  
 \begin{figure}[!htbp]
 
-{\centering \includegraphics[width=\textwidth]{thesis_files/figure-latex/unnamed-chunk-13-1} 
+{\centering \includegraphics[width=\textwidth]{figures/unnamed-chunk-13-1} 
 
 }
 
@@ -630,7 +630,7 @@ We see that the edges of the box are better-preserved compared to the lowpass fi
 
 \begin{figure}[!htbp]
 
-{\centering \includegraphics[width=\textwidth]{thesis_files/figure-latex/unnamed-chunk-14-1} 
+{\centering \includegraphics[width=\textwidth]{figures/unnamed-chunk-14-1} 
 
 }
 
@@ -727,7 +727,7 @@ In practice, there may be two or more disconnected foreground regions in $A$ to 
 
 \begin{figure}[!htbp]
 
-{\centering \includegraphics[width=\textwidth]{thesis_files/figure-latex/unnamed-chunk-15-1} 
+{\centering \includegraphics[width=\textwidth]{figures/unnamed-chunk-15-1} 
 
 }
 
@@ -754,7 +754,7 @@ If, for example, $Minpts = 2$, then $x$ would be considered a core point.
 
 \begin{figure}[!htbp]
 
-{\centering \includegraphics[width=\textwidth]{thesis_files/figure-latex/unnamed-chunk-16-1} 
+{\centering \includegraphics[width=\textwidth]{figures/unnamed-chunk-16-1} 
 
 }
 
@@ -770,7 +770,7 @@ All three points are core points and although the points located at $(4,4)$ and 
 
 \begin{figure}[!htbp]
 
-{\centering \includegraphics[width=\textwidth]{thesis_files/figure-latex/unnamed-chunk-17-1} 
+{\centering \includegraphics[width=\textwidth]{figures/unnamed-chunk-17-1} 
 
 }
 
@@ -783,7 +783,7 @@ While density-reachability requires that all points in-between two points be cor
 
 \begin{figure}[!htbp]
 
-{\centering \includegraphics[width=\textwidth]{thesis_files/figure-latex/unnamed-chunk-18-1} 
+{\centering \includegraphics[width=\textwidth]{figures/unnamed-chunk-18-1} 
 
 }
 
@@ -806,7 +806,7 @@ We see that seven points are classified in a single cluster and three points are
 
 \begin{figure}[!htbp]
 
-{\centering \includegraphics[width=\textwidth]{thesis_files/figure-latex/unnamed-chunk-19-1} 
+{\centering \includegraphics[width=\textwidth]{figures/unnamed-chunk-19-1} 
 
 }
 
