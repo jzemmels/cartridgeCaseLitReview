@@ -3,7 +3,7 @@
 on:
   push:
     paths: ['**.Rmd']
-
+    
 name: render-rmarkdown
 
 jobs:
