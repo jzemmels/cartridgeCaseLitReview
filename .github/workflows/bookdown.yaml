@@ -36,7 +36,10 @@ jobs:
           restore-keys: bookdown-
 
       - name: Build site
-        run: xfun::in_dir('isu-thesis', bookdown::render_book('index.rmd'))
+        run: |
+          setwd("./isu-thesis/")
+          bookdown::render_book('index.rmd')
+          setwd("../")
         shell: Rscript {0}
 
       - name: Deploy to GitHub pages 🚀
