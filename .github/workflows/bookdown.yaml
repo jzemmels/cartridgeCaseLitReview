@@ -37,6 +37,8 @@ jobs:
 
       - name: Build site
         run: |
+          install.packages('tinytex')
+          tinytex::install_tinytex()
           setwd("./isu-thesis/")
           bookdown::render_book('index.Rmd')
           setwd("../")
