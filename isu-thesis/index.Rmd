@@ -75,7 +75,7 @@ In this work, we focus on impressions left on a cartridge during the firing proc
 
 In this section, we describe the basic process of firing a handgun or rifle using a cartridge.
 A \emph{cartridge} consists of a metal casing containing primer, gunpowder, and a bullet.
-\autoref{fig:cartridgeDiagram} shows a cross-section of a cartridge featuring these components \citep{calibersExplained}.
+Figure \@ref(fig:cartridgeDiagram) shows a cross-section of a cartridge featuring these components \citep{calibersExplained}.
 
 <!-- \begin{figure}[!htbp] -->
 
@@ -92,7 +92,7 @@ knitr::include_graphics("images/bulletdiagram1.png")
 
 
 To initiate the firing process, a cartridge is loaded into an area in the back of the barrel known as the \emph{chamber}.
-\autoref{fig:pistolParts} shows an example of a cartridge loaded into the chamber of a pistol \citep{rattenbury}.
+Figure \@ref(fig:pistolParts) shows an example of a cartridge loaded into the chamber of a pistol \citep{rattenbury}.
 In this example, the hammer of the pistol is pulled back such that the firing pin is held back under spring tension.
 Upon squeezing the trigger, the firing pin is released and travels forwards at a high velocity.
 The firing pin strikes the primer of the cartridge case, causing it to explode.
@@ -110,7 +110,7 @@ The firing pin strikes the primer of the cartridge case, causing it to explode.
 knitr::include_graphics("images/Parts-pistol.png")
 ```
 
-As shown in \autoref{fig:firingCartridge}, the explosion of the primer ignites the powder in the cartridge \citep{hampton}.
+As shown in Figure \@ref(fig:firingCartridge), the explosion of the primer ignites the powder in the cartridge \citep{hampton}.
 Gas rapidly expands in the cartridge causing the bullet to travel down the barrel.
 At the same time, the rest of the cartridge is sent towards the back of the barrel.
 
@@ -130,7 +130,7 @@ knitr::include_graphics("images/firingCartridgeDiagram.jpg")
 As the bullet leaves the barrel, the cartridge case strikes the back wall of the barrel, known as the \emph{breech face}, with considerable force.
 Any markings on the breech face are imprinted onto the cartridge case, creating the so-called \emph{breech face impressions}.
 These impressions are analogous to a barrel's \`\`fingerprint" left on the cartridge case.
-\autoref{fig:impressionDiagram} shows cartoon examples of breech face markings that appear on cartridge cases \citep{hampton}.
+Figure \@ref(fig:impressionDiagram) shows cartoon examples of breech face markings that appear on cartridge cases \citep{hampton}.
 
 <!-- \begin{figure}[!htbp] -->
 
@@ -145,7 +145,7 @@ These impressions are analogous to a barrel's \`\`fingerprint" left on the cartr
 knitr::include_graphics("images/breechFaceImpressionDiagram.jpg")
 ```
 
-\autoref{fig:realCartridgeCase} shows the base of a fired cartridge \citep{hampton}.
+Figure \@ref(fig:realCartridgeCase) shows the base of a fired cartridge \citep{hampton}.
 The hole to the south-east of the center of the primer is the impression left by the firing pin.
 Note the horizontal striated breech face markings on the primer to the left of the firing pin impression.
 
@@ -163,7 +163,7 @@ knitr::include_graphics("images/realCartridgeCaseImage.jpg")
 ```
 
 After the bullet has left the barrel, the extractor pin and ejector push the cartridge case out of the chamber.
-As shown in \autoref{fig:extractorMarkings}, these can leave additional markings on the cartridge \citep{hampton}.
+As shown in Figure \@ref(fig:extractorMarkings), these can leave additional markings on the cartridge \citep{hampton}.
 Firing pin, breech face, extractor pin and ejector, and other possible markings are all used in a forensic examination to determine whether two cartridge cases were fired from the same firearm.
 Note that the focus of this work is on the comparison of breech face impressions specifically.
 
@@ -186,9 +186,9 @@ knitr::include_graphics("images/extractorPinDiagram.png")
 #### An Overview of Firearms and Toolmarks Examinations
 
 Forensic firearms and toolmarks (F \& T) identification has been performed in the United States for over 100 years \citep{Thompson2017}.
-For most of this time, trained F \& T examiners have used a \emph{comparison microscope}, such as the one shown in \autoref{fig:comparisonMicroscope}, to perform these examinations \citep{Zheng2014}.
+For most of this time, trained F \& T examiners have used a \emph{comparison microscope}, such as the one shown in Figure \@ref(fig:comparisonMicroscope), to perform these examinations \citep{Zheng2014}.
 A comparison microscope consists of two compound microscopes that are joined via an \emph{optical bridge} which allows for viewing of the stages below each microscope simultaneously under the same eyepiece.
-The right image of \autoref{fig:comparisonMicroscope} shows an example of the view under a comparison microscope of two bullets with the white dotted line separating the two fields of view.
+The right image of Figure \@ref(fig:comparisonMicroscope) shows an example of the view under a comparison microscope of two bullets with the white dotted line separating the two fields of view.
 
 <!-- \begin{figure}[!htbp] -->
 
@@ -301,7 +301,7 @@ Broadly, the steps of the pipeline include:
 This is similar to the structure discussed in \citet{Rice2020}.
 We add to this structure the emphasis that each step of the pipeline can be further broken-down into modularized pieces.
 For example, the preprocessing step may include multiple sub-procedures to isolate a region of interest of the evidence.
-\autoref{fig:pipelineDiagram} shows three possible variations of the cartridge case comparison pipeline as well as the parameters requiring manual specification and alternative modules.
+Figure \@ref(fig:pipelineDiagram) shows three possible variations of the cartridge case comparison pipeline as well as the parameters requiring manual specification and alternative modules.
 The benefits of this modularization include easing the process of experimenting with different parameters/sub-procedures and improving the comprehensibility of the pipeline.
 
 [Update the pipeline diagram]
@@ -336,7 +336,7 @@ One common 3D scanning procedure is disc scanning confocal microscopy.
 This procedure works by shining a focused beam of light on the cartridge case surface.
 This light is reflected back onto a pinhole allowing a limited height range to pass through.
 The microscope scans through different height range \`\`slices" and compiles all these slices into a single 3D topography of the cartridge case primer surface.
-The Microdisplay Scan Confocal Microscope from Sensofar\texttrademark~Metrology is shown in \autoref{fig:sensofarScanner} \citep{bermudez2017confocal}.
+The Microdisplay Scan Confocal Microscope from Sensofar\texttrademark~Metrology is shown in Figure \@ref(fig:sensofarScanner) \citep{bermudez2017confocal}.
 
 <!-- \begin{figure}[!htbp] -->
 
@@ -351,7 +351,7 @@ The Microdisplay Scan Confocal Microscope from Sensofar\texttrademark~Metrology 
 knitr::include_graphics("images/sensofarScanner.png")
 ```
 
-\autoref{fig:cartridgeCaseImages} shows a 2D image and 3D topography of the same cartridge case primer from \citet{fadulempirical2011}.
+Figure \@ref(fig:cartridgeCaseImages) shows a 2D image and 3D topography of the same cartridge case primer from \citet{fadulempirical2011}.
 
 <!-- \begin{figure}[!htbp] -->
 
@@ -367,7 +367,7 @@ knitr::include_graphics("images/fadul1-1_sidebyside.PNG")
 ```
 
 More recently, Cadre Forensics\texttrademark~introduced the TopMatch-3D High-Capacity Scanner \citep{topmatch}.
-A tray of 15 fired cartridge cases and the scanner are shown in \autoref{fig:topMatchScanner} \citep{topmatchFlyer}.
+A tray of 15 fired cartridge cases and the scanner are shown in Figure \@ref(fig:topMatchScanner) \citep{topmatchFlyer}.
 This scanner collects images under various lighting conditions of a gel pad into which the cartridge case surface is impressed and combines these images into a regular 2D array called a \emph{surface matrix}.
 The physical dimensions of these objects are about 5.5 $mm^2$ captured at a resolution of 1.84 microns per pixel (1000 microns equals 1 mm).
 
@@ -385,7 +385,7 @@ knitr::include_graphics("images/TopMatchSystem7.png")
 ```
 
 When applied to ballistics evidence, these 3D scans are commonly stored in the ISO standard x3p file format \citep{ISO25178-72}.
-x3p is a container consisting of a single surface matrix representing the height value of the surface and metadata concerning the parameters under which the scan was taken as shown in \autoref{fig:x3pFlowchart} \citep{Zheng2020}.
+x3p is a container consisting of a single surface matrix representing the height value of the surface and metadata concerning the parameters under which the scan was taken as shown in Figure \@ref(fig:x3pFlowchart) \citep{Zheng2020}.
 It has been empirically demonstrated that comparing 3D topographic scans of cartridge case evidence leads to more accurate conclusions compared to comparing 2D optical images of the same evidence \citep{Tai2019,tong_fired_2014,song_3d_2014}.
 
 <!-- \begin{figure}[!htbp] -->
@@ -406,7 +406,7 @@ knitr::include_graphics("images/x3pFlowchart.jpg")
 ### Preprocessing Procedures for Forensic Data
 
 When capturing the surface of a cartridge case, the result is bound to contain extraneous regions due to the incongruity between the circular primer and the rectangular array in which the surface data are stored.
-\autoref{fig:cartridgeCaseImages} shows an example of a 2D image and 3D scan of the same cartridge case.
+Figure \@ref(fig:cartridgeCaseImages) shows an example of a 2D image and 3D scan of the same cartridge case.
 We can see, for example, that the corners of these arrays include non-primer regions of the cartridge case surface.
 Additionally, the center of the cartridge case primer features an impression left by the firing pin during the firing process.
 In most applications, impressions left by the firing pin are compared separately from the breech face impressions \citep{Zhang2016}.
@@ -627,7 +627,7 @@ where $\mathcal{F}$ and $\mathcal{F}^{-1}$ denote the discrete Fourier and inver
 Because the product on the right-hand side is calculated pointwise, this result allows us to trade the moving sum computations from the definition of the CCF for two forward Fourier transformations, a pointwise product, and an inverse Fourier transformation.
 The Fast Fourier Transform (FFT) algorithm can be used to reduce the computational load considerably.
 
-\autoref{fig:ccfTranslationExample} shows an example of two images $A$ and $B$ of dimension $100 \times 100$ and $21 \times 21$, respectively.
+Figure \@ref(fig:ccfTranslationExample) shows an example of two images $A$ and $B$ of dimension $100 \times 100$ and $21 \times 21$, respectively.
 The white boxes in both of the images are of dimension $10 \times 10$.
 The box in image A is centered on index [30,50] while the box in image B is centered on index [11,11].
 The right image shows the result of calculating the CCF using image $A$ as reference and $B$ as template.
@@ -676,7 +676,7 @@ A_{lp,\sigma}[m,n] = \mathcal{F}^{-1}\left(\mathcal{F}(A) \odot \mathcal{F}(K)\r
 $$
 You will note the similarity between this operation, known as \emph{convolution}, and the calculation of the CCF given above \citep{ISO1661021}.
 
-\autoref{fig:gaussianFilterExample} shows an image $A$ of a box undergoing the injection of Gaussian noise (noise standard deviation $\sigma_n = 0.3$) followed by the application of various filters.
+Figure \@ref(fig:gaussianFilterExample) shows an image $A$ of a box undergoing the injection of Gaussian noise (noise standard deviation $\sigma_n = 0.3$) followed by the application of various filters.
 While the box is obscured due to noise in the middle image, the lowpass filter (kernel standard deviation $\sigma_k = 2$) recovers some of the definition of the box seen in the original image $A$.
 
 If a lowpass filter \`\`smooths" the values of an image, then a \emph{highpass} filter performs a \`\`sharpening" operation.
@@ -685,13 +685,13 @@ More specifically, for image $A$ and kernel standard deviation $\sigma$, the hig
 A_{hp,\sigma} = A - A_{lp,\sigma}.
 \end{align*}
 The highpass filter therefore removes larger-scale (smooth) structure from an image and retains high-frequency structure such as noise or edges.
-An example of a highpass-filtered image $A$ is shown in \autoref{fig:gaussianFilterExample}.
+An example of a highpass-filtered image $A$ is shown in Figure \@ref(fig:gaussianFilterExample).
 We can see that the smooth interior of the box is effectively removed from the image while the edges are preserved.
 
 Finally, the bandpass filter performs the highpass sharpening followed by the lowpass smoothing operations.
 Generally, the highpass kernel's standard deviation will be considerably larger than that of the lowpass kernel.
 This leads to retaining sharp edges while also reducing noise.
-An example of a bandpass filtered image $A$ is shown in \autoref{fig:gaussianFilterExample}.
+An example of a bandpass filtered image $A$ is shown in Figure \@ref(fig:gaussianFilterExample).
 We see that the edges of the box are better-preserved compared to the lowpass filter figure while the interior of the box is better-preserved compared to the highpass filter figure.
 
 <!-- \begin{figure}[!htbp] -->
@@ -793,7 +793,7 @@ W \ominus B =
 $$
 Erosion by $B$ therefore shrinks the region $W$ in $A$ by one index in each direction.
 
-\autoref{fig:dilationErosionExample} shows the example considered here in terms of black and white representations of $A$ undergoing dilation and erosion by $B$.
+Figure \@ref(fig:dilationErosionExample) shows the example considered here in terms of black and white representations of $A$ undergoing dilation and erosion by $B$.
 In practice, there may be two or more disconnected foreground regions in $A$ to which dilation or erosion can be independently applied.
 
 <!-- \begin{figure}[!htbp] -->
@@ -823,7 +823,7 @@ The \emph{$\epsilon$-neighborhood} of $x$ is defined as the set $N_{\epsilon}(x)
 Given a minimum number of points $Minpts \in \mathbb{N}$, observation $x$ is called a \emph{core point} with respect to $\epsilon$ and $Minpts$ if $|N_{\epsilon}(x)| \geq Minpts$.
 Both $\epsilon$ and $Minpts$ are selected by the user.
 
-\autoref{fig:epsNeighborhoodExample} shows an example of 10 points on the Cartesian plane.
+Figure \@ref(fig:epsNeighborhoodExample) shows an example of 10 points on the Cartesian plane.
 An $\epsilon$-neighborhood using the Euclidean distance metric and $\epsilon = 3$ is drawn around an observation $x$ located at $(3,2)$.
 Points inside the circle are neighbors of $x$.
 If, for example, $Minpts = 2$, then $x$ would be considered a core point.
@@ -843,9 +843,9 @@ knitr::include_graphics("figures/unnamed-chunk-16-1.png")
 
 To identify regions of high observation density, two relational notions, \emph{density-reachability} and \emph{density-connectivity}, are used.
 A point $y$ is \emph{directly density-reachable} to a point $x$ if $x$ is a core point and $y \in N_{\epsilon}(x)$.
-In the example in \autoref{fig:epsNeighborhoodExample}, the observation located at $(1,0)$ is directly density-reachable to the observation located at $(3,2)$.
+In the example in Figure \@ref(fig:epsNeighborhoodExample), the observation located at $(1,0)$ is directly density-reachable to the observation located at $(3,2)$.
 More broadly, a point $x_m$ is \emph{density-reachable} to a point $x_1$ if there exists a chain of observations $x_1,x_2,...,x_{m-1},x_m$ such that $x_{i+1}$ is directly density-reachable from $x_i$, $i = 1,...,n$.
-\autoref{fig:densityReachableExample} shows an example of three density-reachable points located at $(1,0), (3,2)$, and $(4,4)$ using $\epsilon = 3$ and $Minpts = 2$.
+Figure \@ref(fig:densityReachableExample) shows an example of three density-reachable points located at $(1,0), (3,2)$, and $(4,4)$ using $\epsilon = 3$ and $Minpts = 2$.
 All three points are core points and although the points located at $(4,4)$ and $(1,3)$ are not neighbors, they share a neighbor in the point located at $(3,2)$ and are thus density-reachable.
 
 <!-- \begin{figure}[!htbp] -->
@@ -863,7 +863,7 @@ knitr::include_graphics("figures/unnamed-chunk-17-1.png")
 
 Finally, a point $y$ is \emph{density-connected} to a point $x$ with respect to $\epsilon$ and $Minpts$ if there is a point $z$ such that both $x$ and $y$ are density-reachable to $z$ (with respect to $\epsilon$ and $Minpts$).
 While density-reachability requires that all points in-between two points be core points, density-connectivity extends the notion of \`\`neighbors of neighbors" to include points that are merely within the neighborhood of density-reachable points.
-\autoref{fig:densityConnectedExample} illustrates how the points located at $(4,7)$ and $(0,-2)$ are density-connected while not being density-reachable.
+Figure \@ref(fig:densityConnectedExample) illustrates how the points located at $(4,7)$ and $(0,-2)$ are density-connected while not being density-reachable.
 
 <!-- \begin{figure}[!htbp] -->
 
@@ -889,7 +889,7 @@ A \emph{cluster} $C \subset D$ with respect to $\epsilon$ and $Minpts$ satisfies
 Points that are not assigned to a cluster are classified as \emph{noise}.
 
 For a data set $D$, the DBSCAN algorithm determines clusters based on the above definition.
-\autoref{fig:dbscanResultExample} shows the labels return by DBSCAN for the example considered above with respect to $\epsilon = 3$ and $Minpts = 2$..
+Figure \@ref(fig:dbscanResultExample) shows the labels return by DBSCAN for the example considered above with respect to $\epsilon = 3$ and $Minpts = 2$..
 We see that seven points are classified in a single cluster and three points are classified as noise.
 
 <!-- \begin{figure}[!htbp] -->
@@ -934,7 +934,7 @@ This operator allows the output of one function to be passed as input to another
 Data can be incrementally transformed as they move from one function to another.
 
 Implementing a data analysis procedure using the pipe operator allows the user to think intuitively in terms of verbs applied to the data.
-\autoref{tab:pipelineTable} illustrates two examples of pipelines that utilize the pipe operator.
+Table \@ref(tab:pipelineTable) illustrates two examples of pipelines that utilize the pipe operator.
 The left-hand example shows how an R data frame can be manipulated using functions from the \texttt{dplyr} package.
 Functions like \texttt{group\_by}, \texttt{summarize}, and \texttt{filter} are simple building blocks that can be strung together to create complicated workflows.
 The right-hand example similarly illustrates a cartridge case object passing through the comparison pipeline.
@@ -955,12 +955,12 @@ Data Frame Manipulation Example & Cartridge Case Comparison Example\\
 \label{tab:pipelineTable}
 \end{table}
 
-\autoref{fig:taiEddyPreprocess}, \autoref{fig:ricePreprocess}, \autoref{fig:handwriterPreprocess}, and \autoref{fig:cmcRPreprocess} illustrate how various forensic comparison algorithms use a modularized structure in their preprocessing procedures.
+Figure \@ref(fig:taiEddyPreprocess), Figure \@ref(fig:ricePreprocess), Figure \@ref(fig:handwriterPreprocess), and Figure \@ref(fig:cmcRPreprocess) illustrate how various forensic comparison algorithms use a modularized structure in their preprocessing procedures.
 In each figure, a sequence of modular procedures are applied to a piece of evidence.
-\autoref{fig:taiEddyPreprocess} shows the morphological and image processing preprocessing procedures used to remove the firing pin region from a 2D image of a cartridge case \citep{tai_fully_2018}.
-\autoref{fig:ricePreprocess} shows the procedure by which a 2D \`\`signature" of a bullet scan is extracted from a 3D topographical scan \citep{Rice2020}.
-\autoref{fig:handwriterPreprocess} shows how an image of the written word \`\`csafe" is processed using the handwriter R package to break the word into individual \emph{graphemes} that can be further processed \citep{handwriter}.
-Finally, \autoref{fig:cmcRPreprocess} shows a 3D topographical cartridge case scan undergoing various procedures to isolate and highlight the breech face impressions.
+Figure \@ref(fig:taiEddyPreprocess) shows the morphological and image processing preprocessing procedures used to remove the firing pin region from a 2D image of a cartridge case \citep{tai_fully_2018}.
+Figure \@ref(fig:ricePreprocess) shows the procedure by which a 2D \`\`signature" of a bullet scan is extracted from a 3D topographical scan \citep{Rice2020}.
+Figure \@ref(fig:handwriterPreprocess) shows how an image of the written word \`\`csafe" is processed using the handwriter R package to break the word into individual \emph{graphemes} that can be further processed \citep{handwriter}.
+Finally, Figure \@ref(fig:cmcRPreprocess) shows a 3D topographical cartridge case scan undergoing various procedures to isolate and highlight the breech face impressions.
 These procedures are discussed in greater detail in Chapter 2.
 
 By breaking the broader preprocessing step into modularized pieces, we can devise other arrangements of these preprocessing procedures that may improve the segmenting or emphasizing of the region of interest.
