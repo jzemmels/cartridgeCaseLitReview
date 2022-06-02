@@ -35,15 +35,6 @@ jobs:
           key: bookdown-${{ hashFiles('**/*Rmd') }}
           restore-keys: bookdown-
 
-      - name: Build site
-        run: |
-          install.packages('tinytex')
-          tinytex::install_tinytex()
-          setwd("./isu-thesis/")
-          bookdown::render_book('index.Rmd')
-          setwd("../")
-        shell: Rscript {0}
-
       - name: Deploy to GitHub pages 🚀
         if: github.event_name != 'pull_request'
         uses: JamesIves/github-pages-deploy-action@4.1.4
