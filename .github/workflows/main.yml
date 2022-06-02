@@ -17,6 +17,8 @@ jobs:
         with:
           fetch-depth: 0
 
+      - uses: r-lib/actions/setup-tinytex@master
+      
       - uses: r-lib/actions/setup-pandoc@v1
 
       - uses: r-lib/actions/setup-r@v1
@@ -25,7 +27,6 @@ jobs:
       
       - name: Render Rmarkdown files
         run: |
-          sudo apt-get install texlive-xetex
           RMD_PATH=($'isu-thesis/index.Rmd$'))
           Rscript -e 'for (f in commandArgs(TRUE)) if (file.exists(f)) rmarkdown::render(f)' ${RMD_PATH[*]}
       - name: Commit results
