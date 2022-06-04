@@ -150,7 +150,7 @@ div.csl-indent {
 <p class="author"><em>Joseph Zemmels</em></p>
 <div class="abstract">
 <p class="abstract">Abstract</p>
-<p>As the need for computationally-intensive methods to analyze forensic data has grown, so too has the need for user-friendly tools to experiment with and improve upon these methods. In this work, we discuss an algorithm used to objectively measure the similarity between cartridge cases. Chapter 2 discusses a modularization of the algorithm into a “pipeline” that enables reproducibility, experimentation, and comprehension. Chapter 3 details a suite of diagnostic tools that illuminate the inner-workings of the algorithm and help determine when and why the algorithm does or does not “work” correctly. Chapter 4 introduces novel pieces of this pipeline that we demonstrate are improvements to the current state-of-the-art.</p>
+<p>As the need for computationally-intensive methods to analyze forensic data has grown, so too has the need for user-friendly tools to experiment with and improve upon these methods. In this work, we discuss an algorithm used to objectively measure the similarity between cartridge cases. Chapter 2 discusses a modularization of the algorithm into a “pipeline” that enables reproducibility, experimentation, and comprehension. Chapter 3 details a suite of diagnostic tools that illuminate the inner-workings of the algorithm and help determine when and why the algorithm “works” correctly. Chapter 4 introduces novel pieces of this pipeline that we demonstrate are improvements to the current state-of-the-art.</p>
 </div>
 </div>
 <div id="literature-review" class="section level1 hasAnchor" number="1">
@@ -159,19 +159,27 @@ div.csl-indent {
 <!-- \section{Preliminaries: Forensic Examinations}\label{preliminaries-forensic-examinations}} -->
 <div id="preliminaries-forensic-examinations" class="section level2 hasAnchor" number="1.1">
 <h2><span class="header-section-number">1.1</span> Preliminaries: Forensic Examinations<a href="index.html#preliminaries-forensic-examinations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>A primary goal of a forensic examination is to determine the source of a piece of evidence.
-This is referred to as the <em>source identification</em> problem .
-A common setting for source identification problems involves obtaining evidence of unknown source from a crime scene and either evidence from a known source or other evidence of unknown source.
-For example, a bullet found at a crime scene may be compared to a suspect’s firearm.
-Such evidence is sent to a forensic lab where a trained forensic examiner compares the “questioned” bullet to bullets fired from the suspect’s firearm to determine whether the suspect’s firearm was the original source.
-In this work, we develop a method to supplement such an examination by providing an objective measure of similarity between the two pieces of evidence.</p>
+<p>A bullet casing is found at the scene of a murder.
+The bullet is recovered from the victim during autopsy.
+A handwritten letter threatening the victim is found in their pocket.
+The assailant’s shoeprints are discovered fleeing the area.
+Who left this evidence?
+Investigators obtain the gun, shoes, and handwriting samples of a suspect.
+This evidence, along with the crime scene evidence, is sent to a forensic laboratory for analysis.
+Forensic examiners compare the evidence to establish whether they share a common source.
+The suspect is charged after the examiners conclude that there is sufficient agreement between the crime scene and suspect’s evidence.</p>
+<p>The procedure described above, in which evidence is compared to determine their origin, is called the <em>source identification</em> problem .
+Historically, forensic examiners have relied on tools (e.g., microscopes), case facts, and experience to develop an opinion on the similarity of two pieces of evidence.
+More recently, algorithms to automatically compare evidence and provide an objective measure of similarity have been introduced.
+These algorithms are used in a forensic examination to supplement and inform the examiner’s conclusion.
+We propose an automatic, objective solution to the source identification problem; specifically in the context of comparing fired <em>cartridge cases.</em>
+Cartridge case comparison is a sub-discipline of Firearms and Toolmarks Identification, which is reviewed in the next section.</p>
 <!-- \hypertarget{firearms-and-toolmarks-identification}{% -->
 <!-- \subsection{Firearms and Toolmarks Identification}\label{firearms-and-toolmarks-identification}} -->
 <div id="firearms-and-toolmarks-identification" class="section level3 hasAnchor" number="1.1.1">
 <h3><span class="header-section-number">1.1.1</span> Firearms and Toolmarks Identification<a href="index.html#firearms-and-toolmarks-identification" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Firearms and toolmarks (F &amp; T) identification involves studying markings or impressions left by a hard surface, such as the metal of a firearm or other tool (e.g., screwdriver), on a softer surface .
-For example, a firearm barrel leaves toolmarks on a bullet as it travels through the barrel.
-In this work, we focus on impressions left on a cartridge during the firing process.</p>
+For example, a barrel’s rifling leaves toolmarks on a bullet as it travels out of the gun.</p>
 <!-- \hypertarget{the-firing-process}{% -->
 <!-- \subsubsection{The Firing Process}\label{the-firing-process}} -->
 <div id="the-firing-process" class="section level4 hasAnchor" number="1.1.1.1">
@@ -190,7 +198,7 @@ Figure <a href="#fig:cartridgeDiagram"><strong>??</strong></a> shows a cross-sec
 Figure 1.1:  A cartridge containing primer, powder, and a bullet. The firing process is initiated by loading a cartridge into the barrel of a firearm.
 </p>
 </div>
-<p>To initiate the firing process, a cartridge is loaded into an area in the back of the barrel known as the <em>chamber</em>.
+<p>The first step of the firing process is to load a cartridge into the area in the back of the barrel known as the <em>chamber</em>.
 Figure <a href="#fig:pistolParts"><strong>??</strong></a> shows an example of a cartridge loaded into the chamber of a pistol .
 In this example, the hammer of the pistol is pulled back such that the firing pin is held back under spring tension.
 Upon squeezing the trigger, the firing pin is released and travels forwards at a high velocity.
@@ -252,7 +260,7 @@ Figure 1.5:  A fired 9mm Luger cartridge case with visible firing pin and breech
 <p>After the bullet has left the barrel, the extractor pin and ejector push the cartridge case out of the chamber.
 As shown in Figure <a href="#fig:extractorMarkings"><strong>??</strong></a>, these can leave additional markings on the cartridge .
 Firing pin, breech face, extractor pin and ejector, and other possible markings are all used in a forensic examination to determine whether two cartridge cases were fired from the same firearm.
-Note that the focus of this work is on the comparison of breech face impressions specifically.</p>
+This work focuses on the comparison of breech face impressions specifically.</p>
 <!-- \begin{figure}[!htbp] -->
 <!-- {\centering \includegraphics[width=.6\textwidth]{images/extractorPinDiagram}  -->
 <!-- } -->
@@ -269,8 +277,7 @@ Figure 1.6:  Examples of common extractor pin and ejector markings. These, impre
 </div>
 <div id="an-overview-of-firearms-and-toolmarks-examinations" class="section level4 hasAnchor" number="1.1.1.2">
 <h4><span class="header-section-number">1.1.1.2</span> An Overview of Firearms and Toolmarks Examinations<a href="index.html#an-overview-of-firearms-and-toolmarks-examinations" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Forensic firearms and toolmarks (F &amp; T) identification has been performed in the United States for over 100 years .
-For most of this time, trained F &amp; T examiners have used a <em>comparison microscope</em>, such as the one shown in Figure <a href="#fig:comparisonMicroscope"><strong>??</strong></a>, to perform these examinations .
+<p>Trained F &amp; T examiners use a <em>comparison microscope</em>, such as the one shown in Figure <a href="#fig:comparisonMicroscope"><strong>??</strong></a>, to examine two pieces of evidence .
 A comparison microscope consists of two compound microscopes that are joined via an <em>optical bridge</em> which allows for viewing of the stages below each microscope simultaneously under the same eyepiece.
 The right image of Figure <a href="#fig:comparisonMicroscope"><strong>??</strong></a> shows an example of the view under a comparison microscope of two bullets with the white dotted line separating the two fields of view.</p>
 <!-- \begin{figure}[!htbp] -->
@@ -300,7 +307,7 @@ These characteristics relate to markings that are reproduced across a subgroup o
 For example, breech faces using the same milling machine may include markings that are unique to the milling machine .
 As it can be difficult to distinguish between individual and subclass characteristics during an examination, an examiner’s decision process may be affected if the existence of subclass characteristics is suspected.</p>
 <p>Many F &amp; T examiners in the United States adhere to the Association of Firearms and Toolmarks Examiners (AFTE) Range of Conclusions when making their evidentiary conclusions .
-According to these guidelines, there are six possible conclusions that can be made in a F &amp; T examination:</p>
+According to these guidelines, six possible conclusions can be made in a F &amp; T examination:</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Identification</strong>: Agreement of a combination of individual characteristics and all discernible class characteristics where the extent of agreement exceeds that which can occur in the comparison of toolmarks made by different tools and is consistent with the agreement demonstrated by toolmarks known to have been produced by the same tool.</p></li>
 <li><p><strong>Inconclusive</strong>:</p></li>
@@ -312,12 +319,12 @@ According to these guidelines, there are six possible conclusions that can be ma
 <li><p><strong>Elimination</strong>: Significant disagreement of discernible class characteristics and/or individual characteristics.</p></li>
 <li><p><strong>Unsuitable</strong>: Unsuitable for examination.</p></li>
 </ol>
-<p>In general, forensic examinations first involve an examination of a “questioned” bullet or cartridge case for identifiable toolmarks .
+<p>Forensic examinations first involve an examination of a “questioned” bullet or cartridge case for identifiable toolmarks .
 Markings including breech face, firing pin, chamber marks, extractor pin, and ejector impressions are categorized by their class, individual, or subclass characteristics.
 If available, this information is compared to “known source” fires obtained from a suspect’s firearm.
 If known source evidence is unavailable, class characteristics from the questioned bullet can be used to narrow the relevant population and provide potential leads.
-Ultimately, an examiner’s decision may be used as part of an ongoing investigation or presented at trial as expert testimony.</p>
-<p>It should be noted that standard operating procedures for assessing and comparing evidence differ between forensic laboratories.
+An examiner’s decision may be used as part of an ongoing investigation or presented at trial as expert testimony.</p>
+<p>Standard operating procedures for assessing and comparing evidence differ between forensic laboratories.
 For example, some labs collapse the three possible inconclusive decisions into a single decision  or prohibit examiners from making an elimination based on differences in individual characteristics .</p>
 <!-- \hypertarget{why-should-firearm-and-toolmark-identification-change}{% -->
 <!-- \subsection{Why Should Firearms and Toolmarks Identification Change?}\label{why-should-firearm-and-toolmark-identification-change}} -->
@@ -327,18 +334,18 @@ For example, some labs collapse the three possible inconclusive decisions into a
 <h3><span class="header-section-number">1.1.2</span> Why Should Firearms and Toolmarks Identification Change?<a href="index.html#why-should-firearms-and-toolmarks-identification-change" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In 2009, the National Research Council released a report assessing a number of forensic disciplines including Firearms and Toolmarks analysis.
 The report pointed out that F &amp; T analysis lacked a precisely defined process and that little research had been done to determine the reliability or repeatability of the methods.
-Part of the recommendations from this study were to establish rigorously-validated laboratory procedures and “develop automated techniques capable of enhancing forensic technologies .”</p>
-<p>A number of studies have been performed to assess the reliability and repeatability of a firearms and toolmarks examination (non-exhaustively: ).
-All of these studies report extremely low error rates when examiners are asked to make conclusions for evidence for which the authors know ground truth (i.e., whether the bullets or cartridge cases are truly matching or non-matching).
+Two of the recommendations from this study were to establish rigorously-validated laboratory procedures and “develop automated techniques capable of enhancing forensic technologies .”</p>
+<p>A number of studies assess the reliability and repeatability of a firearms and toolmarks examination (non-exhaustively: ).
+These studies indicate that examiners have a low error rate when comparing evidence obtained under controlled conditions (i.e., for which ground-truth is known).
 However, as pointed out in a 2016 report from the President’s Council of Advisors on Science and Technology, many of these studies, save , were not “appropriately designed to test the foundational validity and estimate reliability .”
 The report asserts that additional, properly-designed studies should be performed to more rigorously establish the scientific validity of the discipline.</p>
-<p>Due to the opacity in the decision-making process, examiners have been referred to as “black boxes” in a similar sense to black-box algorithms .
-Their evidentiary conclusions are fundamentally subjective, and there is empirical evidence to suggest that conclusions differ across examiners when presented with the same evidence and even for a single examiner when presented with the same evidence on two different occasions .
+<p>Due to the opacity in the decision-making process, examiners are referred to as “black boxes” in a similar sense to black-box algorithms .
+Their evidentiary conclusions are fundamentally subjective, and empirical evidence suggests that conclusions differ when examiners are presented with the same evidence on different occasions .
 Examiners rarely need to provide quantitative justification for their conclusion.
 Even for qualitative justifications, it can be difficult to determine what the examiner is actually “looking at” to arrive at their conclusion .
 This suggests the need to supplement these black box decisions with transparent, objective techniques that quantitatively measure the similarity between pieces of evidence.
 As stated in , efforts should be made to “convert firearms analysis from a subjective method to an objective method” including “developing and testing image-analysis algorithms for comparing the similarity of tool marks.”
-The focus of this work is on the development of an algorithm for comparing breech face impressions on cartridge cases.</p>
+This work focuses on the development of an algorithm for comparing breech face impressions on cartridge cases.</p>
 <!-- \hypertarget{forensic-comparison-pipelines}{% -->
 <!-- \section{Forensic Comparison Pipelines}\label{forensic-comparison-pipelines}} -->
 </div>
@@ -347,12 +354,12 @@ The focus of this work is on the development of an algorithm for comparing breec
 <h2><span class="header-section-number">1.2</span> Forensic Comparison Pipelines<a href="index.html#forensic-comparison-pipelines" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Recent work in many forensic disciplines has focused on the development of algorithms to measure the similarity between pieces of evidence including glass , handwriting , shoe prints , ballistics , and toolmarks .
 These algorithms often result in a numerical, non-binary (dis)similarity score for two pieces of evidence.
-A non-binary score adds more nuance to an evidentiary conclusion beyond simply stating whether the evidence did or did not originate from the same source as would be the case in binary classification.
+A non-binary score adds more nuance to an evidentiary conclusion beyond simply stating whether the evidence originated from the same source as would be the case in binary classification.
 For example, the larger the similarity score, the “more similar” the evidence.
 However, a binary (or ternary, if admitting inconclusives) conclusion must ultimately be reached by an examiner.
 Whether a decision should be reached based solely on results of a comparison algorithm (e.g., defining a score-based decision boundary) or if an examiner should incorporate the similarity score into their own decision-making process is still up for debate .
-In this work, we view forensic comparison algorithms as a supplement to, rather than a replacement of, the forensic examination.</p>
-<p>We conceptualize forensic comparison algorithms as evidence-to-classification “pipelines.”
+We view forensic comparison algorithms as a supplement to, rather than a replacement of, the forensic examination.</p>
+<p>Forensic comparison algorithms are treated as evidence-to-classification “pipelines.”
 Broadly, the steps of the pipeline include:</p>
 <ol style="list-style-type: decimal">
 <li><p>capturing a digital representation of the evidence,</p></li>
@@ -379,7 +386,7 @@ Figure 1.8:  Variations upon the cartridge case comparison pipeline. The first t
 </p>
 </div>
 <p>In the following sections, we detail recent advances to each of the five steps in the pipeline outlined above.
-We narrow our focus to advances made in comparing F &amp; T evidence.</p>
+We narrow our focus to advances made in comparing firearms evidence.</p>
 <!-- \hypertarget{digital-representations-of-evidence}{% -->
 <!-- \subsection{Digital Representations of Evidence}\label{digital-representations-of-evidence}} -->
 <div id="digital-representations-of-evidence" class="section level3 hasAnchor" number="1.2.1">
@@ -388,7 +395,7 @@ We narrow our focus to advances made in comparing F &amp; T evidence.</p>
 A common way to take 2D optical images is to take a picture of the cartridge case under a microscope.
 This implies that the digital representation of the cartridge case surface is dependent on the lighting conditions under which the picture was taken.
 Some recent work has focused on comparing 2D optical images , although the use of 3D microscopes has become more prevalent to capture the surface of ballistics evidence.</p>
-<p>Using a 3D microscope, we obtain scans at the micron (or micrometer) level that are more light-agnostic than a 2D image .
+<p>Using a 3D microscope, scans are taken at the micron (or micrometer) level that are more light-agnostic than a 2D image .
 One common 3D scanning procedure is disc scanning confocal microscopy.
 This procedure works by shining a focused beam of light on the cartridge case surface.
 This light is reflected back onto a pinhole allowing a limited height range to pass through.
@@ -453,10 +460,10 @@ Figure 1.12:  The hierarchy of information stored in the x3p file format for bot
 <h3><span class="header-section-number">1.2.2</span> Preprocessing Procedures for Forensic Data<a href="index.html#preprocessing-procedures-for-forensic-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>When capturing the surface of a cartridge case, the result is bound to contain extraneous regions due to the incongruity between the circular primer and the rectangular array in which the surface data are stored.
 Figure <a href="#fig:cartridgeCaseImages"><strong>??</strong></a> shows an example of a 2D image and 3D scan of the same cartridge case.
-We can see, for example, that the corners of these arrays include non-primer regions of the cartridge case surface.
+The corners of these arrays include non-primer regions of the cartridge case surface.
 Additionally, the center of the cartridge case primer features an impression left by the firing pin during the firing process.
 In most applications, impressions left by the firing pin are compared separately from the breech face impressions .
-As the focus of this work is on the comparison of breech face impressions between two cartridge cases, only the annular region surrounding the firing pin impression is of interest.
+Because we are interested in the comparison of breech face impressions between two cartridge cases, only the annular region surrounding the firing pin impression is of interest.
 The annular breech face impression region must be segmented away from the rest of the captured surface.</p>
 <p>Both the 2D optical and 3D topographic representations of cartridge case surfaces are fundamentally pictorial in nature.
 As such, many image processing and computer vision techniques are used to automatically isolate the breech face impression region.
@@ -483,7 +490,7 @@ Later,  applied Principal Component Analysis to reduce these three features down
 <p>Pertinent to this work is the cell-based comparison procedure originally outlined in .
 The underlying assumption of  is similar to that of : that two matching cartridge cases will exhibit higher similarity when they are “close” to being correctly aligned.
 While  measured similarity using the CCF between the two full scans,  proposes partitioning the scans into a grid of “correlation cells” and counting the number of similar cells between the two scans.
-The rationale behind this procedure is that many cartridge case scans have regions that do not contain discriminatory markings.
+The rationale behind this procedure is that many cartridge case scans have only a few regions with discriminatory markings.
 As such, comparing full scans may result in a lower correlation than if one were to focus on the highly-discriminatory regions.
 In theory, dividing the scans into cells allows for the identification of these regions.</p>
 <p>After breaking a scan into a grid of cells, each cell is compared to the other scan to identify the rotation and translation, known together as the <em>registration</em>, at which the cross-correlation is maximized.
@@ -514,16 +521,16 @@ If a cluster is found for a particular pairwise comparison, then that pair is cl
 <div id="reproducibility-of-comparison-pipelines" class="section level3 hasAnchor" number="1.2.5">
 <h3><span class="header-section-number">1.2.5</span> Reproducibility of Comparison Pipelines<a href="index.html#reproducibility-of-comparison-pipelines" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p> defines reproducibility as “obtaining consistent computational results using the same input data, computational steps, methods, code, and conditions of analysis.”
-While not exact in their definition of “consistent,” the authors do assert that, barring a few exceptions, it is reasonable to expect that the results obtained by a second researcher, after applying the exact same processing steps to the exact same data, be the exact same as the original results.
+While not exact in their definition of “consistent,” the authors assert that, barring a few exceptions, it is reasonable to expect that the results obtained by a second researcher, after applying the exact same processing steps to the exact same data, be the exact same as the original results.
 Among the exceptions given is if the original researcher had made a mistake in writing the original source code.
 In either case, they assert that “a study’s data and code have to be available in order for others to reproduce and confirm results.”
-Researchers can not only easily verify the results given data and code, they can also incorporate the materials into their own research and thus improve or accelerate discovery .</p>
+Researchers can easily verify the results given data and code and incorporate the materials into their own research and thus improve or accelerate discovery .</p>
 <p>A number of studies indicate that computationally reproducible research is sparse across various disciplines.
  and  studied the reproducibility of articles sampled from the journals <em>Science</em> and the <em>Journal of Computational Physics</em>, respectively.
 In the former,  found that only 3 of 204 randomly selected articles from <em>Science</em> were “straightforward to reproduce with minimal effort;” despite a journal policy requiring that all code and data used in the paper be made available to any reader.
 In the latter,  found that zero of 306 randomly selected articles from the <em>Journal of Computaional Physics</em> were “straightforward to reproduce with minimal effort” and, at best, that five articles were “reproducible after some tweaking.”
 Similar findings were found in  (29 of 59 economic papers reproducible),  (zero of 268 biomedical papers provided raw data and 1 in 268 linked to a full study protocol),  (50% or more published articles include data or code in only 27 of 333 economics journals), and  (24 of 400 AI conference papers included code).
-A common recommendation amongst these authors is the establishment of rigorous standards for reproducibility.
+A common recommendation amongst these authors is the establishment of rigorous tools and standards to promote reproducibility.
 This includes making code and data used in a paper easily-accessible to readers.</p>
 <p>Infrastructure already exists to ease the processing of developing, maintaining, and sharing open-source code and data.
 Data repositories such as the NIST Ballistics Toolmark Research Database  provide open access to raw data.
@@ -539,23 +546,24 @@ These tools make data, code, and derivative research findings more accessible, i
 <div id="diagnostic-tools" class="section level2 hasAnchor" number="1.3">
 <h2><span class="header-section-number">1.3</span> Diagnostic Tools<a href="index.html#diagnostic-tools" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Forensic examiners often provide expert testimony in court cases.
-As part of this testimony, an examiner is allowed to not only provide facts about the outcome of a forensic examination, but also their opinion about what the results mean.
+As part of this testimony, an examiner is allowed to provide facts about the outcome of a forensic examination and their opinion about what the results mean.
 A party to a court may challenge the examiner on the validity of the underlying scientific method or whether they interpreted the results correctly .
-In these situations, examiners need to be able to explain the process by which they reached an evidentiary conclusion to the fact finders of the case; namely, the judge or jury.
+In these situations, examiners need to explain the process by which they reached an evidentiary conclusion to the fact finders of the case; namely, the judge or jury.
 As algorithms are more often used in forensic examinations, the technical knowledge required to understand and explain an algorithm to lay-people has increased.
 While in some cases the authors of the algorithm have been willing to provide testimony to establish the validity of the algorithm , this will become less viable as algorithms become more prevalent.
 Indeed, even the most elegant improvements to an algorithm may be moot if an examiner can’t explain the improvements in their testimony.</p>
 <p>The resources required to educate examiners on the use of highly technical algorithms makes additional training seem currently implausible.
 An alternative is to develop algorithms from the ground-up to be intuitive for examiners to understand and explain to others.
 <em>Explainability</em> refers to the ability to identify the factors that contributed to the results of an algorithm .
-For example, understanding “why” a classifier predicted one class over another.</p>
-<p>Myriad techniques exist to explain the results of an algorithm.
+For example, understanding “why” a classifier predicted one class over another.
+Diagnostic tools improve the explainability of a model.</p>
+<p>Myriad diagnostic tools exist to explain the results of an algorithm.
 These range from identifying instances of the training set that illuminate how the model operates  to fitting more transparent models that approximate the complex model accurately  to explaining the behavior of the algorithm in a small region of interest .
 Many of these methods require additional technical knowledge to interpret these explanations.</p>
 <p>A less technical approach is to use visualizations that facilitate understanding of model behavior.
-Properly constructed visuals enable both exploratory data analysis and diagnostics .
-Given that many of the procedures by which cartridge case evidence is captured, processed, and compared are based on image processing techniques, a visual diagnostic is an intuitive mode of explanation for experts and lay-people alike.
-In this work, we develop a suite of visual diagnostic tools that can be used to explain the behavior of the cartridge case comparison pipeline.</p>
+Properly constructed visuals enable both exploratory data analysis and diagnostics , which are critical for anticipating and assessing
+Given that many of the procedures by which cartridge case evidence is captured, processed, and compared are based on image processing techniques, a visual diagnostic is an intuitive mode of explanation for researchers and lay-people alike.
+We develop a suite of diagnostic tools that can be used to explain the behavior of the cartridge case comparison pipeline.</p>
 <p>[Discuss tidyverse tools for visual diagnostics. ggplot2, etc. Emphasize that rshiny enables users to actually physically engage with the analysis process.]</p>
 <!-- \hypertarget{automating-and-improving-the-cartridge-case-identification-pipeline}{% -->
 <!-- \section{Automating and Improving the Cartridge Case Identification Pipeline}\label{automating-and-improving-the-cartridge-case-identification-pipeline}} -->
@@ -616,11 +624,11 @@ The cross-correlation function measures the similarity between <span class="math
 where <span class="math inline">\(1 \leq m \leq M + P - 1\)</span> and <span class="math inline">\(1 \leq n \leq N + Q - 1\)</span>.
 By this definition, <span class="math inline">\(A \star B\)</span> is a 2D array of dimension <span class="math inline">\(M + P - 1 \times N + Q - 1\)</span> in which the <span class="math inline">\([m,n]\)</span>-th element quantifies the similarity between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> when <span class="math inline">\(B\)</span> is translated <span class="math inline">\(m\)</span> elements horizontally and <span class="math inline">\(n\)</span> elements vertically.
 For interpretability, the CCF is commonly normalized between -1 and 1.</p>
-<p>Using the CCF as a similarity metric, we can determine the translations <span class="math inline">\([m^*, n^*]\)</span> at which images <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> attain the maximum CCF value:
+<p>Using the CCF as a similarity metric, the translations <span class="math inline">\([m^*, n^*]\)</span> at which images <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> attain the maximum CCF value can be calculated:
 <span class="math display">\[\begin{align*}
 [m^{\dagger},n^{\dagger}] \equiv \arg \max_{[m,n]} (A \star B)[m,n].
 \end{align*}\]</span>
-To determine the optimal rotation, we calculate the maximum CCF value across a range of rotations of image <span class="math inline">\(B\)</span>.
+To determine the optimal rotation, the maximum CCF value is calculated across a range of rotations of image <span class="math inline">\(B\)</span>.
 If <span class="math inline">\(B_\theta\)</span> denotes image <span class="math inline">\(B\)</span> rotated by an angle <span class="math inline">\(\theta \in [0,2\pi)\)</span>, then the estimated registration <span class="math inline">\([m^*,n^*,\theta^*]\)</span> is given by:
 <span class="math display">\[\begin{align*}
 [m^*,n^*,\theta^*] \equiv \arg \max_{[m,n,\theta]} (A \star B_{\theta})[m,n].
@@ -650,7 +658,7 @@ The Fast Fourier Transform (FFT) algorithm can be used to reduce the computation
 The white boxes in both of the images are of dimension <span class="math inline">\(10 \times 10\)</span>.
 The box in image A is centered on index [30,50] while the box in image B is centered on index [11,11].
 The right image shows the result of calculating the CCF using image <span class="math inline">\(A\)</span> as reference and <span class="math inline">\(B\)</span> as template.
-We see that the CCF achieves a maximum of 1, indicating a perfect match, at the translation value of <span class="math inline">\([m^\dagger,n^\dagger] = [22,-2]\)</span>.
+The CCF achieves a maximum of 1, indicating a perfect match, at the translation value of <span class="math inline">\([m^\dagger,n^\dagger] = [22,-2]\)</span>.
 This represents that if image B were overlaid onto image A such that their center indices coincided, then image B would need to be shifted 22 units “up” and 2 units “left” to match perfectly with image A.</p>
 <!-- \begin{figure}[!htbp] -->
 <!-- {\centering \includegraphics[width=\textwidth]{figures/unnamed-chunk-13-1}  -->
@@ -689,7 +697,7 @@ K =
 <span class="math display">\[
 A_{lp,\sigma}[m,n] = \mathcal{F}^{-1}\left(\mathcal{F}(A) \odot \mathcal{F}(K)\right)[m,n].
 \]</span>
-You will note the similarity between this operation, known as <em>convolution</em>, and the calculation of the CCF given above .</p>
+This operation, known as <em>convolution</em>, is extremely similar to the calculation of the CCF given above .</p>
 <p>Figure <a href="#fig:gaussianFilterExample"><strong>??</strong></a> shows an image <span class="math inline">\(A\)</span> of a box undergoing the injection of Gaussian noise (noise standard deviation <span class="math inline">\(\sigma_n = 0.3\)</span>) followed by the application of various filters.
 While the box is obscured due to noise in the middle image, the lowpass filter (kernel standard deviation <span class="math inline">\(\sigma_k = 2\)</span>) recovers some of the definition of the box seen in the original image <span class="math inline">\(A\)</span>.</p>
 <p>If a lowpass filter “smooths” the values of an image, then a <em>highpass</em> filter performs a “sharpening” operation.
@@ -699,12 +707,12 @@ A_{hp,\sigma} = A - A_{lp,\sigma}.
 \end{align*}\]</span>
 The highpass filter therefore removes larger-scale (smooth) structure from an image and retains high-frequency structure such as noise or edges.
 An example of a highpass-filtered image <span class="math inline">\(A\)</span> is shown in Figure <a href="#fig:gaussianFilterExample"><strong>??</strong></a>.
-We can see that the smooth interior of the box is effectively removed from the image while the edges are preserved.</p>
+The smooth interior of the box is effectively removed from the image while the edges are preserved.</p>
 <p>Finally, the bandpass filter performs the highpass sharpening followed by the lowpass smoothing operations.
 Generally, the highpass kernel’s standard deviation will be considerably larger than that of the lowpass kernel.
 This leads to retaining sharp edges while also reducing noise.
 An example of a bandpass filtered image <span class="math inline">\(A\)</span> is shown in Figure <a href="#fig:gaussianFilterExample"><strong>??</strong></a>.
-We see that the edges of the box are better-preserved compared to the lowpass filter figure while the interior of the box is better-preserved compared to the highpass filter figure.</p>
+The edges of the box are better-preserved compared to the lowpass filter figure while the interior of the box is better-preserved compared to the highpass filter figure.</p>
 <!-- \begin{figure}[!htbp] -->
 <!-- {\centering \includegraphics[width=\textwidth]{figures/unnamed-chunk-14-1}  -->
 <!-- } -->
@@ -725,7 +733,7 @@ Another alternative, the “edge preserving” filter, adapts the kernel weights
 <div id="morphological-operations" class="section level4 hasAnchor" number="1.4.1.3">
 <h4><span class="header-section-number">1.4.1.3</span> Morphological Operations<a href="index.html#morphological-operations" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Mathematical morphology refers to a theory and collection of image processing techniques for geometrical structures .
-In our application, these geometrical structures are cartridge case scans; specifically, binarized versions of these scans representing whether a particular pixel does or does not contain part of the cartridge case surface.</p>
+In our application, these geometrical structures are cartridge case scans; specifically, binarized versions of these scans representing whether a particular pixel contains part of the cartridge case surface.</p>
 <p>Two fundamental operations in mathematical morphology are <em>dilation</em> and <em>erosion</em> .
 For our purposes, these are both set operations on binary (black and white) images.
 We classify the set of black and white pixels as the background and foreground of the image, respectively.
@@ -775,7 +783,7 @@ W \oplus B =
 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0
 \end{pmatrix}.
 \]</span>
-We see that the dilation operation by <span class="math inline">\(B\)</span> has the effect of growing the region <span class="math inline">\(W\)</span> inside of <span class="math inline">\(A\)</span> by one index in each direction.</p>
+The dilation operation by <span class="math inline">\(B\)</span> has the effect of growing the region <span class="math inline">\(W\)</span> inside of <span class="math inline">\(A\)</span> by one index in each direction.</p>
 <p>In contrast, erosion has the effect of shrinking a selected region.
 More precisely, the erosion of <span class="math inline">\(W\)</span> by <span class="math inline">\(B\)</span> is defined by
 <span class="math display">\[
@@ -832,9 +840,9 @@ If, for example, <span class="math inline">\(Minpts = 2\)</span>, then <span cla
 <!-- \caption{\label{fig:epsNeighborhoodExample} An $\epsilon$-neighborhood around a observation located at $(3,2)$ for $\epsilon = 3$. Points are labeled based on whether they are neighbors to this observation or not}\label{fig:unnamed-chunk-16} -->
 <!-- \end{figure} -->
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-16"></span>
-<img src="figures/unnamed-chunk-16-1.png" alt="\label{fig:epsNeighborhoodExample} An $\epsilon$-neighborhood around a observation located at $(3,2)$ for $\epsilon = 3$. Points are labeled based on whether they are neighbors to this observation or not." width="\textwidth" />
+<img src="figures/unnamed-chunk-16-1.png" alt="\label{fig:epsNeighborhoodExample} An $\epsilon$-neighborhood around a observation located at $(3,2)$ for $\epsilon = 3$. Points are labeled based on whether they are neighbors to this observation." width="\textwidth" />
 <p class="caption">
-Figure 1.16:  An <span class="math inline">\(\epsilon\)</span>-neighborhood around a observation located at <span class="math inline">\((3,2)\)</span> for <span class="math inline">\(\epsilon = 3\)</span>. Points are labeled based on whether they are neighbors to this observation or not.
+Figure 1.16:  An <span class="math inline">\(\epsilon\)</span>-neighborhood around a observation located at <span class="math inline">\((3,2)\)</span> for <span class="math inline">\(\epsilon = 3\)</span>. Points are labeled based on whether they are neighbors to this observation.
 </p>
 </div>
 <p>To identify regions of high observation density, two relational notions, <em>density-reachability</em> and <em>density-connectivity</em>, are used.
@@ -854,9 +862,9 @@ All three points are core points and although the points located at <span class=
 Figure 1.17:  An example of three points that are density-reachable with respect to <span class="math inline">\(\epsilon = 3\)</span> and <span class="math inline">\(Minpts = 2\)</span>.
 </p>
 </div>
-<p>Finally, a point <span class="math inline">\(y\)</span> is <em>density-connected</em> to a point <span class="math inline">\(x\)</span> with respect to <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(Minpts\)</span> if there is a point <span class="math inline">\(z\)</span> such that both <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are density-reachable to <span class="math inline">\(z\)</span> (with respect to <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(Minpts\)</span>).
+<p>Finally, a point <span class="math inline">\(y\)</span> is <em>density-connected</em> to a point <span class="math inline">\(x\)</span> with respect to <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(Minpts\)</span> if there exists a point <span class="math inline">\(z\)</span> such that both <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are density-reachable to <span class="math inline">\(z\)</span> (with respect to <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(Minpts\)</span>).
 While density-reachability requires that all points in-between two points be core points, density-connectivity extends the notion of “neighbors of neighbors” to include points that are merely within the neighborhood of density-reachable points.
-Figure <a href="#fig:densityConnectedExample"><strong>??</strong></a> illustrates how the points located at <span class="math inline">\((4,7)\)</span> and <span class="math inline">\((0,-2)\)</span> are density-connected while not being density-reachable.</p>
+Figure <a href="#fig:densityConnectedExample"><strong>??</strong></a> illustrates how the points located at <span class="math inline">\((4,7)\)</span> and <span class="math inline">\((0,-2)\)</span> are density-connected but not density-reachable.</p>
 <!-- \begin{figure}[!htbp] -->
 <!-- {\centering \includegraphics[width=\textwidth]{figures/unnamed-chunk-18-1}  -->
 <!-- } -->
@@ -873,10 +881,10 @@ Figure 1.18:  An example of two points that are density-connected, but not densi
 <li><p><span class="math inline">\(\forall x,y\)</span>: if <span class="math inline">\(x \in C\)</span> and <span class="math inline">\(y\)</span> is density-reachable from <span class="math inline">\(x\)</span> with respect to <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(Minpts\)</span>, then <span class="math inline">\(y \in C\)</span>.</p></li>
 <li><p><span class="math inline">\(\forall x,y \in C\)</span>: <span class="math inline">\(x\)</span> is density-connected to <span class="math inline">\(y\)</span> with respect to <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(Minpts\)</span>.</p></li>
 </ol>
-<p>Points that are not assigned to a cluster are classified as <em>noise</em>.</p>
+<p>Points not assigned to a cluster are classified as <em>noise</em>.</p>
 <p>For a data set <span class="math inline">\(D\)</span>, the DBSCAN algorithm determines clusters based on the above definition.
 Figure <a href="#fig:dbscanResultExample"><strong>??</strong></a> shows the labels return by DBSCAN for the example considered above with respect to <span class="math inline">\(\epsilon = 3\)</span> and <span class="math inline">\(Minpts = 2\)</span>..
-We see that seven points are classified in a single cluster and three points are classified as noise.</p>
+Seven points are classified in a single cluster and three points are classified as noise.</p>
 <!-- \begin{figure}[!htbp] -->
 <!-- {\centering \includegraphics[width=\textwidth]{figures/unnamed-chunk-19-1}  -->
 <!-- } -->
@@ -893,11 +901,11 @@ Figure 1.19:  Cluster labeling for 10 data points using the DBSCAN algorithm wit
 </div>
 <div id="features-based-on-visual-diagnostics" class="section level3 hasAnchor" number="1.4.3">
 <h3><span class="header-section-number">1.4.3</span> Features Based on Visual Diagnostics<a href="index.html#features-based-on-visual-diagnostics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Much of the literature on “explainable” algorithms are focused on black-box machine learning algorithms such as Random Forests or Multi-layer Neural Networks.
+<p>Much of the “explainable” algorithms literature focuses on black-box machine learning algorithms such as Random Forests or Multi-layer Neural Networks.
 [More to say here?]
 Less focused is placed on constructing explainable features.
 Feature selection and engineering is a critical, often time-intensive step in the data analysis process that isn’t often</p>
-<p>We use the visual diagnostic tools discussed in Chapter [5] to develop a set of features.
+<p>The visual diagnostic tools discussed in Chapter [5] are used to develop a set of features.
 By definition, these features are human-interpretable unlike, for example, features that are calculated in the convolution layer of a convolutional neural network.
 The interpretability of these features imply that they can be explained to forensic examiners or lay-people.
 This will make it easier to introduce such methods into forensic labs and court rooms.</p>
@@ -986,7 +994,7 @@ The four principles of a tidy API are:</p>
 In our application it also enables experimentation by making it easy to change one step of the pipeline and measure the downstream effects .
 Each step of the cartridge case comparison pipeline requires the user to define parameters.
 These can range from minor, such as the standard deviation used in a Gaussian filter, to substantial, such as choosing the algorithm used to calculate the similarity score.
-So far, there is no consensus on the “best” parameter settings.
+So far, no consensus exists for the “best” parameter settings.
 A large amount of experimentation is yet required to establish these parameters.
 A tidy implementation of the cartridge case comparison pipeline allows more people to engage in the validation and improvement of the procedure.</p>
 
