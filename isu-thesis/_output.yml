@@ -16,3 +16,5 @@ bookdown::pdf_book:
     "--metadata", "link-citations=true",
     "--top-level-division=chapter", "--natbib"
   ]
+bookdown::gitbook:
+  toc_depth: 2
