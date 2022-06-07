@@ -44,6 +44,8 @@ knitr::opts_chunk$set(
   fig.align = "center",
   fig.pos = "!htbp"
 )
+
+library(ggplot2)
 ```
 
 <!-- \hypertarget{literature-review}{% -->

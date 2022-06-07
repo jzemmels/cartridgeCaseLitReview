@@ -21,6 +21,10 @@ fig:unnamed-chunk-20
 fig:unnamed-chunk-21
 fig:unnamed-chunk-22
 fig:unnamed-chunk-23
+fig:unnamed-chunk-24
+fig:unnamed-chunk-25
+fig:unnamed-chunk-26
+fig:unnamed-chunk-27
 literature-review
 preliminaries-forensic-examinations
 firearms-and-toolmarks-identification
@@ -34,6 +38,8 @@ forensic-data-feature-extraction
 similarity-scores-for-forensic-data
 reproducibility-of-comparison-pipelines
 diagnostic-tools
+visual-diagnostics
+interactive-diagnostics
 automating-and-improving-the-cartridge-case-identification-pipeline
 image-processing-techniques
 image-registration
@@ -42,5 +48,3 @@ morphological-operations
 density-based-spatial-clustering-of-applications-with-noise
 features-based-on-visual-diagnostics
 implementation-considerations
-this-is-the-title-of-the-first-paper
-introduction
