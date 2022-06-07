@@ -236,11 +236,11 @@ According to these guidelines, six possible conclusions can be made in a F \& T 
 
 2. **Inconclusive**:
 
-  2.1 Some agreement of individual characteristics and all discernible class characteristics, but insufficient for an identification.
+2.1 Some agreement of individual characteristics and all discernible class characteristics, but insufficient for an identification.
 
-  2.2 Agreement of all discernible class characteristics without agreement or disagreement of individual characteristics due to an absence, insufficiency, or lack of reproducibility.
+2.2 Agreement of all discernible class characteristics without agreement or disagreement of individual characteristics due to an absence, insufficiency, or lack of reproducibility.
 
-  2.3 Agreement of all discernible class characteristics and disagreement of individual characteristics, but insufficient for an elimination.
+2.3 Agreement of all discernible class characteristics and disagreement of individual characteristics, but insufficient for an elimination.
 
 3. **Elimination**: Significant disagreement of discernible class characteristics and/or individual characteristics.
 
@@ -523,12 +523,160 @@ Myriad diagnostic tools exist to explain the results of an algorithm.
 These range from identifying instances of the training set that illuminate how the model operates \citep{Deng2018} to fitting more transparent models that approximate the complex model accurately \citep{Puiutta2020} to explaining the behavior of the algorithm in a small region of interest \citep{LIME,Goode2021}.
 Many of these methods require additional technical knowledge to interpret these explanations.
 
-A less technical approach is to use visualizations that facilitate understanding of model behavior.
-Properly constructed visuals enable both exploratory data analysis and diagnostics \citep{Buja2009}, which are critical for anticipating and assessing 
-Given that many of the procedures by which cartridge case evidence is captured, processed, and compared are based on image processing techniques, a visual diagnostic is an intuitive mode of explanation for researchers and lay-people alike.
-We develop a suite of diagnostic tools that can be used to explain the behavior of the cartridge case comparison pipeline.
+### Visual Diagnostics
 
-[Discuss tidyverse tools for visual diagnostics. ggplot2, etc. Emphasize that rshiny enables users to actually physically engage with the analysis process.]
+A less technical approach is to use visualizations that facilitate understanding of model behavior.
+Properly constructed visuals enable both exploratory data analysis and diagnostics \citep{Buja2009}, which are critical steps in the data analysis process for anticipating and assessing model fit.
+Given that many of the procedures by which cartridge case evidence is captured, processed, and compared are based on image processing techniques, a visual diagnostic is an intuitive mode of explanation for researchers and lay-people alike.
+As stated in \citet{cleveland1994elements}, "graphical methods tend to show data sets as a whole, allowing us to summarize the behavior and to study detail. This leads to much more thorough data analyses."
+
+Numerical statistics summarize the behavior of data, but miss the detail referenced in Cleveland's quote \citep{telea2014data}.
+To illustrate this, consider the famous data sets from \citep{Anscombe1973} known as Anscombe's quartet.
+The two variables in each data set are plotted against one another in Figure \@ref(fig:anscombeQuartet).
+There are clear differences in the relationship between `x` and `y` across these four data sets.
+
+```{r, fig.cap="\\label{fig:anscombeQuartet} A visualization of Anscombe's quartet. Despite there being obvious differences between these four data sets, their summary statistics are nearly identical",fig.height = 3,fig.width=5}
+library(magrittr)
+library(dplyr)
+anscombeLong <- data.frame(
+    group  = rep(1:4, each = 11),
+    x = unlist(datasets::anscombe[,c(1:4)]),
+    y = unlist(datasets::anscombe[,c(5:8)])
+    )
+rownames(anscombeLong) <- NULL
+
+anscombeLong %>%
+  ggplot(aes(x=x,y=y)) +
+  geom_point() +
+  facet_wrap(~ group,nrow = 2,labeller = labeller(group = c("1" = "Data Set 1","2" = "Data Set 2","3" = "Data Set 3","4" = "Data Set 4"))) +
+  theme_bw() +
+  labs(title = "Anscombe's Quartet")
+```
+
+Despite these differences, Table \@ref(tab:anscombeStats) demonstrates that summary statistics, namely the first two moments, are identical.
+This demonstrates that relying on summary statistics (at least low-order moments) can lead to incorrect assumptions about a data set's behavior.
+
+\begin{table}[!htbp]
+\centering
+\begin{tabular}{| r | r | r | r | r |}
+\hline
+Data Set & $\bar{x}$ & S.D. $x$ & $\bar{y}$ & S.D. $y$ \\
+\hline
+1 & 9 & 3.32 & 7.5 & 2.03 \\
+\hline
+3 & 9 & 3.32 & 7.5 & 2.03 \\
+\hline
+3 & 9 & 3.32 & 7.5 & 2.03 \\
+\hline
+4 & 9 & 3.32 & 7.5 & 2.03 \\
+\hline
+\end{tabular}
+\caption{Moments of the two variables in Anscombe's quartet.}
+\label{tab:anscombeStats}
+\end{table}
+
+Given the pivotal role that visual diagnostics play in the data analysis pipeline, we now consider best practices in creating data visualizations.
+Human brains are wired for seeing patterns and differences, and for understanding spatial relationships from this \citep{telea2014data}.
+As such, an effective visual diagnostic, or data visualization in general, is one that conveys patterns quickly and easily, and with minimal scope for understanding.
+Arising originally from a pyschological theory of perception, the Gestalt Laws of Perceptual Organization \citep{Goldstein2016-un} are relevant to the construction of statistical graphics.
+The Gestalt laws are as follows:
+
+- **Pragnanz - the law of simplicity:** Every stimulus pattern is seen in such a away that the resulting structure is as simple as possible.
+
+- **Proximity:** Things that are near each other appear to be grouped together.
+
+- **Good Continuation:** Points that, when connected, result in straight or smoothly curving lines are seen as belonging together, and the lines tend to be seen in such a way as to follow the smoothest path.
+
+- **Similarity:** Similar things appear to be grouped together.
+
+- **Common Region:** Elements that are within the same region of space appear to be grouped together.
+
+- **Uniform Connectedness:** A connected region of visual properties, such as the lightness, color, texture, or motion, is perceived as a single unit.
+
+- **Synchrony:** Visual events that occur at the same time are perceived as belonging together.
+
+- **Common Fate:** Things that are moving in the same direction appear to be grouped together.
+
+- **Familiarity:** Things that form patterns that are familiar or meaningful are likely to become grouped together.
+
+These laws provide guidance on how to construct a visual that concisely conveys a pattern or difference in data.
+For data visualization, additional laws include \citep{Midway2020}:
+
+- **Use and Effective Geometry:** Choose a geometry (shape and features of a statistical graphic) that is appropriate to the data.
+
+- **Colors Always Mean Something:** Colors in visuals can convey groupings or a range of values.
+
+As an example of these principles in-action is shown in Figure \@ref(fig:chickweightExample).
+The plot shows the weight over time of chicks fed one of two experimental diets (from the `ChickWeight` base R data set) \citep{crowder1990analysis}.
+Individual points represent the weight of a single chick on a particular day.
+Each set of collected points represents the weight for a single chick over time.
+This is an example of using an effective geometry (point & line graph to represent time series) along with the Gestalt law of Good Continuation.
+We further apply the Gestalt law of Common Region by faceting the plot by diet\footnote{Note that the encoding for Diet 1 and Diet 2 in the original data set was "1" and "3"}.
+This implicitly communicates to the audience that the weights of two diet groups of chicks is expected to differ.
+Indeed, appealing to the Gestalt law of Uniform Connectedness, the "motion" of the grouped time series suggests that chicks given Diet 2 tend to gain weight more rapidly than those given Diet 1.
+This may suggest a particular modeling structure for these time series (e.g., diet fixed effect) or the need to assess the experimental design to ensure that the assumption that the chicks were randomly sampled from the same population is appropriate.
+We see how such a plot can be used for both exploratory data analysis or as a post-hoc diagnostic tool.
+Alternative to faceting, the time series from these two diet groups could be combined into a single plot and distinguished by color.
+
+```{r,fig.cap="\\label{fig:chickweightExample} An example of using the ggplot2 package to construct a residual plot from a simple linear regression. The features of the statistical graphic are combined layer-by-layer using the + operator.",fig.height = 3,fig.width=5}
+library(dplyr)
+
+datasets::ChickWeight %>%
+  as.data.frame() %>%
+  filter(Diet %in% c(1,3)) %>%
+  ggplot(aes(x = Time,y = weight,group = Chick
+             )) +
+  geom_point() +
+  geom_line() +
+  theme_bw() +
+  ylim(c(0,NA)) +
+  theme(legend.position = "bottom") +
+  facet_wrap(~ Diet,labeller = labeller(Diet = c("1" = "Diet 1","3" = "Diet 2"))) +
+  labs(y = "Weight (gm)",
+       x = "Time (Days)",
+       title = "Chick weights over time for two experimental diets")
+```
+
+The R programming language \citep{r} provides a variety of tools to create visual diagnostics.
+Among the most robust of these tools is the ggplot2 package \citep{ggplot2}.
+This package extends the "Grammar of Graphics" introduced in \citet{Wilkinson2005} that provides a user-friendly structure by which graphics can be created.
+Features of a statistical graphic (e.g., elements, transformations, guides, labels) are individually "layered" on a blank canvas using the `+` operator.
+An example of constructing a residual plot from the `attitude` base R data set is shown in \@ref(fig:ggplot2Example) \citep{Chatterjee2006}.
+Such a diagnostic allows the analyst or audience to determine whether the homoscedasticity or linear form assumptions underlying simple linear regression are met.
+For those willing to learn the "grammar," the code used to create these statistical graphics can easily be re-used and tweaked to fit a specific application.
+
+```{r,echo=TRUE,fig.cap="\\label{fig:ggplot2Example} An example of using the ggplot2 package to construct a residual plot from a simple linear regression. The features of the statistical graphic are combined layer-by-layer using the + operator.",fig.height = 3,fig.width=5}
+lmFit <- lm(formula = rating ~ complaints,data = datasets::attitude)
+
+library(ggplot2)
+
+ggplot(data = data.frame(Complaints = datasets::attitude$complaints,
+                         Residuals = lmFit$residuals)) +
+  geom_point(aes(x = Complaints,y = Residuals)) +
+  geom_hline(yintercept = 0,linetype = "dashed") +
+  labs(x = "% in-favor of handling of employee complaints")
+```
+
+### Interactive Diagnostics
+
+While the `ggplot2` package eases the process of constructing visual diagnostics, software such as the `shiny` R package \citep{shiny} enables the consumer of the diagnostic to interact with the visualizations and underlying data.
+The `shiny` package provides tools for using R to build web applications run on HTML, CSS, JavaScript.
+Among other functionality, these applications allow users to upload or create their own data, set parameters for an analysis, interact with visualizations or data sets (e.g., by hovering to display a tooltip), and export their analyses in various file formats \citep{Beeley2018-ci}.
+This can be extremely helpful for encouraging non-experts to engage with an analysis pipeline that otherwise may be technically or conceptually inaccessible.
+Rather than answering a question posed by the author of a plot as a static plot does, such interactive diagnostic tools enable the audience to formulate and answer their own questions.
+This leads to deeper engagement with the data \citep{telea2014data}.
+
+Figure \@ref(fig:IPDmada) \citep{wang2021ipdmada} shows a screenshot of the IPDmada shiny application that enables users to perform a meta-analysis of diagnostic test accuracy studies at the individual patient level (an individual patient data meta-analysis or IPD-MA) using a variety of statistical techniques.
+As seen in \@ref(fig:IPDmada), the user can upload their own data csv file and select parameters that will enable the importing of the data.
+The other tabs at the top of the application provide statistical tools to analyze the uploaded data.
+This application is useful for researchers who are interested in analyzing diagnostic test accuracy data, yet do not necessarily have the coding skills to perform such an analysis in R themselves.
+
+```{r,fig.cap="\\label{fig:IPDmada} The IPDmada shiny application allows users to analyze individual patient data from a diagnostic test accuracy study using a variety of statistical techniques.",fig.height = 3,out.width=".7\\textwidth"}
+knitr::include_graphics("images/IPDmadaShinyExample.png")
+```
+
+We develop a suite of diagnostic tools that can be used to explain the behavior of the cartridge case comparison pipeline.
+These diagnostic tools are created using flexible, open-source tools such as `ggplot2` and `shiny` so that future development and improvement is easy.
 
 <!-- \hypertarget{automating-and-improving-the-cartridge-case-identification-pipeline}{% -->
 <!-- \section{Automating and Improving the Cartridge Case Identification Pipeline}\label{automating-and-improving-the-cartridge-case-identification-pipeline}} -->
@@ -608,11 +756,11 @@ The overall registration procedure is given by:
 
 1. For each $\theta \in \pmb{\Theta}$:
 
-  2.1 Rotate image $B$ by $\theta$ to obtain $B_\theta$.
+2.1 Rotate image $B$ by $\theta$ to obtain $B_\theta$.
 
-  2.2 Calculate the CCF between $A$ and $B_\theta$.
+2.2 Calculate the CCF between $A$ and $B_\theta$.
 
-  2.3 Determine the translation $[m^*,n^*]_{\theta}$ at which the CCF is maximized. Also, record the CCF value associated with this translation.
+2.3 Determine the translation $[m^*,n^*]_{\theta}$ at which the CCF is maximized. Also, record the CCF value associated with this translation.
 
 2. Across all $\theta \in \Theta$, determine the rotation $\theta^*$ at which the largest CCF value is achieved.
 
@@ -635,7 +783,7 @@ The right image shows the result of calculating the CCF using image $A$ as refer
 The CCF achieves a maximum of 1, indicating a perfect match, at the translation value of $[m^\dagger,n^\dagger] = [22,-2]$.
 This represents that if image B were overlaid onto image A such that their center indices coincided, then image B would need to be shifted 22 units "up" and 2 units "left" to match perfectly with image A.
 
- 
+
 <!-- \begin{figure}[!htbp] -->
 
 <!-- {\centering \includegraphics[width=\textwidth]{figures/unnamed-chunk-13-1}  -->
@@ -838,7 +986,7 @@ If, for example, $Minpts = 2$, then $x$ would be considered a core point.
 <!-- \caption{\label{fig:epsNeighborhoodExample} An $\epsilon$-neighborhood around a observation located at $(3,2)$ for $\epsilon = 3$. Points are labeled based on whether they are neighbors to this observation or not}\label{fig:unnamed-chunk-16} -->
 <!-- \end{figure} -->
 
-```{r,echo=FALSE,fig.cap="\\label{fig:epsNeighborhoodExample} An $\\epsilon$-neighborhood around a observation located at $(3,2)$ for $\\epsilon = 3$. Points are labeled based on whether they are neighbors to this observation.",out.width="\\textwidth"}
+```{r,echo=FALSE,fig.cap="\\label{fig:epsNeighborhoodExample} An $\\epsilon$-neighborhood around a observation located at $(3,2)$ for $\\epsilon = 3$. Points are labeled based on whether they are neighbors to this observation.",out.width=".8\\textwidth"}
 knitr::include_graphics("figures/unnamed-chunk-16-1.png")
 ```
 
@@ -858,7 +1006,7 @@ All three points are core points and although the points located at $(4,4)$ and 
 <!-- \caption{\label{fig:densityReachableExample} An example of three points that are density-reachable with respect to $\epsilon = 3$ and $Minpts = 2$.}\label{fig:unnamed-chunk-17} -->
 <!-- \end{figure} -->
 
-```{r,echo=FALSE,fig.cap="\\label{fig:densityReachableExample} An example of three points that are density-reachable with respect to $\\epsilon = 3$ and $Minpts = 2$.",out.width="\\textwidth"}
+```{r,echo=FALSE,fig.cap="\\label{fig:densityReachableExample} An example of three points that are density-reachable with respect to $\\epsilon = 3$ and $Minpts = 2$.",out.width=".8\\textwidth"}
 knitr::include_graphics("figures/unnamed-chunk-17-1.png")
 ```
 
@@ -875,7 +1023,7 @@ Figure \@ref(fig:densityConnectedExample) illustrates how the points located at 
 <!-- \caption{\label{fig:densityConnectedExample} An example of two points that are density-connected, but not density-reachable, with respect to $\epsilon = 3$ and $Minpts = 2$.}\label{fig:unnamed-chunk-18} -->
 <!-- \end{figure} -->
 
-```{r,echo=FALSE,fig.cap="\\label{fig:densityConnectedExample} An example of two points that are density-connected, but not density-reachable, with respect to $\\epsilon = 3$ and $Minpts = 2$.",out.width="\\textwidth"}
+```{r,echo=FALSE,fig.cap="\\label{fig:densityConnectedExample} An example of two points that are density-connected, but not density-reachable, with respect to $\\epsilon = 3$ and $Minpts = 2$.",out.width=".8\\textwidth"}
 knitr::include_graphics("figures/unnamed-chunk-18-1.png")
 ```
 
@@ -900,7 +1048,7 @@ Seven points are classified in a single cluster and three points are classified 
 <!-- \caption{\label{fig:dbscanResultExample} Cluster labeling for 10 data points using the DBSCAN algorithm with parameters $\epsilon = 3$ and $Minpts = 2$. Seven points are assigned to a single cluster and the remaining three are classified as noise.}\label{fig:unnamed-chunk-19} -->
 <!-- \end{figure} -->
 
-```{r,echo=FALSE,fig.cap="\\label{fig:dbscanResultExample} Cluster labeling for 10 data points using the DBSCAN algorithm with parameters $\\epsilon = 3$ and $Minpts = 2$. Seven points are assigned to a single cluster and the remaining three are classified as noise.",out.width="\\textwidth"}
+```{r,echo=FALSE,fig.cap="\\label{fig:dbscanResultExample} Cluster labeling for 10 data points using the DBSCAN algorithm with parameters $\\epsilon = 3$ and $Minpts = 2$. Seven points are assigned to a single cluster and the remaining three are classified as noise.",out.width=".8\\textwidth"}
 knitr::include_graphics("figures/unnamed-chunk-19-1.png")
 ```
 
