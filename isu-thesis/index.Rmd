@@ -48,12 +48,8 @@ knitr::opts_chunk$set(
 library(ggplot2)
 ```
 
-<!-- \hypertarget{literature-review}{% -->
-<!-- \chapter{LITERATURE REVIEW}\label{literature-review}} -->
 # LITERATURE REVIEW
 
-<!-- \hypertarget{preliminaries-forensic-examinations}{% -->
-<!-- \section{Preliminaries: Forensic Examinations}\label{preliminaries-forensic-examinations}} -->
 ## Preliminaries: Forensic Examinations
 
 A bullet casing is found at the scene of a murder.
@@ -73,29 +69,17 @@ These algorithms are used in a forensic examination to supplement and inform the
 We propose an automatic, objective solution to the source identification problem; specifically in the context of comparing fired *cartridge cases.*
 Cartridge case comparison is a sub-discipline of Firearms and Toolmarks Identification, which is reviewed in the next section.
 
-<!-- \hypertarget{firearms-and-toolmarks-identification}{% -->
-<!-- \subsection{Firearms and Toolmarks Identification}\label{firearms-and-toolmarks-identification}} -->
 ### Firearms and Toolmarks Identification
 
 Firearms and toolmarks (F \& T) identification involves studying markings or impressions left by a hard surface, such as the metal of a firearm or other tool (e.g., screwdriver), on a softer surface \citep{Thompson2017}.
 For example, a barrel's rifling leaves toolmarks on a bullet as it travels out of the gun.
 
-<!-- \hypertarget{the-firing-process}{% -->
-<!-- \subsubsection{The Firing Process}\label{the-firing-process}} -->
 #### The Firing Process
 
 In this section, we describe the basic process of firing a handgun or rifle using a cartridge.
 A *cartridge* consists of a metal casing containing primer, gunpowder, and a bullet.
 Figure \@ref(fig:cartridgeDiagram) shows a cross-section of a cartridge featuring these components \citep{calibersExplained}.
 
-<!-- \begin{figure}[!htbp] -->
-
-<!-- {\centering \includegraphics[width=.5\textwidth]{images/bulletdiagram1}  -->
-
-<!-- } -->
-
-<!-- \caption{\label{fig:cartridgeDiagram} A cartridge containing primer, powder, and a bullet. The firing process is initiated by loading a cartridge into the barrel of a firearm.}\label{fig:unnamed-chunk-1} -->
-<!-- \end{figure} -->
 
 ```{r,echo=FALSE,fig.cap="\\label{fig:cartridgeDiagram} A cartridge containing primer, powder, and a bullet. The firing process is initiated by loading a cartridge into the barrel of a firearm.",out.width=".5\\textwidth"}
 knitr::include_graphics("images/bulletdiagram1.png")
@@ -108,15 +92,6 @@ In this example, the hammer of the pistol is pulled back such that the firing pi
 Upon squeezing the trigger, the firing pin is released and travels forwards at a high velocity.
 The firing pin strikes the primer of the cartridge case, causing it to explode.
 
-<!-- \begin{figure}[!htbp] -->
-
-<!-- {\centering \includegraphics[width=.5\textwidth]{images/Parts-pistol}  -->
-
-<!-- } -->
-
-<!-- \caption{\label{fig:pistolParts} Cross-section of a pistol with a chambered cartridge and drawn-back hammer. Pulling the trigger releases the firing pin which strikes the cartridge case primer.}\label{fig:unnamed-chunk-2} -->
-<!-- \end{figure} -->
-
 ```{r,echo=FALSE,fig.cap="\\label{fig:pistolParts} Cross-section of a pistol with a chambered cartridge and drawn-back hammer. Pulling the trigger releases the firing pin which strikes the cartridge case primer.",out.width=".5\\textwidth"}
 knitr::include_graphics("images/Parts-pistol.png")
 ```
@@ -124,15 +99,6 @@ knitr::include_graphics("images/Parts-pistol.png")
 As shown in Figure \@ref(fig:firingCartridge), the explosion of the primer ignites the powder in the cartridge \citep{hampton}.
 Gas rapidly expands in the cartridge causing the bullet to travel down the barrel.
 At the same time, the rest of the cartridge is sent towards the back of the barrel.
-
-<!-- \begin{figure}[!htbp] -->
-
-<!-- {\centering \includegraphics[width=.5\textwidth]{images/firingCartridgeDiagram}  -->
-
-<!-- } -->
-
-<!-- \caption{\label{fig:firingCartridge} A cartridge after a firing pin has struck the primer. The explosion of the primer ignites the powder within the cartridge, causing gas to rapidly expand and force the bullet down the barrel.}\label{fig:unnamed-chunk-3} -->
-<!-- \end{figure} -->
 
 ```{r,echo=FALSE,fig.cap="\\label{fig:firingCartridge} A cartridge after a firing pin has struck the primer. The explosion of the primer ignites the powder within the cartridge, causing gas to rapidly expand and force the bullet down the barrel.",out.width=".5\\textwidth"}
 knitr::include_graphics("images/firingCartridgeDiagram.jpg")
@@ -143,15 +109,6 @@ Any markings on the breech face are imprinted onto the cartridge case, creating 
 These impressions are analogous to a barrel's "fingerprint" left on the cartridge case.
 Figure \@ref(fig:impressionDiagram) shows cartoon examples of breech face markings that appear on cartridge cases \citep{hampton}.
 
-<!-- \begin{figure}[!htbp] -->
-
-<!-- {\centering \includegraphics[width=.6\textwidth]{images/breechFaceImpressionDiagram}  -->
-
-<!-- } -->
-
-<!-- \caption{\label{fig:impressionDiagram} Examples of common breech face impression patterns. These are considered analogous to a breech face fingerprint left on the cartridge surface.}\label{fig:unnamed-chunk-4} -->
-<!-- \end{figure} -->
-
 ```{r,echo=FALSE,fig.cap="\\label{fig:impressionDiagram} Examples of common breech face impression patterns. These are considered analogous to a breech face fingerprint left on the cartridge surface.",out.width=".6\\textwidth"}
 knitr::include_graphics("images/breechFaceImpressionDiagram.jpg")
 ```
@@ -159,15 +116,6 @@ knitr::include_graphics("images/breechFaceImpressionDiagram.jpg")
 Figure \@ref(fig:realCartridgeCase) shows the base of a fired cartridge \citep{hampton}.
 The hole to the south-east of the center of the primer is the impression left by the firing pin.
 Note the horizontal striated breech face markings on the primer to the left of the firing pin impression.
-
-<!-- \begin{figure}[!htbp] -->
-
-<!-- {\centering \includegraphics[width=.7\textwidth]{images/realCartridgeCaseImage}  -->
-
-<!-- } -->
-
-<!-- \caption{\label{fig:realCartridgeCase} A fired 9mm Luger cartridge case with visible firing pin and breech face impressions.}\label{fig:unnamed-chunk-5} -->
-<!-- \end{figure} -->
 
 ```{r,echo=FALSE,fig.cap="\\label{fig:realCartridgeCase} A fired 9mm Luger cartridge case with visible firing pin and breech face impressions.",out.width=".7\\textwidth"}
 knitr::include_graphics("images/realCartridgeCaseImage.jpg")
@@ -178,36 +126,15 @@ As shown in Figure \@ref(fig:extractorMarkings), these can leave additional mark
 Firing pin, breech face, extractor pin and ejector, and other possible markings are all used in a forensic examination to determine whether two cartridge cases were fired from the same firearm.
 This work focuses on the comparison of breech face impressions specifically.
 
-<!-- \begin{figure}[!htbp] -->
-
-<!-- {\centering \includegraphics[width=.6\textwidth]{images/extractorPinDiagram}  -->
-
-<!-- } -->
-
-<!-- \caption{\label{fig:extractorMarkings} Examples of common extractor pin and ejector markings. These, impressions on the cartridge, are used in a forensic examination to determine the source of the fired cartridge.}\label{fig:unnamed-chunk-6} -->
-<!-- \end{figure} -->
-
 ```{r,echo=FALSE,fig.cap="\\label{fig:extractorMarkings} Examples of common extractor pin and ejector markings. These, impressions on the cartridge, are used in a forensic examination to determine the source of the fired cartridge.",out.width=".6\\textwidth"}
 knitr::include_graphics("images/extractorPinDiagram.png")
 ```
-
-<!-- \hypertarget{an-overview-of-firearms-and-toolmarks-examinations}{% -->
-<!-- \subsubsection{An Overview of Firearms and Toolmarks Examinations}\label{an-overview-of-firearms-and-toolmarks-examinations}} -->
 
 #### An Overview of Firearms and Toolmarks Examinations
 
 Trained F \& T examiners use a *comparison microscope*, such as the one shown in Figure \@ref(fig:comparisonMicroscope), to examine two pieces of evidence \citep{Zheng2014}.
 A comparison microscope consists of two compound microscopes that are joined via an *optical bridge* which allows for viewing of the stages below each microscope simultaneously under the same eyepiece.
 The right image of Figure \@ref(fig:comparisonMicroscope) shows an example of the view under a comparison microscope of two bullets with the white dotted line separating the two fields of view.
-
-<!-- \begin{figure}[!htbp] -->
-
-<!-- {\centering \includegraphics[width=.6\textwidth]{images/comparisonMicroscope}  -->
-
-<!-- } -->
-
-<!-- \caption{\label{fig:comparisonMicroscope} A comparison microscope consists of two stages upon which evidence is placed. These stages are placed under two compound microscopes that are joined together via an optical bridge and allow for viewing of both stages simultaneously under a single eyepiece. The image on the right shows an example of a bullet viewed under a comparison microscope.}\label{fig:unnamed-chunk-7} -->
-<!-- \end{figure} -->
 
 ```{r,echo=FALSE,fig.cap="\\label{fig:comparisonMicroscope} A comparison microscope consists of two stages upon which evidence is placed. These stages are placed under two compound microscopes that are joined together via an optical bridge and allow for viewing of both stages simultaneously under a single eyepiece. The image on the right shows an example of a bullet viewed under a comparison microscope.",out.width=".6\\textwidth"}
 knitr::include_graphics("images/comparisonMicroscope.png")
@@ -257,8 +184,6 @@ An examiner's decision may be used as part of an ongoing investigation or presen
 Standard operating procedures for assessing and comparing evidence differ between forensic laboratories.
 For example, some labs collapse the three possible inconclusive decisions into a single decision \citep{Neuman2022} or prohibit examiners from making an elimination based on differences in individual characteristics \citep{Duez2017}.
 
-<!-- \hypertarget{why-should-firearm-and-toolmark-identification-change}{% -->
-<!-- \subsection{Why Should Firearms and Toolmarks Identification Change?}\label{why-should-firearm-and-toolmark-identification-change}} -->
 ### Why Should Firearms and Toolmarks Identification Change?
 
 In 2009, the National Research Council released a report assessing a number of forensic disciplines including Firearms and Toolmarks analysis.
@@ -278,8 +203,6 @@ This suggests the need to supplement these black box decisions with transparent,
 As stated in \citet{pcast2016}, efforts should be made to "convert firearms analysis from a subjective method to an objective method" including "developing and testing image-analysis algorithms for comparing the similarity of tool marks."
 This work focuses on the development of an algorithm for comparing breech face impressions on cartridge cases.
 
-<!-- \hypertarget{forensic-comparison-pipelines}{% -->
-<!-- \section{Forensic Comparison Pipelines}\label{forensic-comparison-pipelines}} -->
 ## Forensic Comparison Pipelines
 
 Recent work in many forensic disciplines has focused on the development of algorithms to measure the similarity between pieces of evidence including glass \citep{Curran2000-hp,Park2019,openForSciR}, handwriting \citep{crawford_handwriting_2020}, shoe prints \citep{park_algorithm_2020}, ballistics \citep{hare_automatic_2016,tai_fully_2018}, and toolmarks \citep{Hadler2017,Krishnan2018}.
@@ -306,29 +229,16 @@ Broadly, the steps of the pipeline include:
 This is similar to the structure discussed in \citet{Rice2020}.
 We add to this structure the emphasis that each step of the pipeline can be further broken-down into modularized pieces.
 For example, the preprocessing step may include multiple sub-procedures to isolate a region of interest of the evidence.
-Figure \@ref(fig:pipelineDiagram) shows three possible variations of the cartridge case comparison pipeline as well as the parameters requiring manual specification and alternative modules.
+Figure \@ref(fig:pipelineDiagram) shows two possible variations of the cartridge case comparison pipeline as well as the parameters requiring manual specification and alternative modules.
 The benefits of this modularization include easing the process of experimenting with different parameters/sub-procedures and improving the comprehensibility of the pipeline.
 
-[Update the pipeline diagram]
-
-<!-- \begin{figure}[!htbp] -->
-
-<!-- {\centering \includegraphics[width=\textwidth]{images/pipelineDiagram_9-9-21}  -->
-
-<!-- } -->
-
-<!-- \caption{\label{fig:pipelineDiagram} Variations upon the cartridge case comparison pipeline. The first three columns detail the pipeline with different sub-procedures. The fourth columns shows the parameters that require manual specification at each step. The fifth column shows  alternative processing steps that could replace steps in the existing pipeline.}\label{fig:unnamed-chunk-8} -->
-<!-- \end{figure} -->
-
-```{r,echo=FALSE,echo=FALSE,fig.cap="\\label{fig:pipelineDiagram} Variations upon the cartridge case comparison pipeline. The first three columns detail the pipeline with different sub-procedures. The fourth columns shows the parameters that require manual specification at each step. The fifth column shows  alternative processing steps that could replace steps in the existing pipeline.",out.width="\\textwidth"}
-knitr::include_graphics("images/pipelineDiagram_9-9-21.jpg")
+```{r,echo=FALSE,echo=FALSE,fig.cap="\\label{fig:pipelineDiagram} Variations upon the cartridge case comparison pipeline. The first two columns detail the pipeline with different sub-procedures. The third columns shows the parameters that require manual specification at each step. The fourth column shows  alternative processing steps that could replace steps in the existing pipeline.",out.width="\\textwidth"}
+knitr::include_graphics("images/pipelineDiagram_6-8-22.png")
 ```
 
 In the following sections, we detail recent advances to each of the five steps in the pipeline outlined above.
 We narrow our focus to advances made in comparing firearms evidence.
 
-<!-- \hypertarget{digital-representations-of-evidence}{% -->
-<!-- \subsection{Digital Representations of Evidence}\label{digital-representations-of-evidence}} -->
 ### Digital Representations of Evidence
 
 Digital representations of cartridge case evidence commonly come in one of two modes: 2D optical images or 3D topographic scans.
@@ -343,29 +253,11 @@ This light is reflected back onto a pinhole allowing a limited height range to p
 The microscope scans through different height range "slices" and compiles all these slices into a single 3D topography of the cartridge case primer surface.
 The Microdisplay Scan Confocal Microscope from Sensofar\texttrademark~Metrology is shown in Figure \@ref(fig:sensofarScanner) \citep{bermudez2017confocal}.
 
-<!-- \begin{figure}[!htbp] -->
-
-<!-- {\centering \includegraphics[width=.5\textwidth]{images/sensofarScanner}  -->
-
-<!-- } -->
-
-<!-- \caption{\label{fig:sensofarScanner} The Microdisplay Scan Confocal Microscope from Sensofar\texttrademark\ Metrology. The cartridge case surface is captured by scanning through a range of vertical slices and compiling these slices into a single 3D topography.}\label{fig:unnamed-chunk-9} -->
-<!-- \end{figure} -->
-
 ```{r,echo=FALSE,fig.cap="\\label{fig:sensofarScanner} The Microdisplay Scan Confocal Microscope from Sensofar\\texttrademark\\ Metrology. The cartridge case surface is captured by scanning through a range of vertical slices and compiling these slices into a single 3D topography.",out.width=".5\\textwidth"}
 knitr::include_graphics("images/sensofarScanner.png")
 ```
 
 Figure \@ref(fig:cartridgeCaseImages) shows a 2D image and 3D topography of the same cartridge case primer from \citet{fadulempirical2011}.
-
-<!-- \begin{figure}[!htbp] -->
-
-<!-- {\centering \includegraphics[width=\textwidth]{images/fadul1-1_sidebyside}  -->
-
-<!-- } -->
-
-<!-- \caption{\label{fig:cartridgeCaseImages} A cartridge case captured using 2D confocal reflectance microscopy (left) and 3D disc scanning confocal microscopy (right).}\label{fig:unnamed-chunk-10} -->
-<!-- \end{figure} -->
 
 ```{r,echo=FALSE,fig.cap="\\label{fig:cartridgeCaseImages} A cartridge case captured using 2D confocal reflectance microscopy (left) and 3D disc scanning confocal microscopy (right).",out.width="\\textwidth"}
 knitr::include_graphics("images/fadul1-1_sidebyside.PNG")
@@ -376,15 +268,6 @@ A tray of 15 fired cartridge cases and the scanner are shown in Figure \@ref(fig
 This scanner collects images under various lighting conditions of a gel pad into which the cartridge case surface is impressed and combines these images into a regular 2D array called a *surface matrix*.
 The physical dimensions of these objects are about 5.5 $mm^2$ captured at a resolution of 1.84 microns per pixel (1000 microns equals 1 mm).
 
-<!-- \begin{figure}[!htbp] -->
-
-<!-- {\centering \includegraphics[width=.7\textwidth]{images/TopMatchSystem7}  -->
-
-<!-- } -->
-
-<!-- \caption{\label{fig:topMatchScanner} The TopMatch-3D High-Capacity Scanner from Cadre Forensics\texttrademark\ . The scanner captures topographic scans of a gel pad into which a cartridge case surface is impressed.}\label{fig:unnamed-chunk-11} -->
-<!-- \end{figure} -->
-
 ```{r,echo=FALSE,fig.cap="\\label{fig:topMatchScanner} The TopMatch-3D High-Capacity Scanner from Cadre Forensics\\texttrademark\\ . The scanner captures topographic scans of a gel pad into which a cartridge case surface is impressed.",out.width=".7\\textwidth"}
 knitr::include_graphics("images/TopMatchSystem7.png")
 ```
@@ -393,21 +276,10 @@ When applied to ballistics evidence, these 3D scans are commonly stored in the I
 x3p is a container consisting of a single surface matrix representing the height value of the surface and metadata concerning the parameters under which the scan was taken as shown in Figure \@ref(fig:x3pFlowchart) \citep{Zheng2020}.
 It has been empirically demonstrated that comparing 3D topographic scans of cartridge case evidence leads to more accurate conclusions compared to comparing 2D optical images of the same evidence \citep{Tai2019,tong_fired_2014,song_3d_2014}.
 
-<!-- \begin{figure}[!htbp] -->
-
-<!-- {\centering \includegraphics[width=.7\textwidth]{images/x3pFlowchart}  -->
-
-<!-- } -->
-
-<!-- \caption{\label{fig:x3pFlowchart} The hierarchy of information stored in the x3p file format for both bullet and cartridge case evidence.}\label{fig:unnamed-chunk-12} -->
-<!-- \end{figure} -->
-
 ```{r,echo=FALSE,fig.cap="\\label{fig:x3pFlowchart} The hierarchy of information stored in the x3p file format for both bullet and cartridge case evidence.",out.width=".7\\textwidth"}
 knitr::include_graphics("images/x3pFlowchart.jpg")
 ```
 
-<!-- \hypertarget{preprocessing-procedures-for-forensic-data}{% -->
-<!-- \subsection{Preprocessing Procedures for Forensic Data}\label{preprocessing-procedures-for-forensic-data}} -->
 ### Preprocessing Procedures for Forensic Data
 
 When capturing the surface of a cartridge case, the result is bound to contain extraneous regions due to the incongruity between the circular primer and the rectangular array in which the surface data are stored.
@@ -430,8 +302,6 @@ Instead of using automatic procedures, others have used subjective human interve
 For example, \citep{song_estimating_2018} indicate that cartridge cases are "manually trimming to extract the breech face impression of interest."
 In \citet{Roth2015}, examiners manually identify the borders of the breech face impression region by placing points around an image of the cartridge case primer.
 
-<!-- \hypertarget{forensic-data-feature-extraction}{% -->
-<!-- \subsection{Forensic Data Feature Extraction}\label{forensic-data-feature-extraction}} -->
 ### Forensic Data Feature Extraction
 
 After applying the preprocessing procedures to two cartridge case scans, their breech face impressions are compared and similarity features are extracted.
@@ -454,8 +324,6 @@ After breaking a scan into a grid of cells, each cell is compared to the other s
 \citet{song_proposed_2013} assume that the cells from a truly matching pair of cartridge cases will "agree" on their registration in the other scan.
 Details of this procedure are provided in Chapter 2.
 
-<!-- \hypertarget{similarity-scores-for-forensic-data}{% -->
-<!-- \subsection{Similarity Scores for Forensic Data}\label{similarity-scores-for-forensic-data}} -->
 ### Similarity Scores for Forensic Data
 
 Following feature extraction, the dimensionality of these features is further reduced to a low-dimensional, usually univariate, similarity score.
@@ -469,7 +337,7 @@ Using these estimates, they are able to estimate the score-based likelihood rati
 This SLR can be viewed as a similarity score \citep{Garton2021}.
 
 In the case of the cell-based comparison procedure discussed above, the total number of cells that are deemed "congruent matching" is used as a similarity score.
-The criteria used to define "congruent matching" has changed across papers \citep{song_3d_2014,tong_fired_2014,tong_improved_2015,chen_convergence_2017} and will be discussed in greater detail in [Chapter].
+The criteria used to define "congruent matching" has changed across papers \citep{song_3d_2014,tong_fired_2014,tong_improved_2015,chen_convergence_2017} and will be discussed in greater detail in Chapter 2.
 The authors of these papers have consistently used a decision boundary of six "Congruent Matching Cells" to distinguish matches from non-matches.
 
 \citet{Zhang2020} applies the Density-Based Spatial Clustering of Applications with Noise (DBSCAN) algorithm \citep{Ester1996} to the features from the cell-based comparison procedure to determine if any clusters form amongst the per-cell estimated registration values.
@@ -477,8 +345,6 @@ This is based on the assumption that any cells that come to a consensus on their
 \citet{Zhang2020} proposes a binary classifier based on whether any clusters are identified by the DBSCAN algorithm \citep{Ester1996}.
 If a cluster is found for a particular pairwise comparison, then that pair is classified as a "match" and otherwise as a "non-match."
 
-<!-- \hypertarget{reproducibility-of-comparison-pipelines}{% -->
-<!-- \subsection{Reproducibility of Comparison Pipelines}\label{reproducibility-of-comparison-pipelines}} -->
 ### Reproducibility of Comparison Pipelines
 
 \citet{nasem_2019} defines reproducibility as "obtaining consistent computational results using the same input data, computational steps, methods, code, and conditions of analysis."
@@ -503,8 +369,6 @@ For situations in which VMs or containers aren't available, software such as the
 Further, software such as the `knitr` R package \citep{Xie2014} enable "literate programming" in which prose and executed code can be interwoven to make it easier to understand the code's function.
 These tools make data, code, and derivative research findings more accessible, in terms of both acquisition and comprehensibility, to consumers and fellow researchers. 
 
-<!-- \hypertarget{diagnostic-tools}{% -->
-<!-- \section{Diagnostic Tools}\label{diagnostic-tools}} -->
 ## Diagnostic Tools
 
 Forensic examiners often provide expert testimony in court cases.
@@ -513,7 +377,7 @@ A party to a court may challenge the examiner on the validity of the underlying 
 In these situations, examiners need to explain the process by which they reached an evidentiary conclusion to the fact finders of the case; namely, the judge or jury.
 As algorithms are more often used in forensic examinations, the technical knowledge required to understand and explain an algorithm to lay-people has increased.
 While in some cases the authors of the algorithm have been willing to provide testimony to establish the validity of the algorithm \citep{trueAlleleTestimony}, this will become less viable as algorithms become more prevalent.
-Indeed, even the most elegant improvements to an algorithm may be moot if an examiner can't explain the improvements in their testimony.
+Indeed, even the most effective algorithms may be moot if an examiner can't explain the algorithm in their testimony.
 
 The resources required to educate examiners on the use of highly technical algorithms makes additional training seem currently implausible.
 An alternative is to develop algorithms from the ground-up to be intuitive for examiners to understand and explain to others.
@@ -677,17 +541,27 @@ This application is useful for researchers who are interested in analyzing diagn
 knitr::include_graphics("images/IPDmadaShinyExample.png")
 ```
 
-We develop a suite of diagnostic tools that can be used to explain the behavior of the cartridge case comparison pipeline.
+Several recently-released software provide interactive diagnostic applications for firarms and toolmarks evidence.
+Most notable of these software is the Virtual Comparison Microscopy application from Cadre Forensics\texttrademark.
+In contrast to Light Comparison Microscopy (LCM; e.g., using comparison microscopes), this software displays 3D topographies saved on a computer (e.g., as an x3p file).
+An example screenshot of this software is shown in Figure \@ref(fig:topMatchAnnotationExample) \citep{Chapnick2020}.
+We see that two cartridge case scans are selected from the user's computer for comparison.
+This user has selected various colors to represent similar or different regions.
+A major benefit of using VCM over LCM is that these 3D scans can be shared over the internet rather than sending the physical specimen to another lab (which may damage the specimen).
+\citet{Duez2017}, \citet{Chapnick2020}, and \citet{Knowles2021} all demonstrate that performing forensic examinations using such VCM technology yields equally, if not more, accurate conclusions compared to traditional LCM methods.
+
+```{r,fig.cap="\\label{fig:topMatchAnnotationExample} A screenshot of the TopMatch-3D\\texttrademark Virtual Comparison Microscopy software. In this example, similar and different markings on the cartridge case scans are manually annotated by the user.",out.width = "\\textwidth"}
+knitr::include_graphics("images/topMatchSoftwareAnnotation.jpg")
+```
+
+
+We develop a suite of diagnostic tools to explain the behavior of the cartridge case comparison pipeline.
 These diagnostic tools are created using flexible, open-source tools such as `ggplot2` and `shiny` so that future development and improvement is easy.
 
-<!-- \hypertarget{automating-and-improving-the-cartridge-case-identification-pipeline}{% -->
-<!-- \section{Automating and Improving the Cartridge Case Identification Pipeline}\label{automating-and-improving-the-cartridge-case-identification-pipeline}} -->
-## Automating and Improving the Cartridge Case Identification Pipeline
+## Automating and Improving the Cartridge Case Comparison Pipeline
 
 In this section, we review preliminaries needed to understand various sub-routines of the cartridge case comparison pipeline.
 
-<!-- \hypertarget{image-processing-techniques}{% -->
-<!-- \subsection{Image Processing Techniques}\label{image-processing-techniques}} -->
 ### Image Processing Techniques
 
 We first review image processing and computer vision algorithms that are commonly used in cartridge case comparison algorithms.
@@ -695,8 +569,6 @@ Throughout this section, let $A$ and $B$ denote two images.
 Define these images to be 2D arrays of a given size where $A[m,n]$ and $B[m,n]$ each map to a spatially-ordered measurement value.
 For example, the measurement may be the height $h$ value of a cartridge case surface at a particular $[m,n]$ location.
 
-<!-- \hypertarget{image-registration}{% -->
-<!-- \subsubsection{Image Registration}\label{image-registration}} -->
 #### Image Registration
 
 Image registration involves transforming one image to align with another image \citep{Brown1992}.
@@ -785,22 +657,10 @@ The right image shows the result of calculating the CCF using image $A$ as refer
 The CCF achieves a maximum of 1, indicating a perfect match, at the translation value of $[m^\dagger,n^\dagger] = [22,-2]$.
 This represents that if image B were overlaid onto image A such that their center indices coincided, then image B would need to be shifted 22 units "up" and 2 units "left" to match perfectly with image A.
 
-
-<!-- \begin{figure}[!htbp] -->
-
-<!-- {\centering \includegraphics[width=\textwidth]{figures/unnamed-chunk-13-1}  -->
-
-<!-- } -->
-
-<!-- \caption{\label{fig:ccfTranslationExample} (Left) A reference image $A$ and template image $B$ both featuring a white box of dimension $10 \times 10$. (Right) The cross-correlation function (CCF) between $A$ and $B$. The index at which the CCF is maximized represents the translation at which $A$ and $B$ are most similar.}\label{fig:unnamed-chunk-13} -->
-<!-- \end{figure} -->
-
 ```{r,echo=FALSE,fig.cap="\\label{fig:ccfTranslationExample} (Left) A reference image $A$ and template image $B$ both featuring a white box of dimension $10 \\times 10$. (Right) The cross-correlation function (CCF) between $A$ and $B$. The index at which the CCF is maximized represents the translation at which $A$ and $B$ are most similar.",out.width="\\textwidth"}
 knitr::include_graphics("figures/unnamed-chunk-13-1.png")
 ```
 
-<!-- \hypertarget{gaussian-filters}{% -->
-<!-- \subsubsection{Gaussian Filters}\label{gaussian-filters}} -->
 #### Gaussian Filters
 
 In image processing, a Gaussian filter (equivalently, blur or smoother) is mathematical operator that imputes the values in an image using a locally-weighted sum of surrounding values.
@@ -845,15 +705,6 @@ This leads to retaining sharp edges while also reducing noise.
 An example of a bandpass filtered image $A$ is shown in Figure \@ref(fig:gaussianFilterExample).
 The edges of the box are better-preserved compared to the lowpass filter figure while the interior of the box is better-preserved compared to the highpass filter figure.
 
-<!-- \begin{figure}[!htbp] -->
-
-<!-- {\centering \includegraphics[width=\textwidth]{figures/unnamed-chunk-14-1}  -->
-
-<!-- } -->
-
-<!-- \caption{\label{fig:gaussianFilterExample} An image $A$ of a box undergoing various filtering operations.}\label{fig:unnamed-chunk-14} -->
-<!-- \end{figure} -->
-
 ```{r,echo=FALSE,fig.cap="\\label{fig:gaussianFilterExample} An image $A$ of a box undergoing various filtering operations.",out.width="\\textwidth"}
 knitr::include_graphics("figures/unnamed-chunk-14-1.png")
 ```
@@ -862,8 +713,6 @@ Variations on the standard Gaussian filter include the "robust" Gaussian regress
 This filter fluctuates between a filter step, which applies a Gaussian filter, and outlier step, which identifies and omits outlier observations from the next filter step \citep{robustFilter}.
 Another alternative, the "edge preserving" filter, adapts the kernel weights when approaching the boundary of an image to mitigate so-called *boundary effects* \citep{Aurich1995}.
 
-<!-- \hypertarget{morphological-operations}{% -->
-<!-- \subsubsection{Morphological Operations}\label{morphological-operations}} -->
 #### Morphological Operations
 
 Mathematical morphology refers to a theory and collection of image processing techniques for geometrical structures \citep{Haralick1987}.
@@ -947,21 +796,10 @@ Erosion by $B$ therefore shrinks the region $W$ in $A$ by one index in each dire
 Figure \@ref(fig:dilationErosionExample) shows the example considered here in terms of black and white representations of $A$ undergoing dilation and erosion by $B$.
 In practice, there may be two or more disconnected foreground regions in $A$ to which dilation or erosion can be independently applied.
 
-<!-- \begin{figure}[!htbp] -->
-
-<!-- {\centering \includegraphics[width=\textwidth]{figures/unnamed-chunk-15-1}  -->
-
-<!-- } -->
-
-<!-- \caption{\label{fig:dilationErosionExample} A $7 \times 7$ image $A$ featuring a $3 \times 3$ box undergoing dilation and erosion by a $3 \times 3$ structuring element $B$.}\label{fig:unnamed-chunk-15} -->
-<!-- \end{figure} -->
-
 ```{r,echo=FALSE,fig.cap="\\label{fig:dilationErosionExample} A $7 \\times 7$ image $A$ featuring a $3 \\times 3$ box undergoing dilation and erosion by a $3 \\times 3$ structuring element $B$.",out.width="\\textwidth"}
 knitr::include_graphics("figures/unnamed-chunk-15-1.png")
 ```
 
-<!-- \hypertarget{density-based-spatial-clustering-of-applications-with-noise}{% -->
-<!-- \subsection{Density-Based Spatial Clustering of Applications with Noise}\label{density-based-spatial-clustering-of-applications-with-noise}} -->
 ### Density-Based Spatial Clustering of Applications with Noise
 
 The Density-Based Spatial Clustering of Applications with Noise (DBSCAN) algorithm is a clustering procedure that assigns observations to clusters if they are in a region of high observation density \citep{Ester1996}.
@@ -979,15 +817,6 @@ An $\epsilon$-neighborhood using the Euclidean distance metric and $\epsilon = 3
 Points inside the circle are neighbors of $x$.
 If, for example, $Minpts = 2$, then $x$ would be considered a core point.
 
-<!-- \begin{figure}[!htbp] -->
-
-<!-- {\centering \includegraphics[width=\textwidth]{figures/unnamed-chunk-16-1}  -->
-
-<!-- } -->
-
-<!-- \caption{\label{fig:epsNeighborhoodExample} An $\epsilon$-neighborhood around a observation located at $(3,2)$ for $\epsilon = 3$. Points are labeled based on whether they are neighbors to this observation or not}\label{fig:unnamed-chunk-16} -->
-<!-- \end{figure} -->
-
 ```{r,echo=FALSE,fig.cap="\\label{fig:epsNeighborhoodExample} An $\\epsilon$-neighborhood around a observation located at $(3,2)$ for $\\epsilon = 3$. Points are labeled based on whether they are neighbors to this observation.",out.width=".8\\textwidth"}
 knitr::include_graphics("figures/unnamed-chunk-16-1.png")
 ```
@@ -999,15 +828,6 @@ More broadly, a point $x_m$ is *density-reachable* to a point $x_1$ if there exi
 Figure \@ref(fig:densityReachableExample) shows an example of three density-reachable points located at $(1,0), (3,2)$, and $(4,4)$ using $\epsilon = 3$ and $Minpts = 2$.
 All three points are core points and although the points located at $(4,4)$ and $(1,3)$ are not neighbors, they share a neighbor in the point located at $(3,2)$ and are thus density-reachable.
 
-<!-- \begin{figure}[!htbp] -->
-
-<!-- {\centering \includegraphics[width=\textwidth]{figures/unnamed-chunk-17-1}  -->
-
-<!-- } -->
-
-<!-- \caption{\label{fig:densityReachableExample} An example of three points that are density-reachable with respect to $\epsilon = 3$ and $Minpts = 2$.}\label{fig:unnamed-chunk-17} -->
-<!-- \end{figure} -->
-
 ```{r,echo=FALSE,fig.cap="\\label{fig:densityReachableExample} An example of three points that are density-reachable with respect to $\\epsilon = 3$ and $Minpts = 2$.",out.width=".8\\textwidth"}
 knitr::include_graphics("figures/unnamed-chunk-17-1.png")
 ```
@@ -1015,15 +835,6 @@ knitr::include_graphics("figures/unnamed-chunk-17-1.png")
 Finally, a point $y$ is *density-connected* to a point $x$ with respect to $\epsilon$ and $Minpts$ if there exists a point $z$ such that both $x$ and $y$ are density-reachable to $z$ (with respect to $\epsilon$ and $Minpts$).
 While density-reachability requires that all points in-between two points be core points, density-connectivity extends the notion of "neighbors of neighbors" to include points that are merely within the neighborhood of density-reachable points.
 Figure \@ref(fig:densityConnectedExample) illustrates how the points located at $(4,7)$ and $(0,-2)$ are density-connected but not density-reachable.
-
-<!-- \begin{figure}[!htbp] -->
-
-<!-- {\centering \includegraphics[width=\textwidth]{figures/unnamed-chunk-18-1}  -->
-
-<!-- } -->
-
-<!-- \caption{\label{fig:densityConnectedExample} An example of two points that are density-connected, but not density-reachable, with respect to $\epsilon = 3$ and $Minpts = 2$.}\label{fig:unnamed-chunk-18} -->
-<!-- \end{figure} -->
 
 ```{r,echo=FALSE,fig.cap="\\label{fig:densityConnectedExample} An example of two points that are density-connected, but not density-reachable, with respect to $\\epsilon = 3$ and $Minpts = 2$.",out.width=".8\\textwidth"}
 knitr::include_graphics("figures/unnamed-chunk-18-1.png")
@@ -1041,35 +852,21 @@ For a data set $D$, the DBSCAN algorithm determines clusters based on the above 
 Figure \@ref(fig:dbscanResultExample) shows the labels return by DBSCAN for the example considered above with respect to $\epsilon = 3$ and $Minpts = 2$..
 Seven points are classified in a single cluster and three points are classified as noise.
 
-<!-- \begin{figure}[!htbp] -->
-
-<!-- {\centering \includegraphics[width=\textwidth]{figures/unnamed-chunk-19-1}  -->
-
-<!-- } -->
-
-<!-- \caption{\label{fig:dbscanResultExample} Cluster labeling for 10 data points using the DBSCAN algorithm with parameters $\epsilon = 3$ and $Minpts = 2$. Seven points are assigned to a single cluster and the remaining three are classified as noise.}\label{fig:unnamed-chunk-19} -->
-<!-- \end{figure} -->
-
 ```{r,echo=FALSE,fig.cap="\\label{fig:dbscanResultExample} Cluster labeling for 10 data points using the DBSCAN algorithm with parameters $\\epsilon = 3$ and $Minpts = 2$. Seven points are assigned to a single cluster and the remaining three are classified as noise.",out.width=".8\\textwidth"}
 knitr::include_graphics("figures/unnamed-chunk-19-1.png")
 ```
 
-<!-- \hypertarget{features-based-on-visual-diagnostics}{% -->
-<!-- \subsection{Features Based on Visual Diagnostics}\label{features-based-on-visual-diagnostics}} -->
 ### Features Based on Visual Diagnostics
 
 Much of the "explainable" algorithms literature focuses on black-box machine learning algorithms such as Random Forests or Multi-layer Neural Networks.
-[More to say here?]
 Less focused is placed on constructing explainable features.
 Feature selection and engineering is a critical, often time-intensive step in the data analysis process that isn't often
 
-The visual diagnostic tools discussed in Chapter [5] are used to develop a set of features.
+The visual diagnostic tools discussed in Chapter 4 are used to develop a set of features.
 By definition, these features are human-interpretable unlike, for example, features that are calculated in the convolution layer of a convolutional neural network.
 The interpretability of these features imply that they can be explained to forensic examiners or lay-people.
 This will make it easier to introduce such methods into forensic labs and court rooms.
 
-<!-- \hypertarget{implementation-considerations}{% -->
-<!-- \subsection{Implementation Considerations}\label{implementation-considerations}} -->
 ### Implementation Considerations
 
 This cartridge case comparison pipeline is similar to other data analysis pipelines.
@@ -1115,53 +912,17 @@ These procedures are discussed in greater detail in Chapter 2.
 By breaking the broader preprocessing step into modularized pieces, we can devise other arrangements of these preprocessing procedures that may improve the segmenting or emphasizing of the region of interest.
 The modularity of the pipeline makes it easier to understand what the algorithm is doing "under the hood" while a modularized implementation enables others to experiment with alternative versions of the pipeline.
 
-<!-- \begin{figure}[!htbp] -->
-
-<!-- {\centering \includegraphics[width=.7\textwidth]{images/taiEddyPreprocess}  -->
-
-<!-- } -->
-
-<!-- \caption{\label{fig:taiEddyPreprocess} A preprocessing procedure applied to a 2D image of a cartridge case to identify the firing pin impression. The procedure results in a 2D image of a cartridge case without the firing pin impression region.}\label{fig:unnamed-chunk-21} -->
-<!-- \end{figure} -->
-
 ```{r,echo=FALSE,fig.cap="\\label{fig:taiEddyPreprocess} A preprocessing procedure applied to a 2D image of a cartridge case to identify the firing pin impression. The procedure results in a 2D image of a cartridge case without the firing pin impression region.",out.width=".7\\textwidth"}
 knitr::include_graphics("images/taiEddyPreprocess.png")
 ```
-
-<!-- \begin{figure}[!htbp] -->
-
-<!-- {\centering \includegraphics[width=.8\textwidth]{images/riceBulletPreprocessDiagram}  -->
-
-<!-- } -->
-
-<!-- \caption{\label{fig:ricePreprocess} A preprocessing procedure for extracting 2D bullet "signatures" from a 3D topographic bullet scan. The procedure results in an ordered sequence of values representing the local variations in the surface of the bullet.}\label{fig:unnamed-chunk-22} -->
-<!-- \end{figure} -->
 
 ```{r,echo=FALSE,fig.cap='\\label{fig:ricePreprocess} A preprocessing procedure for extracting 2D bullet \\`\\`signatures" from a 3D topographic bullet scan. The procedure results in an ordered sequence of values representing the local variations in the surface of the bullet.',out.width=".8\\textwidth"}
 knitr::include_graphics("images/riceBulletPreprocessDiagram.png")
 ```
 
-<!-- \begin{figure}[!htbp] -->
-
-<!-- {\centering \includegraphics[width=.35\textwidth]{images/handwriterPreprocessDiagram}  -->
-
-<!-- } -->
-
-<!-- \caption{\label{fig:handwriterPreprocess} A preprocessing procedure applied to a handwriting image of the word "csafe." The procedure results in a skeletonized version of the word that has been separated into graphemes as represented by orange nodes.}\label{fig:unnamed-chunk-23} -->
-<!-- \end{figure} -->
-
 ```{r,echo=FALSE,fig.cap='\\label{fig:handwriterPreprocess} A preprocessing procedure applied to a handwriting image of the word "csafe." The procedure results in a skeletonized version of the word that has been separated into graphemes as represented by orange nodes.',out.width=".35\\textwidth"}
 knitr::include_graphics("images/handwriterPreprocessDiagram.png")
 ```
-
-<!-- \begin{figure}[!htbp] -->
-
-<!-- {\centering \includegraphics[width=\textwidth]{figures/preProcessPlots}  -->
-
-<!-- } -->
-
-<!-- \caption{\label{fig:cmcRPreprocess} A cartridge case undergoing various preprocessing steps. The procedure results in a cartridge case scan in which the breech face impressions have been segmented and highlighted.}\label{fig:unnamed-chunk-24} -->
-<!-- \end{figure} -->
 
 ```{r,echo=FALSE,fig.cap='\\label{fig:cmcRPreprocess} A cartridge case undergoing various preprocessing steps. The procedure results in a cartridge case scan in which the breech face impressions have been segmented and highlighted.',out.width="\\textwidth"}
 knitr::include_graphics("figures/preProcessPlots.png")

@@ -1,6 +1,3 @@
-fig:unnamed-chunk-1
-fig:unnamed-chunk-2
-fig:unnamed-chunk-3
 fig:unnamed-chunk-4
 fig:unnamed-chunk-5
 fig:unnamed-chunk-6
@@ -25,6 +22,10 @@ fig:unnamed-chunk-24
 fig:unnamed-chunk-25
 fig:unnamed-chunk-26
 fig:unnamed-chunk-27
+fig:unnamed-chunk-28
+fig:unnamed-chunk-29
+fig:unnamed-chunk-30
+fig:unnamed-chunk-31
 literature-review
 preliminaries-forensic-examinations
 firearms-and-toolmarks-identification
@@ -40,7 +41,7 @@ reproducibility-of-comparison-pipelines
 diagnostic-tools
 visual-diagnostics
 interactive-diagnostics
-automating-and-improving-the-cartridge-case-identification-pipeline
+automating-and-improving-the-cartridge-case-comparison-pipeline
 image-processing-techniques
 image-registration
 gaussian-filters

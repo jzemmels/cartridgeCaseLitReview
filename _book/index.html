@@ -146,7 +146,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="#preliminaries-forensic-examinations"><i class="fa fa-check"></i><b>1.1</b> Preliminaries: Forensic Examinations</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="#forensic-comparison-pipelines"><i class="fa fa-check"></i><b>1.2</b> Forensic Comparison Pipelines</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="#diagnostic-tools"><i class="fa fa-check"></i><b>1.3</b> Diagnostic Tools</a></li>
-<li class="chapter" data-level="1.4" data-path="index.html"><a href="#automating-and-improving-the-cartridge-case-identification-pipeline"><i class="fa fa-check"></i><b>1.4</b> Automating and Improving the Cartridge Case Identification Pipeline</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="#automating-and-improving-the-cartridge-case-comparison-pipeline"><i class="fa fa-check"></i><b>1.4</b> Automating and Improving the Cartridge Case Comparison Pipeline</a></li>
 </ul></li>
 </ul>
 
@@ -175,8 +175,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="literature-review" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">1</span> LITERATURE REVIEW<a href="#literature-review" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<!-- \hypertarget{preliminaries-forensic-examinations}{% -->
-<!-- \section{Preliminaries: Forensic Examinations}\label{preliminaries-forensic-examinations}} -->
 <div id="preliminaries-forensic-examinations" class="section level2 hasAnchor" number="1.1">
 <h2><span class="header-section-number">1.1</span> Preliminaries: Forensic Examinations<a href="#preliminaries-forensic-examinations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A bullet casing is found at the scene of a murder.
@@ -194,25 +192,16 @@ More recently, algorithms to automatically compare evidence and provide an objec
 These algorithms are used in a forensic examination to supplement and inform the examiner’s conclusion.
 We propose an automatic, objective solution to the source identification problem; specifically in the context of comparing fired <em>cartridge cases.</em>
 Cartridge case comparison is a sub-discipline of Firearms and Toolmarks Identification, which is reviewed in the next section.</p>
-<!-- \hypertarget{firearms-and-toolmarks-identification}{% -->
-<!-- \subsection{Firearms and Toolmarks Identification}\label{firearms-and-toolmarks-identification}} -->
 <div id="firearms-and-toolmarks-identification" class="section level3 hasAnchor" number="1.1.1">
 <h3><span class="header-section-number">1.1.1</span> Firearms and Toolmarks Identification<a href="#firearms-and-toolmarks-identification" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Firearms and toolmarks (F &amp; T) identification involves studying markings or impressions left by a hard surface, such as the metal of a firearm or other tool (e.g., screwdriver), on a softer surface .
 For example, a barrel’s rifling leaves toolmarks on a bullet as it travels out of the gun.</p>
-<!-- \hypertarget{the-firing-process}{% -->
-<!-- \subsubsection{The Firing Process}\label{the-firing-process}} -->
 <div id="the-firing-process" class="section level4 hasAnchor" number="1.1.1.1">
 <h4><span class="header-section-number">1.1.1.1</span> The Firing Process<a href="#the-firing-process" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>In this section, we describe the basic process of firing a handgun or rifle using a cartridge.
 A <em>cartridge</em> consists of a metal casing containing primer, gunpowder, and a bullet.
 Figure <a href="#fig:cartridgeDiagram"><strong>??</strong></a> shows a cross-section of a cartridge featuring these components .</p>
-<!-- \begin{figure}[!htbp] -->
-<!-- {\centering \includegraphics[width=.5\textwidth]{images/bulletdiagram1}  -->
-<!-- } -->
-<!-- \caption{\label{fig:cartridgeDiagram} A cartridge containing primer, powder, and a bullet. The firing process is initiated by loading a cartridge into the barrel of a firearm.}\label{fig:unnamed-chunk-1} -->
-<!-- \end{figure} -->
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-4"></span>
 <img src="images/bulletdiagram1.png" alt="\label{fig:cartridgeDiagram} A cartridge containing primer, powder, and a bullet. The firing process is initiated by loading a cartridge into the barrel of a firearm." width=".5\textwidth" />
 <p class="caption">
 Figure 1.1:  A cartridge containing primer, powder, and a bullet. The firing process is initiated by loading a cartridge into the barrel of a firearm.
@@ -223,12 +212,7 @@ Figure <a href="#fig:pistolParts"><strong>??</strong></a> shows an example of a 
 In this example, the hammer of the pistol is pulled back such that the firing pin is held back under spring tension.
 Upon squeezing the trigger, the firing pin is released and travels forwards at a high velocity.
 The firing pin strikes the primer of the cartridge case, causing it to explode.</p>
-<!-- \begin{figure}[!htbp] -->
-<!-- {\centering \includegraphics[width=.5\textwidth]{images/Parts-pistol}  -->
-<!-- } -->
-<!-- \caption{\label{fig:pistolParts} Cross-section of a pistol with a chambered cartridge and drawn-back hammer. Pulling the trigger releases the firing pin which strikes the cartridge case primer.}\label{fig:unnamed-chunk-2} -->
-<!-- \end{figure} -->
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-5"></span>
 <img src="images/Parts-pistol.png" alt="\label{fig:pistolParts} Cross-section of a pistol with a chambered cartridge and drawn-back hammer. Pulling the trigger releases the firing pin which strikes the cartridge case primer." width=".5\textwidth" />
 <p class="caption">
 Figure 1.2:  Cross-section of a pistol with a chambered cartridge and drawn-back hammer. Pulling the trigger releases the firing pin which strikes the cartridge case primer.
@@ -237,12 +221,7 @@ Figure 1.2:  Cross-section of a pistol with a chambered cartridge and drawn-back
 <p>As shown in Figure <a href="#fig:firingCartridge"><strong>??</strong></a>, the explosion of the primer ignites the powder in the cartridge .
 Gas rapidly expands in the cartridge causing the bullet to travel down the barrel.
 At the same time, the rest of the cartridge is sent towards the back of the barrel.</p>
-<!-- \begin{figure}[!htbp] -->
-<!-- {\centering \includegraphics[width=.5\textwidth]{images/firingCartridgeDiagram}  -->
-<!-- } -->
-<!-- \caption{\label{fig:firingCartridge} A cartridge after a firing pin has struck the primer. The explosion of the primer ignites the powder within the cartridge, causing gas to rapidly expand and force the bullet down the barrel.}\label{fig:unnamed-chunk-3} -->
-<!-- \end{figure} -->
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-3"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-6"></span>
 <img src="images/firingCartridgeDiagram.jpg" alt="\label{fig:firingCartridge} A cartridge after a firing pin has struck the primer. The explosion of the primer ignites the powder within the cartridge, causing gas to rapidly expand and force the bullet down the barrel." width=".5\textwidth" />
 <p class="caption">
 Figure 1.3:  A cartridge after a firing pin has struck the primer. The explosion of the primer ignites the powder within the cartridge, causing gas to rapidly expand and force the bullet down the barrel.
@@ -252,12 +231,7 @@ Figure 1.3:  A cartridge after a firing pin has struck the primer. The explosion
 Any markings on the breech face are imprinted onto the cartridge case, creating the so-called <em>breech face impressions</em>.
 These impressions are analogous to a barrel’s “fingerprint” left on the cartridge case.
 Figure <a href="#fig:impressionDiagram"><strong>??</strong></a> shows cartoon examples of breech face markings that appear on cartridge cases .</p>
-<!-- \begin{figure}[!htbp] -->
-<!-- {\centering \includegraphics[width=.6\textwidth]{images/breechFaceImpressionDiagram}  -->
-<!-- } -->
-<!-- \caption{\label{fig:impressionDiagram} Examples of common breech face impression patterns. These are considered analogous to a breech face fingerprint left on the cartridge surface.}\label{fig:unnamed-chunk-4} -->
-<!-- \end{figure} -->
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-4"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-7"></span>
 <img src="images/breechFaceImpressionDiagram.jpg" alt="\label{fig:impressionDiagram} Examples of common breech face impression patterns. These are considered analogous to a breech face fingerprint left on the cartridge surface." width=".6\textwidth" />
 <p class="caption">
 Figure 1.4:  Examples of common breech face impression patterns. These are considered analogous to a breech face fingerprint left on the cartridge surface.
@@ -266,12 +240,7 @@ Figure 1.4:  Examples of common breech face impression patterns. These are consi
 <p>Figure <a href="#fig:realCartridgeCase"><strong>??</strong></a> shows the base of a fired cartridge .
 The hole to the south-east of the center of the primer is the impression left by the firing pin.
 Note the horizontal striated breech face markings on the primer to the left of the firing pin impression.</p>
-<!-- \begin{figure}[!htbp] -->
-<!-- {\centering \includegraphics[width=.7\textwidth]{images/realCartridgeCaseImage}  -->
-<!-- } -->
-<!-- \caption{\label{fig:realCartridgeCase} A fired 9mm Luger cartridge case with visible firing pin and breech face impressions.}\label{fig:unnamed-chunk-5} -->
-<!-- \end{figure} -->
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-5"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-8"></span>
 <img src="images/realCartridgeCaseImage.jpg" alt="\label{fig:realCartridgeCase} A fired 9mm Luger cartridge case with visible firing pin and breech face impressions." width=".7\textwidth" />
 <p class="caption">
 Figure 1.5:  A fired 9mm Luger cartridge case with visible firing pin and breech face impressions.
@@ -281,31 +250,19 @@ Figure 1.5:  A fired 9mm Luger cartridge case with visible firing pin and breech
 As shown in Figure <a href="#fig:extractorMarkings"><strong>??</strong></a>, these can leave additional markings on the cartridge .
 Firing pin, breech face, extractor pin and ejector, and other possible markings are all used in a forensic examination to determine whether two cartridge cases were fired from the same firearm.
 This work focuses on the comparison of breech face impressions specifically.</p>
-<!-- \begin{figure}[!htbp] -->
-<!-- {\centering \includegraphics[width=.6\textwidth]{images/extractorPinDiagram}  -->
-<!-- } -->
-<!-- \caption{\label{fig:extractorMarkings} Examples of common extractor pin and ejector markings. These, impressions on the cartridge, are used in a forensic examination to determine the source of the fired cartridge.}\label{fig:unnamed-chunk-6} -->
-<!-- \end{figure} -->
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-6"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-9"></span>
 <img src="images/extractorPinDiagram.png" alt="\label{fig:extractorMarkings} Examples of common extractor pin and ejector markings. These, impressions on the cartridge, are used in a forensic examination to determine the source of the fired cartridge." width=".6\textwidth" />
 <p class="caption">
 Figure 1.6:  Examples of common extractor pin and ejector markings. These, impressions on the cartridge, are used in a forensic examination to determine the source of the fired cartridge.
 </p>
 </div>
-<!-- \hypertarget{an-overview-of-firearms-and-toolmarks-examinations}{% -->
-<!-- \subsubsection{An Overview of Firearms and Toolmarks Examinations}\label{an-overview-of-firearms-and-toolmarks-examinations}} -->
 </div>
 <div id="an-overview-of-firearms-and-toolmarks-examinations" class="section level4 hasAnchor" number="1.1.1.2">
 <h4><span class="header-section-number">1.1.1.2</span> An Overview of Firearms and Toolmarks Examinations<a href="#an-overview-of-firearms-and-toolmarks-examinations" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Trained F &amp; T examiners use a <em>comparison microscope</em>, such as the one shown in Figure <a href="#fig:comparisonMicroscope"><strong>??</strong></a>, to examine two pieces of evidence .
 A comparison microscope consists of two compound microscopes that are joined via an <em>optical bridge</em> which allows for viewing of the stages below each microscope simultaneously under the same eyepiece.
 The right image of Figure <a href="#fig:comparisonMicroscope"><strong>??</strong></a> shows an example of the view under a comparison microscope of two bullets with the white dotted line separating the two fields of view.</p>
-<!-- \begin{figure}[!htbp] -->
-<!-- {\centering \includegraphics[width=.6\textwidth]{images/comparisonMicroscope}  -->
-<!-- } -->
-<!-- \caption{\label{fig:comparisonMicroscope} A comparison microscope consists of two stages upon which evidence is placed. These stages are placed under two compound microscopes that are joined together via an optical bridge and allow for viewing of both stages simultaneously under a single eyepiece. The image on the right shows an example of a bullet viewed under a comparison microscope.}\label{fig:unnamed-chunk-7} -->
-<!-- \end{figure} -->
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-7"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-10"></span>
 <img src="images/comparisonMicroscope.png" alt="\label{fig:comparisonMicroscope} A comparison microscope consists of two stages upon which evidence is placed. These stages are placed under two compound microscopes that are joined together via an optical bridge and allow for viewing of both stages simultaneously under a single eyepiece. The image on the right shows an example of a bullet viewed under a comparison microscope." width=".6\textwidth" />
 <p class="caption">
 Figure 1.7:  A comparison microscope consists of two stages upon which evidence is placed. These stages are placed under two compound microscopes that are joined together via an optical bridge and allow for viewing of both stages simultaneously under a single eyepiece. The image on the right shows an example of a bullet viewed under a comparison microscope.
@@ -346,8 +303,6 @@ If known source evidence is unavailable, class characteristics from the question
 An examiner’s decision may be used as part of an ongoing investigation or presented at trial as expert testimony.</p>
 <p>Standard operating procedures for assessing and comparing evidence differ between forensic laboratories.
 For example, some labs collapse the three possible inconclusive decisions into a single decision or prohibit examiners from making an elimination based on differences in individual characteristics .</p>
-<!-- \hypertarget{why-should-firearm-and-toolmark-identification-change}{% -->
-<!-- \subsection{Why Should Firearms and Toolmarks Identification Change?}\label{why-should-firearm-and-toolmark-identification-change}} -->
 </div>
 </div>
 <div id="why-should-firearms-and-toolmarks-identification-change" class="section level3 hasAnchor" number="1.1.2">
@@ -366,8 +321,6 @@ Even for qualitative justifications, it can be difficult to determine what the e
 This suggests the need to supplement these black box decisions with transparent, objective techniques that quantitatively measure the similarity between pieces of evidence.
 As stated in , efforts should be made to “convert firearms analysis from a subjective method to an objective method” including “developing and testing image-analysis algorithms for comparing the similarity of tool marks.”
 This work focuses on the development of an algorithm for comparing breech face impressions on cartridge cases.</p>
-<!-- \hypertarget{forensic-comparison-pipelines}{% -->
-<!-- \section{Forensic Comparison Pipelines}\label{forensic-comparison-pipelines}} -->
 </div>
 </div>
 <div id="forensic-comparison-pipelines" class="section level2 hasAnchor" number="1.2">
@@ -391,24 +344,16 @@ Broadly, the steps of the pipeline include:</p>
 <p>This is similar to the structure discussed in .
 We add to this structure the emphasis that each step of the pipeline can be further broken-down into modularized pieces.
 For example, the preprocessing step may include multiple sub-procedures to isolate a region of interest of the evidence.
-Figure <a href="#fig:pipelineDiagram"><strong>??</strong></a> shows three possible variations of the cartridge case comparison pipeline as well as the parameters requiring manual specification and alternative modules.
+Figure <a href="#fig:pipelineDiagram"><strong>??</strong></a> shows two possible variations of the cartridge case comparison pipeline as well as the parameters requiring manual specification and alternative modules.
 The benefits of this modularization include easing the process of experimenting with different parameters/sub-procedures and improving the comprehensibility of the pipeline.</p>
-<p>[Update the pipeline diagram]</p>
-<!-- \begin{figure}[!htbp] -->
-<!-- {\centering \includegraphics[width=\textwidth]{images/pipelineDiagram_9-9-21}  -->
-<!-- } -->
-<!-- \caption{\label{fig:pipelineDiagram} Variations upon the cartridge case comparison pipeline. The first three columns detail the pipeline with different sub-procedures. The fourth columns shows the parameters that require manual specification at each step. The fifth column shows  alternative processing steps that could replace steps in the existing pipeline.}\label{fig:unnamed-chunk-8} -->
-<!-- \end{figure} -->
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-8"></span>
-<img src="images/pipelineDiagram_9-9-21.jpg" alt="\label{fig:pipelineDiagram} Variations upon the cartridge case comparison pipeline. The first three columns detail the pipeline with different sub-procedures. The fourth columns shows the parameters that require manual specification at each step. The fifth column shows  alternative processing steps that could replace steps in the existing pipeline." width="\textwidth" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-11"></span>
+<img src="images/pipelineDiagram_6-8-22.png" alt="\label{fig:pipelineDiagram} Variations upon the cartridge case comparison pipeline. The first two columns detail the pipeline with different sub-procedures. The third columns shows the parameters that require manual specification at each step. The fourth column shows  alternative processing steps that could replace steps in the existing pipeline." width="\textwidth" />
 <p class="caption">
-Figure 1.8:  Variations upon the cartridge case comparison pipeline. The first three columns detail the pipeline with different sub-procedures. The fourth columns shows the parameters that require manual specification at each step. The fifth column shows alternative processing steps that could replace steps in the existing pipeline.
+Figure 1.8:  Variations upon the cartridge case comparison pipeline. The first two columns detail the pipeline with different sub-procedures. The third columns shows the parameters that require manual specification at each step. The fourth column shows alternative processing steps that could replace steps in the existing pipeline.
 </p>
 </div>
 <p>In the following sections, we detail recent advances to each of the five steps in the pipeline outlined above.
 We narrow our focus to advances made in comparing firearms evidence.</p>
-<!-- \hypertarget{digital-representations-of-evidence}{% -->
-<!-- \subsection{Digital Representations of Evidence}\label{digital-representations-of-evidence}} -->
 <div id="digital-representations-of-evidence" class="section level3 hasAnchor" number="1.2.1">
 <h3><span class="header-section-number">1.2.1</span> Digital Representations of Evidence<a href="#digital-representations-of-evidence" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Digital representations of cartridge case evidence commonly come in one of two modes: 2D optical images or 3D topographic scans.
@@ -421,24 +366,14 @@ This procedure works by shining a focused beam of light on the cartridge case su
 This light is reflected back onto a pinhole allowing a limited height range to pass through.
 The microscope scans through different height range “slices” and compiles all these slices into a single 3D topography of the cartridge case primer surface.
 The Microdisplay Scan Confocal Microscope from Sensofar~Metrology is shown in Figure <a href="#fig:sensofarScanner"><strong>??</strong></a> .</p>
-<!-- \begin{figure}[!htbp] -->
-<!-- {\centering \includegraphics[width=.5\textwidth]{images/sensofarScanner}  -->
-<!-- } -->
-<!-- \caption{\label{fig:sensofarScanner} The Microdisplay Scan Confocal Microscope from Sensofar\texttrademark\ Metrology. The cartridge case surface is captured by scanning through a range of vertical slices and compiling these slices into a single 3D topography.}\label{fig:unnamed-chunk-9} -->
-<!-- \end{figure} -->
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-9"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-12"></span>
 <img src="images/sensofarScanner.png" alt="\label{fig:sensofarScanner} The Microdisplay Scan Confocal Microscope from Sensofar\texttrademark\ Metrology. The cartridge case surface is captured by scanning through a range of vertical slices and compiling these slices into a single 3D topography." width=".5\textwidth" />
 <p class="caption">
 Figure 1.9:  The Microdisplay Scan Confocal Microscope from Sensofar Metrology. The cartridge case surface is captured by scanning through a range of vertical slices and compiling these slices into a single 3D topography.
 </p>
 </div>
 <p>Figure <a href="#fig:cartridgeCaseImages"><strong>??</strong></a> shows a 2D image and 3D topography of the same cartridge case primer from .</p>
-<!-- \begin{figure}[!htbp] -->
-<!-- {\centering \includegraphics[width=\textwidth]{images/fadul1-1_sidebyside}  -->
-<!-- } -->
-<!-- \caption{\label{fig:cartridgeCaseImages} A cartridge case captured using 2D confocal reflectance microscopy (left) and 3D disc scanning confocal microscopy (right).}\label{fig:unnamed-chunk-10} -->
-<!-- \end{figure} -->
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-10"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-13"></span>
 <img src="images/fadul1-1_sidebyside.PNG" alt="\label{fig:cartridgeCaseImages} A cartridge case captured using 2D confocal reflectance microscopy (left) and 3D disc scanning confocal microscopy (right)." width="\textwidth" />
 <p class="caption">
 Figure 1.10:  A cartridge case captured using 2D confocal reflectance microscopy (left) and 3D disc scanning confocal microscopy (right).
@@ -448,12 +383,7 @@ Figure 1.10:  A cartridge case captured using 2D confocal reflectance microscopy
 A tray of 15 fired cartridge cases and the scanner are shown in Figure <a href="#fig:topMatchScanner"><strong>??</strong></a> .
 This scanner collects images under various lighting conditions of a gel pad into which the cartridge case surface is impressed and combines these images into a regular 2D array called a <em>surface matrix</em>.
 The physical dimensions of these objects are about 5.5 <span class="math inline">\(mm^2\)</span> captured at a resolution of 1.84 microns per pixel (1000 microns equals 1 mm).</p>
-<!-- \begin{figure}[!htbp] -->
-<!-- {\centering \includegraphics[width=.7\textwidth]{images/TopMatchSystem7}  -->
-<!-- } -->
-<!-- \caption{\label{fig:topMatchScanner} The TopMatch-3D High-Capacity Scanner from Cadre Forensics\texttrademark\ . The scanner captures topographic scans of a gel pad into which a cartridge case surface is impressed.}\label{fig:unnamed-chunk-11} -->
-<!-- \end{figure} -->
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-11"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-14"></span>
 <img src="images/TopMatchSystem7.png" alt="\label{fig:topMatchScanner} The TopMatch-3D High-Capacity Scanner from Cadre Forensics\texttrademark\ . The scanner captures topographic scans of a gel pad into which a cartridge case surface is impressed." width=".7\textwidth" />
 <p class="caption">
 Figure 1.11:  The TopMatch-3D High-Capacity Scanner from Cadre Forensics . The scanner captures topographic scans of a gel pad into which a cartridge case surface is impressed.
@@ -462,19 +392,12 @@ Figure 1.11:  The TopMatch-3D High-Capacity Scanner from Cadre Forensics . The 
 <p>When applied to ballistics evidence, these 3D scans are commonly stored in the ISO standard x3p file format .
 x3p is a container consisting of a single surface matrix representing the height value of the surface and metadata concerning the parameters under which the scan was taken as shown in Figure <a href="#fig:x3pFlowchart"><strong>??</strong></a> .
 It has been empirically demonstrated that comparing 3D topographic scans of cartridge case evidence leads to more accurate conclusions compared to comparing 2D optical images of the same evidence .</p>
-<!-- \begin{figure}[!htbp] -->
-<!-- {\centering \includegraphics[width=.7\textwidth]{images/x3pFlowchart}  -->
-<!-- } -->
-<!-- \caption{\label{fig:x3pFlowchart} The hierarchy of information stored in the x3p file format for both bullet and cartridge case evidence.}\label{fig:unnamed-chunk-12} -->
-<!-- \end{figure} -->
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-12"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-15"></span>
 <img src="images/x3pFlowchart.jpg" alt="\label{fig:x3pFlowchart} The hierarchy of information stored in the x3p file format for both bullet and cartridge case evidence." width=".7\textwidth" />
 <p class="caption">
 Figure 1.12:  The hierarchy of information stored in the x3p file format for both bullet and cartridge case evidence.
 </p>
 </div>
-<!-- \hypertarget{preprocessing-procedures-for-forensic-data}{% -->
-<!-- \subsection{Preprocessing Procedures for Forensic Data}\label{preprocessing-procedures-for-forensic-data}} -->
 </div>
 <div id="preprocessing-procedures-for-forensic-data" class="section level3 hasAnchor" number="1.2.2">
 <h3><span class="header-section-number">1.2.2</span> Preprocessing Procedures for Forensic Data<a href="#preprocessing-procedures-for-forensic-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -495,8 +418,6 @@ Other versions of the bandpass filter are used in that accomplish tasks such as 
 <p>Instead of using automatic procedures, others have used subjective human intervention to isolate the breech face impressions.
 For example, indicate that cartridge cases are “manually trimming to extract the breech face impression of interest.”
 In , examiners manually identify the borders of the breech face impression region by placing points around an image of the cartridge case primer.</p>
-<!-- \hypertarget{forensic-data-feature-extraction}{% -->
-<!-- \subsection{Forensic Data Feature Extraction}\label{forensic-data-feature-extraction}} -->
 </div>
 <div id="forensic-data-feature-extraction" class="section level3 hasAnchor" number="1.2.3">
 <h3><span class="header-section-number">1.2.3</span> Forensic Data Feature Extraction<a href="#forensic-data-feature-extraction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -516,8 +437,6 @@ In theory, dividing the scans into cells allows for the identification of these 
 <p>After breaking a scan into a grid of cells, each cell is compared to the other scan to identify the rotation and translation, known together as the <em>registration</em>, at which the cross-correlation is maximized.
 assume that the cells from a truly matching pair of cartridge cases will “agree” on their registration in the other scan.
 Details of this procedure are provided in Chapter 2.</p>
-<!-- \hypertarget{similarity-scores-for-forensic-data}{% -->
-<!-- \subsection{Similarity Scores for Forensic Data}\label{similarity-scores-for-forensic-data}} -->
 </div>
 <div id="similarity-scores-for-forensic-data" class="section level3 hasAnchor" number="1.2.4">
 <h3><span class="header-section-number">1.2.4</span> Similarity Scores for Forensic Data<a href="#similarity-scores-for-forensic-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -529,14 +448,12 @@ proposes setting a CCF cut-off that maximizes the precision and recall in a trai
 Using these estimates, they are able to estimate the score-based likelihood ratio (SLR) for a new set of features.
 This SLR can be viewed as a similarity score .</p>
 <p>In the case of the cell-based comparison procedure discussed above, the total number of cells that are deemed “congruent matching” is used as a similarity score.
-The criteria used to define “congruent matching” has changed across papers and will be discussed in greater detail in [Chapter].
+The criteria used to define “congruent matching” has changed across papers and will be discussed in greater detail in Chapter 2.
 The authors of these papers have consistently used a decision boundary of six “Congruent Matching Cells” to distinguish matches from non-matches.</p>
 <p> applies the Density-Based Spatial Clustering of Applications with Noise (DBSCAN) algorithm to the features from the cell-based comparison procedure to determine if any clusters form amongst the per-cell estimated registration values.
 This is based on the assumption that any cells that come to a consensus on their registration should form a cluster in translation <span class="math inline">\((x,y)\)</span> and rotation <span class="math inline">\(\theta\)</span> space.
 proposes a binary classifier based on whether any clusters are identified by the DBSCAN algorithm .
 If a cluster is found for a particular pairwise comparison, then that pair is classified as a “match” and otherwise as a “non-match.”</p>
-<!-- \hypertarget{reproducibility-of-comparison-pipelines}{% -->
-<!-- \subsection{Reproducibility of Comparison Pipelines}\label{reproducibility-of-comparison-pipelines}} -->
 </div>
 <div id="reproducibility-of-comparison-pipelines" class="section level3 hasAnchor" number="1.2.5">
 <h3><span class="header-section-number">1.2.5</span> Reproducibility of Comparison Pipelines<a href="#reproducibility-of-comparison-pipelines" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -559,8 +476,6 @@ For situations in which VMs or containers aren’t available, software such as t
 reference repositories like Bioconductor that make it easy to document and distribute code.
 Further, software such as the <code>knitr</code> R package enable “literate programming” in which prose and executed code can be interwoven to make it easier to understand the code’s function.
 These tools make data, code, and derivative research findings more accessible, in terms of both acquisition and comprehensibility, to consumers and fellow researchers.</p>
-<!-- \hypertarget{diagnostic-tools}{% -->
-<!-- \section{Diagnostic Tools}\label{diagnostic-tools}} -->
 </div>
 </div>
 <div id="diagnostic-tools" class="section level2 hasAnchor" number="1.3">
@@ -571,7 +486,7 @@ A party to a court may challenge the examiner on the validity of the underlying 
 In these situations, examiners need to explain the process by which they reached an evidentiary conclusion to the fact finders of the case; namely, the judge or jury.
 As algorithms are more often used in forensic examinations, the technical knowledge required to understand and explain an algorithm to lay-people has increased.
 While in some cases the authors of the algorithm have been willing to provide testimony to establish the validity of the algorithm , this will become less viable as algorithms become more prevalent.
-Indeed, even the most elegant improvements to an algorithm may be moot if an examiner can’t explain the improvements in their testimony.</p>
+Indeed, even the most effective algorithms may be moot if an examiner can’t explain the algorithm in their testimony.</p>
 <p>The resources required to educate examiners on the use of highly technical algorithms makes additional training seem currently implausible.
 An alternative is to develop algorithms from the ground-up to be intuitive for examiners to understand and explain to others.
 <em>Explainability</em> refers to the ability to identify the factors that contributed to the results of an algorithm .
@@ -590,8 +505,8 @@ As stated in , “graphical methods tend to show data sets as a whole, allowing 
 To illustrate this, consider the famous data sets from known as Anscombe’s quartet.
 The two variables in each data set are plotted against one another in Figure <a href="#fig:anscombeQuartet"><strong>??</strong></a>.
 There are clear differences in the relationship between <code>x</code> and <code>y</code> across these four data sets.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-13"></span>
-<img src="thesis_files/figure-html/unnamed-chunk-13-1.png" alt="\label{fig:anscombeQuartet} A visualization of Anscombe's quartet. Despite there being obvious differences between these four data sets, their summary statistics are nearly identical" width="480" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-16"></span>
+<img src="thesis_files/figure-html/unnamed-chunk-16-1.png" alt="\label{fig:anscombeQuartet} A visualization of Anscombe's quartet. Despite there being obvious differences between these four data sets, their summary statistics are nearly identical" width="480" />
 <p class="caption">
 Figure 1.13:  A visualization of Anscombe’s quartet. Despite there being obvious differences between these four data sets, their summary statistics are nearly identical
 </p>
@@ -631,8 +546,8 @@ Indeed, appealing to the Gestalt law of Uniform Connectedness, the “motion” 
 This may suggest a particular modeling structure for these time series (e.g., diet fixed effect) or the need to assess the experimental design to ensure that the assumption that the chicks were randomly sampled from the same population is appropriate.
 We see how such a plot can be used for both exploratory data analysis or as a post-hoc diagnostic tool.
 Alternative to faceting, the time series from these two diet groups could be combined into a single plot and distinguished by color.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-14"></span>
-<img src="thesis_files/figure-html/unnamed-chunk-14-1.png" alt="\label{fig:chickweightExample} An example of using the ggplot2 package to construct a residual plot from a simple linear regression. The features of the statistical graphic are combined layer-by-layer using the + operator." width="480" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-17"></span>
+<img src="thesis_files/figure-html/unnamed-chunk-17-1.png" alt="\label{fig:chickweightExample} An example of using the ggplot2 package to construct a residual plot from a simple linear regression. The features of the statistical graphic are combined layer-by-layer using the + operator." width="480" />
 <p class="caption">
 Figure 1.14:  An example of using the ggplot2 package to construct a residual plot from a simple linear regression. The features of the statistical graphic are combined layer-by-layer using the + operator.
 </p>
@@ -653,8 +568,8 @@ For those willing to learn the “grammar,” the code used to create these stat
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> Complaints,<span class="at">y =</span> Residuals)) <span class="sc">+</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>,<span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;% in-favor of handling of employee complaints&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-15"></span>
-<img src="thesis_files/figure-html/unnamed-chunk-15-1.png" alt="\label{fig:ggplot2Example} An example of using the ggplot2 package to construct a residual plot from a simple linear regression. The features of the statistical graphic are combined layer-by-layer using the + operator." width="480" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-18"></span>
+<img src="thesis_files/figure-html/unnamed-chunk-18-1.png" alt="\label{fig:ggplot2Example} An example of using the ggplot2 package to construct a residual plot from a simple linear regression. The features of the statistical graphic are combined layer-by-layer using the + operator." width="480" />
 <p class="caption">
 Figure 1.15:  An example of using the ggplot2 package to construct a residual plot from a simple linear regression. The features of the statistical graphic are combined layer-by-layer using the + operator.
 </p>
@@ -672,31 +587,39 @@ This leads to deeper engagement with the data .</p>
 As seen in <a href="#fig:IPDmada"><strong>??</strong></a>, the user can upload their own data csv file and select parameters that will enable the importing of the data.
 The other tabs at the top of the application provide statistical tools to analyze the uploaded data.
 This application is useful for researchers who are interested in analyzing diagnostic test accuracy data, yet do not necessarily have the coding skills to perform such an analysis in R themselves.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-16"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-19"></span>
 <img src="images/IPDmadaShinyExample.png" alt="\label{fig:IPDmada} The IPDmada shiny application allows users to analyze individual patient data from a diagnostic test accuracy study using a variety of statistical techniques." width=".7\textwidth" />
 <p class="caption">
 Figure 1.16:  The IPDmada shiny application allows users to analyze individual patient data from a diagnostic test accuracy study using a variety of statistical techniques.
 </p>
 </div>
-<p>We develop a suite of diagnostic tools that can be used to explain the behavior of the cartridge case comparison pipeline.
+<p>Several recently-released software provide interactive diagnostic applications for firarms and toolmarks evidence.
+Most notable of these software is the Virtual Comparison Microscopy application from Cadre Forensics.
+In contrast to Light Comparison Microscopy (LCM; e.g., using comparison microscopes), this software displays 3D topographies saved on a computer (e.g., as an x3p file).
+An example screenshot of this software is shown in Figure <a href="#fig:topMatchAnnotationExample"><strong>??</strong></a> .
+We see that two cartridge case scans are selected from the user’s computer for comparison.
+This user has selected various colors to represent similar or different regions.
+A major benefit of using VCM over LCM is that these 3D scans can be shared over the internet rather than sending the physical specimen to another lab (which may damage the specimen).
+, , and all demonstrate that performing forensic examinations using such VCM technology yields equally, if not more, accurate conclusions compared to traditional LCM methods.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-20"></span>
+<img src="images/topMatchSoftwareAnnotation.jpg" alt="\label{fig:topMatchAnnotationExample} A screenshot of the TopMatch-3D\texttrademark Virtual Comparison Microscopy software. In this example, similar and different markings on the cartridge case scans are manually annotated by the user." width="\textwidth" />
+<p class="caption">
+Figure 1.17:  A screenshot of the TopMatch-3DVirtual Comparison Microscopy software. In this example, similar and different markings on the cartridge case scans are manually annotated by the user.
+</p>
+</div>
+<p>We develop a suite of diagnostic tools to explain the behavior of the cartridge case comparison pipeline.
 These diagnostic tools are created using flexible, open-source tools such as <code>ggplot2</code> and <code>shiny</code> so that future development and improvement is easy.</p>
-<!-- \hypertarget{automating-and-improving-the-cartridge-case-identification-pipeline}{% -->
-<!-- \section{Automating and Improving the Cartridge Case Identification Pipeline}\label{automating-and-improving-the-cartridge-case-identification-pipeline}} -->
 </div>
 </div>
-<div id="automating-and-improving-the-cartridge-case-identification-pipeline" class="section level2 hasAnchor" number="1.4">
-<h2><span class="header-section-number">1.4</span> Automating and Improving the Cartridge Case Identification Pipeline<a href="#automating-and-improving-the-cartridge-case-identification-pipeline" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="automating-and-improving-the-cartridge-case-comparison-pipeline" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Automating and Improving the Cartridge Case Comparison Pipeline<a href="#automating-and-improving-the-cartridge-case-comparison-pipeline" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In this section, we review preliminaries needed to understand various sub-routines of the cartridge case comparison pipeline.</p>
-<!-- \hypertarget{image-processing-techniques}{% -->
-<!-- \subsection{Image Processing Techniques}\label{image-processing-techniques}} -->
 <div id="image-processing-techniques" class="section level3 hasAnchor" number="1.4.1">
 <h3><span class="header-section-number">1.4.1</span> Image Processing Techniques<a href="#image-processing-techniques" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We first review image processing and computer vision algorithms that are commonly used in cartridge case comparison algorithms.
 Throughout this section, let <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> denote two images.
 Define these images to be 2D arrays of a given size where <span class="math inline">\(A[m,n]\)</span> and <span class="math inline">\(B[m,n]\)</span> each map to a spatially-ordered measurement value.
 For example, the measurement may be the height <span class="math inline">\(h\)</span> value of a cartridge case surface at a particular <span class="math inline">\([m,n]\)</span> location.</p>
-<!-- \hypertarget{image-registration}{% -->
-<!-- \subsubsection{Image Registration}\label{image-registration}} -->
 <div id="image-registration" class="section level4 hasAnchor" number="1.4.1.1">
 <h4><span class="header-section-number">1.4.1.1</span> Image Registration<a href="#image-registration" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Image registration involves transforming one image to align with another image .
@@ -776,19 +699,12 @@ The box in image A is centered on index [30,50] while the box in image B is cent
 The right image shows the result of calculating the CCF using image <span class="math inline">\(A\)</span> as reference and <span class="math inline">\(B\)</span> as template.
 The CCF achieves a maximum of 1, indicating a perfect match, at the translation value of <span class="math inline">\([m^\dagger,n^\dagger] = [22,-2]\)</span>.
 This represents that if image B were overlaid onto image A such that their center indices coincided, then image B would need to be shifted 22 units “up” and 2 units “left” to match perfectly with image A.</p>
-<!-- \begin{figure}[!htbp] -->
-<!-- {\centering \includegraphics[width=\textwidth]{figures/unnamed-chunk-13-1}  -->
-<!-- } -->
-<!-- \caption{\label{fig:ccfTranslationExample} (Left) A reference image $A$ and template image $B$ both featuring a white box of dimension $10 \times 10$. (Right) The cross-correlation function (CCF) between $A$ and $B$. The index at which the CCF is maximized represents the translation at which $A$ and $B$ are most similar.}\label{fig:unnamed-chunk-13} -->
-<!-- \end{figure} -->
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-17"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-21"></span>
 <img src="figures/unnamed-chunk-13-1.png" alt="\label{fig:ccfTranslationExample} (Left) A reference image $A$ and template image $B$ both featuring a white box of dimension $10 \times 10$. (Right) The cross-correlation function (CCF) between $A$ and $B$. The index at which the CCF is maximized represents the translation at which $A$ and $B$ are most similar." width="\textwidth" />
 <p class="caption">
-Figure 1.17:  (Left) A reference image <span class="math inline">\(A\)</span> and template image <span class="math inline">\(B\)</span> both featuring a white box of dimension <span class="math inline">\(10 \times 10\)</span>. (Right) The cross-correlation function (CCF) between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. The index at which the CCF is maximized represents the translation at which <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are most similar.
+Figure 1.18:  (Left) A reference image <span class="math inline">\(A\)</span> and template image <span class="math inline">\(B\)</span> both featuring a white box of dimension <span class="math inline">\(10 \times 10\)</span>. (Right) The cross-correlation function (CCF) between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. The index at which the CCF is maximized represents the translation at which <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are most similar.
 </p>
 </div>
-<!-- \hypertarget{gaussian-filters}{% -->
-<!-- \subsubsection{Gaussian Filters}\label{gaussian-filters}} -->
 </div>
 <div id="gaussian-filters" class="section level4 hasAnchor" number="1.4.1.2">
 <h4><span class="header-section-number">1.4.1.2</span> Gaussian Filters<a href="#gaussian-filters" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -829,22 +745,15 @@ Generally, the highpass kernel’s standard deviation will be considerably large
 This leads to retaining sharp edges while also reducing noise.
 An example of a bandpass filtered image <span class="math inline">\(A\)</span> is shown in Figure <a href="#fig:gaussianFilterExample"><strong>??</strong></a>.
 The edges of the box are better-preserved compared to the lowpass filter figure while the interior of the box is better-preserved compared to the highpass filter figure.</p>
-<!-- \begin{figure}[!htbp] -->
-<!-- {\centering \includegraphics[width=\textwidth]{figures/unnamed-chunk-14-1}  -->
-<!-- } -->
-<!-- \caption{\label{fig:gaussianFilterExample} An image $A$ of a box undergoing various filtering operations.}\label{fig:unnamed-chunk-14} -->
-<!-- \end{figure} -->
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-18"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-22"></span>
 <img src="figures/unnamed-chunk-14-1.png" alt="\label{fig:gaussianFilterExample} An image $A$ of a box undergoing various filtering operations." width="\textwidth" />
 <p class="caption">
-Figure 1.18:  An image <span class="math inline">\(A\)</span> of a box undergoing various filtering operations.
+Figure 1.19:  An image <span class="math inline">\(A\)</span> of a box undergoing various filtering operations.
 </p>
 </div>
 <p>Variations on the standard Gaussian filter include the “robust” Gaussian regression filter.
 This filter fluctuates between a filter step, which applies a Gaussian filter, and outlier step, which identifies and omits outlier observations from the next filter step .
 Another alternative, the “edge preserving” filter, adapts the kernel weights when approaching the boundary of an image to mitigate so-called <em>boundary effects</em> .</p>
-<!-- \hypertarget{morphological-operations}{% -->
-<!-- \subsubsection{Morphological Operations}\label{morphological-operations}} -->
 </div>
 <div id="morphological-operations" class="section level4 hasAnchor" number="1.4.1.3">
 <h4><span class="header-section-number">1.4.1.3</span> Morphological Operations<a href="#morphological-operations" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -921,19 +830,12 @@ W \ominus B =
 Erosion by <span class="math inline">\(B\)</span> therefore shrinks the region <span class="math inline">\(W\)</span> in <span class="math inline">\(A\)</span> by one index in each direction.</p>
 <p>Figure <a href="#fig:dilationErosionExample"><strong>??</strong></a> shows the example considered here in terms of black and white representations of <span class="math inline">\(A\)</span> undergoing dilation and erosion by <span class="math inline">\(B\)</span>.
 In practice, there may be two or more disconnected foreground regions in <span class="math inline">\(A\)</span> to which dilation or erosion can be independently applied.</p>
-<!-- \begin{figure}[!htbp] -->
-<!-- {\centering \includegraphics[width=\textwidth]{figures/unnamed-chunk-15-1}  -->
-<!-- } -->
-<!-- \caption{\label{fig:dilationErosionExample} A $7 \times 7$ image $A$ featuring a $3 \times 3$ box undergoing dilation and erosion by a $3 \times 3$ structuring element $B$.}\label{fig:unnamed-chunk-15} -->
-<!-- \end{figure} -->
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-19"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-23"></span>
 <img src="figures/unnamed-chunk-15-1.png" alt="\label{fig:dilationErosionExample} A $7 \times 7$ image $A$ featuring a $3 \times 3$ box undergoing dilation and erosion by a $3 \times 3$ structuring element $B$." width="\textwidth" />
 <p class="caption">
-Figure 1.19:  A <span class="math inline">\(7 \times 7\)</span> image <span class="math inline">\(A\)</span> featuring a <span class="math inline">\(3 \times 3\)</span> box undergoing dilation and erosion by a <span class="math inline">\(3 \times 3\)</span> structuring element <span class="math inline">\(B\)</span>.
+Figure 1.20:  A <span class="math inline">\(7 \times 7\)</span> image <span class="math inline">\(A\)</span> featuring a <span class="math inline">\(3 \times 3\)</span> box undergoing dilation and erosion by a <span class="math inline">\(3 \times 3\)</span> structuring element <span class="math inline">\(B\)</span>.
 </p>
 </div>
-<!-- \hypertarget{density-based-spatial-clustering-of-applications-with-noise}{% -->
-<!-- \subsection{Density-Based Spatial Clustering of Applications with Noise}\label{density-based-spatial-clustering-of-applications-with-noise}} -->
 </div>
 </div>
 <div id="density-based-spatial-clustering-of-applications-with-noise" class="section level3 hasAnchor" number="1.4.2">
@@ -950,15 +852,10 @@ Both <span class="math inline">\(\epsilon\)</span> and <span class="math inline"
 An <span class="math inline">\(\epsilon\)</span>-neighborhood using the Euclidean distance metric and <span class="math inline">\(\epsilon = 3\)</span> is drawn around an observation <span class="math inline">\(x\)</span> located at <span class="math inline">\((3,2)\)</span>.
 Points inside the circle are neighbors of <span class="math inline">\(x\)</span>.
 If, for example, <span class="math inline">\(Minpts = 2\)</span>, then <span class="math inline">\(x\)</span> would be considered a core point.</p>
-<!-- \begin{figure}[!htbp] -->
-<!-- {\centering \includegraphics[width=\textwidth]{figures/unnamed-chunk-16-1}  -->
-<!-- } -->
-<!-- \caption{\label{fig:epsNeighborhoodExample} An $\epsilon$-neighborhood around a observation located at $(3,2)$ for $\epsilon = 3$. Points are labeled based on whether they are neighbors to this observation or not}\label{fig:unnamed-chunk-16} -->
-<!-- \end{figure} -->
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-20"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-24"></span>
 <img src="figures/unnamed-chunk-16-1.png" alt="\label{fig:epsNeighborhoodExample} An $\epsilon$-neighborhood around a observation located at $(3,2)$ for $\epsilon = 3$. Points are labeled based on whether they are neighbors to this observation." width=".8\textwidth" />
 <p class="caption">
-Figure 1.20:  An <span class="math inline">\(\epsilon\)</span>-neighborhood around a observation located at <span class="math inline">\((3,2)\)</span> for <span class="math inline">\(\epsilon = 3\)</span>. Points are labeled based on whether they are neighbors to this observation.
+Figure 1.21:  An <span class="math inline">\(\epsilon\)</span>-neighborhood around a observation located at <span class="math inline">\((3,2)\)</span> for <span class="math inline">\(\epsilon = 3\)</span>. Points are labeled based on whether they are neighbors to this observation.
 </p>
 </div>
 <p>To identify regions of high observation density, two relational notions, <em>density-reachability</em> and <em>density-connectivity</em>, are used.
@@ -967,29 +864,19 @@ In the example in Figure <a href="#fig:epsNeighborhoodExample"><strong>??</stron
 More broadly, a point <span class="math inline">\(x_m\)</span> is <em>density-reachable</em> to a point <span class="math inline">\(x_1\)</span> if there exists a chain of observations <span class="math inline">\(x_1,x_2,...,x_{m-1},x_m\)</span> such that <span class="math inline">\(x_{i+1}\)</span> is directly density-reachable from <span class="math inline">\(x_i\)</span>, <span class="math inline">\(i = 1,...,n\)</span>.
 Figure <a href="#fig:densityReachableExample"><strong>??</strong></a> shows an example of three density-reachable points located at <span class="math inline">\((1,0), (3,2)\)</span>, and <span class="math inline">\((4,4)\)</span> using <span class="math inline">\(\epsilon = 3\)</span> and <span class="math inline">\(Minpts = 2\)</span>.
 All three points are core points and although the points located at <span class="math inline">\((4,4)\)</span> and <span class="math inline">\((1,3)\)</span> are not neighbors, they share a neighbor in the point located at <span class="math inline">\((3,2)\)</span> and are thus density-reachable.</p>
-<!-- \begin{figure}[!htbp] -->
-<!-- {\centering \includegraphics[width=\textwidth]{figures/unnamed-chunk-17-1}  -->
-<!-- } -->
-<!-- \caption{\label{fig:densityReachableExample} An example of three points that are density-reachable with respect to $\epsilon = 3$ and $Minpts = 2$.}\label{fig:unnamed-chunk-17} -->
-<!-- \end{figure} -->
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-21"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-25"></span>
 <img src="figures/unnamed-chunk-17-1.png" alt="\label{fig:densityReachableExample} An example of three points that are density-reachable with respect to $\epsilon = 3$ and $Minpts = 2$." width=".8\textwidth" />
 <p class="caption">
-Figure 1.21:  An example of three points that are density-reachable with respect to <span class="math inline">\(\epsilon = 3\)</span> and <span class="math inline">\(Minpts = 2\)</span>.
+Figure 1.22:  An example of three points that are density-reachable with respect to <span class="math inline">\(\epsilon = 3\)</span> and <span class="math inline">\(Minpts = 2\)</span>.
 </p>
 </div>
 <p>Finally, a point <span class="math inline">\(y\)</span> is <em>density-connected</em> to a point <span class="math inline">\(x\)</span> with respect to <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(Minpts\)</span> if there exists a point <span class="math inline">\(z\)</span> such that both <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are density-reachable to <span class="math inline">\(z\)</span> (with respect to <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(Minpts\)</span>).
 While density-reachability requires that all points in-between two points be core points, density-connectivity extends the notion of “neighbors of neighbors” to include points that are merely within the neighborhood of density-reachable points.
 Figure <a href="#fig:densityConnectedExample"><strong>??</strong></a> illustrates how the points located at <span class="math inline">\((4,7)\)</span> and <span class="math inline">\((0,-2)\)</span> are density-connected but not density-reachable.</p>
-<!-- \begin{figure}[!htbp] -->
-<!-- {\centering \includegraphics[width=\textwidth]{figures/unnamed-chunk-18-1}  -->
-<!-- } -->
-<!-- \caption{\label{fig:densityConnectedExample} An example of two points that are density-connected, but not density-reachable, with respect to $\epsilon = 3$ and $Minpts = 2$.}\label{fig:unnamed-chunk-18} -->
-<!-- \end{figure} -->
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-22"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-26"></span>
 <img src="figures/unnamed-chunk-18-1.png" alt="\label{fig:densityConnectedExample} An example of two points that are density-connected, but not density-reachable, with respect to $\epsilon = 3$ and $Minpts = 2$." width=".8\textwidth" />
 <p class="caption">
-Figure 1.22:  An example of two points that are density-connected, but not density-reachable, with respect to <span class="math inline">\(\epsilon = 3\)</span> and <span class="math inline">\(Minpts = 2\)</span>.
+Figure 1.23:  An example of two points that are density-connected, but not density-reachable, with respect to <span class="math inline">\(\epsilon = 3\)</span> and <span class="math inline">\(Minpts = 2\)</span>.
 </p>
 </div>
 <p>A <em>cluster</em> <span class="math inline">\(C \subset D\)</span> with respect to <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(Minpts\)</span> satisfies the following conditions:</p>
@@ -1001,32 +888,22 @@ Figure 1.22:  An example of two points that are density-connected, but not densi
 <p>For a data set <span class="math inline">\(D\)</span>, the DBSCAN algorithm determines clusters based on the above definition.
 Figure <a href="#fig:dbscanResultExample"><strong>??</strong></a> shows the labels return by DBSCAN for the example considered above with respect to <span class="math inline">\(\epsilon = 3\)</span> and <span class="math inline">\(Minpts = 2\)</span>..
 Seven points are classified in a single cluster and three points are classified as noise.</p>
-<!-- \begin{figure}[!htbp] -->
-<!-- {\centering \includegraphics[width=\textwidth]{figures/unnamed-chunk-19-1}  -->
-<!-- } -->
-<!-- \caption{\label{fig:dbscanResultExample} Cluster labeling for 10 data points using the DBSCAN algorithm with parameters $\epsilon = 3$ and $Minpts = 2$. Seven points are assigned to a single cluster and the remaining three are classified as noise.}\label{fig:unnamed-chunk-19} -->
-<!-- \end{figure} -->
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-23"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-27"></span>
 <img src="figures/unnamed-chunk-19-1.png" alt="\label{fig:dbscanResultExample} Cluster labeling for 10 data points using the DBSCAN algorithm with parameters $\epsilon = 3$ and $Minpts = 2$. Seven points are assigned to a single cluster and the remaining three are classified as noise." width=".8\textwidth" />
 <p class="caption">
-Figure 1.23:  Cluster labeling for 10 data points using the DBSCAN algorithm with parameters <span class="math inline">\(\epsilon = 3\)</span> and <span class="math inline">\(Minpts = 2\)</span>. Seven points are assigned to a single cluster and the remaining three are classified as noise.
+Figure 1.24:  Cluster labeling for 10 data points using the DBSCAN algorithm with parameters <span class="math inline">\(\epsilon = 3\)</span> and <span class="math inline">\(Minpts = 2\)</span>. Seven points are assigned to a single cluster and the remaining three are classified as noise.
 </p>
 </div>
-<!-- \hypertarget{features-based-on-visual-diagnostics}{% -->
-<!-- \subsection{Features Based on Visual Diagnostics}\label{features-based-on-visual-diagnostics}} -->
 </div>
 <div id="features-based-on-visual-diagnostics" class="section level3 hasAnchor" number="1.4.3">
 <h3><span class="header-section-number">1.4.3</span> Features Based on Visual Diagnostics<a href="#features-based-on-visual-diagnostics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Much of the “explainable” algorithms literature focuses on black-box machine learning algorithms such as Random Forests or Multi-layer Neural Networks.
-[More to say here?]
 Less focused is placed on constructing explainable features.
 Feature selection and engineering is a critical, often time-intensive step in the data analysis process that isn’t often</p>
-<p>The visual diagnostic tools discussed in Chapter [5] are used to develop a set of features.
+<p>The visual diagnostic tools discussed in Chapter 4 are used to develop a set of features.
 By definition, these features are human-interpretable unlike, for example, features that are calculated in the convolution layer of a convolutional neural network.
 The interpretability of these features imply that they can be explained to forensic examiners or lay-people.
 This will make it easier to introduce such methods into forensic labs and court rooms.</p>
-<!-- \hypertarget{implementation-considerations}{% -->
-<!-- \subsection{Implementation Considerations}\label{implementation-considerations}} -->
 </div>
 <div id="implementation-considerations" class="section level3 hasAnchor" number="1.4.4">
 <h3><span class="header-section-number">1.4.4</span> Implementation Considerations<a href="#implementation-considerations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1053,48 +930,28 @@ Finally, Figure <a href="#fig:cmcRPreprocess"><strong>??</strong></a> shows a 3D
 These procedures are discussed in greater detail in Chapter 2.</p>
 <p>By breaking the broader preprocessing step into modularized pieces, we can devise other arrangements of these preprocessing procedures that may improve the segmenting or emphasizing of the region of interest.
 The modularity of the pipeline makes it easier to understand what the algorithm is doing “under the hood” while a modularized implementation enables others to experiment with alternative versions of the pipeline.</p>
-<!-- \begin{figure}[!htbp] -->
-<!-- {\centering \includegraphics[width=.7\textwidth]{images/taiEddyPreprocess}  -->
-<!-- } -->
-<!-- \caption{\label{fig:taiEddyPreprocess} A preprocessing procedure applied to a 2D image of a cartridge case to identify the firing pin impression. The procedure results in a 2D image of a cartridge case without the firing pin impression region.}\label{fig:unnamed-chunk-21} -->
-<!-- \end{figure} -->
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-24"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-28"></span>
 <img src="images/taiEddyPreprocess.png" alt="\label{fig:taiEddyPreprocess} A preprocessing procedure applied to a 2D image of a cartridge case to identify the firing pin impression. The procedure results in a 2D image of a cartridge case without the firing pin impression region." width=".7\textwidth" />
 <p class="caption">
-Figure 1.24:  A preprocessing procedure applied to a 2D image of a cartridge case to identify the firing pin impression. The procedure results in a 2D image of a cartridge case without the firing pin impression region.
+Figure 1.25:  A preprocessing procedure applied to a 2D image of a cartridge case to identify the firing pin impression. The procedure results in a 2D image of a cartridge case without the firing pin impression region.
 </p>
 </div>
-<!-- \begin{figure}[!htbp] -->
-<!-- {\centering \includegraphics[width=.8\textwidth]{images/riceBulletPreprocessDiagram}  -->
-<!-- } -->
-<!-- \caption{\label{fig:ricePreprocess} A preprocessing procedure for extracting 2D bullet "signatures" from a 3D topographic bullet scan. The procedure results in an ordered sequence of values representing the local variations in the surface of the bullet.}\label{fig:unnamed-chunk-22} -->
-<!-- \end{figure} -->
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-25"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-29"></span>
 <img src="images/riceBulletPreprocessDiagram.png" alt="\label{fig:ricePreprocess} A preprocessing procedure for extracting 2D bullet \`\`signatures&quot; from a 3D topographic bullet scan. The procedure results in an ordered sequence of values representing the local variations in the surface of the bullet." width=".8\textwidth" />
 <p class="caption">
-Figure 1.25:  A preprocessing procedure for extracting 2D bullet ``signatures” from a 3D topographic bullet scan. The procedure results in an ordered sequence of values representing the local variations in the surface of the bullet.
+Figure 1.26:  A preprocessing procedure for extracting 2D bullet ``signatures” from a 3D topographic bullet scan. The procedure results in an ordered sequence of values representing the local variations in the surface of the bullet.
 </p>
 </div>
-<!-- \begin{figure}[!htbp] -->
-<!-- {\centering \includegraphics[width=.35\textwidth]{images/handwriterPreprocessDiagram}  -->
-<!-- } -->
-<!-- \caption{\label{fig:handwriterPreprocess} A preprocessing procedure applied to a handwriting image of the word "csafe." The procedure results in a skeletonized version of the word that has been separated into graphemes as represented by orange nodes.}\label{fig:unnamed-chunk-23} -->
-<!-- \end{figure} -->
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-26"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-30"></span>
 <img src="images/handwriterPreprocessDiagram.png" alt="\label{fig:handwriterPreprocess} A preprocessing procedure applied to a handwriting image of the word &quot;csafe.&quot; The procedure results in a skeletonized version of the word that has been separated into graphemes as represented by orange nodes." width=".35\textwidth" />
 <p class="caption">
-Figure 1.26:  A preprocessing procedure applied to a handwriting image of the word “csafe.” The procedure results in a skeletonized version of the word that has been separated into graphemes as represented by orange nodes.
+Figure 1.27:  A preprocessing procedure applied to a handwriting image of the word “csafe.” The procedure results in a skeletonized version of the word that has been separated into graphemes as represented by orange nodes.
 </p>
 </div>
-<!-- \begin{figure}[!htbp] -->
-<!-- {\centering \includegraphics[width=\textwidth]{figures/preProcessPlots}  -->
-<!-- } -->
-<!-- \caption{\label{fig:cmcRPreprocess} A cartridge case undergoing various preprocessing steps. The procedure results in a cartridge case scan in which the breech face impressions have been segmented and highlighted.}\label{fig:unnamed-chunk-24} -->
-<!-- \end{figure} -->
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-27"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-31"></span>
 <img src="figures/preProcessPlots.png" alt="\label{fig:cmcRPreprocess} A cartridge case undergoing various preprocessing steps. The procedure results in a cartridge case scan in which the breech face impressions have been segmented and highlighted." width="\textwidth" />
 <p class="caption">
-Figure 1.27:  A cartridge case undergoing various preprocessing steps. The procedure results in a cartridge case scan in which the breech face impressions have been segmented and highlighted.
+Figure 1.28:  A cartridge case undergoing various preprocessing steps. The procedure results in a cartridge case scan in which the breech face impressions have been segmented and highlighted.
 </p>
 </div>
 <p>Our implementation is structured to adhere to the “tidy” principles of design .
