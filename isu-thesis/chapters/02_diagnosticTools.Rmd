@@ -1,1 +1,21 @@
-# Diagnostic Tools for Cartridge Case Comparison Pipelines
+# Diagnostic Tools for Cartridge Case Comparison Algorithms
+
+```{block, type='paperinfo_'}
+published in the *Journal of Computational and Graphical Statistics*
+```
+```{block, type='paperauthor_'}
+Joseph Zemmels and Susan VanderPlas and Heike Hofmann
+```
+
+## Abstract {-}
+
+Diagnostics are useful for explaining the behavior of a complex model or algorithm.
+In this paper, we introduce a suite of visual and interactive diagnostic tools to assess algorithms that automatically compare forensic cartridge case evidence.
+These tools are useful to both forensic researchers and practitioners:
+Researchers can analyze and correct the (mis)behavior of the algorithm forensic practitioners can more easily understand and explain the algorithm.
+First, we develop a collection of tools to diagnose each step of a cartridge case comparison algorithm in the `impression` R package.
+We then implement these visual diagnostics in an interactive web application called `cartridgeInvestigatR` to provide greater flexibility to the user.
+
+## Introduction
+
+Start of paper.

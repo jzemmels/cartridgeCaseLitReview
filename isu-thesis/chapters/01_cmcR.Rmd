@@ -28,4 +28,6 @@ how to fill in the gaps when computationally ambiguous descriptions of algoriths
 
 ## Introduction
 
-Paper contents here
+```{=tex}
+\includepdf{RJwrapper.pdf}
+```

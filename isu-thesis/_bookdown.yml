@@ -4,7 +4,9 @@ output_dir: docs
 clean: [bookdown.bbl]
 rmd_files: [
   "index.Rmd",
-  # "chapters/01_example.Rmd",
+  # "chapters/01_cmcR.Rmd",
+  "chapters/02_diagnosticTools.Rmd",
+  "chapters/03_cartridgeCasePipeline.Rmd"
   # "appendices/01_appendix.Rmd",
   # "appendices/02_appendix.Rmd"
 ]

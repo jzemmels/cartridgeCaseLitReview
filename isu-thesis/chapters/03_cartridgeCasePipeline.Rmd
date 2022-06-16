@@ -1,1 +1,23 @@
-# Automatic Cartridge Case Analysis using Density-Based and Visual Diagnostic Features
+# Automatic Matching of Cartridge Case Impressions
+
+```{block, type='paperinfo_'}
+published in the *Journal of Data Science, Statistics, and Visualizations*
+```
+```{block, type='paperauthor_'}
+Joseph Zemmels and Susan VanderPlas and Heike Hofmann
+```
+
+## Abstract {-}
+
+Forensic examinations determine whether two pieces of evidence originated from the same source.
+For example, a cartridge case found at a crime scene may be compared to a fired cartridge case collected from a suspect's firearm.
+Historically, forensic examiners rely on high-powered comparison microscopes, case facts, and their own experience to arrive at a source conclusion.
+Recently, algorithms that provide an automatic and objective measure of similarity of the evidence have become more popular.
+We introduce a cartridge case comparison algorithm that encompasseses preprocessing, feature extraction, and similarity scoring.
+We use a train/test split on a data set of 510 cartridge case scans to fit and validate a random forest model.
+We demonstrate that this random forest model yields improved accuracy compared to predominant algorithms.
+Finally, we use the random forest model to calculate score-based likelihood ratios that estimate the probative value of the evidence.
+
+## Introduction
+
+Start of paper.
