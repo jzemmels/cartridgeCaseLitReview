@@ -213,7 +213,7 @@ Figure `r knitr::asis_output(ifelse(knitr::is_html_output(), '\\@ref(fig:cartrid
 In this study, a total of 40 cartridge cases were scanned with a lateral resolution of 6.25 microns (micrometers) per pixel.
 The surface matrices are approximately $1200 \times 1200$ pixels in size corresponding to an area of about $3.8 \times 3.8$ mm$^2$.
 
-```{r, fadul1-1Screenshot,include=FALSE}
+```{r, fadul1-1Screenshot,include=FALSE,cache=TRUE}
 fadul1.1 <- x3ptools::x3p_read("data/fadul1-1.x3p")
 
 #apply low-pass filter to reduce noise in scan:
@@ -262,7 +262,7 @@ x3ptools::x3p_snapshot(file = "figures/fadul1-1.png")
 close3d()
 ```
 
-```{r ,fadul1-2Screenshot,include=FALSE}
+```{r ,fadul1-2Screenshot,include=FALSE,cache=TRUE}
 fadul1.2 <- x3ptools::x3p_read("data/fadul1-2.x3p")
 
 surface2 <- fadul1.2 %>%
