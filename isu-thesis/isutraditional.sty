@@ -27,7 +27,7 @@
                  %\thispagestyle{plain} - remove to get rid of page #
                  \if@twocolumn
                      \onecolumn
-                     \@tempswatrue  
+                     \@tempswatrue
                    \else
                      \@tempswafalse
                  \fi
@@ -52,9 +52,9 @@
      \fi
      \Large \bfseries #2\par}%
     \@endpart}
-\def\@spart#1{%   
+\def\@spart#1{%
     {\centering
-     \interlinepenalty \@M  
+     \interlinepenalty \@M
      \reset@font
      \Large \bfseries #1\par}%
     \@endpart}
@@ -66,7 +66,7 @@
               \fi
               \if@tempswa
                 \twocolumn
-              \fi} 
+              \fi}
 
 %  Chapter
 \renewcommand{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi
@@ -83,9 +83,9 @@
                       \addcontentsline{toc}{chapter}{#1}%
                     \fi
                     \chaptermark{#1}%
-                    \addtocontents{lof}{\protect\addvspace{10\p@}}%   
-                    \addtocontents{lot}{\protect\addvspace{10\p@}}%  
-                    \if@twocolumn 
+                    \addtocontents{lof}{\protect\addvspace{10\p@}}%
+                    \addtocontents{lot}{\protect\addvspace{10\p@}}%
+                    \if@twocolumn
                       \@topnewpage[\@makechapterhead{#2}]%
                     \else
                       \@makechapterhead{#2}%
@@ -139,3 +139,19 @@
                                        {3.25ex \@plus1ex \@minus .2ex}%
                                        {-1em}%
                                       {\normalfont\normalsize\bfseries \hskip 0.25 in}}
+\usepackage{subfig}
+\usepackage{booktabs}
+\usepackage{subfig}
+\usepackage{nameref}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}

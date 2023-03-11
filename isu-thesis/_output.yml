@@ -17,4 +17,4 @@ bookdown::pdf_book:
     "--top-level-division=chapter", "--natbib"
   ]
 bookdown::gitbook:
-  toc_depth: 2
+  toc_depth: 3

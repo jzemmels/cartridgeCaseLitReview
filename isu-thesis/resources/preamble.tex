@@ -3,18 +3,18 @@
 \NewEnviron{specialchapt_}{%
   \specialchapt{\BODY}
   }
-  
+
 \NewEnviron{paperinfo_}{%
   \paperinfo{\BODY}
   }
-  
+
 \NewEnviron{paperauthor_}{%
   \paperauthor{\BODY}
   }
-  
+
 
 \let\oldappendix\appendix
 \renewcommand{\appendix}{
-\appendixtitle 
+\appendixtitle
 \oldappendix
 }
