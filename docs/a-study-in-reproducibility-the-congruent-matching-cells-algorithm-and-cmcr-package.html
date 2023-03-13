@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 A Study in Reproducibility: The Congruent Matching Cells Algorithm and cmcR package | A Cartridge Case Comparison Pipeline</title>
+  <meta name="description" content="2 A Study in Reproducibility: The Congruent Matching Cells Algorithm and cmcR package | A Cartridge Case Comparison Pipeline" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 A Study in Reproducibility: The Congruent Matching Cells Algorithm and cmcR package | A Cartridge Case Comparison Pipeline" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="jzemmels/cartridgeCaseLitReview" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 A Study in Reproducibility: The Congruent Matching Cells Algorithm and cmcR package | A Cartridge Case Comparison Pipeline" />
+  
+  
+  
+
+<meta name="author" content="Joseph Zemmels" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"/>
+<style type="text/css">
+p.abstract{
+  text-align: center;
+  font-weight: bold;
+}
+div.abstract{
+  margin: auto;
+  width: 90%;
+}
+</style>
+<script src="libs/jquery/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Literature Review</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#preliminaries-forensic-examinations"><i class="fa fa-check"></i><b>1.1</b> Preliminaries: Forensic Examinations</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="index.html"><a href="index.html#firearm-and-toolmark-identification"><i class="fa fa-check"></i><b>1.1.1</b> Firearm and Toolmark Identification</a></li>
+<li class="chapter" data-level="1.1.2" data-path="index.html"><a href="index.html#why-should-firearm-and-toolmark-identification-change"><i class="fa fa-check"></i><b>1.1.2</b> Why Should Firearm and Toolmark Identification Change?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#forensic-comparison-pipelines"><i class="fa fa-check"></i><b>1.2</b> Forensic Comparison Pipelines</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#digital-representations-of-evidence"><i class="fa fa-check"></i><b>1.2.1</b> Digital Representations of Evidence</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#pre-processing-procedures-for-forensic-data"><i class="fa fa-check"></i><b>1.2.2</b> Pre-processing Procedures for Forensic Data</a></li>
+<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#forensic-data-feature-extraction"><i class="fa fa-check"></i><b>1.2.3</b> Forensic Data Feature Extraction</a></li>
+<li class="chapter" data-level="1.2.4" data-path="index.html"><a href="index.html#similarity-scores-classification-rules-for-forensic-data"><i class="fa fa-check"></i><b>1.2.4</b> Similarity Scores &amp; Classification Rules for Forensic Data</a></li>
+<li class="chapter" data-level="1.2.5" data-path="index.html"><a href="index.html#reproducibility-of-comparison-pipelines"><i class="fa fa-check"></i><b>1.2.5</b> Reproducibility of Comparison Pipelines</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#diagnostic-tools"><i class="fa fa-check"></i><b>1.3</b> Diagnostic Tools</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#visual-diagnostics"><i class="fa fa-check"></i><b>1.3.1</b> Visual Diagnostics</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#interactive-diagnostics"><i class="fa fa-check"></i><b>1.3.2</b> Interactive Diagnostics</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#automating-and-improving-the-cartridge-case-comparison-pipeline"><i class="fa fa-check"></i><b>1.4</b> Automating and Improving the Cartridge Case Comparison Pipeline</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="index.html"><a href="index.html#image-processing-techniques"><i class="fa fa-check"></i><b>1.4.1</b> Image Processing Techniques</a></li>
+<li class="chapter" data-level="1.4.2" data-path="index.html"><a href="index.html#density-based-spatial-clustering-of-applications-with-noise"><i class="fa fa-check"></i><b>1.4.2</b> Density-Based Spatial Clustering of Applications with Noise</a></li>
+<li class="chapter" data-level="1.4.3" data-path="index.html"><a href="index.html#implementation-considerations"><i class="fa fa-check"></i><b>1.4.3</b> Implementation Considerations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><i class="fa fa-check"></i><b>2</b> A Study in Reproducibility: The Congruent Matching Cells Algorithm and cmcR package</a>
+<ul>
+<li class="chapter" data-level="" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#abstract"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="2.1" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#intro"><i class="fa fa-check"></i><b>2.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#repeatability-and-reproducibility"><i class="fa fa-check"></i><b>2.1.1</b> Repeatability and reproducibility</a></li>
+<li class="chapter" data-level="2.1.2" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#the-congruent-matching-cells-algorithm"><i class="fa fa-check"></i><b>2.1.2</b> The Congruent Matching Cells algorithm</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cmcMethod"><i class="fa fa-check"></i><b>2.2</b> The CMC pipeline</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#initialData"><i class="fa fa-check"></i><b>2.2.1</b> Initial data</a></li>
+<li class="chapter" data-level="2.2.2" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#preProcessing"><i class="fa fa-check"></i><b>2.2.2</b> Pre-processing procedures</a></li>
+<li class="chapter" data-level="2.2.3" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#comparisonProcedure"><i class="fa fa-check"></i><b>2.2.3</b> “Correlation cell” comparison procedure</a></li>
+<li class="chapter" data-level="2.2.4" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#decision-rule"><i class="fa fa-check"></i><b>2.2.4</b> Decision rule</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#discussion"><i class="fa fa-check"></i><b>2.3</b> Discussion</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#ambiguities"><i class="fa fa-check"></i><b>2.3.1</b> Ambiguity in algorithmic descriptions</a></li>
+<li class="chapter" data-level="2.3.2" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#investigation"><i class="fa fa-check"></i><b>2.3.2</b> CMC pattern matching pipeline</a></li>
+<li class="chapter" data-level="2.3.3" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#processing-condition-sensitivity"><i class="fa fa-check"></i><b>2.3.3</b> Processing condition sensitivity</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#conclusion"><i class="fa fa-check"></i><b>2.4</b> Conclusion</a></li>
+<li class="chapter" data-level="2.5" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#acknowledgement"><i class="fa fa-check"></i><b>2.5</b> Acknowledgement</a></li>
+<li class="chapter" data-level="2.6" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#computational-details"><i class="fa fa-check"></i><b>2.6</b> Computational details</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><i class="fa fa-check"></i><b>3</b> Diagnostic Tools for Cartridge Case Comparison Algorithms</a>
+<ul>
+<li class="chapter" data-level="" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#abstract-1"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="3.1" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html"><i class="fa fa-check"></i><b>4</b> Automatic Matching of Cartridge Case Impressions</a>
+<ul>
+<li class="chapter" data-level="" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#abstract-2"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="4.1" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Cartridge Case Comparison Pipeline</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> A Study in Reproducibility: The Congruent Matching Cells Algorithm and cmcR package<a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="abstract" class="section level2 unnumbered hasAnchor">
+<h2>Abstract<a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#abstract" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Scientific research is driven by our ability to use methods, procedures, and materials from previous studies and further research by adding to it.
+As the need for computationally-intensive methods to analyze large amounts of data grows, the criteria needed to achieve reproducibility, specifically computational reproducibility, have become more sophisticated.
+In general, prosaic descriptions of algorithms are not detailed or precise enough to ensure complete reproducibility of a method.
+Results may be sensitive to conditions not commonly specified in written-word descriptions such as implicit parameter settings or the programming language used.
+To achieve true computational reproducibility, it is necessary to provide all intermediate data and code used to produce published results.
+In this paper, we consider a class of algorithms developed to perform firearm evidence identification on cartridge case evidence known as the <em>Congruent Matching Cells</em> (CMC) methods.
+To date, these algorithms have been published as textual descriptions only.
+We introduce the first open-source implementation of the Congruent Matching Cells methods in the R package cmcR.
+We have structured the cmcR package as a set of sequential, modularized functions intended to ease the process of parameter experimentation.
+We use cmcR and a novel variance ratio statistic to explore the CMC methodology and demonstrate how to fill in the gaps when provided with computationally ambiguous descriptions of algorithms.</p>
+</div>
+<div id="intro" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Introduction<a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#intro" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Forensic examinations are intended to provide an objective assessment of the probative value of a piece of evidence.
+Typically, this assessment of probative value is performed by a forensic examiner who visually inspects the evidence to determine whether it matches evidence found on a suspect.
+The process by which an examiner arrives at their evidentiary conclusion is largely opaque and has been criticized <span class="citation">(<a href="#ref-pcast2016" role="doc-biblioref">President’s Council of Advisors on Sci. &amp; Tech. 2016</a>)</span> because its subjectivity does not allow for an estimation of error rates.
+In response, <span class="citation">National Research Council (<a href="#ref-council_strengthening_2009" role="doc-biblioref">2009</a>)</span> pushed to augment subjective decisions made by forensic examiners with automatic algorithms that objectively assess evidence and can be explained during court testimony.
+In addition to the objectivity of these algorithms, there is an additional benefit: we expect that an algorithm with the same random seed run on the same data multiple times will produce the same answer; that is, that the results are repeatable.
+This is extremely beneficial because it allows the prosecution and defense to come to the same conclusion given objective evidence or data.</p>
+<div id="repeatability-and-reproducibility" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Repeatability and reproducibility<a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#repeatability-and-reproducibility" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Repeatability in forensic labs is enforced primarily using standard operating procedures (SOPs), which specify the steps taken for any given evaluation, along with the concentrations of any chemicals used, the range of acceptable machine settings, and any calibration procedures required to be completed before the evidence is evaluated.
+When labs use computational procedures, this SOP is augmented with specific algorithms, which are themselves SOPs intended for use by man and machine.
+Algorithms are generally described on two levels: we need both the conceptual description (intended for the human using the algorithm) and the procedural definition (which provides the computer hardware with a precise set of instructions).
+For scientific and forensic repeatability and reproducibility, it is essential to have both pieces: the algorithm description is critical for establishing human understanding and justifying the method’s use in court, but no less important is the computer code which provides the higher degree of precision necessary to ensure the results obtained are similar no matter who evaluates the evidence.
+As with SOPs in lab settings, the code parameters function like specific chemical concentrations; without those details, the SOP would be incomplete and the results produced would be too variable to be accepted in court.</p>
+<p>The <span class="citation">National Academy of Sciences, Engineering, and Medicine (<a href="#ref-nasem_2019" role="doc-biblioref">2019</a>)</span> defines <em>reproducibility</em> as “obtaining consistent computational results using the same input data, computational steps, methods, code, and conditions of analysis.” This form of reproducibility requires that the input data, code, method, and computational environment are all described and made available to the community.
+In many situations, this level of reproducibility is not provided – not just in forensics but in many other applied disciplines.
+In forensics in particular, it is easier to list the exceptions: reproducible algorithms have been proposed in sub-disciplines including DNA <span class="citation">(<a href="#ref-Tvedebrink2020" role="doc-biblioref">Tvedebrink, Andersen, and Curran 2020</a>; <a href="#ref-osiris" role="doc-biblioref">Goor, Hoffman, and Riley 2020</a>; <a href="#ref-openForSciR" role="doc-biblioref">Tyner et al. 2019</a>)</span>, glass <span class="citation">(<a href="#ref-Curran2000" role="doc-biblioref">Curran, Champod, and Buckleton 2000</a>; <a href="#ref-Park2019" role="doc-biblioref">Park and Tyner 2019</a>)</span>, handwriting <span class="citation">(<a href="#ref-crawford_handwriting_2020" role="doc-biblioref">Crawford 2020</a>)</span>, shoe prints <span class="citation">(<a href="#ref-park_algorithm_2020" role="doc-biblioref">Park and Carriquiry 2020</a>)</span>, and ballistic evidence <span class="citation">(<a href="#ref-hare_automatic_2016" role="doc-biblioref">Hare, Hofmann, and Carriquiry 2017</a>; <a href="#ref-tai_fully_2018" role="doc-biblioref">Tai and Eddy 2018</a>)</span>.</p>
+<p>We find it useful to instead consider a more inclusive hierarchy of reproducibility.
+Algorithms at higher tiers of the hierarchy are more easily reproducible in the sense that fewer resources are required to (re)-implement the algorithm.</p>
+<p><strong>Definition 1</strong> <em>Hierarchy of Reproducibility</em></p>
+<blockquote>
+<p><strong>Conceptual description</strong> <em>The algorithm is described and demonstrated in a scientific publication.</em></p>
+</blockquote>
+<blockquote>
+<p><strong>Pseudocode</strong> <em>The algorithm is described at a high level of detail with pseudocode implementation provided, and results are demonstrated in a scientific publication.</em></p>
+</blockquote>
+<blockquote>
+<p><strong>Reproducible data</strong> <em>The algorithm is described and demonstrated in a scientific publication, and input data are available in supplementary material.</em></p>
+</blockquote>
+<blockquote>
+<p><strong>Comparable results</strong> <em>The algorithm is described and demonstrated in a scientific publication, and input data and numerical results are provided in supplementary material.</em></p>
+</blockquote>
+<blockquote>
+<p><strong>Full reproducibility</strong> <em>The algorithm is described and demonstrated in a scientific publication, and the input data, source code, parameter settings, and numerical results are provided in supplementary material.</em></p>
+</blockquote>
+<p>To aid in comprehension of an algorithm, it is useful to supplement conceptual descriptions with pseudocode.
+However, a conceptual description and pseudocode alone do not contain sufficient detail (e.g., parameter settings) to ensure computational reproducibility.
+Implementing algorithms based on conceptual descriptions or pseudocode requires enumerating and testing possible parameter choices which, depending on their complexity, can be a lengthy and expensive process.
+In contrast, implementing fully reproducible algorithms requires only as much time as it takes to emulate the original development environment.
+Commonly identified reasons for unreproducible results include (1) ambiguity in how procedures were implemented, (2) missing or incomplete data, and (3) missing or incomplete computer code to replicate all statistical analyses <span class="citation">(<a href="#ref-leek_is_2017" role="doc-biblioref">Leek and Jager 2017</a>)</span>.
+In particular, for statistical algorithms which depend on input data, we find that full reproducibility depends on the provision of both original data and any manual pre-processing applied to said data, as this manual process is not reproducible by itself.
+In combination with the code, the algorithm description, and the numerical results presented in the paper, it should be possible to fully reproduce the results of a paper.</p>
+<p>In this paper, we demonstrate the importance of higher levels of reproducibility by examining the Congruent Matching Cells (CMC) algorithm for cartridge case comparisons and developing an open-source, fully reproducible version for general use in the forensics community.</p>
+</div>
+<div id="the-congruent-matching-cells-algorithm" class="section level3 hasAnchor" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> The Congruent Matching Cells algorithm<a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#the-congruent-matching-cells-algorithm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A <em>cartridge case</em> is the portion of firearm ammunition that encases a projectile (e.g., bullet, shots, or slug) along with the explosive used to propel the projectile through the firearm.
+When a firearm is discharged, the projectile is propelled down the barrel of the firearm, while the cartridge case is forced towards the back of the barrel.
+It strikes the back wall, known as the <em>breech face</em>, of the barrel with considerable force, thereby imprinting any markings on the breech face onto the cartridge case and creating the so-called <em>breech face impressions</em>.
+These markings are used in forensic examinations to determine whether two cartridge cases have been fired by the same firearm.
+During a forensic examination, two pieces of ballistic evidence are placed under a <em>comparison microscope</em>.
+Comparison microscopes allow for a side-by-side comparison of two objects within the same viewfinder, as seen in Figure <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#fig:ccPair">2.1</a>.
+A pair of breech face images is aligned along the thin black line in the middle of the images.
+The degree to which these breech face markings can be aligned is used to determine whether the two cartridge cases came from the same source; i.e., were fired from the same firearm.
+These breech face impressions are considered analogous to a firearm’s “fingerprint” left on a cartridge case <span class="citation">(<a href="#ref-Thompson2017" role="doc-biblioref">Thompson 2017</a>)</span>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ccPair"></span>
+<img src="images/cartridgeCasePair_comparison_with_line.PNG" alt="Photos of the bottoms of two matching cartridge cases separated by a vertical line. The cartridge case photos have been aligned such that it appears as if the markings from cartridge case continue across the vertical line onto the other cartridge case. This emphasizes the similar markings on the two cases." width="\textwidth" />
+<p class="caption">
+Figure 2.1: A cartridge case pair with visible breech face impressions under a microscope. A thin line can be seen separating the two views. The degree to which the markings coincide is used to conclude whether the pair comes from the same source.
+</p>
+</div>
+<p>The Congruent Matching Cells (CMC) pipeline is a collection of algorithms to process and compare cartridge case evidence <span class="citation">(<a href="#ref-song_proposed_2013" role="doc-biblioref">Song 2013</a>)</span>.
+Since its introduction, the pipeline and its extensions <span class="citation">(<a href="#ref-tong_improved_2015" role="doc-biblioref">Tong, Song, and Chu 2015</a>; <a href="#ref-chen_convergence_2017" role="doc-biblioref">Chen et al. 2017</a>; <a href="#ref-song_estimating_2018" role="doc-biblioref">Song et al. 2018</a>)</span> have shown promise in being able to differentiate between matching and non-matching cartridge cases.
+However, so far the CMC pipelines have only been introduced in the form of conceptual descriptions.
+Further, the cartridge case scans used to validate the pipelines are only available in their raw, unprocessed forms on the NIST Ballistics Toolmark Research Database <span class="citation">(<a href="#ref-nbtrd" role="doc-biblioref">Zheng, Soons, and Thompson 2016</a>)</span>.
+While it is clear that the creators of the CMC pipeline have a working implementation, the wider forensic science community only has access to conceptual descriptions of the pipeline and summary statistics describing its performance.
+In our hierarchy of reproducibility, this puts the CMC algorithm somewhere between the conceptual description and reproducible data stage: the steps are described but no code is available, and the raw data are available but manual pre-processing steps make this raw data insufficient to replicate the pipeline even with newly written code.</p>
+<p>The development of the CMC algorithm seems to be representative of how many forensic algorithms are developed: after an algorithm is introduced, researchers build upon the foundation laid by the original algorithm in subsequent papers.
+These changes are often incremental in nature and reflect a growing understanding of the algorithm’s behavior.
+While this cycle of scientific progress certainly is not unique to forensic algorithms, given the gravity of the application it is imperative that these incremental improvements not be unnecessarily delayed.
+As such, we believe that the forensic community at-large would benefit greatly by establishing an open-source foundation for their algorithms upon which additional improvements can be developed.
+Using open-source algorithms are cheaper to use than writing one’s own code, enables the process of peer review by providing an accessible benchmark, and helps other research groups or companies stay on the leading edge of technology development <span class="citation">(<a href="#ref-linux" role="doc-biblioref">The Linux Foundation 2017</a>)</span>.</p>
+<p>Here, we describe the process of implementing the CMC pipeline for the comparison of marks on spent cartridge cases, using the descriptions from two published papers, <span class="citation">Song et al. (<a href="#ref-song_3d_2014" role="doc-biblioref">2014</a>)</span> and <span class="citation">Tong, Song, and Chu (<a href="#ref-tong_improved_2015" role="doc-biblioref">2015</a>)</span>.
+Our R package, cmcR, provides an open-source implementation of the CMC pipeline.
+We use cmcR to illustrate how ambiguities in the textual description of an algorithm can lead to highly divergent results.
+In particular, our implementation highlights an extreme sensitivity to processing and parameter decisions that has not been discussed previously.
+Additionally, we argue that our implementation can be used as a template for future implementations of forensic pattern-matching algorithms to not only ensure transparency and auditability, but also to facilitate incremental improvements in forensic algorithms.</p>
+<p>In the remainder of this paper, we describe a general, reproducible, and open-source CMC pipeline which encompasses those discussed in <span class="citation">Song (<a href="#ref-song_proposed_2013" role="doc-biblioref">2013</a>)</span>, <span class="citation">Song et al. (<a href="#ref-song_3d_2014" role="doc-biblioref">2014</a>)</span>, and <span class="citation">Tong, Song, and Chu (<a href="#ref-tong_improved_2015" role="doc-biblioref">2015</a>)</span>.
+<span class="citation">Song (<a href="#ref-song_proposed_2013" role="doc-biblioref">2013</a>)</span> lays out the conceptual framework for the original CMC pipeline later implemented in <span class="citation">Song et al. (<a href="#ref-song_3d_2014" role="doc-biblioref">2014</a>)</span> and <span class="citation">Tong et al. (<a href="#ref-tong_fired_2014" role="doc-biblioref">2014</a>)</span>.
+An improvement of the pipeline presented in <span class="citation">Tong, Song, and Chu (<a href="#ref-tong_improved_2015" role="doc-biblioref">2015</a>)</span> and used in subsequent papers is referred to as the “High CMC” method <span class="citation">(<a href="#ref-chen_convergence_2017" role="doc-biblioref">Chen et al. 2017</a>)</span>. However, it should be noted that what the authors refer to as the original and High CMC decision rules are variations of one step of a larger CMC pipeline.</p>
+<p>The cmcR package contains implementations designed for use with 3D topographical scans of the original decision rule described in <span class="citation">Song (<a href="#ref-song_proposed_2013" role="doc-biblioref">2013</a>)</span> and <span class="citation">Song et al. (<a href="#ref-song_3d_2014" role="doc-biblioref">2014</a>)</span> and the High CMC decision rule described in <span class="citation">Tong, Song, and Chu (<a href="#ref-tong_improved_2015" role="doc-biblioref">2015</a>)</span>.
+The source code to the full cmcR package is accessible at <a href="https://github.com/CSAFE-ISU/cmcR" class="uri">https://github.com/CSAFE-ISU/cmcR</a>.</p>
+</div>
+</div>
+<div id="cmcMethod" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> The CMC pipeline<a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cmcMethod" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this section, we examine the process of implementing the CMC pipeline for automatic comparisons of 3D cartridge case scans.
+At each step, we will discuss how we filled in the gaps of the original description during the creation of cmcR.</p>
+<p>All of the CMC pipelines can be broken down into three broad stages: (1) pre-processing, (2) cell-based similarity feature extraction, and (3) application of a decision rule as illustrated in @(fig:overview-flow).
+In the following sections we break each of these stages further into a set of modular steps.
+One advantage of modularizing these algorithms is that we can implement an algorithm as a set of sequential procedures.
+This allows us to test new variations against the old implementation in a coherent, unified framework.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:overview-flow"></span>
+<img src="images/overview-flow.png" alt="A diagram of three puzzle pieces arranged horizontally that represent the three stages of the CMC pipeline. The pre-processing puzzle piece shows a raw cartridge case scan with regions highlighted to be removed. The cell-based comparisons piece shows two cartridge case scans with blue and red cells overlaid. The decision rule piece shows a histogram plot of CMC counts for non-matching and matching cartridge case pairs in red and blue, respectively. The matching CMC count distribution is located at higher CMC values than the non-match distribution. " width="\textwidth" />
+<p class="caption">
+Figure 2.2: The stages of CMC pipelines. In the pre-processing stage, each scan is prepared for analysis, removing extraneous information and noise. Then, each scan is broken up into cells, which are numerically compared to cells in the other scan to determine an optimal alignment. Finally, each of the scores arising from the cells in the second stage are compared to a reference distribution to determine whether the scans originate from the same source or from different sources.
+</p>
+</div>
+<p>The primary difference between the two pipelines presented here, using the original and High CMC decision rules, lies in how the decision rules are utilized to separate matching vs. non-matching cartridge case pairs.
+In addition, there are also several small differences in the parameters used in the pre-processing and comparison procedures.</p>
+<div id="initialData" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> Initial data<a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#initialData" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Digital microscopy is capable of precision measurements of surface topology at high resolutions.
+Using a 3D microscope, we can obtain scans of breech face impressions at the micron level (<span class="math inline">\(1 \mu m = 10^{-3} mm = 10^{-6} m\)</span>).
+These 3D topological scans are used as input to automated comparison algorithms, such as the CMC pipeline originally proposed in <span class="citation">Song (<a href="#ref-song_proposed_2013" role="doc-biblioref">2013</a>)</span>.
+We will use the same data set referenced in <span class="citation">Song et al. (<a href="#ref-song_3d_2014" role="doc-biblioref">2014</a>)</span> and <span class="citation">Tong, Song, and Chu (<a href="#ref-tong_improved_2015" role="doc-biblioref">2015</a>)</span> to illustrate usage of the cmcR package.
+These 3D scans of cartridge cases are available from the NIST Ballistics Toolmark Research Database <span class="citation">(<a href="#ref-nbtrd" role="doc-biblioref">Zheng, Soons, and Thompson 2016</a>)</span>.
+The strings defined below refer to three cartridge case scans available on the NBTRD from <span class="citation">Fadul et al. (<a href="#ref-fadul_empirical_2011" role="doc-biblioref">2011</a>)</span> and will be used throughout the remainder of this paper.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cmcR)</span>
+<span id="cb2-2"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb2-3" aria-hidden="true" tabindex="-1"></a>nbtrd_url <span class="ot">&lt;-</span> <span class="st">&quot;https://tsapps.nist.gov/NRBTD/Studies/CartridgeMeasurement&quot;</span></span>
+<span id="cb2-4"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb2-5" aria-hidden="true" tabindex="-1"></a>x3p_ids <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;DownloadMeasurement/2d9cc51f-6f66-40a0-973a-a9292dbee36d&quot;</span>,</span>
+<span id="cb2-6"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb2-6" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;DownloadMeasurement/cb296c98-39f5-46eb-abff-320a2f5568e8&quot;</span>,</span>
+<span id="cb2-7"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb2-7" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;DownloadMeasurement/8ae0b86d-210a-41fd-ad75-8212f9522f96&quot;</span>)</span>
+<span id="cb2-8"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb2-9" aria-hidden="true" tabindex="-1"></a>file_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;fadul1-1.x3p&quot;</span>,<span class="st">&quot;fadul1-2.x3p&quot;</span>,<span class="st">&quot;fadul2-1.x3p&quot;</span>)</span>
+<span id="cb2-10"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb2-11" aria-hidden="true" tabindex="-1"></a>purrr<span class="sc">::</span><span class="fu">walk2</span>(<span class="at">.x =</span> x3p_ids,</span>
+<span id="cb2-12"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb2-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">.y =</span> file_names,</span>
+<span id="cb2-13"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb2-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">.f =</span> <span class="cf">function</span>(x3p_id,file_name){</span>
+<span id="cb2-14"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb2-14" aria-hidden="true" tabindex="-1"></a>               <span class="fu">download.file</span>(<span class="at">url =</span> <span class="fu">file.path</span>(nbtrd_url, x3p_id),</span>
+<span id="cb2-15"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb2-15" aria-hidden="true" tabindex="-1"></a>                             <span class="at">destfile =</span> <span class="fu">paste0</span>(<span class="st">&quot;data/&quot;</span>,file_name),<span class="at">mode =</span> <span class="st">&quot;wb&quot;</span>)</span>
+<span id="cb2-16"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb2-16" aria-hidden="true" tabindex="-1"></a>             })</span></code></pre></div>
+<p>Cartridge case scans are commonly stored in the ISO standard x3p file format <span class="citation">(<a href="#ref-ISO25178-72" role="doc-biblioref"><span>“<span class="nocase">Geometrical product specifications (GPS) — Surface texture: Areal — Part 72: XML file format x3p</span>”</span> 2017</a>)</span>.
+x3p is a container format which consists of a single surface matrix representing the height value of the breech face surface and metadata concerning the parameters under which the scan was taken (size, resolution, creator, microscope, microscopy software versions, etc.).
+The x3ptools package provides functionality to work with the format in R <span class="citation">(<a href="#ref-x3ptools" role="doc-biblioref">Hofmann et al. 2020</a>)</span>.</p>
+<p>Figure <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#fig:cartridgeCasePair-html">2.3</a> shows the surface matrices of a known match (KM) pair of cartridge cases from a study by <span class="citation">Fadul et al. (<a href="#ref-fadul_empirical_2011" role="doc-biblioref">2011</a>)</span>.
+In this study, a total of 40 cartridge cases were scanned with a lateral resolution of 6.25 microns (micrometers) per pixel.
+The surface matrices are approximately <span class="math inline">\(1200 \times 1200\)</span> pixels in size corresponding to an area of about <span class="math inline">\(3.8 \times 3.8\)</span> mm<span class="math inline">\(^2\)</span>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cartridgeCasePair-html"></span>
+<img src="figures/fadul1-1.png" alt="A visualization of two unprocessed cartridge case scans where the surface height values are mapped to a gray color gradient. It is difficult to assess the similarity between the unprocessed scans, which motivates the need for the pre-processing stage of the CMC pipeline." width=".49\linewidth" height=".49\linewidth" /><img src="figures/fadul1-2.png" alt="A visualization of two unprocessed cartridge case scans where the surface height values are mapped to a gray color gradient. It is difficult to assess the similarity between the unprocessed scans, which motivates the need for the pre-processing stage of the CMC pipeline." width=".49\linewidth" height=".49\linewidth" />
+<p class="caption">
+Figure 2.3: Unprocessed surface matrices of the known-match Fadul 1-1 and Fadul 1-2 Fadul et al. <span class="math inline">\(2011\)</span>. The observations in the corners of these surface matrices are artifacts of the staging area in which these scans were taken. The holes on the interior of the primer surfaces are caused by the firing pin striking the primer during the firing process. The region of the primer around this hole does not come into uniform contact with the breech face of the firearm.
+</p>
+</div>
+<p>Only certain regions of a cartridge case contain identifying breech face impression markings.
+<span class="citation">Song (<a href="#ref-song_proposed_2013" role="doc-biblioref">2013</a>)</span> defines “valid correlation regions” as regions where “the individual characteristics of the ballistics signature are found that can be used effectively for ballistics identification.”
+Prior to applying the CMC comparison procedure, cartridge scans must undergo some pre-processing to isolate the valid correlation regions.</p>
+</div>
+<div id="preProcessing" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Pre-processing procedures<a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#preProcessing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>During the pre-processing stage, we apply sequential steps to prepare each cartridge case for analysis.
+The goal of this process is to remove the edges and center of the scan which did not come into contact with the breech face, as well as any artifacts of the scan and microscope staging which do not accurately represent the breech face surface.
+The various iterations of the CMC algorithm describe different variations of these steps.
+A summary of these steps is shown in Figure <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#fig:pre-processing-schematic">2.4</a>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:pre-processing-schematic"></span>
+<img src="images/preprocessing_flow.png" alt="A flow diagram showing the various pre-processing procedures used across CMC papers. These steps are shown as horizontally-arranged puzzle pieces and include type of input, the amount of downsampling performed on the scans, any resizing performed after downsampling, whether the breech face impression regions were isolated manually or automatically, and the type of Gaussian filter applied. Traversing these puzzle pieces is a curve for each CMC paper. The diagram is intended to show how different the pre-processing procedures are across papers, which makes it difficult to compare results if the underlying data/code aren't avaiable." width="\textwidth" />
+<p class="caption">
+Figure 2.4: Overview of the set of pre-processing steps used in the CMC algorithms. Where a procedure step is not discussed or explicitly not applied in the paper, the path traverses empty space.
+</p>
+</div>
+<p>Translating the pre-processing steps in Figure <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#fig:pre-processing-schematic">2.4</a> into an implementation requires the implementer to decide between potentially many implicit parameter choices.
+For example, Table <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#tab:pre-processTable-html">2.1</a> compares the pre-processing procedures as described in <span class="citation">Song et al. (<a href="#ref-song_3d_2014" role="doc-biblioref">2014</a>)</span> to considerations that need to be made when implementing the procedures.
+Depending on one’s interpretation of the description, there are many possible implementations that satisfy the described procedure - in contrast, there was only one implementation that led to the original results.
+While not explicitly mentioned in <span class="citation">Song et al. (<a href="#ref-song_3d_2014" role="doc-biblioref">2014</a>)</span>, <span class="citation">Song et al. (<a href="#ref-song_estimating_2018" role="doc-biblioref">2018</a>)</span> indicates that the “trimming” of the unwanted regions of the scan is performed manually.
+It is difficult to replicate manual steps as part of a reproducible pipeline; the best solution is for the authors to provide intermediate data after the manual steps have been completed.</p>
+<table>
+<caption>
+<span id="tab:pre-processTable-html">Table 2.1: </span>Description of pre-processing procedures from Song et al. <span class="math inline">\(2014\)</span> vs. considerations that need to be made when implementing these procedures. Each of these considerations requires the implementer to decide between potentially many choices.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Description from Song et al. (2014)
+</th>
+<th style="text-align:left;">
+Implementation Considerations
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+“Trim off the inside firing pin surface and other areas outside the breech face mark, so that only breech face impression data remain for correlation.”
+</td>
+<td style="text-align:left;">
+Removal of firing pin hole and primer exterior<br>Removal of global trend<br>Removal of primer roll-off
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+“Identify and remove dropouts or outliers.”
+</td>
+<td style="text-align:left;">
+Definition of outliers<br>What “removal” of dropouts or outliers means
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+“Apply a band-pass Gaussian regression filter with 40 <span class="math inline">\(\mu\)</span>m short cut-off length and 400 <span class="math inline">\(\mu\)</span>m long cut-off length to remove low frequency components, including surface curvature, form error, waviness and high frequency components which mainly arise from the instrument noise.”
+</td>
+<td style="text-align:left;">
+Wavelength cut-off parameters<br>Specific implementation of the filter
+</td>
+</tr>
+</tbody>
+</table>
+<p>The pre-processing procedures are implemented via modularized functions of the form <code>preProcess_*</code>.
+Modularizing the steps of the pre-processing procedures makes the overall process easier to understand and allows for experimentation.
+Figure <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#fig:processingPipeline">2.5</a> shows an overview of the pre-processing framework for the Fadul 1-1 breech face from reading the scan (left) to an analysis-ready region (right).
+For each scan in Figure <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#fig:processingPipeline">2.5</a>, eleven height value percentiles: the Minimum (0th), 1st, 2.5th, 10th, 25th, Median (50th), 75th, 90th, 97.5th, 99th, and Maximum (100th) are mapped to a purple-to-orange color gradient.
+This mapping is chosen to highlight the extreme values in each scan.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:processingPipeline"></span>
+<img src="figures/preProcessPipeline.png" alt="A diagram of a cartridge case scan undergoing four pre-processing steps: reading, cropping, de-trending, and filtering. The final result is a cartridge case scan with emphasized breech face impressions." width="\textwidth" />
+<p class="caption">
+Figure 2.5: Illustration of the sequential application of pre-processing steps implemented in cmcR. We map the cartridge case surface height values to a divergent purple-white-orange color scale to emphasize deviations from the median height value (represented here as 0 micrometers). At each stage, the variability in height across the scan decreases as we emphasize the regions containing breech face impressions.
+</p>
+</div>
+<p>We demonstrate usage of the <code>preProcess_*</code> functions on the Fadul 1-1 scan.
+Each code chunk is followed up with an explanation of the functions used.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step (1)</span></span>
+<span id="cb3-2"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb3-2" aria-hidden="true" tabindex="-1"></a>fadul1<span class="fl">.1</span> <span class="ot">&lt;-</span> x3ptools<span class="sc">::</span><span class="fu">x3p_read</span>(<span class="st">&quot;data/fadul1-1.x3p&quot;</span>)</span></code></pre></div>
+<p>We begin with a 3D scan.
+Typically, we downsample scans to about 25% of their size by only retaining every other row and column in the surface matrix.
+The breech faces in <span class="citation">Fadul et al. (<a href="#ref-fadul_empirical_2011" role="doc-biblioref">2011</a>)</span> were initially scanned at a resolution of 3.125 <span class="math inline">\(\mu\)</span>m per pixel.
+Downsampling reduces the resolution to 6.25 <span class="math inline">\(\mu\)</span>m per pixel.
+Step (1) in Figure <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#fig:processingPipeline">2.5</a> shows an unprocessed breech face scan.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step (2)</span></span>
+<span id="cb4-2"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb4-2" aria-hidden="true" tabindex="-1"></a>fadul1<span class="fl">.1</span>_cropped <span class="ot">&lt;-</span> fadul1<span class="fl">.1</span> <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  cmcR<span class="sc">::</span><span class="fu">preProcess_crop</span>(<span class="at">region =</span> <span class="st">&quot;exterior&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  cmcR<span class="sc">::</span><span class="fu">preProcess_crop</span>(<span class="at">region =</span> <span class="st">&quot;interior&quot;</span>)</span></code></pre></div>
+<p>We then use a labeling algorithm to identify three major regions of the scan: the exterior of the cartridge case primer, the breech face impression region of interest, and the firing pin impression region in the center of the scan <span class="citation">(<a href="#ref-hesselink_concurrent_2001" role="doc-biblioref">Hesselink, Meijster, and Bron 2001</a>; <a href="#ref-imager" role="doc-biblioref">Barthelme 2019</a>)</span>.
+We remove observations outside of the breech face impression region (i.e., replaced with <code>NA</code>).
+The resulting breech face scan, like the one shown in step (2) of Figure <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#fig:processingPipeline">2.5</a>, is reproducible assuming the same parameters are used.
+The <code>preProcess_crop</code> function removes the exterior and firing pin impression region on the interior based on the <code>region</code> argument.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step (3)</span></span>
+<span id="cb5-2"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb5-2" aria-hidden="true" tabindex="-1"></a>fadul1<span class="fl">.1</span>_deTrended <span class="ot">&lt;-</span> fadul1<span class="fl">.1</span>_cropped <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">preProcess_removeTrend</span>(<span class="at">statistic =</span> <span class="st">&quot;quantile&quot;</span>, <span class="at">tau =</span> .<span class="dv">5</span>, <span class="at">method =</span> <span class="st">&quot;fn&quot;</span>)</span></code></pre></div>
+<p>In step (3), we remove the southwest-to-northeast trend observable in steps (1) and (2) of Figure <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#fig:processingPipeline">2.5</a> by subtracting the estimated conditional median height value.
+The result of the <code>preProcess_removeTrend</code> function the median-leveled breech face scan in step (3) of Figure <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#fig:processingPipeline">2.5</a>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step (4)</span></span>
+<span id="cb6-2"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb6-2" aria-hidden="true" tabindex="-1"></a>fadul1<span class="fl">.1</span>_processed <span class="ot">&lt;-</span> fadul1<span class="fl">.1</span>_deTrended <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">preProcess_gaussFilter</span>(<span class="at">filtertype =</span> <span class="st">&quot;bp&quot;</span>, <span class="at">wavelength =</span> <span class="fu">c</span>(<span class="dv">16</span>,<span class="dv">500</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb6-4" aria-hidden="true" tabindex="-1"></a>  x3ptools<span class="sc">::</span><span class="fu">x3p_sample</span>(<span class="at">m =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p>Finally, we apply a band-pass Gaussian filter to the surface values to attenuate noise and unwanted large-scale structure.
+Step (4) of Figure <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#fig:processingPipeline">2.5</a> shows the effect of the <code>preProcess_gaussFilter</code> function.
+There is currently no determination or removal of outliers in the cmcR package’s pre-processing procedures.
+Instead, we rely on the low-pass portion of the Gaussian filter to reduce the effects of any high-frequency noise.</p>
+<p>Figure <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#fig:processedScans">2.6</a> displays the processed Fadul 1-1 and Fadul 1-2 scans; the second matrix is processed using the same parameters.
+Next, similarity features are extracted from a processed cartridge case pair in the cell-based comparison procedure.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:processedScans"></span>
+<img src="figures/cmcr-processedScans-1.png" alt="A visualization of two pre-processed, matching cartridge case scans. The height values are mapped to a divergent purple to orange color scale to emphasize values lower or higher than the median height value, respectively. Compared to the raw cartridge case scan visualization, it is easier to see the similar markings on the pre-processed cartridge case surfaces." width="\textwidth" />
+<p class="caption">
+Figure 2.6: Fadul 1-1 and Fadul 1-2 after pre-processing. Similar striated markings are now easier to visually identify on both surfaces. It is now clearer that one of the scans needs to be rotated to align better with the other.
+</p>
+</div>
+</div>
+<div id="comparisonProcedure" class="section level3 hasAnchor" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> “Correlation cell” comparison procedure<a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#comparisonProcedure" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As described in <span class="citation">Song (<a href="#ref-song_proposed_2013" role="doc-biblioref">2013</a>)</span>, breech face markings are not uniformly impressed upon a cartridge case during the firing process.
+As such, only certain sections of the cartridge case are used in a comparison.
+In the CMC pipeline as proposed by <span class="citation">Song (<a href="#ref-song_proposed_2013" role="doc-biblioref">2013</a>)</span> two scans are compared by partitioning one breech face scan into a grid of so-called “correlation cells”.
+These cells are compared individually to their best-matching counterpart on the other scan.
+If a large proportion of these correlation cells are highly similar to their counterparts on the other breech face scan, this is considered as evidence that the markings on the two cartridge cases were made by the same source.
+The number of highly similar cells is defined as the <em>CMC count</em> <span class="math inline">\(C\)</span> <span class="citation">(<a href="#ref-song_proposed_2013" role="doc-biblioref">Song 2013</a>)</span> of the breech-face comparison.
+The CMC count is considered to be a more robust measure of similarity than the correlation calculated between two full scans.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cmc-illustration"></span>
+<img src="images/cmc_illustration.PNG" alt="A diagram of two cartridge cases scans undergoing the cell-based comparison procedure. One scan, called the 'reference,' is shown partitioned into a grid of cells. One of the cells is highlighted with an arrow connecting it to a square region in the other cartridge case scan, referred to as the 'target.' This is to illustrate how each cell in the reference scan finds its translational and rotational alignment in the target scan." width=".75\textwidth" />
+<p class="caption">
+Figure 2.7: Illustration of comparing a cell in the reference cartridge case scan (left) to a larger region in a questioned cartridge case scan (right). Every one of the cells in the reference cartridge case is similarly paired with a region in the questioned cartridge case. To determine the rotation at which the two cartridge cases align, the cell-region pairs are compared for various rotations of the questioned cartridge case.
+</p>
+</div>
+<p>Figure <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#fig:cmc-illustration">2.7</a> illustrates the cell-based comparison procedure between two cartridge case scans.
+The scan on the left serves as the reference; it is divided into a grid of <span class="math inline">\(8 \times 8\)</span> cells.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cmc-schematic"></span>
+<img src="images/cmc_flow.png" alt="A flow diagram that is similar in structure to the pre-processing flow diagram, yet shows the various steps in the cell-based comparison procedure. Each step is represented as a puzzle piece while the procedures used in individual CMC papers are represented as curves that traverse these puzzle pieces. This is again intended to show the variability in the comparison procedures used across CMC papers. Most notable in the comparison stage are the large number of implicit parameter choices that need to be made by an implementer." width="\textwidth" />
+<p class="caption">
+Figure 2.8: Each CMC implementation uses a slightly different procedure to obtain a similarity score between two cartridge cases. Steps which are implemented with additional user-specified parameters are shaded purple; steps which are described but without sufficient detail are shaded grey.
+</p>
+</div>
+<p>Figure <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#fig:cmc-schematic">2.8</a> shows the steps of the correlation cell comparison process in each of the papers as well as the cmcR implementation.
+Each cell is paired with an associated larger region in the other scan.
+The absolute location of each cell and region in their respective surface matrices remain constant.
+However, the scan on the right is rotated to determine the rotation at which the two scans are the most “similar,” as quantified by the <em>cross-correlation function</em> (CCF).</p>
+<p>For real-valued matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> of dimension <span class="math inline">\(M \times N\)</span> and <span class="math inline">\(P \times Q\)</span>, respectively, the cross-correlation function, denoted <span class="math inline">\((A \star B)\)</span> is defined as
+<span class="math display">\[
+(A \star B)[m,n] = \sum_{i=1}^M \sum_{j=1}^N A[i,j] B[(i + m), (j + n)],
+\]</span> where <span class="math inline">\(1 \leq m \leq M + P - 1\)</span> and <span class="math inline">\(1 \leq n \leq N + Q - 1\)</span>.
+By this definition, the <span class="math inline">\([m,n]\)</span>th element of the resulting <span class="math inline">\(M + P - 1 \times N + Q - 1\)</span> CCF matrix quantifies the similarity between matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> for a translation of matrix <span class="math inline">\(B\)</span> by <span class="math inline">\(m\)</span> pixels horizontally and <span class="math inline">\(n\)</span> pixel vertically.
+The index at which the CCF attains a maximum represents the optimal translation needed to align <span class="math inline">\(B\)</span> with <span class="math inline">\(A\)</span>.
+The CCF as defined need not be bounded between <span class="math inline">\(-1\)</span> and <span class="math inline">\(1\)</span>.
+However, it is common to normalize the CCF for interpretability, and this is the convention adopted in the cmcR package.</p>
+<p>Prior to calculating the CCF, the matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are standardized through subtraction of their respective means and division by their respective standard deviations.
+This is referred to as the <em>Areal Cross-Correlation Function</em> (ACCF) in some CMC papers <span class="citation">(<a href="#ref-ott_applying_2017" role="doc-biblioref">Ott, Thompson, and Song 2017</a>)</span>.
+A direct calculation of the CCF for breech face scans based on the definition above is prohibitively slow.
+While computationally feasible alternatives exist, <span class="citation">Song (<a href="#ref-song_proposed_2013" role="doc-biblioref">2013</a>)</span> and other CMC papers do not specify the algorithm used to calculate the CCF.</p>
+<p>Published descriptions of the CMC algorithm do not detail how the CCF is calculated.
+In image processing, it is common to use an implementation based on the Fast Fourier Transform <span class="citation">(<a href="#ref-Brown1992" role="doc-biblioref">Brown 1992</a>)</span>.
+This implementation leverages the Cross-Correlation Theorem, which states that for matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, the CCF can be expressed in terms of a frequency-domain pointwise product:
+<span class="math display">\[
+(A \star B )[m,n]= \mathcal{F}^{-1}\left(\overline{\mathcal{F}(A)} \odot \mathcal{F}(B)\right)[m,n],
+\]</span>
+where <span class="math inline">\(\mathcal{F}\)</span> and <span class="math inline">\(\mathcal{F}^{-1}\)</span> denote the discrete Fourier and inverse discrete Fourier transforms, respectively, and <span class="math inline">\(\overline{\mathcal{F}(A)}\)</span> denotes the complex conjugate <span class="citation">(<a href="#ref-fft_brigham" role="doc-biblioref">Brigham 1988</a>)</span>.
+Because the product on the right-hand side is calculated pointwise, we trade the moving sum computations from the definition of the CCF for two forward Fourier transformations, a pointwise product, and an inverse Fourier transformation.
+The Fast Fourier Transform (FFT) algorithm can be used to reduce the computational load considerably.
+Our implementation of this FFT-based CCF calculation is adapted from the cartridges3D package <span class="citation">(<a href="#ref-cartridges3D" role="doc-biblioref">Tai 2021</a>)</span>.</p>
+<p>No computational shortcut comes without some trade-offs, though, and this FFT-based CCF calculation is no different.
+The FFT does not tolerate missing values, and breech faces are not continuous surfaces – all of the white regions in Figure <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#fig:cmc-illustration">2.7</a> correspond to missing values.
+While it is unclear how the CCF is implemented in the CMC papers, the cmcR package adopts the following conventions:</p>
+<ul>
+<li><p>Only cells with a minimum proportion of non-missing pixels are assessed. This minimum threshold differs across CMC papers (15% in <span class="citation">Chen et al. (<a href="#ref-chen_convergence_2017" role="doc-biblioref">2017</a>)</span> vs. 10% in <span class="citation">Song et al. (<a href="#ref-song_estimating_2018" role="doc-biblioref">2018</a>)</span>, as shown in Figure <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#fig:cmc-schematic">2.8</a>), and is referenced but not specified in several other papers <span class="citation">(<a href="#ref-tong_fired_2014" role="doc-biblioref">Tong et al. 2014</a>; <a href="#ref-song_3d_2014" role="doc-biblioref">Song et al. 2014</a>; <a href="#ref-chu_validation_2013" role="doc-biblioref">Chu, Tong, and Song 2013</a>)</span>. The <code>comparison_calcPropMissing</code> function computes the proportion of a matrix that is missing (<code>NA</code>-valued).</p></li>
+<li><p>Missing values are replaced with the overall mean value when the FFT-based CCF is computed (using function <code>comparison_replaceMissing</code>).</p></li>
+<li><p>The optimal translation is determined using the FFT-based CCF (using <code>comparison_fft_ccf</code>).</p></li>
+<li><p>Based on the optimal translation determined from the FFT-based CCF, we compute the pairwise complete CCF directly, avoiding any distortion of the CCF computation based on compensation for missing values (using function <code>comparison_cor</code>).</p></li>
+</ul>
+<p>All of the steps dealing with cell-based comparisons are implemented as functions of the form <code>comparison_*</code>.
+Similar to the <code>preProcess_*</code> functions, the <code>comparison_*</code> functions can be chained together through a sequence of pipes.
+Below, we use the <code>comparison_allTogether</code> function to perform the entire cell-based comparison procedure in one call.
+The comparison procedure is performed twice: once with Fadul 1-1 considered the “reference” scan divided into cells that are compared to the “target” scan Fadul 1-2 and again with the roles reversed.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fill in most of the arguments first</span></span>
+<span id="cb7-2"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb7-2" aria-hidden="true" tabindex="-1"></a>comp_w_pars <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">partial</span>(<span class="at">.f =</span> comparison_allTogether,</span>
+<span id="cb7-3"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb7-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">numCells =</span> <span class="fu">c</span>(<span class="dv">8</span>,<span class="dv">8</span>), <span class="at">maxMissingProp =</span> .<span class="dv">85</span>)</span>
+<span id="cb7-4"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Then, map the remaining values to theta</span></span>
+<span id="cb7-6"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb7-6" aria-hidden="true" tabindex="-1"></a>kmComparisonFeatures <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map_dfr</span>(</span>
+<span id="cb7-7"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">30</span>,<span class="dv">30</span>,<span class="at">by =</span> <span class="dv">3</span>),</span>
+<span id="cb7-8"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span><span class="fu">comp_w_pars</span>(<span class="at">reference =</span> fadul1<span class="fl">.1</span>, <span class="at">target =</span> fadul1<span class="fl">.2</span>, <span class="at">theta =</span> .))</span>
+<span id="cb7-9"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb7-10" aria-hidden="true" tabindex="-1"></a>kmComparisonFeatures_rev <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map_dfr</span>(</span>
+<span id="cb7-11"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">30</span>,<span class="dv">30</span>,<span class="at">by =</span> <span class="dv">3</span>),</span>
+<span id="cb7-12"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span><span class="fu">comp_w_pars</span>(<span class="at">reference =</span> fadul1<span class="fl">.2</span>, <span class="at">target =</span> fadul1<span class="fl">.1</span>, <span class="at">theta =</span> .))</span></code></pre></div>
+<p>The <code>comparison_allTogether</code> function consists of the following steps wrapped into a single convenience function:</p>
+<ul>
+<li><code>comparison_cellDivision</code>: Divide the reference scan into cells</li>
+<li><code>comparison_getTargetRegions</code>: Extract regions associated with each reference cell from the target scan</li>
+<li><code>comparison_calcPropMissing</code>: Compute missing proportions and filter out cells with a proportion of missing values above the threshold.</li>
+<li><code>comparison_standardizeHeights</code>: Standardize height values</li>
+<li><code>comparison_replaceMissing</code>: Replace missing values</li>
+<li><code>comparison_fft_ccf</code>: Compute CCF and estimated translations using FFT</li>
+<li><code>comparison_alignedTargetCell</code>: Extract a matrix from the target scan corresponding to the region of the target scan to which the reference cell aligns</li>
+<li><code>cor</code>: Calculate the pairwise-complete correlation between each cell pair</li>
+</ul>
+<p>The <code>comparison_allTogether</code> is called repeatedly while rotating the target scan by a set of rotation angles.
+When implementing the High CMC decision rule <span class="citation">(<a href="#ref-tong_improved_2015" role="doc-biblioref">Tong, Song, and Chu 2015</a>)</span>, both combinations of reference and target scan are examined (e.g. A-B and B-A).</p>
+<p>Table <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#tab:cellCCF-html">2.2</a> shows several rows of the data frame output of the <code>comparison_allTogether</code> function for the comparison of Fadul 1-1 vs. Fadul 1-2 considering Fadul 1-1 as the reference scan.
+Although we used a grid of <span class="math inline">\(8 \times 8\)</span> cells, there were only 26 cell-region pairs that contained a sufficient proportion of non-missing values (15% in this example).
+The features derived from the correlation cell procedure (CCF<span class="math inline">\(_{max}\)</span>, <span class="math inline">\(\Delta x\)</span>, <span class="math inline">\(\Delta y\)</span>, <span class="math inline">\(\theta\)</span>) are then used to measure the similarity between scans.</p>
+<table>
+<caption>
+<span id="tab:cellCCF-html">Table 2.2: </span>Example of output from correlation cell comparison procedure between Fadul 1-1 and Fadul 1-2 rotated by -24 degrees. Due to the large proportion of missing values that are replaced to compute the FFT-based correlation, the pairwise-complete correlation is most often greater than the FFT-based correlation.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Cell Index
+</th>
+<th style="text-align:right;">
+Pairwise-comp. corr.
+</th>
+<th style="text-align:right;">
+FFT-based corr.
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(\Delta\)</span>x
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(\Delta\)</span>y
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(\theta\)</span>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2, 7
+</td>
+<td style="text-align:right;">
+0.432
+</td>
+<td style="text-align:right;">
+0.228
+</td>
+<td style="text-align:right;">
+-14
+</td>
+<td style="text-align:right;">
+-33
+</td>
+<td style="text-align:right;">
+-24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2, 8
+</td>
+<td style="text-align:right;">
+0.464
+</td>
+<td style="text-align:right;">
+0.176
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+-44
+</td>
+<td style="text-align:right;">
+-24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3, 1
+</td>
+<td style="text-align:right;">
+0.841
+</td>
+<td style="text-align:right;">
+0.478
+</td>
+<td style="text-align:right;">
+-7
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+-24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3, 8
+</td>
+<td style="text-align:right;">
+0.699
+</td>
+<td style="text-align:right;">
+0.277
+</td>
+<td style="text-align:right;">
+-7
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+-24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4, 1
+</td>
+<td style="text-align:right;">
+0.850
+</td>
+<td style="text-align:right;">
+0.375
+</td>
+<td style="text-align:right;">
+-4
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+-24
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="decision-rule" class="section level3 hasAnchor" number="2.2.4">
+<h3><span class="header-section-number">2.2.4</span> Decision rule<a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#decision-rule" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For each cell on the reference scan, we calculate the translation <span class="math inline">\((\Delta x, \Delta y)\)</span> and cross-correlation across rotations by a set of angles <span class="math inline">\(\theta\)</span> of the target scan.
+The task is to determine whether multiple cells come to a “consensus” on a particular translation and rotation.
+If such a consensus is reached, then there is evidence that a true aligning translation and rotation exists and the cartridge cases match.
+The CMC decision rules principally differ in how they identify consensus among the <span class="math inline">\(\Delta x, \Delta y, \theta\)</span> values.
+Here, we describe the two pipelines implemented in the cmcR package: using the original decision rule described in <span class="citation">Song et al. (<a href="#ref-song_3d_2014" role="doc-biblioref">2014</a>)</span> and the High CMC decision rule proposed in <span class="citation">Tong, Song, and Chu (<a href="#ref-tong_improved_2015" role="doc-biblioref">2015</a>)</span>.</p>
+<div id="originalMethod" class="section level4 hasAnchor" number="2.2.4.1">
+<h4><span class="header-section-number">2.2.4.1</span> The Original CMC decision rule<a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#originalMethod" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>This section briefly describes the decision rule used in the first CMC paper <span class="citation">(<a href="#ref-song_proposed_2013" role="doc-biblioref">Song 2013</a>)</span>.
+For a thorough explanation of the procedure, refer to the <a href="https://csafe-isu.github.io/cmcR/articles/decisionRuleDescription.html">CMC Decision Rule Description</a> vignette of the cmcR package.</p>
+<p>Let <span class="math inline">\(x_i, y_i, \theta_i\)</span> denote the translation and rotation parameters which produce the highest CCF for the alignment of cell-region pair <span class="math inline">\(i\)</span>, <span class="math inline">\(i = 1,...,n\)</span> where <span class="math inline">\(n\)</span> is the total number of cell-region pairs containing a sufficient proportion of non-missing values.
+<span class="citation">Song (<a href="#ref-song_proposed_2013" role="doc-biblioref">2013</a>)</span> propose the median as a consensus <span class="math inline">\((x_{\text{ref}}, y_{\text{ref}}, \theta_{\text{ref}})\)</span> across the cell-region pairs.
+Then, the distance between each <span class="math inline">\((x_i, y_i, \theta_i)\)</span> and <span class="math inline">\((x_{\text{ref}}, y_{\text{ref}}, \theta_{\text{ref}})\)</span> is compared to thresholds <span class="math inline">\(T_{x}, T_{y}, T_\theta, T_{\text{CCF}}\)</span>.
+A cell-region pair <span class="math inline">\(i\)</span> is declared a “match” if all of the following conditions hold:</p>
+<p><span class="math display" id="eq:original">\[\begin{eqnarray}
+|x_i - x_{\text{ref}}| &amp;\leq&amp; T_{x}, \\ \nonumber
+|y_i - y_{\text{ref}}| &amp;\leq&amp; T_{y}, \\ \nonumber
+|\theta_i - \theta_{\text{ref}}| &amp;\leq&amp; T_{\theta}, \\ \nonumber
+\text{CCF}_{\max,i} &amp;\geq&amp; T_{\text{CCF}}.
+\tag{2.1}
+\end{eqnarray}\]</span></p>
+<p>The number of matching cell-region pairs, the “CMC count,” is used as a measure of similarity between the two cartridge cases.
+<span class="citation">Song et al. (<a href="#ref-song_3d_2014" role="doc-biblioref">2014</a>)</span> indicate that the thresholds <span class="math inline">\(T_{x}, T_{y}, T_\theta, T_{\text{CCF}}\)</span> need to be determined experimentally.
+Table <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#tab:thresholdTable-html">2.3</a> summarizes the thresholds used in various CMC papers.</p>
+<table>
+<caption>
+<span id="tab:thresholdTable-html">Table 2.3: </span>Different thresholds for translation, rotation, and CCF<span class="math inline">\(_{\max}\)</span> are used across different papers. The range in CCF<span class="math inline">\(_{\max}\)</span> is particularly notable.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Paper
+</th>
+<th style="text-align:right;">
+Translation <span class="math inline">\(T_x, T_y\)</span> (in pixels)
+</th>
+<th style="text-align:right;">
+Rotation <span class="math inline">\(\theta\)</span> (in degrees)
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(CCF_{\max}\)</span>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Song et al. (2014)
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0.60
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Tong et al. (2014)
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Tong et al. (2015)
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.55
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Chen et al. (2017)
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.40
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Song et al. (2018)
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0.50
+</td>
+</tr>
+</tbody>
+</table>
+<p>Unlike the original CMC pipeline, the High CMC decision rule considers multiple rotations for each cell-region pair.</p>
+</div>
+<div id="highCMCMethod" class="section level4 hasAnchor" number="2.2.4.2">
+<h4><span class="header-section-number">2.2.4.2</span> The High CMC decision rule<a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#highCMCMethod" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>For the High CMC decision rule, two scans are compared in both directions - i.e., each scan takes on the role of the reference scan that is partitioned into a grid of cells.
+<span class="citation">Tong, Song, and Chu (<a href="#ref-tong_improved_2015" role="doc-biblioref">2015</a>)</span> claim that some matching cell-region pairs “may be mistakenly excluded from the CMC count” under the original decision rule because they attain the largest CCF at a rotation outside the range allowed by <span class="math inline">\(T_\theta\)</span> “by chance.”</p>
+<p><span class="citation">Tong, Song, and Chu (<a href="#ref-tong_improved_2015" role="doc-biblioref">2015</a>)</span> introduce consensus values across all cell-region pairs for each rotation angle <span class="math inline">\(\theta\)</span> and calculate a <span class="math inline">\(\theta\)</span>-dependent CMC count as the sum of matches observed.
+Under the High CMC rule, a cell-region pair <span class="math inline">\(i\)</span> is defined as a match conditional on a particular rotation <span class="math inline">\(\theta\)</span> if it satisfies the following three conditions:</p>
+<p><span class="math display" id="eq:highCMC">\[\begin{eqnarray}
+|x_{i,\theta} - x_{ref,\theta}| &amp;\leq&amp; T_x \\ \nonumber
+|y_{i,\theta} - y_{ref,\theta}| &amp;\leq&amp; T_y \\ \nonumber
+\text{CCF}_{i,\theta} &amp;\geq&amp; T_{\text{CCF}}.
+\tag{2.2}
+\end{eqnarray}\]</span></p>
+<p>The <span class="math inline">\(\theta\)</span>-dependent CMC count, CMC<span class="math inline">\(_\theta\)</span>, is defined as the sum of matching cell-region pairs.</p>
+<p><span class="citation">Tong, Song, and Chu (<a href="#ref-tong_improved_2015" role="doc-biblioref">2015</a>)</span> assert that for a truly matching cartridge case pair, the relationship between <span class="math inline">\(\theta\)</span> and CMC<span class="math inline">\(_\theta\)</span> should exhibit a “prominent peak” near the true rotation value.
+That is, CMC<span class="math inline">\(_{\theta}\)</span> should be largest when the scans are close to being correctly aligned.
+Further, non-matching pairs should exhibit a “relatively flat and random […] pattern” across the CMC<span class="math inline">\(_{\theta}\)</span> values.</p>
+<p>To determine whether a “prominent peak” exists in the relationship between <span class="math inline">\(\theta\)</span> and CMC<span class="math inline">\(_\theta\)</span>, <span class="citation">Tong, Song, and Chu (<a href="#ref-tong_improved_2015" role="doc-biblioref">2015</a>)</span> consider an interval of rotation angles with large associated CMC<span class="math inline">\(_\theta\)</span> values.
+Let <span class="math inline">\(CMC_{\text{max}} = \max_{\theta} CMC_{\theta}\)</span> be the maximum CMC<span class="math inline">\(_\theta\)</span> count across all rotation angles.
+For <span class="math inline">\(\tau &gt; 0\)</span>, define <span class="math inline">\(S(\tau) = \{\theta : CMC_\theta &gt; (CMC_{\max} - \tau)\}\)</span> as the set of rotations with “large” CMC<span class="math inline">\(_\theta\)</span> values.
+<span class="citation">Tong, Song, and Chu (<a href="#ref-tong_improved_2015" role="doc-biblioref">2015</a>)</span> consider the “angular range” as <span class="math inline">\(R(\tau) = |\max_{\theta} S(\tau) - \min_\theta S(\tau)|\)</span>.
+If <span class="math inline">\(R(\tau)\)</span> is small, then there is evidence that many cells agree on a single rotation and that the scans match.
+To arrive at a CMC count similarity score, <span class="citation">Tong, Song, and Chu (<a href="#ref-tong_improved_2015" role="doc-biblioref">2015</a>)</span> suggest a value for <span class="math inline">\(\tau\)</span> of 1 and determine:</p>
+<blockquote>
+<p>If the angular range of the “high CMCs” is within the range <span class="math inline">\(T_\theta\)</span>, identify the CMCs for each rotation angle in this range and combine them to give the number of CMCs for this comparison in place of the original CMC number.</p>
+</blockquote>
+<p>If the angular range is larger than <span class="math inline">\(T_\theta\)</span>, we say that the cartridge case pair “fails” the High CMC criteria and the original CMC number is used.
+The High CMC decision rule returns a CMC count at least as large as the original decision rule.</p>
+</div>
+<div id="decisionRuleImplementation" class="section level4 hasAnchor" number="2.2.4.3">
+<h4><span class="header-section-number">2.2.4.3</span> Implementation of decision rules<a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#decisionRuleImplementation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In this section, we implement the decision rules in cmcR for both the original and High CMC decision rules.
+For illustrative purposes, we consider a set of thresholds: <span class="math inline">\(T_x = T_y = 20\)</span>, <span class="math inline">\(T_{\theta} = 6\)</span>, and <span class="math inline">\(T_{\text{CCF}} = 0.5\)</span>.</p>
+<p>Decision rules in cmcR are implemented as functions of the form <code>decision_*</code>.
+In particular, the <code>decision_CMC</code> function applies both the original and High CMC decision rules depending on if the parameter <span class="math inline">\(\tau\)</span> is set.
+The code below demonstrates the use of <code>decision_CMC</code> on the features <code>kmComparisonFeatures</code>, extracted from the comparison of scans Fadul 1-1 vs. Fadul 1-2.
+Conversely, <code>kmComparisonFeatures_rev</code> contains the features from a comparison of Fadul 1-2 vs. Fadul 1-1.
+For comparison, we also compute the CMCs under both decision rules for the comparison between the non-match pair Fadul 1-1 and Fadul 2-1 (not shown to avoid redundancy).</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb8-1" aria-hidden="true" tabindex="-1"></a>kmComparison_cmcs <span class="ot">&lt;-</span> kmComparisonFeatures <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(</span>
+<span id="cb8-2"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">originalMethodClassif =</span></span>
+<span id="cb8-3"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">decision_CMC</span>(<span class="at">cellIndex =</span> cellIndex, <span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">theta =</span> theta,</span>
+<span id="cb8-4"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb8-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">corr =</span> pairwiseCompCor, <span class="at">xThresh =</span> <span class="dv">20</span>, <span class="at">thetaThresh =</span> <span class="dv">6</span>,</span>
+<span id="cb8-5"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb8-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">corrThresh =</span> .<span class="dv">5</span>),</span>
+<span id="cb8-6"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">highCMCClassif =</span></span>
+<span id="cb8-7"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">decision_CMC</span>(<span class="at">cellIndex =</span> cellIndex, <span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">theta =</span> theta,</span>
+<span id="cb8-8"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb8-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">corr =</span> pairwiseCompCor, <span class="at">xThresh =</span> <span class="dv">20</span>, <span class="at">thetaThresh =</span> <span class="dv">6</span>,</span>
+<span id="cb8-9"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cb8-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">corrThresh =</span> .<span class="dv">5</span>, <span class="at">tau =</span> <span class="dv">1</span>))</span></code></pre></div>
+<p>We use the <code>cmcPlot</code> function to visualize congruent matching cells (CMCs) and non-congruent matching cells (non-CMCs).
+Figure <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#fig:topVoteCMCPlot">2.9</a> shows the CMCs and non-CMCs in blue and red, respectively, based on the original decision rule.
+The (red) non-CMC patches are shown in the position where the maximum CCF value in the target scan is attained.
+The top row shows 18 CMCs in blue and 8 non-CMCs in red when Fadul 1-1 is treated as the reference and Fadul 1-2 the target.
+The bottom row shows the 17 CMCs and 13 non-CMCs when the roles are reversed.
+There is no discussion in <span class="citation">Song (<a href="#ref-song_proposed_2013" role="doc-biblioref">2013</a>)</span> about combining the results from these two comparison directions, but <span class="citation">Tong, Song, and Chu (<a href="#ref-tong_improved_2015" role="doc-biblioref">2015</a>)</span> propose using the minimum of the two CMC counts (17 in this example).</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:topVoteCMCPlot"></span>
+<img src="figures/kmOriginalMethod.png" alt="Visualization of two matching cartridge case scans with overlaid Congruent Matching cells shown in blue and Non-Congruent Matching cells shown in red as determined using the original decision rule from Song et al. (2013)." width="\textwidth" />
+<p class="caption">
+Figure 2.9: CMC results for the comparison between Fadul 1-1 and Fadul 1-2 using the original decision rule. The two plots in the top row show the 18 CMCs when Fadul 1-1 is treated as the “reference” cartridge case to which Fadul 1-2 (the “target”) is compared. The second row shows the 17 CMCs when the roles are reversed. Red cells indicate where cells not identified as congruent achieve the maximum pairwise-complete correlation across all rotations of the target scan.
+</p>
+</div>
+<p>Similarly, CMCs and non-CMCs determined under the High CMC decision rule are shown in Figure <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#fig:highCMCPlot">2.10</a>.
+Treating Fadul 1-1 and Fadul 1-2 as the reference scan yields 20 and 18 CMCs, respectively.
+Combining the results as described above, the final High CMC count is 24.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:highCMCPlot"></span>
+<img src="figures/kmHighCMC.png" alt="Visualization of two matching cartridge case scans with overlaid Congruent Matching cells shown in blue and Non-Congruent Matching cells shown in red as determined using the High CMC decision rule from Tong et al. (2015)." width="\textwidth" />
+<p class="caption">
+Figure 2.10: Applying the High CMC decision rule to the comparison of Fadul 1-1 and Fadul 1-2 results in 20 CMCs when Fadul 1-1 is treated as the reference (top) and 18 CMCs when Fadul 1-2 is treated as the reference (bottom). Although the individual comparisons do not yield considerably more CMCs than under the original CMC pipeline, Tong et al. (2015) indicate that the High CMCs from both comparisons are combined as the final High CMC count (each cell is counted at most once). Combining the results means that the High CMC decision rule tends to produce higher CMC counts than the original CMC pipeline. In this example, the combined High CMC count is 24 CMCs.
+</p>
+</div>
+<p>In contrast, Figure <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#fig:knmCMCPlot">2.11</a> shows the CMC results for a comparison between Fadul 1-1 and a known non-match scan, Fadul 2-1, under the exact same processing conditions.
+Only two cells are classified as congruent matching cells under the original decision rule when Fadul 1-1 is the reference scan.
+No cells are classified as CMCs in the other direction.
+While not shown, this pair fails the High CMC criteria and thus was assigned 0 CMCs under the High CMC decision rule.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:knmCMCPlot"></span>
+<img src="figures/knmOriginalMethod.png" alt="Visualization of two non-matching cartridge case scans with overlaid Congruent Matching cells shown in blue and Non-Congruent Matching cells shown in red as determined using the original decision rule from Song et al. (2013)." width="\textwidth" />
+<p class="caption">
+Figure 2.11: Applying both decision rules to the comparison between the non-match pair Fadul 1-1 and Fadul 2-1 results in 2 CMCs under the original decision rule (shown above) and 0 CMCs under the High CMC decision rule (not shown). The seemingly random behavior of the red cells exemplifies the assumption that cells in a non-match comparison do not exhibit an observable pattern. Random chance should be the prevailing factor in classifying non-match cells as CMCs.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="discussion" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Discussion<a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#discussion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="ambiguities" class="section level3 hasAnchor" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Ambiguity in algorithmic descriptions<a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#ambiguities" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>During the implementation process we encountered ambiguous descriptions of the various CMC pipelines.
+We include the pre-processing and cell-based comparison procedures in the description of CMC methodology to emphasize how sensitive the final results are to decisions made in these first two steps.
+The pre-processing and cell-based comparison procedures are discussed only briefly, if at all, in <span class="citation">Song et al. (<a href="#ref-song_3d_2014" role="doc-biblioref">2014</a>)</span>, <span class="citation">Tong et al. (<a href="#ref-tong_fired_2014" role="doc-biblioref">2014</a>)</span>, <span class="citation">Tong, Song, and Chu (<a href="#ref-tong_improved_2015" role="doc-biblioref">2015</a>)</span>, or <span class="citation">Chen et al. (<a href="#ref-chen_convergence_2017" role="doc-biblioref">2017</a>)</span>.
+However, the results reported often indicate a sensitivity to these procedures.
+Ambiguities range from minor implicit parameter choices (e.g., the convergence criteria for the robust Gaussian regression filter <span class="citation">(<a href="#ref-brinkman_bodschwinna_2003" role="doc-biblioref">Brinkman and Bodschwinna 2003</a>)</span>) to procedures that are fundamental to feature calculation (e.g., how the cross-correlation is calculated).
+We bring up these ambiguities to demonstrate the difficulties that we faced when translating the conceptual description of the CMC pipeline into an actual pipeline.
+While many of these choices are unlikely to affect the results dramatically, we believe that any amount of variability that exists solely because of uncertainty in how the method was intended to be implemented is both unnecessary and dangerous in this application.</p>
+<p>The only solution to such ambiguity is to enumerate, implement, and pare-down the possible choices that could have been made to arrive to published results.
+Unsurprisingly, this process takes a considerable amount of time and resources that would be better spent furthering the state of the field.
+During the creation of the cmcR package, the process of re-implementing the comparison and decision steps of the pipeline was fairly straightforward.
+Emulating the pre-processing procedures used, on the other hand, took months of trial and error.
+Even after this effort, we still have no assurances that our implementation would match the results of the original implementation if applied to other data sets.</p>
+<p>In the next section, we describe the process of resolving these ambiguities in the CMC pipeline descriptions.
+In doing so, we abstract a set of principles by which pipelines and results can be rendered both computationally reproducible and more thoroughly understood.</p>
+</div>
+<div id="investigation" class="section level3 hasAnchor" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> CMC pattern matching pipeline<a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#investigation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>As described in the <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#initialData">initial data</a> section, the set of cartridge case scans from <span class="citation">Fadul et al. (<a href="#ref-fadul_empirical_2011" role="doc-biblioref">2011</a>)</span> is commonly used to compare the performance of various classification methods <span class="citation">(<a href="#ref-song_3d_2014" role="doc-biblioref">Song et al. 2014</a>; <a href="#ref-tong_improved_2015" role="doc-biblioref">Tong, Song, and Chu 2015</a>; <a href="#ref-chen_convergence_2017" role="doc-biblioref">Chen et al. 2017</a>)</span>.
+This set consists of 40 cartridge cases and 780 total comparisons: 63 known match comparisons and 717 known non-match comparisons.
+Scans of each breech face impression were taken with a Nanofocus Confocal Light Microscope at 10 fold magnification for a nominal lateral resolution of 3.125 microns per pixel and published to the NBTRD <span class="citation">(<a href="#ref-nbtrd" role="doc-biblioref">Zheng, Soons, and Thompson 2016</a>)</span>.
+We also use the <span class="citation">Weller et al. (<a href="#ref-weller_2012" role="doc-biblioref">2012</a>)</span> data set of 95 cartridge cases for comparison.
+For the <span class="citation">Weller et al. (<a href="#ref-weller_2012" role="doc-biblioref">2012</a>)</span> dataset, we manually isolated the breech face impression regions using the FiX3P software (accessible here: <a href="https://github.com/talenfisher/fix3p" class="uri">https://github.com/talenfisher/fix3p</a>).
+We compare results from the cmcR package to published results using processed scans available through the Iowa State University DataShare repository <span class="citation">(<a href="#ref-cartridgeCaseDataSet" role="doc-biblioref">Zemmels, Hofmann, and Vanderplas 2022</a>)</span>.
+Our goal is to show that results obtained from cmcR are similar, at least qualitatively, to previously published results.
+However, justification for any differences will ultimately involve educated guesses due to the closed-source nature of the original implementations.</p>
+<p>For each cartridge case pair, we calculate CMC counts under both the original and High CMC decision rules.
+In practice, we classify a cartridge case pair as “matching” if its CMC count surpasses some threshold; 6 CMCs being the generally accepted threshold in many papers <span class="citation">(<a href="#ref-tong_improved_2015" role="doc-biblioref">Tong, Song, and Chu 2015</a>; <a href="#ref-song_estimating_2018" role="doc-biblioref">Song et al. 2018</a>; <a href="#ref-song_proposed_2013" role="doc-biblioref">Song 2013</a>)</span>.
+However, this threshold has been shown to not generalize well to all proposed methods and cartridge case data sets <span class="citation">(<a href="#ref-chen_convergence_2017" role="doc-biblioref">Chen et al. 2017</a>)</span>.
+We instead use an optimization criterion to select parameters.
+In doing so, we will demonstrate the sensitivity of the pipeline to parameter choice.
+Additionally, we introduce a set of principles designed to reduce the need for brute-force searches across parameter settings when re-implementing algorithms without accompanying code.
+Adherence to these principles yields not only computationally reproducible results, but also improves a reader’s understanding of a proposed pipeline.</p>
+</div>
+<div id="processing-condition-sensitivity" class="section level3 hasAnchor" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> Processing condition sensitivity<a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#processing-condition-sensitivity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Choosing threshold values <span class="math inline">\(T_x, T_y, T_\theta, T_{\text{CCF}}\)</span> for translation, rotation, and maximum cross-correlation is crucial in declaring a particular cell-region pair “congruent.”
+However, many combinations of these thresholds yield perfect separation between the matching and non-matching CMC count distributions.
+Therefore, choosing parameters based on maximizing classification accuracy does not lead to an obvious, single set of parameters.
+We instead consider the ratio of between- and within-group variability to measure separation between match and non-match CMC counts.</p>
+<p>Let C<span class="math inline">\(_{ij}\)</span> denote the CMC count assigned to the <span class="math inline">\(j\)</span>th cartridge case pair, <span class="math inline">\(j = 1,...,n_i\)</span> from the <span class="math inline">\(i\)</span>th group, <span class="math inline">\(i = 1,2\)</span> representing matches and non-matches, respectively.
+For each set of thresholds we calculate the <strong>Variance Ratio</strong> <span class="math inline">\(r\)</span> as:
+<span class="math display">\[
+r = r\left(T_x, T_y, T_\theta, T_{\text{CCF}}\right) = \frac{\sum_{i=1}^2 \left(\overline{C}_{i.} - \overline{C}_{..}\right)^2}{\sum_{i=1}^2 \frac{1}{n_i - 1}\sum_{j=1}^{n_i} \left(C_{ij} - \overline{C}_{i.}\right)^2},
+\]</span>
+where <span class="math inline">\(\overline{C}_{i.}\)</span> denotes the within-group CMC count average and <span class="math inline">\(\overline{C}_{..}\)</span> denotes the grand CMC count average.
+Greater separation between and less variability within the match and non-match CMC count distributions yields larger <span class="math inline">\(r\)</span> values.</p>
+<p>For example, Figure <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#fig:decisionRuleSensitivity-comparison">2.12</a> shows results for the original decision rule and the High CMC decision rule for parameters <span class="math inline">\(T_x = 20 = T_y\)</span> pixels, <span class="math inline">\(T_{\text{CCF}} = 0.5\)</span>, and <span class="math inline">\(T_{\theta} = 6\)</span>.
+Despite both decision rules resulting in separation between the matching and non-matching CMC count distributions, the High CMC decision rule yields greater separation as evidenced by the larger <span class="math inline">\(r\)</span> value.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:decisionRuleSensitivity-comparison"></span>
+<img src="figures/cmcDistributionExample.png" alt="A histogram visualiation of the CMC count distribution of matching and non-matching cartridge pairs from the Fadul et al. (2011) data set. There are two facets to this plot: one showing the CMC counts as determined using the original decision rule of Song et al. (2013) and another as using the High CMC method of Tong et al. (2015). There is perfect separation between the non-matching and matching distributions, indicating a perfect classification rule, although the separation between the distributions is much larger for the High CMC counts. Overlaid on each facet is text that shows the variance ratio values of these distributions: 7.75 for the original decision rule results vs. 33.57 for the High CMC results." width="\textwidth" />
+<p class="caption">
+Figure 2.12: CMC count relative frequencies under the original decision rule and the High CMC decision rule for <span class="math inline">\(T_{\Delta x} = 20 = T_{\Delta y}\)</span> pixels, <span class="math inline">\(T_{\text{CCF}} = 0.5\)</span>, and <span class="math inline">\(T_{\theta} = 6\)</span> degrees. An AUC <span class="math inline">\(= 1\)</span> corresponds to perfect separation of the match and non-match CMC count distributions. We can see that, for this set of processing parameters, the High CMC decision rule yields higher CMC counts for known matches that the original decision rule while known non-matches have the same distribution under both methods.
+</p>
+</div>
+<p>To explore the pipeline’s sensitivity, we consider five dimensions that have a demonstrable impact on CMC counts:</p>
+<ul>
+<li><p>the decision rule (original or High CMC) used,</p></li>
+<li><p>whether the global trend is removed during pre-processing, and</p></li>
+<li><p>choice of congruency thresholds: translation <span class="math inline">\(T_x, T_y\)</span>, rotation <span class="math inline">\(T_\theta\)</span>, and cross-correlation <span class="math inline">\(T_{\text{CCF}}\)</span>.</p></li>
+</ul>
+<p>Choosing a single parameter setting that results in perfect identification is not enough to generally understand the algorithm.
+Instead, we use the variance ratio <span class="math inline">\(r\)</span> to identify promising ranges of parameters.
+Figure <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#fig:cmc-sensitivityScatter">2.13</a> shows the value of the variance ratio under different parameter settings.
+We see that the High CMC decision rule yields better separation than the original decision rule under any parameter setting.
+The largest variance ratio values are achieved for thresholds <span class="math inline">\(T_x, T_y \in [10,20]\)</span>, <span class="math inline">\(T_\theta = 6\)</span>, and <span class="math inline">\(T_{\text{CCF}} \in [0.4,0.5]\)</span>.
+Interestingly, considering Table <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#tab:thresholdTable-html">2.3</a>, only the parameters used in <span class="citation">Song et al. (<a href="#ref-song_estimating_2018" role="doc-biblioref">2018</a>)</span> fall into these ranges.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cmc-sensitivityScatter"></span>
+<img src="figures/varianceRatioPlt.png" alt="A scatterplot visualization of variance ratio values under various parameter settings of the CMC method. Each point represents a particular combination of parameter choices. The translation threshold used, ranging from 5 to 30 pixels, is mapped to the horizontal axis. The variance ratio value is mapped to the vertical axis. The points are colored based on the value of the cross-correlation function threshold used, ranging from 0.35 to 0.6. There are eight facets representing three binary parameter choices: whether the original or High CMC decision rules were used, whether the global trend was removed from the scans during pre-processing, and whether a rotation threshold of 3 or 6 degrees were used. Using such a plot, we can assess how sensitive the CMC algorithm is to various parameter choices and identify which combination of parameter settings yields the best results." width="\textwidth" />
+<p class="caption">
+Figure 2.13: Variance ratio values are plotted for different parameter settings. High variance ratios are indicative of a a good separation between CMC counts for known matching pairs and known-non matching pairs. The High CMC decision rule generally performs better than the original decision rule. Removing the trend during pre-processing has a major impact on the effectiveness of the CMC pipeline. In this setting, translation thresholds <span class="math inline">\(T_x, T_y \in [15,20]\)</span>, a rotation threshold <span class="math inline">\(T_\theta = 6\)</span>, and a CCF threshold <span class="math inline">\(T_{\text{CCF}} \in [0.4,0.5]\)</span> lead to a separation of results.
+</p>
+</div>
+<p>As shown in Figure <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#fig:cmc-sensitivityScatter">2.13</a>, de-trending breech-scans in the pre-processing stage emerges as a critical step to achieve good algorithmic results.
+This step is not explicitly mentioned in the written-word descriptions of the algorithm in <span class="citation">Song (<a href="#ref-song_proposed_2013" role="doc-biblioref">2013</a>)</span>, <span class="citation">Tong et al. (<a href="#ref-tong_fired_2014" role="doc-biblioref">2014</a>)</span>, <span class="citation">Tong, Song, and Chu (<a href="#ref-tong_improved_2015" role="doc-biblioref">2015</a>)</span>, <span class="citation">Chen et al. (<a href="#ref-chen_convergence_2017" role="doc-biblioref">2017</a>)</span>, or <span class="citation">Song et al. (<a href="#ref-song_estimating_2018" role="doc-biblioref">2018</a>)</span>, though it appears from their examples that it was used in the process.
+Figure <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#fig:cmc-sensitivityScatter">2.13</a> also illustrates how breaking a pipeline up into modularized steps eases experimentation.
+We will expand upon this idea in the next section.</p>
+<p>We compare the best results from cmcR to results presented in previous papers.
+In particular, we have calculated variance ratio statistics shown in Figure <a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#fig:cmc-varRatioComparison">2.14</a> based on CMC counts reported in <span class="citation">Song (<a href="#ref-song_proposed_2013" role="doc-biblioref">2013</a>)</span>, <span class="citation">Tong et al. (<a href="#ref-tong_fired_2014" role="doc-biblioref">2014</a>)</span>, <span class="citation">Tong, Song, and Chu (<a href="#ref-tong_improved_2015" role="doc-biblioref">2015</a>)</span>, <span class="citation">Chen et al. (<a href="#ref-chen_convergence_2017" role="doc-biblioref">2017</a>)</span>, and <span class="citation">Song et al. (<a href="#ref-song_estimating_2018" role="doc-biblioref">2018</a>)</span>.
+The last row in each facet shows the variance ratio values obtained from cmcR.
+We see that the implementation provided in cmcR yields comparable results to previous CMC papers.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cmc-varRatioComparison"></span>
+<img src="figures/varianceRatio_paperComparisons.png" alt="A dot plot that shows the variance ratio values associated with various CMC papers. A reference to each paper is mapped to a discretization of the vertical axis while the associated variance ratio value is mapped to the horizontal axis. The plot is faceted based on whether the original or High CMC decision rule was used in the paper. This plot allows us to compare the variance ratio values across papers and highlight that the implementation provided in the cmcR package yields similar results to other papers." width="\textwidth" />
+<p class="caption">
+Figure 2.14: Variance ratios based on results reported in various CMC papers. The High CMC decision rule tends to outperform the original decision rule. However, it should be emphasized that each paper uses very different processing and parameter settings meaning the results are difficult to compare. The values labeled “cmcR” show the largest variance ratio values for the original and High CMC decision rules based on a limited grid search. These results indicate that the CMC pipeline implementation provided in cmcR yields comparable results to previous CMC papers.
+</p>
+</div>
+</div>
+</div>
+<div id="conclusion" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Conclusion<a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#conclusion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Reproducibility is an indispensable component of scientific validity <span class="citation">(<a href="#ref-goodman_what_2016" role="doc-biblioref">Goodman, Fanelli, and Ioannidis 2016</a>)</span>.
+In this paper, we demonstrate at least three ways reproducibility can go awry: ambiguity in procedural implementation, missing or incomplete data, and missing or incomplete code.
+In forensics, many matching algorithms are commonly presented in the form of conceptual descriptions with accompanying results.
+There is sound reasoning to this; conceptual descriptions are more easily understood by humans compared to computer code.
+However, using the CMC pipelines as an example we have observed the gaps that can exist when translating a conceptual description of an algorithm to a genuine implementation.
+This is largely due to the fact that conceptual descriptions rarely detail implicit parameter choices required to run an algorithm.
+Consequently, there are multiple choices that are compatible with the description of an algorithm in a publication.
+This is dangerous in a forensics context because if many parameter settings are valid but only a narrow range lead to the same conclusion, it is entirely possible that witnesses for the prosecution and defense comef to different conclusions.
+In order to prevent such misunderstandings, it is not enough to have guidelines for parameter settings and/or a sensitivity study – it is also necessary to standardize the specific computer code.
+The parameter values are only useful within the context of a single software package or pipeline.</p>
+<p>These principles of open, accessible, interoperable code are also critical for a fair (in the legal sense) justice system: the defense has access to the code to understand the evidence against them, lawyers and examiners can assess the utility of the analysis method, and judges can determine whether a method is admissible in court.
+Transparent and intuitive open-source algorithms, such as cmcR, should be considered the gold standard in allowing the forensic science community to validate a pipeline.</p>
+<p>Our contribution to the CMC literature is the open-source implementation, which fills the gaps in the human-friendly descriptions in the original papers.
+In addition, because we have structured the cmcR implementation as a modular pipeline, it is easier to improve upon the CMC method and document the effects of specific changes to the algorithm compared to previous versions.
+The modularization creates an explicit framework to assess the utility and effectiveness of each piece of the algorithm, and allows us to independently manipulate each step while monitoring the downstream impact on the results.
+Additionally, it allows future collaborators to improve on pieces of the pipeline, adding new options and improving the method without having to re-invent the wheel.
+Indeed, re-implementing steps of the pipeline is at best a useful academic exercise and at worst a waste of time and resources that could be spent actually improving the pipeline.
+Even after many months of trial and error, although we have succeeded in obtaining qualitatively similar results on two data sets, it is difficult to know whether our implementation will behave the same as previous implementations on external data sets.
+Generalizability is an important assessment for any computational algorithm <span class="citation">(<a href="#ref-vanderplasComparisonThreeSimilarity2020" role="doc-biblioref">Vanderplas et al. 2020</a>)</span>.</p>
+<p>Our application is far from unique: some journals have adopted policies encouraging or requiring that authors provide code and data sufficient to reproduce the statistical analyses, with the goal of building a “culture of reproducibility” in their respective fields <span class="citation">(<a href="#ref-peng_reproducible_2009" role="doc-biblioref">Peng 2009</a>, <a href="#ref-peng_reproducible_2011" role="doc-biblioref">2011</a>; <a href="#ref-stodden_toward_2013" role="doc-biblioref">Stodden, Guo, and Ma 2013</a>)</span>.
+Peer-review and scientific progress in the truest sense requires that <em>all</em> pre-processed data, code, and results be made openly available <span class="citation">(<a href="#ref-kwongAlgorithmSaysYou2017" role="doc-biblioref">Kwong 2017</a>; <a href="#ref-desaiTrustVerifyGuide2017" role="doc-biblioref">Desai and Kroll 2017</a>)</span>.
+Our experience with the CMC algorithm suggests that these standards should be adopted by the forensic science community, leveraging open-source ecosystems like R and software sharing platforms such as Github.
+We firmly believe that the forensic community should not go only halfway, trading a subjective, human black box for objective, proprietary algorithms that are similarly opaque and unauditable.
+Open, fully reproducible packages like cmcR allow research groups to make incremental changes, compare different approaches, and accelerate the pace of research and development.</p>
+</div>
+<div id="acknowledgement" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Acknowledgement<a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#acknowledgement" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This work was partially funded by the Center for Statistics and Applications in Forensic Evidence (CSAFE) through Cooperative Agreement 70NANB20H019 between NIST and Iowa State University, which includes activities carried out at Carnegie Mellon University, Duke University, University of California Irvine, University of Virginia, West Virginia University, University of Pennsylvania, Swarthmore College and University of Nebraska, Lincoln.</p>
+<p>We greatly appreciate the constructive feedback from the two anonymous reviewers.
+Special thanks also to all the developers and open-source contributors of R, knitr <span class="citation">(<a href="#ref-knitr1" role="doc-biblioref">Xie 2015</a>, <a href="#ref-knitr2" role="doc-biblioref">2014</a>)</span>, rticles <span class="citation">(<a href="#ref-rticles" role="doc-biblioref">Allaire et al. 2021</a>)</span>, and the tidyverse <span class="citation">(<a href="#ref-tidyverse" role="doc-biblioref">Wickham et al. 2019</a>)</span>, without whom this project would not have been possible.</p>
+</div>
+<div id="computational-details" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> Computational details<a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#computational-details" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<pre><code>#&gt; R version 4.2.2 (2022-10-31 ucrt)
+#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)
+#&gt; Running under: Windows 10 x64 (build 22621)
+#&gt; 
+#&gt; Matrix products: default
+#&gt; 
+#&gt; locale:
+#&gt; [1] LC_COLLATE=English_United States.utf8 
+#&gt; [2] LC_CTYPE=English_United States.utf8   
+#&gt; [3] LC_MONETARY=English_United States.utf8
+#&gt; [4] LC_NUMERIC=C                          
+#&gt; [5] LC_TIME=English_United States.utf8    
+#&gt; 
+#&gt; attached base packages:
+#&gt; [1] stats     graphics  grDevices datasets  utils     methods  
+#&gt; [7] base     
+#&gt; 
+#&gt; other attached packages:
+#&gt;  [1] patchwork_1.1.2 rgl_1.0.1       x3ptools_0.0.3  lubridate_1.9.2
+#&gt;  [5] forcats_1.0.0   stringr_1.5.0   purrr_1.0.1     readr_2.1.4    
+#&gt;  [9] tidyr_1.3.0     tibble_3.2.0    tidyverse_2.0.0 cmcR_0.1.11    
+#&gt; [13] dplyr_1.1.0     magrittr_2.0.3  ggplot2_3.4.1  
+#&gt; 
+#&gt; loaded via a namespace (and not attached):
+#&gt;  [1] webshot_0.5.4      httr_1.4.5         tools_4.2.2       
+#&gt;  [4] bslib_0.3.1        utf8_1.2.2         R6_2.5.1          
+#&gt;  [7] colorspace_2.0-3   withr_2.5.0        readbitmap_0.1.5  
+#&gt; [10] tidyselect_1.2.0   gridExtra_2.3      compiler_4.2.2    
+#&gt; [13] textshaping_0.3.6  cli_3.6.0          rvest_1.0.3       
+#&gt; [16] quantreg_5.94      SparseM_1.81       xml2_1.3.3        
+#&gt; [19] labeling_0.4.2     bookdown_0.26      sass_0.4.1        
+#&gt; [22] scales_1.2.0       systemfonts_1.0.4  digest_0.6.29     
+#&gt; [25] tiff_0.1-11        yulab.utils_0.0.6  rmarkdown_2.14    
+#&gt; [28] svglite_2.1.1      base64enc_0.1-3    jpeg_0.1-10       
+#&gt; [31] pkgconfig_2.0.3    htmltools_0.5.4    fastmap_1.1.0     
+#&gt; [34] highr_0.9          htmlwidgets_1.6.1  rlang_1.0.6       
+#&gt; [37] rstudioapi_0.14    gridGraphics_0.5-1 jquerylib_0.1.4   
+#&gt; [40] farver_2.1.0       generics_0.1.2     zoo_1.8-11        
+#&gt; [43] jsonlite_1.8.4     kableExtra_1.3.4   ggplotify_0.1.0   
+#&gt; [46] Matrix_1.5-3       Rcpp_1.0.10        munsell_0.5.0     
+#&gt; [49] fansi_1.0.3        ggnewscale_0.4.8   lifecycle_1.0.3   
+#&gt; [52] stringi_1.7.6      yaml_2.3.5         MASS_7.3-55       
+#&gt; [55] grid_4.2.2         lattice_0.20-45    cowplot_1.1.1     
+#&gt; [58] splines_4.2.2      hms_1.1.2          knitr_1.39        
+#&gt; [61] pillar_1.8.1       igraph_1.4.1       codetools_0.2-18  
+#&gt; [64] imager_0.42.18     glue_1.6.2         evaluate_0.15     
+#&gt; [67] bmp_0.3            renv_0.17.0        png_0.1-8         
+#&gt; [70] vctrs_0.5.2        tzdb_0.3.0         MatrixModels_0.5-1
+#&gt; [73] gtable_0.3.0       assertthat_0.2.1   xfun_0.31         
+#&gt; [76] pracma_2.4.2       ragg_1.2.5         survival_3.4-0    
+#&gt; [79] viridisLite_0.4.0  timechange_0.2.0   ellipsis_0.3.2</code></pre>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-rticles" class="csl-entry">
+Allaire, JJ, Yihui Xie, R Foundation, Hadley Wickham, Journal of Statistical Software, Ramnath Vaidyanathan, Association for Computing Machinery, et al. 2021. <em>Rticles: Article Formats for r Markdown</em>. <a href="https://CRAN.R-project.org/package=rticles">https://CRAN.R-project.org/package=rticles</a>.
+</div>
+<div id="ref-imager" class="csl-entry">
+Barthelme, Simon. 2019. <em>Imager: Image Processing Library Based on ’CImg’</em>. <a href="https://CRAN.R-project.org/package=imager">https://CRAN.R-project.org/package=imager</a>.
+</div>
+<div id="ref-fft_brigham" class="csl-entry">
+Brigham, E. Oran. 1988. <em>The Fast Fourier Transform and Its Applications</em>. USA: Prentice-Hall, Inc.
+</div>
+<div id="ref-brinkman_bodschwinna_2003" class="csl-entry">
+Brinkman, S., and H. Bodschwinna. 2003. <span>“Advanced <span>Gaussian</span> Filters.”</span> In <em>Advanced Techniques for Assessment Surface Topography: Development of a Basis for 3D Surface Texture Standards <span>"</span>SURFSTAND<span>"</span></em>, edited by L. Blunt and X. Jiang. United States: Elsevier Inc. <a href="https://doi.org/10.1016/B978-1-903996-11-9.X5000-2">https://doi.org/10.1016/B978-1-903996-11-9.X5000-2</a>.
+</div>
+<div id="ref-Brown1992" class="csl-entry">
+Brown, Lisa Gottesfeld. 1992. <span>“A Survey of Image Registration Techniques.”</span> <em><span>ACM</span> Computing Surveys</em> 24 (4): 325–76. <a href="https://doi.org/10.1145/146370.146374">https://doi.org/10.1145/146370.146374</a>.
+</div>
+<div id="ref-chen_convergence_2017" class="csl-entry">
+Chen, Zhe, John Song, Wei Chu, Johannes A. Soons, and Xuezeng Zhao. 2017. <span>“A Convergence Algorithm for Correlation of Breech Face Images Based on the Congruent Matching Cells (<span>CMC</span>) Method.”</span> <em>Forensic Science International</em> 280 (November): 213–23. <a href="https://doi.org/10.1016/j.forsciint.2017.08.033">https://doi.org/10.1016/j.forsciint.2017.08.033</a>.
+</div>
+<div id="ref-chu_validation_2013" class="csl-entry">
+Chu, Wei, Mingsi Tong, and John Song. 2013. <span>“Validation <span>Tests</span> for the <span>Congruent</span> <span>Matching</span> <span>Cells</span> (<span>CMC</span>) <span>Method</span> <span>Using</span> <span>Cartridge</span> <span>Cases</span> <span>Fired</span> with <span>Consecutively</span> <span>Manufactured</span> <span>Pistol</span> <span>Slides</span>.”</span> <em>Journal of the Association of Firearms and Toolmarks Examiners</em> 45 (4): 6. <a href="https://www.nist.gov/publications/validation-tests-congruent-matching-cells-cmc-method-using-cartridge-cases-fired">https://www.nist.gov/publications/validation-tests-congruent-matching-cells-cmc-method-using-cartridge-cases-fired</a>.
+</div>
+<div id="ref-crawford_handwriting_2020" class="csl-entry">
+Crawford, Amy. 2020. <span>“Bayesian Hierarchical Modeling for the Forensic Evaluation of Handwritten Documents.”</span> {Ph.D thesis}, Iowa State University. <a href="https://doi.org/10.31274/etd-20200624-257">https://doi.org/10.31274/etd-20200624-257</a>.
+</div>
+<div id="ref-Curran2000" class="csl-entry">
+Curran, James Michael, Tacha Natalie Hicks Champod, and John S Buckleton, eds. 2000. <em>Forensic Interpretation of Glass Evidence</em>. Boca Raton, FL: CRC Press.
+</div>
+<div id="ref-desaiTrustVerifyGuide2017" class="csl-entry">
+Desai, Deven R., and Joshua A. Kroll. 2017. <span>“Trust but <span>Verify</span>: <span>A</span> <span>Guide</span> to <span>Algorithms</span> and the <span>Law</span>.”</span> <em>Harvard Journal of Law &amp; Technology (Harvard JOLT)</em> 31 (1): 1–64.<a href=" https://ssrn.com/abstract=2959472"> https://ssrn.com/abstract=2959472</a>.
+</div>
+<div id="ref-fadul_empirical_2011" class="csl-entry">
+Fadul, T., G. Hernandez, S. Stoiloff, and Gulati Sneh. 2011. <span>“An <span>Empirical</span> <span>Study</span> to <span>Improve</span> the <span>Scientific</span> <span>Foundation</span> of <span>Forensic</span> <span>Firearm</span> and <span>Tool</span> <span>Mark</span> <span>Identification</span> <span>Utilizing</span> 10 <span>Consecutively</span> <span>Manufactured</span> <span>Slides</span>.”</span> <a href="https://www.ojp.gov/ncjrs/virtual-library/abstracts/empirical-study-improve-scientific-foundation-forensic-firearm-and">https://www.ojp.gov/ncjrs/virtual-library/abstracts/empirical-study-improve-scientific-foundation-forensic-firearm-and</a>.
+</div>
+<div id="ref-ISO25178-72" class="csl-entry">
+<span>“<span class="nocase">Geometrical product specifications (GPS) — Surface texture: Areal — Part 72: XML file format x3p</span>.”</span> 2017. Standard. Vol. 2014. Geneva, CH: International Organization for Standardization. <a href="https://www.iso.org/standard/62310.html">https://www.iso.org/standard/62310.html</a>.
+</div>
+<div id="ref-goodman_what_2016" class="csl-entry">
+Goodman, Steven N., Daniele Fanelli, and John P. A. Ioannidis. 2016. <span>“What Does Research Reproducibility Mean?”</span> <em>Science Translational Medicine</em> 8 (341): 341ps12–12. <a href="https://doi.org/10.1126/scitranslmed.aaf5027">https://doi.org/10.1126/scitranslmed.aaf5027</a>.
+</div>
+<div id="ref-osiris" class="csl-entry">
+Goor, Robert, Douglas Hoffman, and George Riley. 2020. <span>“Novel Method for Accurately Assessing Pull-up Artifacts in STR Analysis.”</span> <em>Forensic Science International: Genetics</em> 51 (November): 102410. <a href="https://doi.org/10.1016/j.fsigen.2020.102410">https://doi.org/10.1016/j.fsigen.2020.102410</a>.
+</div>
+<div id="ref-hare_automatic_2016" class="csl-entry">
+Hare, Eric, Heike Hofmann, and Alicia Carriquiry. 2017. <span>“Automatic <span>Matching</span> of <span>Bullet</span> <span>Land</span> <span>Impressions</span>.”</span> <em>The Annals of Applied Statistics</em> 11 (4): 2332–56. <a href="http://arxiv.org/abs/1601.05788">http://arxiv.org/abs/1601.05788</a>.
+</div>
+<div id="ref-hesselink_concurrent_2001" class="csl-entry">
+Hesselink, Wim H., Arnold Meijster, and Coenraad Bron. 2001. <span>“Concurrent Determination of Connected Components.”</span> <em>Science of Computer Programming</em> 41 (2): 173–94. <a href="https://doi.org/10.1016/S0167-6423(01)00007-7">https://doi.org/10.1016/S0167-6423(01)00007-7</a>.
+</div>
+<div id="ref-x3ptools" class="csl-entry">
+Hofmann, Heike, Susan Vanderplas, Ganesh Krishnan, and Eric Hare. 2020. <em><span class="nocase">x3ptools: Tools for Working with 3D Surface Measurements</span></em>. <a href="https://cran.r-project.org/web/packages/x3ptools/index.html">https://cran.r-project.org/web/packages/x3ptools/index.html</a>.
+</div>
+<div id="ref-kwongAlgorithmSaysYou2017" class="csl-entry">
+Kwong, Katherine. 2017. <span>“The <span>Algorithm</span> <span>Says</span> <span>You</span> <span>Did</span> <span>It</span>: <span>The</span> <span>Use</span> of <span>Black</span> <span>Box</span> <span>Algorithms</span> to <span>Analyze</span> <span>Complex</span> <span>DNA</span> <span>Evidence</span> <span>Notes</span>.”</span> <em>Harvard Journal of Law &amp; Technology (Harvard JOLT)</em> 31 (1): 275–302. <a href="https://jolt.law.harvard.edu/assets/articlePDFs/v31/31HarvJLTech275.pdf">https://jolt.law.harvard.edu/assets/articlePDFs/v31/31HarvJLTech275.pdf</a>.
+</div>
+<div id="ref-leek_is_2017" class="csl-entry">
+Leek, Jeffrey T., and Leah R. Jager. 2017. <span>“Is <span>Most</span> <span>Published</span> <span>Research</span> <span>Really</span> <span>False</span>?”</span> <em>Annual Review of Statistics and Its Application</em> 4 (1): 109–22. <a href="https://doi.org/10.1146/annurev-statistics-060116-054104">https://doi.org/10.1146/annurev-statistics-060116-054104</a>.
+</div>
+<div id="ref-nasem_2019" class="csl-entry">
+National Academy of Sciences, Engineering, and Medicine. 2019. <em>Reproducibility and Replicability in Science</em>. National Academies Press. <a href="https://doi.org/10.17226/25303">https://doi.org/10.17226/25303</a>.
+</div>
+<div id="ref-council_strengthening_2009" class="csl-entry">
+National Research Council. 2009. <em>Strengthening <span>Forensic</span> <span>Science</span> in the <span>United</span> <span>States</span>: <span>A</span> <span>Path</span> <span>Forward</span></em>. Washington, DC: The National Academies Press. <a href="https://doi.org/10.17226/12589">https://doi.org/10.17226/12589</a>.
+</div>
+<div id="ref-ott_applying_2017" class="csl-entry">
+Ott, Daniel, Robert Thompson, and Junfeng Song. 2017. <span>“Applying <span>3D</span> Measurements and Computer Matching Algorithms to Two Firearm Examination Proficiency Tests.”</span> <em>Forensic Science International</em> 271 (February): 98–106. <a href="https://doi.org/10.1016/j.forsciint.2016.12.014">https://doi.org/10.1016/j.forsciint.2016.12.014</a>.
+</div>
+<div id="ref-park_algorithm_2020" class="csl-entry">
+Park, Soyoung, and Alicia Carriquiry. 2020. <span>“An Algorithm to Compare Two-Dimensional Footwear Outsole Images Using Maximum Cliques and Speeded-up Robust Feature.”</span> <em>Statistical Analysis and Data Mining: The ASA Data Science Journal</em> 13 (2): 188–99. <a href="https://doi.org/10.1002/sam.11449">https://doi.org/10.1002/sam.11449</a>.
+</div>
+<div id="ref-Park2019" class="csl-entry">
+Park, Soyoung, and Sam Tyner. 2019. <span>“Evaluation and Comparison of Methods for Forensic Glass Source Conclusions.”</span> <em>Forensic Science International</em> 305 (December): 110003. <a href="https://doi.org/10.1016/j.forsciint.2019.110003">https://doi.org/10.1016/j.forsciint.2019.110003</a>.
+</div>
+<div id="ref-peng_reproducible_2009" class="csl-entry">
+Peng, Roger D. 2009. <span>“Reproducible Research and <span>Biostatistics</span>.”</span> <em>Biostatistics</em> 10 (3): 405–8. <a href="https://doi.org/10.1093/biostatistics/kxp014">https://doi.org/10.1093/biostatistics/kxp014</a>.
+</div>
+<div id="ref-peng_reproducible_2011" class="csl-entry">
+———. 2011. <span>“Reproducible <span>Research</span> in <span>Computational</span> <span>Science</span>.”</span> <em>Science</em> 334 (6060): 1226–27. <a href="https://www.jstor.org/stable/41352177">https://www.jstor.org/stable/41352177</a>.
+</div>
+<div id="ref-pcast2016" class="csl-entry">
+President’s Council of Advisors on Sci. &amp; Tech. 2016. <span>“Forensic Science in Criminal Courts: Ensuring Scientific Validity of Feature-Comparison Methods.”</span> <a href="https://obamawhitehouse.archives.gov/sites/default/files/microsites/ostp/PCAST/pcast_forensic_science_report_final.pdf">https://obamawhitehouse.archives.gov/sites/default/files/microsites/ostp/PCAST/pcast_forensic_science_report_final.pdf</a>.
+</div>
+<div id="ref-song_proposed_2013" class="csl-entry">
+Song, John. 2013. <span>“Proposed <span>‘<span>NIST</span> <span>Ballistics</span> <span>Identification</span> <span>System</span> (<span>NBIS</span>)’</span> <span>Based</span> on <span>3D</span> <span>Topography</span> <span>Measurements</span> on <span>Correlation</span> <span>Cells</span>.”</span> <em>American Firearm and Tool Mark Examiners Journal</em> 45 (2): 11. <a href="https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=910868">https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=910868</a>.
+</div>
+<div id="ref-song_3d_2014" class="csl-entry">
+Song, John, Wei Chu, Mingsi Tong, and Johannes Soons. 2014. <span>“<span>3D</span> Topography Measurements on Correlation Cells—a New Approach to Forensic Ballistics Identifications.”</span> <em>Measurement Science and Technology</em> 25 (6): 064005. <a href="https://doi.org/10.1088/0957-0233/25/6/064005">https://doi.org/10.1088/0957-0233/25/6/064005</a>.
+</div>
+<div id="ref-song_estimating_2018" class="csl-entry">
+Song, John, Theodore V. Vorburger, Wei Chu, James Yen, Johannes A. Soons, Daniel B. Ott, and Nien Fan Zhang. 2018. <span>“Estimating Error Rates for Firearm Evidence Identifications in Forensic Science.”</span> <em>Forensic Science International</em> 284 (March): 15–32. <a href="https://doi.org/10.1016/j.forsciint.2017.12.013">https://doi.org/10.1016/j.forsciint.2017.12.013</a>.
+</div>
+<div id="ref-stodden_toward_2013" class="csl-entry">
+Stodden, Victoria, Peixuan Guo, and Zhaokun Ma. 2013. <span>“Toward <span>Reproducible</span> <span>Computational</span> <span>Research</span>: <span>An</span> <span>Empirical</span> <span>Analysis</span> of <span>Data</span> and <span>Code</span> <span>Policy</span> <span>Adoption</span> by <span>Journals</span>.”</span> Edited by Dmitri Zaykin. <em>PLoS ONE</em> 8 (6): e67111. <a href="https://doi.org/10.1371/journal.pone.0067111">https://doi.org/10.1371/journal.pone.0067111</a>.
+</div>
+<div id="ref-cartridges3D" class="csl-entry">
+Tai, Xiao Hui. 2021. <em>cartridges3D: Algorithm to Compare Cartridge Case Images</em>. <a href="https://github.com/xhtai/cartridges3D">https://github.com/xhtai/cartridges3D</a>.
+</div>
+<div id="ref-tai_fully_2018" class="csl-entry">
+Tai, Xiao Hui, and William F. Eddy. 2018. <span>“A <span>Fully</span> <span>Automatic</span> <span>Method</span> for <span>Comparing</span> <span>Cartridge</span> <span>Case</span> <span>Images</span>,”</span> <em>Journal of Forensic Sciences</em> 63 (2): 440–48. <a href="http://doi.wiley.com/10.1111/1556-4029.13577">http://doi.wiley.com/10.1111/1556-4029.13577</a>.
+</div>
+<div id="ref-linux" class="csl-entry">
+The Linux Foundation. 2017. <span>“<span class="nocase">Using open source software to speed up development and gain business advantage</span>.”</span> <a href="https://www.linuxfoundation.org/blog/using-open-source-software-to-speed-development-and-gain-business-advantage/">https://www.linuxfoundation.org/blog/using-open-source-software-to-speed-development-and-gain-business-advantage/</a>.
+</div>
+<div id="ref-Thompson2017" class="csl-entry">
+Thompson, Robert. 2017. <em>Firearm Identification in the Forensic Science Laboratory</em>. National District Attorneys Association. <a href="https://doi.org/10.13140/RG.2.2.16250.59846">https://doi.org/10.13140/RG.2.2.16250.59846</a>.
+</div>
+<div id="ref-tong_improved_2015" class="csl-entry">
+Tong, Mingsi, John Song, and Wei Chu. 2015. <span>“An <span>Improved</span> <span>Algorithm</span> of <span>Congruent</span> <span>Matching</span> <span>Cells</span> (<span>CMC</span>) <span>Method</span> for <span>Firearm</span> <span>Evidence</span> <span>Identifications</span>.”</span> <em>Journal of Research of the National Institute of Standards and Technology</em> 120 (April): 102. <a href="https://doi.org/10.6028/jres.120.008">https://doi.org/10.6028/jres.120.008</a>.
+</div>
+<div id="ref-tong_fired_2014" class="csl-entry">
+Tong, Mingsi, John Song, Wei Chu, and Robert M. Thompson. 2014. <span>“Fired <span>Cartridge</span> <span>Case</span> <span>Identification</span> <span>Using</span> <span>Optical</span> <span>Images</span> and the <span>Congruent</span> <span>Matching</span> <span>Cells</span> (<span>CMC</span>) <span>Method</span>.”</span> <em>Journal of Research of the National Institute of Standards and Technology</em> 119 (November): 575. <a href="https://doi.org/10.6028/jres.119.023">https://doi.org/10.6028/jres.119.023</a>.
+</div>
+<div id="ref-Tvedebrink2020" class="csl-entry">
+Tvedebrink, Torben, Mikkel Meyer Andersen, and James Michael Curran. 2020. <span>“DNAtools: Tools for Analysing Forensic Genetic DNA Data.”</span> <em>Journal of Open Source Software</em> 5 (45): 1981. <a href="https://doi.org/10.21105/joss.01981">https://doi.org/10.21105/joss.01981</a>.
+</div>
+<div id="ref-openForSciR" class="csl-entry">
+Tyner, Sam, Soyoung Park, Ganesh Krishnan, Karen Pan, Eric Hare, Amanda Luby, Xiao Hui Tai, Heike Hofmann, and Guillermo Basulto-Elias. 2019. <span>“Sctyner/OpenForSciR: Create DOI for Open Forensic Science in r.”</span> Zenodo. <a href="https://zenodo.org/record/3418141">https://zenodo.org/record/3418141</a>.
+</div>
+<div id="ref-vanderplasComparisonThreeSimilarity2020" class="csl-entry">
+Vanderplas, Susan, Melissa Nally, Tylor Klep, Cristina Cadevall, and Heike Hofmann. 2020. <span>“Comparison of Three Similarity Scores for Bullet <span>LEA</span> Matching.”</span> <em>Forensic Science International</em>, January. <a href="https://doi.org/10.1016/j.forsciint.2020.110167">https://doi.org/10.1016/j.forsciint.2020.110167</a>.
+</div>
+<div id="ref-weller_2012" class="csl-entry">
+Weller, Todd J., Alan Zheng, Robert Thompson, and Fred Tulleners. 2012. <span>“Confocal Microscopy Analysis of Breech Face Marks on Fired Cartridge Cases from 10 Consecutively Manufactured Pistol Slides”</span> 57 (4). <a href="https://doi.org/10.1111/j.1556-4029.2012.02072.x">https://doi.org/10.1111/j.1556-4029.2012.02072.x</a>.
+</div>
+<div id="ref-tidyverse" class="csl-entry">
+Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019. <span>“Welcome to the <span class="nocase">tidyverse</span>.”</span> <em>Journal of Open Source Software</em> 4 (43): 1686.
+</div>
+<div id="ref-knitr2" class="csl-entry">
+Xie, Yihui. 2014. <span>“Knitr: A Comprehensive Tool for Reproducible Research in <span>R</span>.”</span> In <em>Implementing Reproducible Computational Research</em>, edited by Victoria Stodden, Friedrich Leisch, and Roger D. Peng. Chapman; Hall/CRC. <a href="http://www.crcpress.com/product/isbn/9781466561595">http://www.crcpress.com/product/isbn/9781466561595</a>.
+</div>
+<div id="ref-knitr1" class="csl-entry">
+———. 2015. <em>Dynamic Documents with <span>R</span> and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>.
+</div>
+<div id="ref-cartridgeCaseDataSet" class="csl-entry">
+Zemmels, Joseph, Heike Hofmann, and Susan Vanderplas. 2022. <span>“<span class="nocase">Zemmels et al. (2023) Cartridge Case Scans</span>.”</span> Iowa State University. <a href="https://doi.org/10.25380/IASTATE.19686297.V1">https://doi.org/10.25380/IASTATE.19686297.V1</a>.
+</div>
+<div id="ref-nbtrd" class="csl-entry">
+Zheng, Xiaoyu A., Johannes A. Soons, and Robert M. Thompson. 2016. <span>“<span>NIST Ballistics Toolmark Research Database</span>.”</span> <a href="https://tsapps.nist.gov/NRBTD/">https://tsapps.nist.gov/NRBTD/</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["thesis.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>A Cartridge Case Comparison Pipeline</title>
+  <meta name="description" content="A Cartridge Case Comparison Pipeline" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="A Cartridge Case Comparison Pipeline" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="jzemmels/cartridgeCaseLitReview" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="A Cartridge Case Comparison Pipeline" />
+  
+  
+  
+
+<meta name="author" content="Joseph Zemmels" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"/>
+<style type="text/css">
+p.abstract{
+  text-align: center;
+  font-weight: bold;
+}
+div.abstract{
+  margin: auto;
+  width: 90%;
+}
+</style>
+<script src="libs/jquery/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Literature Review</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#preliminaries-forensic-examinations"><i class="fa fa-check"></i><b>1.1</b> Preliminaries: Forensic Examinations</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="index.html"><a href="index.html#firearm-and-toolmark-identification"><i class="fa fa-check"></i><b>1.1.1</b> Firearm and Toolmark Identification</a></li>
+<li class="chapter" data-level="1.1.2" data-path="index.html"><a href="index.html#why-should-firearm-and-toolmark-identification-change"><i class="fa fa-check"></i><b>1.1.2</b> Why Should Firearm and Toolmark Identification Change?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#forensic-comparison-pipelines"><i class="fa fa-check"></i><b>1.2</b> Forensic Comparison Pipelines</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#digital-representations-of-evidence"><i class="fa fa-check"></i><b>1.2.1</b> Digital Representations of Evidence</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#pre-processing-procedures-for-forensic-data"><i class="fa fa-check"></i><b>1.2.2</b> Pre-processing Procedures for Forensic Data</a></li>
+<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#forensic-data-feature-extraction"><i class="fa fa-check"></i><b>1.2.3</b> Forensic Data Feature Extraction</a></li>
+<li class="chapter" data-level="1.2.4" data-path="index.html"><a href="index.html#similarity-scores-classification-rules-for-forensic-data"><i class="fa fa-check"></i><b>1.2.4</b> Similarity Scores &amp; Classification Rules for Forensic Data</a></li>
+<li class="chapter" data-level="1.2.5" data-path="index.html"><a href="index.html#reproducibility-of-comparison-pipelines"><i class="fa fa-check"></i><b>1.2.5</b> Reproducibility of Comparison Pipelines</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#diagnostic-tools"><i class="fa fa-check"></i><b>1.3</b> Diagnostic Tools</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#visual-diagnostics"><i class="fa fa-check"></i><b>1.3.1</b> Visual Diagnostics</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#interactive-diagnostics"><i class="fa fa-check"></i><b>1.3.2</b> Interactive Diagnostics</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#automating-and-improving-the-cartridge-case-comparison-pipeline"><i class="fa fa-check"></i><b>1.4</b> Automating and Improving the Cartridge Case Comparison Pipeline</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="index.html"><a href="index.html#image-processing-techniques"><i class="fa fa-check"></i><b>1.4.1</b> Image Processing Techniques</a></li>
+<li class="chapter" data-level="1.4.2" data-path="index.html"><a href="index.html#density-based-spatial-clustering-of-applications-with-noise"><i class="fa fa-check"></i><b>1.4.2</b> Density-Based Spatial Clustering of Applications with Noise</a></li>
+<li class="chapter" data-level="1.4.3" data-path="index.html"><a href="index.html#implementation-considerations"><i class="fa fa-check"></i><b>1.4.3</b> Implementation Considerations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><i class="fa fa-check"></i><b>2</b> A Study in Reproducibility: The Congruent Matching Cells Algorithm and cmcR package</a>
+<ul>
+<li class="chapter" data-level="" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#abstract"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="2.1" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#intro"><i class="fa fa-check"></i><b>2.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#repeatability-and-reproducibility"><i class="fa fa-check"></i><b>2.1.1</b> Repeatability and reproducibility</a></li>
+<li class="chapter" data-level="2.1.2" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#the-congruent-matching-cells-algorithm"><i class="fa fa-check"></i><b>2.1.2</b> The Congruent Matching Cells algorithm</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cmcMethod"><i class="fa fa-check"></i><b>2.2</b> The CMC pipeline</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#initialData"><i class="fa fa-check"></i><b>2.2.1</b> Initial data</a></li>
+<li class="chapter" data-level="2.2.2" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#preProcessing"><i class="fa fa-check"></i><b>2.2.2</b> Pre-processing procedures</a></li>
+<li class="chapter" data-level="2.2.3" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#comparisonProcedure"><i class="fa fa-check"></i><b>2.2.3</b> “Correlation cell” comparison procedure</a></li>
+<li class="chapter" data-level="2.2.4" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#decision-rule"><i class="fa fa-check"></i><b>2.2.4</b> Decision rule</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#discussion"><i class="fa fa-check"></i><b>2.3</b> Discussion</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#ambiguities"><i class="fa fa-check"></i><b>2.3.1</b> Ambiguity in algorithmic descriptions</a></li>
+<li class="chapter" data-level="2.3.2" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#investigation"><i class="fa fa-check"></i><b>2.3.2</b> CMC pattern matching pipeline</a></li>
+<li class="chapter" data-level="2.3.3" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#processing-condition-sensitivity"><i class="fa fa-check"></i><b>2.3.3</b> Processing condition sensitivity</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#conclusion"><i class="fa fa-check"></i><b>2.4</b> Conclusion</a></li>
+<li class="chapter" data-level="2.5" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#acknowledgement"><i class="fa fa-check"></i><b>2.5</b> Acknowledgement</a></li>
+<li class="chapter" data-level="2.6" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#computational-details"><i class="fa fa-check"></i><b>2.6</b> Computational details</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><i class="fa fa-check"></i><b>3</b> Diagnostic Tools for Cartridge Case Comparison Algorithms</a>
+<ul>
+<li class="chapter" data-level="" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#abstract-1"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="3.1" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html"><i class="fa fa-check"></i><b>4</b> Automatic Matching of Cartridge Case Impressions</a>
+<ul>
+<li class="chapter" data-level="" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#abstract-2"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="4.1" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Cartridge Case Comparison Pipeline</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">A Cartridge Case Comparison Pipeline</h1>
+<p class="author"><em>Joseph Zemmels</em></p>
+<div class="abstract">
+<p class="abstract">Abstract</p>
+<p>Algorithms to compare evidence are increasingly used in forensic examinations to supplement an examiner’s opinion with an objective measure of similarity. However, an algorithm must first be thoroughly tested under various conditions to identify its strengths and weaknesses. This experimentation is expedited for algorithms that are accessible to fellow researchers and practitioners. In this work, we discuss an algorithm to objectively measure the similarity between cartridge cases. We have designed this algorithm to be approachable for researchers and practitioners alike. Chapter 2 discusses a modularization of the algorithm into a “pipeline” that enables reproducibility, experimentation, and comprehension. Our goal in this modularization is to lay a foundation upon which improvements can be easily developed. Chapter 3 details a suite of diagnostic tools that illuminate the inner-workings of the algorithm and determine when and why the algorithm “works” correctly. These diagnostics will be useful for both researchers interested in correcting the algorithm’s behavior and for practitioners concerned with applying the algorithm to case work. Chapter 4 introduces novel pieces of the pipeline that we demonstrate are improvements to predominant methods. In particular, we introduce the Automatic Cartridge Evidence Scoring (ACES) algorithm that measures the similarity between two cartridge cases using a novel set of numeric features.</p>
+</div>
+</div>
+<div id="literature-review" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">1</span> Literature Review<a href="index.html#literature-review" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="preliminaries-forensic-examinations" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Preliminaries: Forensic Examinations<a href="index.html#preliminaries-forensic-examinations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A bullet casing is found at the scene of a murder.
+The bullet is recovered from the victim during autopsy.
+A handwritten letter threatening the victim is found in their pocket.
+The assailant’s shoeprints are discovered fleeing the area.
+Who left this evidence?
+Investigators obtain the gun, shoes, and handwriting samples of a suspect.
+This evidence, along with the crime scene evidence, is sent to a forensic laboratory for analysis.
+Forensic examiners compare the evidence to establish whether they share a common source.
+The suspect is charged after the examiners conclude that there is sufficient agreement between the crime scene and suspect’s samples.</p>
+<p>The procedure described above, in which evidence is analyzed to determine its origin, is called the <em>source identification</em> problem .
+Historically, forensic examiners have relied on tools (e.g., microscopes), case facts, and experience to develop an opinion on the similarity of two pieces of evidence.
+More recently, algorithms to automatically compare evidence and provide an objective measure of similarity have been introduced.
+These algorithms can be used in a forensic examination to supplement and inform the examiner’s conclusion.
+We propose an automatic, objective solution to the source identification problem; specifically in the context of comparing fired <em>cartridge cases.</em>
+Cartridge case comparison is a sub-discipline of Firearm and Toolmark Identification, which is reviewed in the next section.</p>
+<div id="firearm-and-toolmark-identification" class="section level3 hasAnchor" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Firearm and Toolmark Identification<a href="index.html#firearm-and-toolmark-identification" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Firearm and toolmark identification involves studying markings or impressions left by a hard surface such as a firearm or screwdriver on a softer surface .
+For example, a barrel’s rifling leaves toolmarks on a bullet as it travels out of the gun.</p>
+<div id="the-firing-process" class="section level4 hasAnchor" number="1.1.1.1">
+<h4><span class="header-section-number">1.1.1.1</span> The Firing Process<a href="index.html#the-firing-process" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In this section, we describe the basic process of firing a cartridge out of a handgun or rifle.
+A <em>cartridge</em> consists of a metal casing containing primer, gunpowder, and a bullet.
+Figure <a href="index.html#fig:cartridgeDiagram">1.1</a> shows a cross-section of a cartridge featuring these components .</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cartridgeDiagram"></span>
+<img src="images/bulletdiagram1.png" alt="A cartridge containing primer, powder, and a bullet. The firing process is initiated by loading a cartridge into the barrel of a firearm." width=".5\textwidth" />
+<p class="caption">
+Figure 1.1: A cartridge containing primer, powder, and a bullet. The firing process is initiated by loading a cartridge into the barrel of a firearm.
+</p>
+</div>
+<p>First, a cartridge is loaded into the back of the barrel in an area called the <em>chamber</em>.
+Figure <a href="index.html#fig:pistolParts">1.2</a> shows an example of a cartridge loaded into the chamber of a pistol .
+Note that the hammer of the pistol in Figure <a href="index.html#fig:pistolParts">1.2</a> is pulled to hold the firing pin under spring tension.
+Upon squeezing the trigger, the firing pin releases and travels forwards at a high velocity.
+The firing pin strikes the primer of the cartridge case, causing it to explode.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:pistolParts"></span>
+<img src="images/Parts-pistol.png" alt="Cross-section of a pistol with a chambered cartridge and drawn-back hammer. Pulling the trigger releases the firing pin which strikes the cartridge case primer." width=".5\textwidth" />
+<p class="caption">
+Figure 1.2: Cross-section of a pistol with a chambered cartridge and drawn-back hammer. Pulling the trigger releases the firing pin which strikes the cartridge case primer.
+</p>
+</div>
+<p>The explosion of the primer ignites the powder in the cartridge .
+As shown in <a href="index.html#fig:firingCartridge">1.3</a>, gas rapidly expands in the cartridge that pushes the bullet down the barrel.
+Simultaneously, the rest of the cartridge travels towards the back of the barrel and strikes the back wall of the barrel, known as the <em>breech face</em>, with considerable force.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:firingCartridge"></span>
+<img src="images/firingCartridgeDiagram.jpg" alt="A cartridge after a firing pin has struck the primer. The explosion of the primer ignites the powder within the cartridge, causing gas to rapidly expand and force the bullet down the barrel." width=".5\textwidth" />
+<p class="caption">
+Figure 1.3: A cartridge after a firing pin has struck the primer. The explosion of the primer ignites the powder within the cartridge, causing gas to rapidly expand and force the bullet down the barrel.
+</p>
+</div>
+<p>Any markings on the breech face are imprinted onto the cartridge case, creating the so-called <em>breech face impressions</em>.
+These impressions are analogous to a barrel’s “fingerprint” left on the cartridge case.
+Figure <a href="index.html#fig:impressionDiagram">1.4</a> shows cartoon examples of breech face markings that appear on cartridge cases .</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:impressionDiagram"></span>
+<img src="images/breechFaceImpressionDiagram.jpg" alt="Examples of common breech face impression patterns. These are considered analogous to a breech face fingerprint left on the cartridge surface." width=".5\textwidth" />
+<p class="caption">
+Figure 1.4: Examples of common breech face impression patterns. These are considered analogous to a breech face fingerprint left on the cartridge surface.
+</p>
+</div>
+<p>Figure <a href="index.html#fig:realCartridgeCase">1.5</a> shows the base of a fired cartridge .
+The hole to the south-east of the center of the primer is the impression left by the firing pin.
+Note the horizontal striated breech face markings on the primer to the left of the firing pin impression.
+We focus on the comparison of such markings.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:realCartridgeCase"></span>
+<img src="images/realCartridgeCaseImage.jpg" alt="A fired 9mm Luger cartridge case with visible firing pin and breech face impressions." width=".7\textwidth" />
+<p class="caption">
+Figure 1.5: A fired 9mm Luger cartridge case with visible firing pin and breech face impressions.
+</p>
+</div>
+<!-- The extractor pin and ejector pushes the cartridge case out of the chamber. -->
+<!-- As shown in Figure \@ref(fig:extractorMarkings), this may leave additional markings on the cartridge surface \citep{hampton}. -->
+<!-- Firing pin, breech face, and extractor pin and ejector markings are all used in a forensic examination to determine whether two cartridge cases were fired from the same firearm. -->
+<!-- We focus on the comparison of breech face impressions specifically. -->
+<!-- ```{r,echo=FALSE,fig.cap="\\label{fig:extractorMarkings} Examples of common extractor pin and ejector markings. Forensic examiners study impressions on the cartridge to identify the source of the fired cartridge.",out.width=".5\\textwidth"} -->
+<!-- knitr::include_graphics("images/extractorPinDiagram.png") -->
+<!-- ``` -->
+</div>
+<div id="an-overview-of-firearm-and-toolmark-examinations" class="section level4 hasAnchor" number="1.1.1.2">
+<h4><span class="header-section-number">1.1.1.2</span> An Overview of Firearm and Toolmark Examinations<a href="index.html#an-overview-of-firearm-and-toolmark-examinations" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Trained firearm and toolmark examiners use a <em>comparison microscope</em> like the one in Figure <a href="index.html#fig:comparisonMicroscope">1.6</a> to examine two pieces of evidence .
+A comparison microscope combines the view of two compound microscopes into a single view via an <em>optical bridge</em>.
+This allows an examiner to view two microscope stages simultaneously under the same eyepiece.
+The right Figure <a href="index.html#fig:comparisonMicroscope">1.6</a> shows the view of two bullets under a comparison microscope.
+The white dotted line represents the split in the two fields of view.
+The goal of using a comparison microscope is to assess the “agreement” of the features on two pieces of evidence.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:comparisonMicroscope"></span>
+<img src="images/comparisonMicroscope.png" alt="A comparison microscope consists of two stages upon which evidence is placed. These stages are placed under two compound microscopes that are joined together via an optical bridge and allow for viewing of both stages simultaneously under a single eyepiece. The image on the right shows an example of a bullet viewed under a comparison microscope." width=".6\textwidth" />
+<p class="caption">
+Figure 1.6: A comparison microscope consists of two stages upon which evidence is placed. These stages are placed under two compound microscopes that are joined together via an optical bridge and allow for viewing of both stages simultaneously under a single eyepiece. The image on the right shows an example of a bullet viewed under a comparison microscope.
+</p>
+</div>
+<p>Firearm examiners distinguish between three broad categories when characterizing the features of a fired bullet or cartridge case: class, subclass, and individual characteristics.
+<em>Class characteristics</em> are features associated with the manufacturing of the firearm such as the size of ammunition chambered by the firearm, the orientation of the extractor and ejector, or the width and twist direction of the barrel rifling.
+An early step in a forensic examination is to determine the class characteristics of the firearm of origin as they can narrow the relevant population of potential firearm sources .
+For example, a 9mm cartridge case must have been fired by a firearm that can chamber 9mm ammunition.</p>
+<p>If the discernible class characteristics match between two pieces of evidence, then the examiner uses a comparison microscope to compare the <em>individual characteristics</em> of the evidence.
+Individual characteristics are markings attributed to imperfections on the firearm surface due to the manufacturing process, use, and wear of the tool.
+For example, markings on the breech face of a barrel often form after repeated fires of the firearm.
+Individual characteristics are assumed to occur randomly across different firearms and therefore can be used to distinguish between two firearms.
+The examiner independently rotates and translates the stages of a comparison microscope to find the position where the markings on the two pieces of evidence match .
+An examiner concludes that the evidence originated from the same firearm if the individual characteristics are in “sufficient agreement” .</p>
+<p><em>Subclass characteristics</em> exist between the macro-level class and micro-level individual characteristics.
+These characteristics relate to markings reproduced across a subgroup of firearms.
+For example, breech faces manufactured by the same milling machine may share similar markings .
+It can be difficult to distinguish between individual and subclass characteristics during an examination.
+An examiner’s decision process may be affected if the existence of subclass characteristics is suspected.</p>
+<p>Many firearm and toolmark examiners in the United States adhere to the Association of Firearm and Toolmark Examiners (AFTE) Range of Conclusions when making their evidentiary conclusions .
+According to these guidelines, six possible conclusions can be made in a firearm and toolmark examination:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Identification</strong>: Agreement of a combination of individual characteristics and all discernible class characteristics where the extent of agreement exceeds that which can occur in the comparison of toolmarks made by different tools and is consistent with the agreement demonstrated by toolmarks known to have been produced by the same tool.</p></li>
+<li><p><strong>Inconclusive</strong>: there are three possible inconclusive decisions</p></li>
+</ol>
+<blockquote>
+<p>2.1 Some agreement of individual characteristics and all discernible class characteristics, but insufficient for an identification.</p>
+</blockquote>
+<blockquote>
+<p>2.2 Agreement of all discernible class characteristics without agreement or disagreement of individual characteristics due to an absence, insufficiency, or lack of reproducibility.</p>
+</blockquote>
+<blockquote>
+<p>2.3 Agreement of all discernible class characteristics and disagreement of individual characteristics, but insufficient for an elimination.</p>
+</blockquote>
+<ol start="3" style="list-style-type: decimal">
+<li><p><strong>Elimination</strong>: Significant disagreement of discernible class characteristics and/or individual characteristics.</p></li>
+<li><p><strong>Unsuitable</strong>: Unsuitable for examination.</p></li>
+</ol>
+<p>Forensic examinations first involve an examination of a “questioned” bullet or cartridge case for identifiable toolmarks .
+The examiner classifies markings by their class, individual, and subclass characteristics.
+The examiner compares these characteristics to “known source” fires obtained from a suspect’s firearm if one is available.
+Otherwise, class characteristics from the questioned bullet can be used to narrow the relevant population and provide potential leads.
+An examiner’s decision may be used as part of an ongoing investigation or presented at trial as expert testimony.</p>
+<p>Standard operating procedures for assessing and comparing evidence differ between forensic laboratories.
+For example, some labs collapse the three possible inconclusive decisions into a single decision or prohibit examiners from making an elimination based on differences in individual characteristics .</p>
+</div>
+</div>
+<div id="why-should-firearm-and-toolmark-identification-change" class="section level3 hasAnchor" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> Why Should Firearm and Toolmark Identification Change?<a href="index.html#why-should-firearm-and-toolmark-identification-change" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In 2009, the National Research Council released a report assessing a number of forensic disciplines including Firearm and Toolmark analysis.
+The report pointed out that firearm and toolmark analysis lacked a precisely defined process and that little research had been done to determine the reliability or repeatability of the methods.
+<em>Reliability</em> refers to the ability to correctly classify evidence as originating from the same source or not.
+<em>Repeatability</em> refers to the consistency of conclusions; for example, whether an examiner makes the same conclusion if presented with the same evidence on different occasions.
+Two of the recommendations from this study were to establish rigorously-validated laboratory procedures and “develop automated techniques capable of enhancing forensic technologies .”</p>
+<p>A number of studies assess the reliability and repeatability of a firearm and toolmark examination (non-exhaustively: ).
+These studies indicate that examiners have a low error rate when comparing evidence obtained under controlled conditions (i.e., for which ground-truth is known).
+However, as pointed out in a 2016 report from the President’s Council of Advisors on Science and Technology, many of these studies, save , were not “appropriately designed to test the foundational validity and estimate reliability .”
+The report called for more properly-designed studies to establish the scientific validity of the discipline.</p>
+<p>Due to the opacity in the decision-making process, examiners are referred to as “black boxes” in a similar sense to black-box algorithms .
+Their evidentiary conclusions are fundamentally subjective and empirical evidence suggests that conclusions may differ if examiners are presented with the same evidence on different occasions .
+Examiners rarely need to provide quantitative justification for their conclusion.
+Even for qualitative justifications, it can be difficult to determine what the examiner is actually “looking at” to arrive at their conclusion .
+This suggests the need to supplement these black box decisions with transparent, objective techniques that quantitatively measure the similarity between pieces of evidence.
+As stated in , efforts should be made to “convert firearms analysis from a subjective method to an objective method” including “developing and testing image-analysis algorithms for comparing the similarity of tool marks.”
+This work focuses on the development of an algorithm for comparing breech face impressions on cartridge cases.</p>
+</div>
+</div>
+<div id="forensic-comparison-pipelines" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Forensic Comparison Pipelines<a href="index.html#forensic-comparison-pipelines" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Recent work in many forensic disciplines has focused on the development of algorithms to measure the similarity between pieces of evidence including glass , handwriting , shoe prints , ballistics , and toolmarks .
+These algorithms often result in a numerical score for two pieces of evidence.
+A numerical score can add more nuance to an evidentiary conclusion beyond simply stating whether the evidence originated from the same source as would be the case in binary classification.
+For example, a larger similarity scores implies the evidence is more similar.
+However, an examiner must ultimately reach one of two conclusions (or three, if admitting inconclusives).
+Whether a conclusion should be based solely on an algorithm’s similarity score or if an examiner should incorporate the similarity score into their own decision-making process is still up for debate .
+In this work we view forensic comparison algorithms as a supplement to, rather than a replacement of, the traditional forensic examination.</p>
+<p>We treat forensic comparison algorithms as evidence-to-classification “pipelines.”
+Broadly, the steps of the pipeline include :</p>
+<ol style="list-style-type: decimal">
+<li><p>capturing a digital representation of the evidence,</p></li>
+<li><p>pre-processing this representation to isolate or emphasize a region of interest of the evidence,</p></li>
+<li><p>comparing regions of interest from two different pieces of evidence to obtain a (perhaps high-dimensional) set of similarity features,</p></li>
+<li><p>combining these features into a low-dimensional set of similarity scores, and</p></li>
+<li><p>defining a classification rule based on these similarity features.</p></li>
+</ol>
+<p>We add to this structure the emphasis that each step of the pipeline can be further broken-down into modularized pieces.
+For example, the pre-processing step may include multiple sub-procedures to isolate a region of interest of the evidence.
+Figure <a href="index.html#fig:pipelineDiagram">1.7</a> shows two possible variations of the cartridge case comparison pipeline as well as the parameters requiring manual specification and alternative modules.
+The benefits of this modularization include easing the process of experimenting with different parameters/sub-procedures and improving the comprehensibility of the pipeline.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:pipelineDiagram"></span>
+<img src="images/pipelineDiagram_6-8-22.png" alt="Variations upon the cartridge case comparison pipeline. The first two columns detail the pipeline with different sub-procedures. The third columns shows the parameters that require manual specification at each step. The fourth column shows  alternative processing steps that could replace steps in the existing pipeline." width="\textwidth" />
+<p class="caption">
+Figure 1.7: Variations upon the cartridge case comparison pipeline. The first two columns detail the pipeline with different sub-procedures. The third columns shows the parameters that require manual specification at each step. The fourth column shows alternative processing steps that could replace steps in the existing pipeline.
+</p>
+</div>
+<p>In the following sections, we detail recent advances to each of the five steps in the pipeline outlined above.
+We narrow our focus to advances made in comparing firearms evidence.</p>
+<div id="digital-representations-of-evidence" class="section level3 hasAnchor" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Digital Representations of Evidence<a href="index.html#digital-representations-of-evidence" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Digital representations of cartridge case evidence commonly come in two forms: 2D optical images or 3D topographic scans.
+A common way to take 2D optical images is to take a picture of the cartridge case surface lit up under a microscope, implying a dependence on the lighting conditions under which the picture was taken.
+Some recent work has focused on comparing 2D optical images , although the use of 3D microscopes has recently become more prevalent to capture the surface of ballistics evidence.</p>
+<p>Using a 3D microscope allows for the scanning of surfaces at the micron (or micrometer) level under light-agnostic conditions .
+Figure <a href="index.html#fig:cartridgeCaseImages">1.8</a> shows a 2D image and 3D topography of the same cartridge case primer from .
+<!-- One common 3D scanning procedure is "disc scanning confocal microscopy." -->
+<!-- This procedure works by shining a focused beam of light on the cartridge case surface. -->
+<!-- This light is reflected back onto a pinhole allowing a limited height range to pass through. -->
+<!-- The microscope scans through different height range "slices" and compiles all these slices into a single 3D topography of the cartridge case primer surface. -->
+<!-- The Microdisplay Scan Confocal Microscope from Sensofar\texttrademark Metrology is shown in Figure \@ref(fig:sensofarScanner) \citep{bermudez2017confocal}. --></p>
+<!-- ```{r,echo=FALSE,fig.cap="\\label{fig:sensofarScanner} The Microdisplay Scan Confocal Microscope from Sensofar\\texttrademark\\ Metrology. The cartridge case surface is captured by scanning through a range of vertical slices and compiling these slices into a single 3D topography.",out.width=".5\\textwidth"} -->
+<!-- knitr::include_graphics("images/sensofarScanner.png") -->
+<!-- ``` -->
+<!-- Figure \@ref(fig:cartridgeCaseImages) shows a 2D image and 3D topography of the same cartridge case primer from \citet{fadulempirical2011}. -->
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cartridgeCaseImages"></span>
+<img src="images/fadul1-1_sidebyside.PNG" alt="A cartridge case captured using 2D confocal reflectance microscopy (left) and 3D disc scanning confocal microscopy (right)." width="\textwidth" />
+<p class="caption">
+Figure 1.8: A cartridge case captured using 2D confocal reflectance microscopy (left) and 3D disc scanning confocal microscopy (right).
+</p>
+</div>
+<p>Recently, Cadre Forensicsintroduced the TopMatch-3D High-Capacity Scanner .
+Figure <a href="index.html#fig:topMatchScanner">1.9</a> shows a TopMatch scanner with a tray of 15 fired cartridge cases .
+This scanner collects images of a gel pad under various lighting conditions into which the cartridge case surface is impressed. Proprietary algorithms combine these images into a regular 2D array called a <em>surface matrix</em>.
+Elements of the surface matrix represent the relative height value of the associated surface.<br />
+The physical dimensions of these scans are about 5.5 <span class="math inline">\(mm^2\)</span> captured at a resolution of 1.84 microns per pixel (1000 microns equals 1 mm).</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:topMatchScanner"></span>
+<img src="images/TopMatchSystem7.png" alt="The TopMatch-3D High-Capacity Scanner from Cadre Forensics\texttrademark\ . The scanner captures topographic scans of a gel pad into which a cartridge case surface is impressed." width=".7\textwidth" />
+<p class="caption">
+Figure 1.9: The TopMatch-3D High-Capacity Scanner from Cadre Forensics . The scanner captures topographic scans of a gel pad into which a cartridge case surface is impressed.
+</p>
+</div>
+<p>The ISO standard x3p file format is commonly used to save 3D scans .
+An x3p is a container consisting of a single surface matrix representing the height values of the surface and metadata concerning the parameters under which the scan was taken as shown in Figure <a href="index.html#fig:x3pFlowchart">1.10</a> .
+A number of studies suggest that 3D topographic scans of cartridge case surfaces lead to more accurate classifications than 2D optical images of the same evidence .</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:x3pFlowchart"></span>
+<img src="images/x3pFlowchart.jpg" alt="The hierarchy of information stored in the x3p file format for both bullet and cartridge case evidence." width=".7\textwidth" />
+<p class="caption">
+Figure 1.10: The hierarchy of information stored in the x3p file format for both bullet and cartridge case evidence.
+</p>
+</div>
+</div>
+<div id="pre-processing-procedures-for-forensic-data" class="section level3 hasAnchor" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Pre-processing Procedures for Forensic Data<a href="index.html#pre-processing-procedures-for-forensic-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>After obtaining a surface’s digital representation, we next want to isolate regions of the surface containing distinguishable markings.
+Figure <a href="index.html#fig:cartridgeCaseImages">1.8</a> shows an example of a 2D image and 3D scan of the same cartridge case.
+In both representations, the corners of these arrays include regions of the cartridge case surface outside of the primer.
+The center of the cartridge case primer contains an impression left by the firing pin during the firing process.
+<!-- In most applications, impressions left by the firing pin are compared separately from the breech face impressions \citep{Zhang2016}. -->
+<!-- Because we are interested in the comparison of breech face impressions between two cartridge cases, only the annular region surrounding the firing pin impression is of interest. -->
+We wish to isolate the annular breech face region around the firing pin impression from the rest of the captured surface.</p>
+<p>Both the 2D optical and 3D topographic representations of cartridge case surfaces are fundamentally pictorial in nature.
+As such, breech face impression isolation commonly relies on image processing and computer vision techniques.
+uses a combination of histogram equalization, Canny edge detection, and morphological operations to isolate breech face impressions in 2D images.
+A Gaussian filter is another common tool to emphasize breech face impressions.
+apply a low-pass Gaussian filter to remove noise via a Gaussian-weighted moving average operation.
+and use a bandpass Gaussian filter to simultaneously remove noise and unwanted global structure from the scan.
+and use a “robust” variant of the Gaussian filter to omit outliers from the scan .</p>
+<p>Instead of automatic procedures, others have used subjective human intervention to isolate the breech face impressions.
+For example, performed “manually trimming to extract the breech face impression of interest” on a set of cartridge case scans.
+In , examiners manually identify the borders of the breech face impression region by placing points around an image of the cartridge case primer.</p>
+</div>
+<div id="forensic-data-feature-extraction" class="section level3 hasAnchor" number="1.2.3">
+<h3><span class="header-section-number">1.2.3</span> Forensic Data Feature Extraction<a href="index.html#forensic-data-feature-extraction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>After isolating the breech face impressions, we compare two pre-processed cartridge case scans and compute a set of similarity features.
+Because the cartridge cases at this point are represented as high-dimensional matrices, this process can be thought of as a dimensionality reduction of the high-dimensional surface arrays to a set of similarity statistics.</p>
+<p>A variety of features have been proposed to quantify the similarity between two cartridge case surface arrays.
+propose calculating the cross-correlation function (CCF) value between two cartridge cases across a grid of rotations.
+The cross-correlation function measures the similarity between two matrices for every translation of one matrix against the other.
+For two matching cartridge cases, we assume that the CCF will be largest after aligning the cartridge cases surfaces by their shared breech face impressions.
+Conversely, we expect the CCF to be relatively small for two non-matching cartridge cases no matter the alignment.
+propose combining the CCF between two aligned scans with the element-wise median Euclidean distance and median difference between the normal vectors at each point of the surface.
+and applied Principal Component Analysis to reduce these three features down to two principal components for the sake of fitting a 2D kernel density estimator.</p>
+<p>Pertinent to this work is the cell-based comparison procedure originally outlined in .
+The underlying assumption of is similar to that of : that two matching cartridge cases will exhibit higher similarity when they are close to being correctly aligned.
+While measured similarity using the CCF between the two full scans, proposes partitioning the scans into a grid of “correlation cells” and counting the number of similar cells between the two scans.
+The rationale behind this procedure is that many cartridge case scans have only a few regions with discriminatory markings.
+As such, comparing full scans may result in a lower correlation than if one were to focus on the highly-discriminatory regions.
+In theory, dividing the scans into cells allows for the identification of these regions.
+After breaking a scan into a grid of cells, each cell is compared to the other scan to identify the rotation and translation, known together as the <em>registration</em>, at which the cross-correlation is maximized.
+assumes that the cells from a truly matching pair of cartridge cases will “agree” on their registration in the other scan.
+referred to the procedure of counting the number of similar cells the “Congruent Matching Cells” method.
+Chapter 2 contains more details of this procedure.</p>
+</div>
+<div id="similarity-scores-classification-rules-for-forensic-data" class="section level3 hasAnchor" number="1.2.4">
+<h3><span class="header-section-number">1.2.4</span> Similarity Scores &amp; Classification Rules for Forensic Data<a href="index.html#similarity-scores-classification-rules-for-forensic-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Following feature extraction, the dimensionality of these features is further reduced to a low-dimensional, usually univariate, similarity score.
+We can define a decision boundary based on the value of the similarity score to classify cartridge case pairs as matching or non-matching.</p>
+<p>After calculating the CCF across various possible registrations, propose using the maximum observed CCF value as the univariate similarity score.
+They perform binary classifications by setting a CCF threshold above which pairs are classified as “matches” and below which as “non-matches.”
+proposes setting a CCF cut-off that maximizes the precision and recall in a training set of pairwise comparisons.</p>
+<p> use a training set to fit two 2D kernel density estimates to a set of features from matching and non-matching comparisons.
+Using these estimates, they compute a score-based likelihood ratio (SLR), which can be interpreted as a similarity score .</p>
+<p>For the Congruent Matching cells method, proposes using the number of cells that agree on a registration, the “congruent matching” cells, as a similarity score.
+The criteria used to define “congruent matching” cells has changed across papers and will be discussed in greater detail in Chapter 2.
+The authors of these papers have consistently used six congruent matching cells as a decision boundary to distinguish matching and non-matching cartridge case pairs.</p>
+<p> applies the Density-Based Spatial Clustering of Applications with Noise (DBSCAN) algorithm to the features from the cell-based comparison procedure to determine if any clusters form amongst the per-cell estimated registration values.
+This is based on the assumption that any cells that come to a consensus on their registration should form a cluster in translation <span class="math inline">\((x,y)\)</span> and rotation <span class="math inline">\(\theta\)</span> space.
+proposes a binary classifier based on whether any clusters are identified by the DBSCAN algorithm .
+If a cluster is found for a particular pairwise comparison, then that pair is classified as a “match” and otherwise as a “non-match.”</p>
+<p>Apart from the algorithms described in and , the authors of these comparison algorithms have not provided publicly available code or data.
+As such, although the results reported in associated papers are promising, it is difficult or impossible for other researchers to verify or reproduce the findings.
+Results must be reproducible to be accepted by others in any scientific domain.
+In the next section, we discuss recent challenges and opportunities in computationally reproducible research.</p>
+</div>
+<div id="reproducibility-of-comparison-pipelines" class="section level3 hasAnchor" number="1.2.5">
+<h3><span class="header-section-number">1.2.5</span> Reproducibility of Comparison Pipelines<a href="index.html#reproducibility-of-comparison-pipelines" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p> defines <em>reproducibility</em> as “obtaining consistent computational results using the same input data, computational steps, methods, code, and conditions of analysis.”
+While not exact in their definition of “consistent,” the authors assert that, barring a few exceptions, it is reasonable to expect that the results obtained by a second researcher, after applying the exact same processing steps to the exact same data, be the exact same as the original results.
+<!-- Among the exceptions given is if the original researcher had made a mistake in writing the original source code. -->
+In either case, they assert that “a study’s data and code have to be available in order for others to reproduce and confirm results.”
+Given data and code, researchers are able to verify the results, incorporate the materials into their own research, and improve or accelerate discovery .</p>
+<p>A number of studies indicate that computationally reproducible research is sparse across various disciplines.
+and studied the reproducibility of articles sampled from the <em>Journal of Computational Physics</em> and the journal <em>Science</em>, respectively.
+In the former, found that zero of 306 randomly selected articles from the <em>Journal of Computaional Physics</em> were “straightforward to reproduce with minimal effort” and, at best, that five articles were “reproducible after some tweaking.”
+In the latter, found that only 3 of 204 randomly selected articles from <em>Science</em> were “straightforward to reproduce with minimal effort;” despite a journal policy requiring that all code and data used in the paper be made available to any reader.
+Similar findings were found in (29 of 59 economic papers reproducible), (zero of 268 biomedical papers provided raw data and 1 in 268 linked to a full study protocol), (50% or more published articles include data or code in only 27 of 333 economics journals), and (24 of 400 AI conference papers included code).
+A common recommendation amongst these authors is to establish of rigorous tools and standards to promote reproducibility.
+This includes making code and data used in a paper easily-accessible to readers.</p>
+<p>Infrastructure already exists to ease the process of developing, maintaining, and sharing open-source code and data.
+Data repositories such as the NIST Ballistics Toolmark Research Database provide open access to raw data.
+discuss the use of package managers such as Conda (<a href="https://anaconda.org/anaconda/conda">https://anaconda.org/anaconda/conda</a>), container software such as Docker (<a href="https://www.docker.com/">https://www.docker.com/</a>), and virtual machine software to preserve the entire data analysis environment in-perpetuity.
+For situations in which VMs or containers aren’t available, software such as the <code>manager</code> R package allows users to “compare package inventories across machines, users, and time to identify changes in functions and objects .”
+reference repositories like Bioconductor that make it easy to document and distribute code.
+Further, software such as the <code>knitr</code> R package enable “literate programming” in which prose and executed code can be interwoven to make it easier to understand the code’s function.
+These tools make data, code, and derivative research findings more accessible, in terms of both acquisition and comprehensibility, to consumers and fellow researchers.</p>
+</div>
+</div>
+<div id="diagnostic-tools" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Diagnostic Tools<a href="index.html#diagnostic-tools" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Forensic examiners often provide expert testimony in court cases.
+As part of this testimony, an examiner is allowed to provide facts about the outcome of a forensic examination and their opinion about what the results mean.
+A party to a court may challenge the examiner on the validity of the underlying scientific method or whether they interpreted the results correctly .
+In these situations, examiners need to explain the process by which they reached an evidentiary conclusion to the fact finders of the case; namely, the judge or jury.
+As algorithms are more often used in forensic examinations, the technical knowledge required to understand and explain an algorithm to lay-people has increased.
+Indeed, even the most effective algorithms may be moot if an examiner can’t explain the algorithm in their testimony.
+While in some cases the authors of the algorithm have been willing to provide testimony to establish the validity of the algorithm , this will become less viable as algorithms become more prevalent.</p>
+<p>The resources required to educate examiners on the theory and implementation of highly technical algorithms makes additional training seem currently implausible.
+An alternative is to develop algorithms from the ground-up to be intuitive for examiners to understand and explain to others.
+<em>Explainability</em> refers to the ability to identify the factors that contributed to the results of an algorithm .
+For example, understanding why a classifier predicted one class over another.
+<em>Diagnostics</em> are tools to explain or justify the behavior of a model or algorithm in specific instances.
+Myriad diagnostic tools exist to explain the results of an algorithm.
+These range from identifying instances of the training set that illuminate how the model operates to fitting more transparent models that accurately approximate the complex model to explaining the behavior of the algorithm in a small region of interest of the prediction space .
+Many of these methods require additional technical knowledge to interpret these explanations.</p>
+<div id="visual-diagnostics" class="section level3 hasAnchor" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Visual Diagnostics<a href="index.html#visual-diagnostics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A less technical approach is to use visualizations that facilitate understanding of model behavior.
+Properly constructed visuals enable both exploratory data analysis and diagnostics , which are critical steps in the data analysis process for anticipating and assessing model fit.
+Given that many of the procedures by which cartridge case evidence is captured, processed, and compared are based on image processing techniques, a visual diagnostic is an intuitive mode of explanation for researchers and lay-people alike.
+As stated in , “graphical methods tend to show data sets as a whole, allowing us to summarize the behavior and to study detail. This leads to much more thorough data analyses.”</p>
+<p>Numerical statistics summarize the behavior of data, but miss the detail referenced in Cleveland’s quote .
+To illustrate this, consider the famous data sets from known as Anscombe’s quartet.
+The two variables in each data set are plotted against one another in Figure <a href="index.html#fig:anscombeQuartet">1.11</a>.
+There are clear differences in the relationship between <code>x</code> and <code>y</code> across these four data sets.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:anscombeQuartet"></span>
+<img src="thesis_files/figure-html/anscombeQuartet-1.png" alt="A visualization of Anscombe's quartet. Despite there being obvious differences between these four data sets, their summary statistics are nearly identical" width="480" />
+<p class="caption">
+Figure 1.11: A visualization of Anscombe’s quartet. Despite there being obvious differences between these four data sets, their summary statistics are nearly identical
+</p>
+</div>
+<p>Despite these differences, Table <a href="#tab:anscombeStats"><strong>??</strong></a> shows that summary statistics, namely the first two moments, are identical.
+This demonstrates that visual diagnostics can be more effective at uncovering data behavior than summary statistics (at least low-order moments).</p>
+<p>Given the pivotal role that visual diagnostics play in the data analysis pipeline, we now consider best practices in creating data visualizations.
+Human brains are wired for seeing patterns and differences, and for understanding spatial relationships from this .
+As such, an effective visual diagnostic or data visualization is one that conveys patterns quickly and easily, and with minimal scope for understanding.
+Arising originally from a psychological theory of perception, the Gestalt Laws of Perceptual Organization summarize important considerations when constructing statistical graphics.
+The Gestalt laws are as follows:</p>
+<ul>
+<li><p><strong>Pragnanz - the law of simplicity:</strong> Every stimulus pattern is seen in such a away that the resulting structure is as simple as possible.</p></li>
+<li><p><strong>Proximity:</strong> Things that are near each other appear to be grouped together.</p></li>
+<li><p><strong>Good Continuation:</strong> Points that, when connected, result in straight or smoothly curving lines are seen as belonging together, and the lines tend to be seen in such a way as to follow the smoothest path.</p></li>
+<li><p><strong>Similarity:</strong> Similar things appear to be grouped together.</p></li>
+<li><p><strong>Common Region:</strong> Elements that are within the same region of space appear to be grouped together.</p></li>
+<li><p><strong>Uniform Connectedness:</strong> A connected region of visual properties, such as the lightness, color, texture, or motion, is perceived as a single unit.</p></li>
+<li><p><strong>Synchrony:</strong> Visual events that occur at the same time are perceived as belonging together.</p></li>
+<li><p><strong>Common Fate:</strong> Things that are moving in the same direction appear to be grouped together.</p></li>
+<li><p><strong>Familiarity:</strong> Things that form patterns that are familiar or meaningful are likely to become grouped together.</p></li>
+</ul>
+<p>These laws provide guidance on how to construct a visual that concisely conveys a pattern or difference in data.
+For data visualization, additional laws include :</p>
+<ul>
+<li><p><strong>Use and Effective Geometry:</strong> Choose a geometry (shape and features of a statistical graphic) that is appropriate to the data.</p></li>
+<li><p><strong>Colors Always Mean Something:</strong> Colors in visuals can convey groupings or a range of values.</p></li>
+</ul>
+<p>Figure <a href="index.html#fig:chickweightExample">1.12</a> depicts a case study of the Gestalt principles in practice.
+The plot shows the weight over time of chicks fed one of two experimental diets .
+Individual points represent the weight of a single chick on a particular day.
+Connected points represent the weight for a single chick over time.
+This is an example of using an effective geometry (point &amp; line graph to represent time series) along with the Gestalt law of Good Continuation.
+We further apply the Gestalt law of Common Region to facet the data set into plots based on diet.
+This implicitly communicates to the audience that the weights of two diet groups of chicks is expected to differ.
+Indeed, appealing to the Gestalt law of Uniform Connectedness, the “motion” of the grouped time series suggests that chicks given Diet 2 tend to gain weight more rapidly than those given Diet 1.
+This may suggest a particular modeling structure for these time series (e.g., diet fixed effect) or the need to assess the experimental design to ensure that the assumption that the chicks were randomly sampled from the same population is appropriate.
+We see how such a plot can be used for both exploratory data analysis or as a post-hoc diagnostic tool.
+Alternative to faceting, the time series from these two diet groups could be combined into a single plot and distinguished by color.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:chickweightExample"></span>
+<img src="thesis_files/figure-html/chickweightExample-1.png" alt="An example of a statistical graphic that uses the Gestalt Laws of Perceptual Organization to communicate data findings." width="480" />
+<p class="caption">
+Figure 1.12: An example of a statistical graphic that uses the Gestalt Laws of Perceptual Organization to communicate data findings.
+</p>
+</div>
+<p>The R programming language provides a variety of tools to create visual diagnostics.
+Among the most robust of these tools is the ggplot2 package .
+This package extends the “Grammar of Graphics” introduced in to provide a user-friendly structure to create statistical graphics.
+We use the <code>+</code> operator to “layer” features of a statistical graphic (e.g., elements, transformations, guides, labels) on a blank canvas.
+<a href="index.html#fig:ggplot2Example">1.13</a> along with the accompanying code chunk demonstrates how to create a residual plot from a simple linear regression using the ggplot2 package.
+This visual diagnostic allows the analyst or audience to determine whether the homoscedasticity or linear form assumptions underlying simple linear regression are met.
+For those willing to learn the “grammar,” the code used to create these statistical graphics can easily be re-used and tweaked to fit a specific application.
+1</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a>lmFit <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> rating <span class="sc">~</span> complaints,<span class="at">data =</span> datasets<span class="sc">::</span>attitude)</span>
+<span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="index.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-4"><a href="index.html#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="index.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">Complaints =</span> datasets<span class="sc">::</span>attitude<span class="sc">$</span>complaints,</span>
+<span id="cb1-6"><a href="index.html#cb1-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">Residuals =</span> lmFit<span class="sc">$</span>residuals)) <span class="sc">+</span></span>
+<span id="cb1-7"><a href="index.html#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> Complaints,<span class="at">y =</span> Residuals)) <span class="sc">+</span></span>
+<span id="cb1-8"><a href="index.html#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>,<span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb1-9"><a href="index.html#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;% in-favor of handling of employee complaints&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ggplot2Example"></span>
+<img src="thesis_files/figure-html/ggplot2Example-1.png" alt="An example of using the ggplot2 package to construct a residual plot from a simple linear regression. The features of the statistical graphic are combined layer-by-layer using the + operator as we see in the accompanying code chunk." width="480" />
+<p class="caption">
+Figure 1.13: An example of using the ggplot2 package to construct a residual plot from a simple linear regression. The features of the statistical graphic are combined layer-by-layer using the + operator as we see in the accompanying code chunk.
+</p>
+</div>
+<p>Properly constructed visual diagnostics provide the audience with a nuanced yet intuitive explanation of the behavior of a model or algorithm that summary diagnostic statistics may not convey.
+Tools like the ggplot2 package provide a coherent, thorough infrastructure for creating such visual diagnostics.
+However, the tools discussed thus far are useful for creating <em>static</em> visualizations.
+In the next section, we discuss the benefits of making a visual diagnostic interactive to user input.</p>
+</div>
+<div id="interactive-diagnostics" class="section level3 hasAnchor" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> Interactive Diagnostics<a href="index.html#interactive-diagnostics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Interactive diagnostic tools encourage both expert and lay users to engage with an analysis pipeline that otherwise may be technically or conceptually inaccessible.
+Rather than answering a question posed by the author of a plot as a static plot does, such interactive diagnostic tools enable the audience to formulate and answer their own questions.
+This leads to deeper engagement with the data .
+While the ggplot2 package eases the process of constructing visual diagnostics, software such as the shiny R package enables the consumer of the diagnostic to interact with the visualizations and underlying data.
+The shiny package provides tools for using R to build web applications run on HTML, CSS, and JavaScript.
+Among other functionality, these applications allow users to upload or create their own data, set parameters for an analysis, interact with visualizations or data sets (e.g., by hovering to display a tooltip), and export their analyses in various file formats .</p>
+<!-- Figure \@ref(fig:IPDmada) \citep{wang2021ipdmada} shows a screenshot of the IPDmada shiny application that enables users to perform a meta-analysis of diagnostic test accuracy studies at the individual patient level (an individual patient data meta-analysis or IPD-MA) using a variety of statistical techniques. -->
+<!-- As seen in \@ref(fig:IPDmada), the user can upload their own data csv file and select parameters that will enable the importing of the data. -->
+<!-- The other tabs at the top of the application provide statistical tools to analyze the uploaded data. -->
+<!-- This application is useful for researchers who are interested in analyzing diagnostic test accuracy data, yet do not necessarily have the coding skills to perform such an analysis in R themselves. -->
+<!-- ```{r,fig.cap="\\label{fig:IPDmada} The IPDmada shiny application allows users to analyze individual patient data from a diagnostic test accuracy study using a variety of statistical techniques.",fig.height = 3,out.width=".7\\textwidth"} -->
+<!-- knitr::include_graphics("images/IPDmadaShinyExample.png") -->
+<!-- ``` -->
+<p>Several recently-released software provide interactive diagnostic applications for firarms and toolmarks evidence.
+Most notable of these software is the Virtual Comparison Microscopy application from Cadre Forensics.
+In contrast to traditional Light Comparison Microscopy (LCM) that uses a comparison microscope, this software displays digital representations of the cartridge case surface on a computer screen.
+Figure <a href="index.html#fig:topMatchAnnotationExample">1.14</a> shows a screenshot of comparing two cartridge case surfaces .
+The functionality shown allows the user to manually annotate the surfaces of the two cartridge cases to identify similar and different markings.
+For example, the user has selected a shade of blue to represent similarities between the two surfaces.
+Conversely, shades of yellow and red represent differences between the two surfaces.
+This sort of interactivity allows the user to customize their analysis more effectively than they could with a static visualization.
+Further, we can save a history of the annotations for further analysis.
+These annotations are a visual diagnostic tool that allows others to understand the specific patterns that the examiner looks at during an examination.
+Another major benefit of using VCM over LCM is the ability to share scans over the internet rather than sending the physical specimen to another lab, which takes time and may damage the specimen.
+, , and all demonstrate that performing forensic examinations using such VCM technology yields equally, if not more, accurate conclusions compared to traditional LCM methods.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:topMatchAnnotationExample"></span>
+<img src="images/topMatchSoftwareAnnotation.jpg" alt="A screenshot of the TopMatch-3D\texttrademark\ Virtual Comparison Microscopy software. In this example, similar and different markings on the cartridge case scans are manually annotated by the user using shades of blue and yellow/red, respectively." width="\textwidth" />
+<p class="caption">
+Figure 1.14: A screenshot of the TopMatch-3D Virtual Comparison Microscopy software. In this example, similar and different markings on the cartridge case scans are manually annotated by the user using shades of blue and yellow/red, respectively.
+</p>
+</div>
+<p>In Chapter 3, we introduce a suite of static and interactive visual diagnostic tools.
+We discuss how these visual diagnostic tools can be used by both researchers and practitioners to understand the behavior of automatic cartridge case comparison algorithms.</p>
+</div>
+</div>
+<div id="automating-and-improving-the-cartridge-case-comparison-pipeline" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Automating and Improving the Cartridge Case Comparison Pipeline<a href="index.html#automating-and-improving-the-cartridge-case-comparison-pipeline" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this section, we review preliminaries needed to understand various sub-routines of the cartridge case comparison pipeline.</p>
+<div id="image-processing-techniques" class="section level3 hasAnchor" number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> Image Processing Techniques<a href="index.html#image-processing-techniques" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We first review image processing and computer vision algorithms used in cartridge case comparison algorithms.
+Throughout this section, let <span class="math inline">\(A, B \in \mathbb{R}^{k \times k}\)</span> denote two images for <span class="math inline">\(k &gt; 0\)</span>.
+We use lowercase letters and subscripts to denote a particular value of a matrix: <span class="math inline">\(a_{ij}\)</span> is the value in the <span class="math inline">\(i\)</span>-th row and <span class="math inline">\(j\)</span>-th column, starting in the top-left corner, of matrix <span class="math inline">\(A\)</span>.
+In our application, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> represent the surface matrices of two cartridge cases.</p>
+<div id="image-registration" class="section level4 hasAnchor" number="1.4.1.1">
+<h4><span class="header-section-number">1.4.1.1</span> Image Registration<a href="index.html#image-registration" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><em>Image registration</em> involves transforming image <span class="math inline">\(B\)</span> to align best with image <span class="math inline">\(A\)</span> (or vice versa) .
+In our application, this transformation is composed of a discrete translation <span class="math inline">\((m^*,n^*) \in \mathbb{Z}^2\)</span> and rotation by <span class="math inline">\(\theta^* \in [-180^\circ, 180^\circ]\)</span>.
+Together, we refer to <span class="math inline">\((m^*,n^*,\theta^*)\)</span> as the “registration” of image <span class="math inline">\(B\)</span> to <span class="math inline">\(A\)</span>.
+To determine the optimal registration, we calculate the <em>cross-correlation function</em> between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, denoted <span class="math inline">\((A \star B)\)</span>, which measures the similarity between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> for every possible translation of <span class="math inline">\(B\)</span>.
+The CCF between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is a 2D array of dimension <span class="math inline">\(2k - 1 \times 2k - 1\)</span> where the value of the <span class="math inline">\(m,n\)</span>-th element is given by:
+<span class="math display">\[
+(a \star b)_{mn} = \sum_{i=1}^k \sum_{j=1}^k a_{mn} \cdot b_{i + m,j + n}
+\]</span>
+where <span class="math inline">\(1 \leq m,n \leq 2k -1\)</span>.
+The value <span class="math inline">\((a \star b)_{mn}\)</span> quantifies the similarity between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> after <span class="math inline">\(B\)</span> is translated <span class="math inline">\(m\)</span> elements horizontally and <span class="math inline">\(n\)</span> elements vertically.</p>
+<p>A natural choice for aligning <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is the translation that maximizes the CCF.
+However, we must also consider that <span class="math inline">\(B\)</span> may also need to be rotated to align optimally with <span class="math inline">\(A\)</span>.
+We therefore compute the maximum CCF value across a range of rotations of <span class="math inline">\(B\)</span>.
+Let <span class="math inline">\(B_\theta\)</span> denote <span class="math inline">\(B\)</span> rotated by an angle <span class="math inline">\(\theta\)</span> and <span class="math inline">\(b_{\theta_{mn}}\)</span> the <span class="math inline">\(m,n\)</span>-th element of <span class="math inline">\(B_\theta\)</span>. Then the estimated registration <span class="math inline">\((m^*, n^*, \theta^*)\)</span> is:
+<span class="math display">\[
+(m^*, n^*, \theta^*) = \arg \max_{m,n,\theta} (a \star b_{\theta})_{mn}.
+\]</span></p>
+<p>In practice, we consider a discrete range of rotations <span class="math inline">\(\Theta \subset [-180^\circ, 180^\circ]\)</span>.
+The registration procedure is given by:</p>
+<ol style="list-style-type: decimal">
+<li>For each <span class="math inline">\(\theta \in \pmb{\Theta}\)</span>:</li>
+</ol>
+<blockquote>
+<p>1.1 Rotate image <span class="math inline">\(B\)</span> by <span class="math inline">\(\theta\)</span> to obtain <span class="math inline">\(B_\theta\)</span>.</p>
+</blockquote>
+<blockquote>
+<p>1.2 Calculate the CCF between <span class="math inline">\(A\)</span> and <span class="math inline">\(B_\theta\)</span>.</p>
+</blockquote>
+<blockquote>
+<p>1.3 Determine the translation <span class="math inline">\([m_{\theta}^*,n_{\theta}^*]\)</span> at which the CCF is maximized. Also, record the CCF value associated with this translation.</p>
+</blockquote>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Across all <span class="math inline">\(\theta \in \Theta\)</span>, determine the rotation <span class="math inline">\(\theta^*\)</span> at which the largest CCF value is achieved.</p></li>
+<li><p>The estimated registration consists of rotation <span class="math inline">\(\theta^*\)</span> and translation <span class="math inline">\([m^*,n^*] \equiv [m_{\theta^*}^*,n_{\theta^*}^*]\)</span>.</p></li>
+</ol>
+<p>In this instance, we refer to image <span class="math inline">\(A\)</span> as the “reference” and <span class="math inline">\(B\)</span>, the image aligned to the reference, as the “target.”
+We represent the transformation to register <span class="math inline">\(B\)</span> to <span class="math inline">\(A\)</span> element-wise where the index <span class="math inline">\(i,j\)</span> maps to <span class="math inline">\(i^*,j^*\)</span> by:
+<span class="math display">\[
+\begin{pmatrix} j^* \\ i^* \end{pmatrix} = \begin{pmatrix} n^* \\ m^* \end{pmatrix} + \begin{pmatrix} \cos(\theta^*) &amp; -\sin(\theta^*) \\ \sin(\theta^*) &amp; \cos(\theta^*) \end{pmatrix} \begin{pmatrix} j \\ i \end{pmatrix}.
+\]</span>
+Under this transformation, the value <span class="math inline">\(b_{ij}\)</span> now occupies the the <span class="math inline">\(i^*,j^*\)</span>-th element.
+In practice, we use <em>nearest-neighbor interpolation</em> meaning <span class="math inline">\(i^*\)</span> and <span class="math inline">\(j^*\)</span> are rounded to the nearest integer.</p>
+<p>Based on the definition given above, the CCF is computationally taxing.
+In image processing, it is common to use an implementation based on the Fast Fourier Transform .
+This implementation leverages the Cross-Correlation Theorem, which states that for images <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> the CCF can be expressed in terms of a frequency-domain pointwise product:
+<span class="math display">\[
+(A \star B)[m,n] = \mathcal{F}^{-1}\left(\overline{\mathcal{F}(A)} \odot \mathcal{F}(B)\right)[m,n]
+\]</span>
+where <span class="math inline">\(\mathcal{F}\)</span> and <span class="math inline">\(\mathcal{F}^{-1}\)</span> denote the discrete Fourier and inverse discrete Fourier transforms, respectively, and <span class="math inline">\(\overline{\mathcal{F}(A)}\)</span> denotes the complex conjugate .
+Because the product on the right-hand side is calculated pointwise, this result allows us to trade the moving sum computations from the definition of the CCF for two forward Fourier transformations, a pointwise product, and an inverse Fourier transformation.
+The Fast Fourier Transform (FFT) algorithm can be used to reduce the computational load considerably.</p>
+<p>Figure <a href="index.html#fig:ccfTranslationExample">1.15</a> shows an example of two images <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> of dimension <span class="math inline">\(100 \times 100\)</span> and <span class="math inline">\(21 \times 21\)</span>, respectively.
+The white boxes in both of the images are of dimension <span class="math inline">\(10 \times 10\)</span>.
+The box in image A is centered on index [30,50] while the box in image B is centered on index [11,11].
+The right image shows the result of calculating the CCF using image <span class="math inline">\(A\)</span> as reference and <span class="math inline">\(B\)</span> as template.
+The CCF achieves a maximum of 1, indicating a perfect match, at the translation value of <span class="math inline">\([m^*,n^*] = [22,-2]\)</span>.
+This means that if image B were overlaid onto image A such that their center indices coincided, then image B would need to be shifted 22 units “up” and 2 units “left” to match perfectly with image A.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ccfTranslationExample"></span>
+<img src="figures/unnamed-chunk-13-1.png" alt="(Left) A reference image $A$ and template image $B$ both featuring a white box of dimension $10 \times 10$. (Right) The cross-correlation function (CCF) between $A$ and $B$. The index at which the CCF is maximized represents the translation at which $A$ and $B$ are most similar." width="\textwidth" />
+<p class="caption">
+Figure 1.15: (Left) A reference image <span class="math inline">\(A\)</span> and template image <span class="math inline">\(B\)</span> both featuring a white box of dimension <span class="math inline">\(10 \times 10\)</span>. (Right) The cross-correlation function (CCF) between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>. The index at which the CCF is maximized represents the translation at which <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are most similar.
+</p>
+</div>
+</div>
+<div id="gaussian-filters" class="section level4 hasAnchor" number="1.4.1.2">
+<h4><span class="header-section-number">1.4.1.2</span> Gaussian Filters<a href="index.html#gaussian-filters" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In image processing, a Gaussian filter (equivalently, blur or smoother) is a mathematical operator that imputes the values in an image using a locally-weighted sum of surrounding values.
+We use a <em>lowpass</em> Gaussian filter to smooth the surface values of a cartridge case scan.
+The weights are dictated according to the Gaussian function of a chosen standard deviation <span class="math inline">\(\sigma\)</span> given by:</p>
+<p><span class="math display">\[
+f(n,m;\sigma) = \frac{1}{2\pi\sigma^2} \exp\left(-\frac{1}{2\sigma^2}(n^2 + m^2)\right).
+\]</span>
+It is common to populate a 2D array with the values of the Gaussian function treating the center index as the origin.
+Such an array is called a <em>kernel</em>.
+An example of a <span class="math inline">\(3 \times 3\)</span> Gaussian kernel <span class="math inline">\(K\)</span> with standard deviation <span class="math inline">\(\sigma = 1\)</span> is given below.
+<span class="math display">\[
+K =
+\begin{pmatrix}
+0.075 &amp; 0.124 &amp; 0.075 \\
+0.124 &amp; 0.204 &amp; 0.124 \\
+0.075 &amp; 0.124 &amp; 0.075
+\end{pmatrix}.
+\]</span></p>
+<p>For an image <span class="math inline">\(A\)</span> and Gaussian kernel <span class="math inline">\(K\)</span> with standard deviation <span class="math inline">\(\sigma\)</span>, the lowpass filtered version of <span class="math inline">\(A\)</span>, denoted <span class="math inline">\(A_{lp,\sigma}\)</span> is given by:
+<span class="math display">\[
+A_{lp,\sigma}[m,n] = \mathcal{F}^{-1}\left(\mathcal{F}(A) \odot \mathcal{F}(K)\right)[m,n].
+\]</span>
+This operation, known as <em>convolution</em>, is extremely similar to the calculation of the CCF defined in the Image Registration section .</p>
+<p>From left to right, Figure <a href="index.html#fig:gaussianFilterExample">1.16</a> shows an image <span class="math inline">\(A\)</span> of a box injected with Gaussian noise (noise standard deviation <span class="math inline">\(\sigma_n = 0.3\)</span>) followed by the application of various Gaussian filters.
+In the middle of Figure <a href="index.html#fig:gaussianFilterExample">1.16</a>, we see that the lowpass filter (kernel standard deviation <span class="math inline">\(\sigma_k = 2\)</span>) recovers some of the definition of the box by “smoothing” some of the Gaussian noise.</p>
+<p>If a lowpass filter smooths values in an image, then a <em>highpass</em> filter performs a “sharpening” operation.
+For an image <span class="math inline">\(A\)</span> and kernel standard deviation <span class="math inline">\(\sigma\)</span>, the highpass filtered version <span class="math inline">\(A_{hp}\)</span> can be defined as:
+<span class="math display">\[\begin{align*}
+A_{hp,\sigma} = A - A_{lp,\sigma}.
+\end{align*}\]</span>
+The highpass filter therefore removes larger-scale (smooth) structure from an image and retains high-frequency structure such as noise or edges.
+The fourth facet of Figure <a href="index.html#fig:gaussianFilterExample">1.16</a> shows a highpass-filtered image <span class="math inline">\(A\)</span> .
+The smooth interior of the box is effectively removed from the image while the edges are preserved.</p>
+<p>Finally, a <em>bandpass</em> Gaussian filter simultaneously performs highpass sharpening and lowpass smoothing operations.
+Generally, the standard deviation of the highpass kernel will be considerably larger than that of the lowpass kernel.
+This leads to retaining sharp edges while also reducing noise.
+An example of a bandpass filtered image <span class="math inline">\(A\)</span> is shown in Figure <a href="index.html#fig:gaussianFilterExample">1.16</a>.
+The edges of the box are better-preserved compared to the lowpass filter figure while the interior of the box is better-preserved compared to the highpass filter figure.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:gaussianFilterExample"></span>
+<img src="figures/unnamed-chunk-14-1.png" alt="An image $A$ of a box with Gaussian noise undergoing a lowpass, highpass, and bandpass filter operation." width="\textwidth" />
+<p class="caption">
+Figure 1.16: An image <span class="math inline">\(A\)</span> of a box with Gaussian noise undergoing a lowpass, highpass, and bandpass filter operation.
+</p>
+</div>
+<p>Variations on the standard Gaussian filter include the “robust” Gaussian regression filter.
+This filter fluctuates between a filter step, which applies a Gaussian filter, and outlier step, which identifies and omits outlier observations from the next filter step .
+Another alternative, the “edge preserving” filter, adapts the kernel weights when approaching the boundary of an image to mitigate so-called <em>boundary effects</em> .</p>
+<p>We use Gaussian filters to change the values on the interior of a cartridge case surface to better emphasize breech face impressions.
+In the next section, we discuss applying morphological operations to change the values on the edges of a cartridge case surface.</p>
+</div>
+<div id="morphological-operations" class="section level4 hasAnchor" number="1.4.1.3">
+<h4><span class="header-section-number">1.4.1.3</span> Morphological Operations<a href="index.html#morphological-operations" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Mathematical morphology refers to a theory and collection of image processing techniques for geometrical structures .
+In our application, these geometrical structures are cartridge case scans; specifically, binarized versions of these scans representing whether a particular pixel contains part of the cartridge case surface.
+We discuss this in greater detail in Chapter 2.</p>
+<p>Two fundamental operations in mathematical morphology are <em>dilation</em> and <em>erosion</em> .
+For our purposes, these are both set operations on black and white, encoded as 0 and 1 respectively, images.
+We call the set of black and white pixels the “background” and “foreground” of the image, respectively.
+For an image <span class="math inline">\(A\)</span>, let <span class="math inline">\(W = \{(m,n) : A_{mn} = 1\}\)</span> denote the foreground of <span class="math inline">\(A\)</span>.
+An example of a <span class="math inline">\(7 \times 7\)</span> binary image <span class="math inline">\(A\)</span> with <span class="math inline">\(W = \{(3,3),(3,4),(3,5),(4,3),(4,4),(4,5),(5,3),(5,4),(5,5)\}\)</span> is given below.
+<span class="math display">\[
+A =
+\begin{pmatrix}
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0
+\end{pmatrix}
+\]</span></p>
+<p>A <em>structuring element</em> is a second, typically small, array <span class="math inline">\(B\)</span> of ones that affects the amount of dilation or erosion applied to <span class="math inline">\(W\)</span> within <span class="math inline">\(A\)</span>.
+For simplicity, the indexing of the structuring element uses the center element as the index origin.
+For example, a <span class="math inline">\(3 \times 3\)</span> structuring element is given by <span class="math inline">\(B = \{(-1,-1),(-1,0),(-1,1),(-1,0),(0,0),(0,1),(1,-1),(1,0),(1,1)\}\)</span> or visually:
+<span class="math display">\[
+B =
+\begin{pmatrix}
+1 &amp; 1 &amp; 1 \\
+1 &amp; 1 &amp; 1 \\
+1 &amp; 1 &amp; 1
+\end{pmatrix}
+\]</span></p>
+<p>As the name suggests, a <em>dilation</em> grows the region <span class="math inline">\(W\)</span> within image <span class="math inline">\(A\)</span> by replacing 0-valued pixels that border <span class="math inline">\(W\)</span> with 1.
+The structuring element <span class="math inline">\(B\)</span> dictates which pixels are replaced with 1.
+We define the dilation of <span class="math inline">\(W\)</span> by <span class="math inline">\(B\)</span>, denoted <span class="math inline">\(W \oplus B\)</span>, element-wise:
+<span class="math display">\[
+W \oplus B = \{[m,n] \in A : [m,n] = [i + k,j + l] \text{ for } [i,j] \in W \text{ and } [k,l] \in B\}
+\]</span></p>
+<p>In our example,
+<span class="math display">\[W \oplus B = \{[3,2],[3,3],[3,4],[3,5],[3,6],[4,2],[4,3],[4,4],[4,5],[4,6],[5,2],[5,3],[5,4],[5,5],[5,6]\}\]</span>
+or visually:
+<span class="math display">\[
+W \oplus B =
+\begin{pmatrix}
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 0 \\
+0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 0 \\
+0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 0 \\
+0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 0 \\
+0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0
+\end{pmatrix}.
+\]</span>
+The dilation operation by this <span class="math inline">\(B\)</span> has the effect of growing the region <span class="math inline">\(W\)</span> inside of <span class="math inline">\(A\)</span> by one index in each direction.</p>
+<p>In contrast, <em>erosion</em> has the effect of shrinking <span class="math inline">\(W\)</span>.
+The erosion of <span class="math inline">\(W\)</span> by <span class="math inline">\(B\)</span> is:
+<span class="math display">\[
+A \ominus B = \{[m,n] \in A: [m,n] + [k,l] \in A \text{ for every } [k,l] \in B\}.
+\]</span></p>
+<p>Using the same example as above, <span class="math inline">\(W \ominus B = \{[3,3]\}\)</span> or visually:
+<span class="math display">\[
+W \ominus B =
+\begin{pmatrix}
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0
+\end{pmatrix}.
+\]</span>
+Erosion by this <span class="math inline">\(B\)</span> shrinks the region <span class="math inline">\(W\)</span> in <span class="math inline">\(A\)</span> by one index in each direction.</p>
+<p>Figure <a href="index.html#fig:dilationErosionExample">1.17</a> shows our example represented using black and white pixels.
+In practice, the foreground set <span class="math inline">\(W\)</span> may contain disconnected regions to which dilation or erosion can be independently applied.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:dilationErosionExample"></span>
+<img src="figures/unnamed-chunk-15-1.png" alt="A $7 \times 7$ image $A$ featuring a $3 \times 3$ box undergoing dilation and erosion by a $3 \times 3$ structuring element $B$." width="\textwidth" />
+<p class="caption">
+Figure 1.17: A <span class="math inline">\(7 \times 7\)</span> image <span class="math inline">\(A\)</span> featuring a <span class="math inline">\(3 \times 3\)</span> box undergoing dilation and erosion by a <span class="math inline">\(3 \times 3\)</span> structuring element <span class="math inline">\(B\)</span>.
+</p>
+</div>
+<p>This concludes our review of image processing techniques we use in subsequent chapters.
+Next, we discuss a clustering procedure used in Chapter 4 to calculate similarity features.</p>
+</div>
+</div>
+<div id="density-based-spatial-clustering-of-applications-with-noise" class="section level3 hasAnchor" number="1.4.2">
+<h3><span class="header-section-number">1.4.2</span> Density-Based Spatial Clustering of Applications with Noise<a href="index.html#density-based-spatial-clustering-of-applications-with-noise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Density-Based Spatial Clustering of Applications with Noise (DBSCAN) algorithm is a clustering procedure that assigns observations to clusters if they are in a region of high observation density .
+As we will see, the DBSCAN algorithm does not require the user to pre-specify the number of expected clusters as is required in common clustering algorithms like K-means.
+Further, the algorithm does not require that all points be assigned to a cluster.
+<!-- Points not assigned to a cluster at the end of the algorithm are called "noise points." --></p>
+<p>Let <span class="math inline">\(D\)</span> represent a <span class="math inline">\(n \times p\)</span> data set (<span class="math inline">\(n\)</span> observations, each of dimension <span class="math inline">\(p\)</span>) and let <span class="math inline">\(x,y,z \in D\)</span> denote three observations.
+The DBSCAN algorithm relies on the notion of <span class="math inline">\(\epsilon\)</span>-neighborhoods.
+Given some neighborhood radius <span class="math inline">\(\epsilon \in \mathbb{R}\)</span> and distance metric <span class="math inline">\(d\)</span>, <span class="math inline">\(y\)</span> is in the <span class="math inline">\(\epsilon\)</span>-neighborhood of <span class="math inline">\(x\)</span> if <span class="math inline">\(d(x,y) \leq \epsilon\)</span>.
+The <em><span class="math inline">\(\epsilon\)</span>-neighborhood</em> of <span class="math inline">\(x\)</span> is defined as the set <span class="math inline">\(N_{\epsilon}(x) = \{y \in D : d(x,y) \leq \epsilon\}\)</span>.
+Given a minimum number of points <span class="math inline">\(Minpts \in \mathbb{N}\)</span> (notation used in ), observation <span class="math inline">\(x\)</span> is called a <em>core point</em> with respect to <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(Minpts\)</span> if <span class="math inline">\(|N_{\epsilon}(x)| \geq Minpts\)</span>.
+Core points are treated as the “seeds” of clusters in the DBSCAN algorithm.
+The user must select values of <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(Minpts\)</span>.</p>
+<p>Figure <a href="index.html#fig:epsNeighborhoodExample">1.18</a> shows an example of a data set <span class="math inline">\(D \in \mathbb{R}^{10 \times 2}\)</span>.
+We represent the 10 observations in <span class="math inline">\(D\)</span> on the Cartesian plane.
+An <span class="math inline">\(\epsilon\)</span>-neighborhood using the Euclidean distance metric and <span class="math inline">\(\epsilon = 3\)</span> is drawn around an observation <span class="math inline">\(x\)</span> located at <span class="math inline">\((3,2)\)</span>.
+Points inside the circle are neighbors of <span class="math inline">\(x\)</span>.
+If, for example, <span class="math inline">\(Minpts = 2\)</span>, then <span class="math inline">\(x\)</span> would be considered a core point.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:epsNeighborhoodExample"></span>
+<img src="figures/dbscanExample_corePoint.png" alt="An $\epsilon$-neighborhood around a observation located at $(3,2)$ for $\epsilon = 3$. Points are colored blue if they are neighbors to this observation and red otherwise." width=".8\textwidth" />
+<p class="caption">
+Figure 1.18: An <span class="math inline">\(\epsilon\)</span>-neighborhood around a observation located at <span class="math inline">\((3,2)\)</span> for <span class="math inline">\(\epsilon = 3\)</span>. Points are colored blue if they are neighbors to this observation and red otherwise.
+</p>
+</div>
+<p> introduces two relational notions, <em>density-reachability</em> and <em>density-connectivity</em>, to identify regions of high observation density.
+A point <span class="math inline">\(y\)</span> is <em>directly density-reachable</em> to a point <span class="math inline">\(x\)</span> if <span class="math inline">\(x\)</span> is a core point and <span class="math inline">\(y \in N_{\epsilon}(x)\)</span>.
+In Figure <a href="index.html#fig:epsNeighborhoodExample">1.18</a>, the observation located at <span class="math inline">\((1,0)\)</span> is directly density-reachable to the observation located at <span class="math inline">\((3,2)\)</span>.
+More broadly, a point <span class="math inline">\(x_m\)</span> is <em>density-reachable</em> to a point <span class="math inline">\(x_1\)</span> if there exists a chain of observations <span class="math inline">\(x_1,x_2,...,x_{m-1},x_m\)</span> such that <span class="math inline">\(x_{i+1}\)</span> is directly density-reachable from <span class="math inline">\(x_i\)</span>, <span class="math inline">\(i = 1,...,n\)</span>.
+Density reachability captures the notion of “neighbors of neighbors” for core points.
+The DBSCAN algorithm agglomerates density-reachable points into single clusters.</p>
+<p>Figure <a href="index.html#fig:densityReachableExample">1.19</a> highlights three points <span class="math inline">\((1,0), (3,2)\)</span>, and <span class="math inline">\((4,4)\)</span>.
+Using <span class="math inline">\(\epsilon = 3\)</span> and <span class="math inline">\(Minpts = 2\)</span>, we see that all three of these points are core points.
+Further, the points at <span class="math inline">\((1,0)\)</span> and <span class="math inline">\((4,4)\)</span> are density-reachable by way of the point <span class="math inline">\((3,2)\)</span>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:densityReachableExample"></span>
+<img src="figures/dbscanExample_densityReachable.png" alt="An example of three points that are density-reachable with respect to $\epsilon = 3$ and $Minpts = 2$." width=".8\textwidth" />
+<p class="caption">
+Figure 1.19: An example of three points that are density-reachable with respect to <span class="math inline">\(\epsilon = 3\)</span> and <span class="math inline">\(Minpts = 2\)</span>.
+</p>
+</div>
+<p>Finally, a point <span class="math inline">\(y\)</span> is <em>density-connected</em> to a point <span class="math inline">\(x\)</span> with respect to <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(Minpts\)</span> if there exists a point <span class="math inline">\(z\)</span> such that both <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are density-reachable to <span class="math inline">\(z\)</span> (with respect to <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(Minpts\)</span>).
+While density-reachability requires that all points in-between two points also be core points, density-connectivity extends the notion of “neighbors of neighbors” to include points that are merely within the neighborhood of density-reachable points.
+Figure <a href="index.html#fig:densityConnectedExample">1.20</a> illustrates how the points located at <span class="math inline">\((4,7)\)</span> and <span class="math inline">\((0,-2)\)</span> are density-connected but not density-reachable.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:densityConnectedExample"></span>
+<img src="figures/dbscanExample_densityConnected.png" alt="An example of two points that are density-connected, but not density-reachable, with respect to $\epsilon = 3$ and $Minpts = 2$." width=".8\textwidth" />
+<p class="caption">
+Figure 1.20: An example of two points that are density-connected, but not density-reachable, with respect to <span class="math inline">\(\epsilon = 3\)</span> and <span class="math inline">\(Minpts = 2\)</span>.
+</p>
+</div>
+<p>A <em>cluster</em> <span class="math inline">\(C \subset D\)</span> with respect to <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(Minpts\)</span> satisfies the following conditions:</p>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(\forall x,y\)</span>: if <span class="math inline">\(x \in C\)</span> and <span class="math inline">\(y\)</span> is density-reachable from <span class="math inline">\(x\)</span> with respect to <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(Minpts\)</span>, then <span class="math inline">\(y \in C\)</span>.</p></li>
+<li><p><span class="math inline">\(\forall x,y \in C\)</span>: <span class="math inline">\(x\)</span> is density-connected to <span class="math inline">\(y\)</span> with respect to <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(Minpts\)</span>.</p></li>
+</ol>
+<p>For a data set <span class="math inline">\(D\)</span>, the DBSCAN algorithm determines clusters based on the above definition.
+Points not assigned to a cluster are classified as <em>noise points</em>.
+The algorithm halts once all points are assigned to a cluster or classified as noise.</p>
+<p>Figure <a href="index.html#fig:dbscanResultExample">1.21</a> shows the labels return by DBSCAN for the example considered above with respect to <span class="math inline">\(\epsilon = 3\)</span> and <span class="math inline">\(Minpts = 2\)</span>.
+The algorithm finds a cluster of seven points, colored blue, and classifies three points as noise, colored red.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:dbscanResultExample"></span>
+<img src="figures/dbscanExample_clusters.png" alt="Cluster labeling for 10 data points using the DBSCAN algorithm with parameters $\epsilon = 3$ and $Minpts = 2$. Seven points are assigned to a single cluster and the remaining three are classified as noise." width=".8\textwidth" />
+<p class="caption">
+Figure 1.21: Cluster labeling for 10 data points using the DBSCAN algorithm with parameters <span class="math inline">\(\epsilon = 3\)</span> and <span class="math inline">\(Minpts = 2\)</span>. Seven points are assigned to a single cluster and the remaining three are classified as noise.
+</p>
+</div>
+<!-- ### Features Based on Visual Diagnostics -->
+<!-- Much of the "explainable" algorithms literature focuses on black-box machine learning algorithms such as Random Forests or Multi-layer Neural Networks. -->
+<!-- Less focus is placed on constructing explainable features. -->
+<!-- Feature selection and engineering is a critical, often time-intensive step in the data analysis process that isn't often -->
+<!-- The visual diagnostic tools discussed in Chapter 4 are used to develop a set of features. -->
+<!-- By definition, these features are human-interpretable unlike, for example, features that are calculated in the convolution layer of a convolutional neural network. -->
+<!-- The interpretability of these features imply that they can be explained to forensic examiners or lay-people. -->
+<!-- This will make it easier to introduce such methods into forensic labs and court rooms. -->
+</div>
+<div id="implementation-considerations" class="section level3 hasAnchor" number="1.4.3">
+<h3><span class="header-section-number">1.4.3</span> Implementation Considerations<a href="index.html#implementation-considerations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In the computational sciences, it is one thing to publish code along with research findings.
+Publicly-available code and data make results accessible in terms of acquisition.
+It is much more challenging to make code <em>conceptually</em> accessible to others.
+The former allows others to obtain the same results under the same programming conditions while the latter empowers others to actually engage with and potentially improve upon individual pieces of the algorithm.
+In any data analysis pipeline, the procedural details may be obscured as the goals of the analysis become more sophisticated.
+<!-- This is helpful neither for the individual performing the analysis nor for any consumer of the results. -->
+It is therefore worthwhile to design tools that make the data analysis process both easier to implement and understand .</p>
+<p>Our implementation of the cartridge case comparison pipeline adheres to the “tidy” principles of design .
+The “tidyverse” is a collection of R packages that share an underlying design philosophy and structure.
+Knowledge and skills learned while using one tidy package can be applied to others.
+The four principles of a tidy API are:</p>
+<ol style="list-style-type: decimal">
+<li><em>Reuse existing data structures.</em></li>
+</ol>
+<blockquote>
+<p>For example, users do not need to learn new data attributes or compatible functions if a package reuses existing data structures.</p>
+</blockquote>
+<ol start="2" style="list-style-type: decimal">
+<li><em>Compose simple functions with the pipe.</em></li>
+</ol>
+<blockquote>
+<p>The pipe operator allows the output of one function to be passed as input to another without assigning a new variable. We incrementally transform data as they move from one function to another rather than drastically transforming the data in a single call.</p>
+</blockquote>
+<ol start="3" style="list-style-type: decimal">
+<li><em>Embrace functional programming.</em></li>
+</ol>
+<blockquote>
+<p>The functional programming paradigm encourages immutability of objects, meaning data passed as input to a function are not changed.
+Rather, the function makes a copy of the input data, manipulates the copy, and returns the transformed copy as output.
+This differs from an “object-oriented” paradigm where functions have the ability to implicitly rewrite or change the state of the original data.
+It is easier to reason about a function that actually returns an object as output than one that changes the input object as a “side effect.”</p>
+</blockquote>
+<ol start="4" style="list-style-type: decimal">
+<li><em>Design for humans.</em></li>
+</ol>
+<blockquote>
+<p>Designing a package for humans largely comes down to using consistent, explicit, and descriptive naming schemes for objects and functions.</p>
+</blockquote>
+<p>Conceptualizing the cartridge case comparison procedure as a pipeline makes it easier to understand.
+We go one step further by actually implementing the procedure as a sequence of algorithms that are programatically connected together in the R statistical programming language .
+In particular, we utilize the pipe operator available from the magrittr R package .
+The pipe operator allows the user to think intuitively in terms of verbs applied to the data.
+Table <a href="#tab:pipelineTable"><strong>??</strong></a> illustrates two pipelines that utilize the pipe operator.
+The left-hand example shows how an R data frame is manipulated by piping it between functions from the dplyr package.
+Functions like <code>group_by</code>, <code>summarize</code>, and <code>filter</code> are simple building blocks strung together to create complicated workflows.
+The right-hand example similarly illustrates a cartridge case object passing through a comparison pipeline.
+While the full comparison procedure is complex, the modularization to the <code>preProcess_</code>, <code>comparison_</code>, and <code>decision_</code> steps, which can further be broken-down into simpler functions, renders the process more understandable and flexible for the user.</p>
+<p>Adherence to tidy principles makes it easier to engage with and understand the overall data analysis pipeline.
+In our application it also enables experimentation by making it easy to change one step of the pipeline and measure the downstream effects .
+Each step of the cartridge case comparison pipeline requires the user to define parameters.
+These can range from minor to substantial, such as choosing the standard deviation used in a Gaussian filter to choosing the algorithm used to calculate a similarity score.
+So far, no consensus exists for the “best” parameter settings.
+A large amount of experimentation is yet required to establish these parameters.
+A tidy implementation of the cartridge case comparison pipeline allows more people to engage in the validation and improvement of the procedure.</p>
+<p>Figure <a href="index.html#fig:taiEddyPreprocess">1.22</a>, Figure <a href="index.html#fig:ricePreprocess">1.23</a>, Figure <a href="index.html#fig:handwriterPreprocess">1.24</a>, and Figure <a href="index.html#fig:cmcRPreprocess">1.25</a> illustrate how various forensic comparison algorithms use a modularized structure to conceptualize their pre-processing procedures.
+In each figure, a sequence of modular procedures are applied to a piece of evidence.
+Figure <a href="index.html#fig:taiEddyPreprocess">1.22</a> shows morphological and image processing procedures applied to a 2D image of a cartridge case to remove the firing pin region .</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:taiEddyPreprocess"></span>
+<img src="images/taiEddyPreprocess.png" alt="A pre-processing procedure applied to a 2D image of a cartridge case to identify the firing pin impression. The procedure results in a 2D image of a cartridge case without the firing pin impression region." width=".7\textwidth" />
+<p class="caption">
+Figure 1.22: A pre-processing procedure applied to a 2D image of a cartridge case to identify the firing pin impression. The procedure results in a 2D image of a cartridge case without the firing pin impression region.
+</p>
+</div>
+<p>Figure <a href="index.html#fig:ricePreprocess">1.23</a> shows the procedure by which a 2D “signature” of a bullet scan is extracted from a 3D topographical scan .</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ricePreprocess"></span>
+<img src="images/riceBulletPreprocessDiagram.png" alt="A pre-processing procedure for extracting 2D bullet \`\`signatures&quot; from a 3D topographic bullet scan. The procedure results in an ordered sequence of values representing the local variations in the surface of the bullet." width=".8\textwidth" />
+<p class="caption">
+Figure 1.23: A pre-processing procedure for extracting 2D bullet ``signatures” from a 3D topographic bullet scan. The procedure results in an ordered sequence of values representing the local variations in the surface of the bullet.
+</p>
+</div>
+<p>Figure <a href="index.html#fig:handwriterPreprocess">1.24</a> shows how an image of the written word “csafe” is processed using the handwriter R package to break the word into individual <em>graphemes</em> that can be further processed .</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:handwriterPreprocess"></span>
+<img src="images/handwriterPreprocessDiagram.png" alt="A pre-processing procedure applied to an image of the handwritten word &quot;csafe.&quot; The procedure results in a skeletonized version of the word that has been separated into graphemes as represented by orange nodes." width=".35\textwidth" />
+<p class="caption">
+Figure 1.24: A pre-processing procedure applied to an image of the handwritten word “csafe.” The procedure results in a skeletonized version of the word that has been separated into graphemes as represented by orange nodes.
+</p>
+</div>
+<p>Finally, Figure <a href="index.html#fig:cmcRPreprocess">1.25</a> shows a 3D topographical cartridge case scan undergoing various procedures to isolate and highlight the breech face impressions.
+These procedures are discussed in greater detail in Chapter 2.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:cmcRPreprocess"></span>
+<img src="figures/preProcessPlots.png" alt="A cartridge case undergoing various pre-processing steps. The procedure results in a cartridge case scan in which the breech face impressions have been segmented and highlighted." width="\textwidth" />
+<p class="caption">
+Figure 1.25: A cartridge case undergoing various pre-processing steps. The procedure results in a cartridge case scan in which the breech face impressions have been segmented and highlighted.
+</p>
+</div>
+<p>By breaking the broader pre-processing step into modularized pieces, we can devise other arrangements of these pre-processing procedures that may improve the segmenting or emphasizing of the region of interest.
+The modularity of the pipeline makes it easier to understand what the algorithm is doing “under the hood.”
+A genuine modular implementation enables others to experiment with alternative versions of the pipeline, thus accelerating discovery and improvement.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["thesis.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
