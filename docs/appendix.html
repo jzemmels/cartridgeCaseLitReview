@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Appendix | A Cartridge Case Comparison Pipeline</title>
+  <meta name="description" content="Appendix | A Cartridge Case Comparison Pipeline" />
+  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Appendix | A Cartridge Case Comparison Pipeline" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="jzemmels/cartridgeCaseLitReview" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Appendix | A Cartridge Case Comparison Pipeline" />
+  
+  
+  
+
+<meta name="author" content="Joseph Zemmels" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="acknowledgments.html"/>
+
+<style type="text/css">
+p.abstract{
+  text-align: center;
+  font-weight: bold;
+}
+div.abstract{
+  margin: auto;
+  width: 90%;
+}
+</style>
+<script src="libs/jquery/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Literature Review</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#preliminaries-forensic-examinations"><i class="fa fa-check"></i><b>1.1</b> Preliminaries: Forensic Examinations</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="index.html"><a href="index.html#firearm-and-toolmark-identification"><i class="fa fa-check"></i><b>1.1.1</b> Firearm and Toolmark Identification</a></li>
+<li class="chapter" data-level="1.1.2" data-path="index.html"><a href="index.html#why-should-firearm-and-toolmark-identification-change"><i class="fa fa-check"></i><b>1.1.2</b> Why Should Firearm and Toolmark Identification Change?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#forensic-comparison-pipelines"><i class="fa fa-check"></i><b>1.2</b> Forensic Comparison Pipelines</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#digital-representations-of-evidence"><i class="fa fa-check"></i><b>1.2.1</b> Digital Representations of Evidence</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#pre-processing-procedures-for-forensic-data"><i class="fa fa-check"></i><b>1.2.2</b> Pre-processing Procedures for Forensic Data</a></li>
+<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#forensic-data-feature-extraction"><i class="fa fa-check"></i><b>1.2.3</b> Forensic Data Feature Extraction</a></li>
+<li class="chapter" data-level="1.2.4" data-path="index.html"><a href="index.html#similarity-scores-classification-rules-for-forensic-data"><i class="fa fa-check"></i><b>1.2.4</b> Similarity Scores &amp; Classification Rules for Forensic Data</a></li>
+<li class="chapter" data-level="1.2.5" data-path="index.html"><a href="index.html#reproducibility-of-comparison-pipelines"><i class="fa fa-check"></i><b>1.2.5</b> Reproducibility of Comparison Pipelines</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#diagnostic-tools"><i class="fa fa-check"></i><b>1.3</b> Diagnostic Tools</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#visual-diagnostics"><i class="fa fa-check"></i><b>1.3.1</b> Visual Diagnostics</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#interactive-diagnostics"><i class="fa fa-check"></i><b>1.3.2</b> Interactive Diagnostics</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#automating-and-improving-the-cartridge-case-comparison-pipeline"><i class="fa fa-check"></i><b>1.4</b> Automating and Improving the Cartridge Case Comparison Pipeline</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="index.html"><a href="index.html#image-processing-techniques"><i class="fa fa-check"></i><b>1.4.1</b> Image Processing Techniques</a></li>
+<li class="chapter" data-level="1.4.2" data-path="index.html"><a href="index.html#density-based-spatial-clustering-of-applications-with-noise"><i class="fa fa-check"></i><b>1.4.2</b> Density-Based Spatial Clustering of Applications with Noise</a></li>
+<li class="chapter" data-level="1.4.3" data-path="index.html"><a href="index.html#implementation-considerations"><i class="fa fa-check"></i><b>1.4.3</b> Implementation Considerations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><i class="fa fa-check"></i><b>2</b> A Study in Reproducibility: The Congruent Matching Cells Algorithm and cmcR package</a>
+<ul>
+<li class="chapter" data-level="" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#abstract"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="2.1" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#intro"><i class="fa fa-check"></i><b>2.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#repeatability-and-reproducibility"><i class="fa fa-check"></i><b>2.1.1</b> Repeatability and reproducibility</a></li>
+<li class="chapter" data-level="2.1.2" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#the-congruent-matching-cells-algorithm"><i class="fa fa-check"></i><b>2.1.2</b> The Congruent Matching Cells algorithm</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cmcMethod"><i class="fa fa-check"></i><b>2.2</b> The CMC pipeline</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#initialData"><i class="fa fa-check"></i><b>2.2.1</b> Initial data</a></li>
+<li class="chapter" data-level="2.2.2" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#preProcessing"><i class="fa fa-check"></i><b>2.2.2</b> Pre-processing procedures</a></li>
+<li class="chapter" data-level="2.2.3" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#comparisonProcedure"><i class="fa fa-check"></i><b>2.2.3</b> “Correlation cell” comparison procedure</a></li>
+<li class="chapter" data-level="2.2.4" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#decision-rule"><i class="fa fa-check"></i><b>2.2.4</b> Decision rule</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#discussion"><i class="fa fa-check"></i><b>2.3</b> Discussion</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#ambiguities"><i class="fa fa-check"></i><b>2.3.1</b> Ambiguity in algorithmic descriptions</a></li>
+<li class="chapter" data-level="2.3.2" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#investigation"><i class="fa fa-check"></i><b>2.3.2</b> CMC pattern matching pipeline</a></li>
+<li class="chapter" data-level="2.3.3" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#processing-condition-sensitivity"><i class="fa fa-check"></i><b>2.3.3</b> Processing condition sensitivity</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#conclusion"><i class="fa fa-check"></i><b>2.4</b> Conclusion</a></li>
+<li class="chapter" data-level="2.5" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#acknowledgement"><i class="fa fa-check"></i><b>2.5</b> Acknowledgement</a></li>
+<li class="chapter" data-level="2.6" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#computational-details"><i class="fa fa-check"></i><b>2.6</b> Computational details</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><i class="fa fa-check"></i><b>3</b> Diagnostic Tools for Cartridge Case Comparison Algorithms</a>
+<ul>
+<li class="chapter" data-level="" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#abstract-1"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="3.1" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html"><i class="fa fa-check"></i><b>4</b> Automatic Matching of Cartridge Case Impressions</a>
+<ul>
+<li class="chapter" data-level="" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#abstract-2"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="4.1" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#previous-work"><i class="fa fa-check"></i><b>4.1.1</b> Previous Work</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#cartridge-case-data"><i class="fa fa-check"></i><b>4.2</b> Cartridge Case Data</a></li>
+<li class="chapter" data-level="4.3" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#methods"><i class="fa fa-check"></i><b>4.3</b> Methods</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#pre-processing"><i class="fa fa-check"></i><b>4.3.1</b> Pre-processing</a></li>
+<li class="chapter" data-level="4.3.2" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#comparing"><i class="fa fa-check"></i><b>4.3.2</b> Comparing</a></li>
+<li class="chapter" data-level="4.3.3" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#scoring"><i class="fa fa-check"></i><b>4.3.3</b> Scoring</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#results"><i class="fa fa-check"></i><b>4.4</b> Results</a></li>
+<li class="chapter" data-level="4.5" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#discussion-1"><i class="fa fa-check"></i><b>4.5</b> Discussion</a></li>
+<li class="chapter" data-level="4.6" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#conclusion-1"><i class="fa fa-check"></i><b>4.6</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="computational-details-1.html"><a href="computational-details-1.html"><i class="fa fa-check"></i>Computational Details</a></li>
+<li class="chapter" data-level="" data-path="acknowledgments.html"><a href="acknowledgments.html"><i class="fa fa-check"></i>Acknowledgments</a></li>
+<li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i>Appendix</a>
+<ul>
+<li class="chapter" data-level="4.7" data-path="appendix.html"><a href="appendix.html#registration-procedure-details"><i class="fa fa-check"></i><b>4.7</b> Registration Procedure Details</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="appendix.html"><a href="appendix.html#cell-based-registration-details"><i class="fa fa-check"></i><b>4.7.1</b> Cell-Based Registration Details</a></li>
+<li class="chapter" data-level="4.7.2" data-path="appendix.html"><a href="appendix.html#registration-based-feature-distributions"><i class="fa fa-check"></i><b>4.7.2</b> Registration-Based Feature Distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="appendix.html"><a href="appendix.html#dbscan-algorithm-details"><i class="fa fa-check"></i><b>4.8</b> DBSCAN Algorithm Details</a>
+<ul>
+<li class="chapter" data-level="4.8.1" data-path="appendix.html"><a href="appendix.html#density-based-feature-distributions"><i class="fa fa-check"></i><b>4.8.1</b> Density-Based Feature Distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="appendix.html"><a href="appendix.html#visual-diagnostic-details"><i class="fa fa-check"></i><b>4.9</b> Visual Diagnostic Details</a>
+<ul>
+<li class="chapter" data-level="4.9.1" data-path="appendix.html"><a href="appendix.html#visual-diagnostic-feature-distributions"><i class="fa fa-check"></i><b>4.9.1</b> Visual Diagnostic Feature Distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.10" data-path="appendix.html"><a href="appendix.html#model-specific-results"><i class="fa fa-check"></i><b>4.10</b> Model-Specific Results</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Cartridge Case Comparison Pipeline</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="appendix" class="section level1 unnumbered hasAnchor">
+<h1>Appendix<a href="appendix.html#appendix" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="registration-procedure-details" class="section level2 hasAnchor" number="4.7">
+<h2><span class="header-section-number">4.7</span> Registration Procedure Details<a href="appendix.html#registration-procedure-details" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In our application, a registration is composed of a discrete translation by <span class="math inline">\((m,n) \in \mathbb{Z}^2\)</span> and rotation by <span class="math inline">\(\theta \in [-180^\circ,180^\circ]\)</span>.
+Under this transformation, the index <span class="math inline">\(i,j\)</span> maps to a new index <span class="math inline">\(i^*,j^*\)</span> by:</p>
+<p><span class="math display">\[\begin{align*}
+\begin{pmatrix} j^* \\ i^* \end{pmatrix} =
+\begin{pmatrix} n \\ m \end{pmatrix} +
+\begin{pmatrix} \cos(\theta) &amp; -\sin(\theta) \\ \sin(\theta) &amp; \cos(\theta) \end{pmatrix} \begin{pmatrix} j \\ i \end{pmatrix}.
+\end{align*}\]</span></p>
+<p>The value <span class="math inline">\(b_{ij}\)</span> now occupies the index <span class="math inline">\(i^*, j^*\)</span>.
+In practice, we use <em>nearest-neighbor interpolation</em> meaning <span class="math inline">\(i^*\)</span> and <span class="math inline">\(j^*\)</span> are rounded to the nearest integer.
+<!-- \footnote{Technical note: We pad the dimensions of matrix $B$ as-needed assuming free boundary conditions (0-padding) so as to not crop-out any of the original values [cite a boundary condition reference here]. For notational simplicity, we'll refer to this padded matrix as $B$ also.} --></p>
+<p>To determine the optimal registration, we calculate the <em>cross-correlation function</em> (CCF) between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, which measures the similarity between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> for every possible translation of <span class="math inline">\(B\)</span>.
+Denoted <span class="math inline">\((A \star B)\)</span>, the CCF between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> is a 2D array of dimension <span class="math inline">\(2k - 1 \times 2k - 1\)</span> with the <span class="math inline">\(m,n\)</span>-th element given by:</p>
+<p><span class="math display">\[
+(a \star b)_{mn} = \sum_{i=1}^k \sum_{j=1}^k a_{mn} \cdot b_{i + m, j + n}
+\]</span></p>
+<p>where <span class="math inline">\(1 \leq m,n \leq 2k - 1\)</span>.
+The value <span class="math inline">\((a \star b)_{mn}\)</span> quantifies the similarity between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> after <span class="math inline">\(B\)</span> is translated <span class="math inline">\(m\)</span> elements horizontally and <span class="math inline">\(n\)</span> elements vertically.
+The CCF is often normalized between -1 and 1 for interpretability.</p>
+<p>The above definition of the CCF is computationally taxing, particularly for large matrices.
+The Cross-Correlation Theorem provides an equivalent expression for the CCF:</p>
+<p><span class="math display">\[
+(A \star B) = \mathcal{F}^{-1}\left(\overline{\mathcal{F}(A)} \odot \mathcal{F}(B)\right)
+\]</span></p>
+<p>where <span class="math inline">\(\mathcal{F}\)</span> and <span class="math inline">\(\mathcal{F}^{-1}\)</span> are the discrete Fourier and inverse discrete Fourier transforms, respectively, <span class="math inline">\(\overline{\mathcal{F}(A)}\)</span> is the complex conjugate, and <span class="math inline">\(\odot\)</span> is an element-wise (Hadamard) product <span class="citation">(<a href="#ref-fft_brigham" role="doc-biblioref">Brigham 1988</a>)</span>.
+We trade the moving sum computation from the previous CCF expression for two forward Fourier transforms, an element-wise product, and an inverse Fourier transform.
+The Fast Fourier Transform (FFT) algorithm reduces the computational load considerably [cite Tukey].</p>
+<p>We estimate the registration by calculating the maximum CCF value across a range of rotations of matrix <span class="math inline">\(B\)</span>.
+Let <span class="math inline">\(B_\theta\)</span> denote <span class="math inline">\(B\)</span> rotated by an angle <span class="math inline">\(\theta \in [-180^\circ,180^\circ]\)</span> and <span class="math inline">\(b_{\theta_{mn}}\)</span> the <span class="math inline">\(m,n\)</span>-th element of <span class="math inline">\(B_\theta\)</span>.
+Then the estimated registration <span class="math inline">\((m^*,n^*,\theta^*)\)</span> is:</p>
+<p><span class="math display">\[
+(m^*,n^*,\theta^*) = \arg \max_{m,n,\theta} (a \star b_\theta)_{mn}.
+\]</span></p>
+<p>In practice we consider a discrete grid of rotations <span class="math inline">\(\pmb{\Theta} \subset [-180^\circ,180^\circ]\)</span>.
+The registration procedure is outlined in Image Registration Algorithm.
+We refer to the matrix that is rotated as the “target.”
+The result is the estimated registration of the target matrix to the “source” matrix.</p>
+<p>The Fast Fourier Transform algorithm used in Image Registration Algorithm does not permit missing values in <span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span>.
+It is common for cartridge case scans to contain many missing values - the gray regions in Figure <a href="automatic-matching-of-cartridge-case-impressions.html#fig:matchPair">4.3</a> represent structural values in the scan.
+Thus, when calculating the CCF we impute these missing values with the average non-missing value in the scan.
+To measure the similarity between <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> while accounting for missingness, we calculate the correlation between the non-missing intersection of the aligned scans.</p>
+<div id="cell-based-registration-details" class="section level3 hasAnchor" number="4.7.1">
+<h3><span class="header-section-number">4.7.1</span> Cell-Based Registration Details<a href="appendix.html#cell-based-registration-details" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Following the full-scan registration, we next perform a cell-based registration procedure.
+<span class="citation">Song (<a href="#ref-song_proposed_2013" role="doc-biblioref">2013</a>)</span> points out that breech face impressions rarely appear uniformly on a cartridge case surface.
+Rather, distinguishing markings appear in specific, usually small, regions of a scan (the author refers to these as <em>valid correlation regions</em>).
+Calculating a correlation between two whole scans does not necessarily capture the similarity between these regions.
+<span class="citation">Song (<a href="#ref-song_proposed_2013" role="doc-biblioref">2013</a>)</span> proposes partitioning a scan into a rectangular grid of “cells” to isolate the valid correlation regions.
+Figure <a href="automatic-matching-of-cartridge-case-impressions.html#fig:cellGridExample">4.4</a> shows an example of two non-match cartridge cases where the source matrix (left) is partitioned into an <span class="math inline">\(8 \times 8\)</span> grid of cells.</p>
+<p>The cell-based comparison procedure begins with selecting one of the matrices, say <span class="math inline">\(A\)</span>, as the “source” matrix to be partitioned into a grid of cells.
+Each of these source cells will be compared to the “target” matrix, in this case <span class="math inline">\(B^*\)</span>.
+Because <span class="math inline">\(A\)</span> and <span class="math inline">\(B^*\)</span> are already partially aligned based on the course rotation grid <span class="math inline">\(\pmb{\Theta}\)</span>, we compare each source cell to <span class="math inline">\(B^*\)</span> using a new rotation grid of <span class="math inline">\(\pmb{\Theta}&#39;_A = \{\theta^*_A - 2^\circ, \theta^*_A - 1^\circ,\theta^*_A,\theta^*_A + 1^\circ,\theta^*_A + 2^\circ\}\)</span>.</p>
+<p>If two cartridge cases are truly matching, then we assume that multiple cells will “agree” on a particular translation value at the true rotation.
+This agreement phenomenon is illustrated in Figure <a href="appendix.html#fig:estimatedTranslationFaceted">4.11</a> where each point represents the translation that maximizes the CCF for a particular cell and rotation.
+The points appear randomly distributed for most of the rotation values except around <span class="math inline">\(\theta = 3\)</span> where a tight cluster of points forms around translation <span class="math inline">\([m,n] \approx [17,-16]\)</span>.
+This is evidence to suggest that a true registration exists for these two cartridge cases, implying that they match.
+The task is to determine when cells reach a registration consensus.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:estimatedTranslationFaceted"></span>
+<img src="figures/estimatedTranslationFaceted.png" alt="A scatterplot where points represent the cell-wise estimated translations faceted by rotation for a matching pair of cartridge cases. As evidenced by the tight cluster in the middle facet, it appears that multiple cells agree on a translation of $[m, n] \approx  [17,-16]$ after rotating by $3^\circ$. Points are jittered for visibility." width="\textwidth" />
+<p class="caption">
+Figure 4.11: A scatterplot where points represent the cell-wise estimated translations faceted by rotation for a matching pair of cartridge cases. As evidenced by the tight cluster in the middle facet, it appears that multiple cells agree on a translation of <span class="math inline">\([m, n] \approx [17,-16]\)</span> after rotating by <span class="math inline">\(3^\circ\)</span>. Points are jittered for visibility.
+</p>
+</div>
+</div>
+<div id="registration-based-feature-distributions" class="section level3 hasAnchor" number="4.7.2">
+<h3><span class="header-section-number">4.7.2</span> Registration-Based Feature Distributions<a href="appendix.html#registration-based-feature-distributions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Figure <a href="appendix.html#fig:registrationDensities">4.12</a> shows density plots of the registration-based features for 21,945 cartridge case pairs.
+The first two rows show densities for the sample mean and standard deviation of the cell-based registrations, respectively.
+The third row shows densities for the pairwise-complete correlation features.
+The standard deviation of the cell-based registrations discriminate more between match vs. non-match pairs than the sample means, which justifies their inclusion in the final feature set.
+[More to say here?]</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:registrationDensities"></span>
+<img src="images/chapter4-images/featureDensity_registration.png" alt="Density plots of the Registration-Based features for 21,945 cartridge case pairs. The standard deviation of the cell-based registrations distinguish between match and non-match pairs better than the mean values." width="\textwidth" />
+<p class="caption">
+Figure 4.12: Density plots of the Registration-Based features for 21,945 cartridge case pairs. The standard deviation of the cell-based registrations distinguish between match and non-match pairs better than the mean values.
+</p>
+</div>
+</div>
+</div>
+<div id="dbscan-algorithm-details" class="section level2 hasAnchor" number="4.8">
+<h2><span class="header-section-number">4.8</span> DBSCAN Algorithm Details<a href="appendix.html#dbscan-algorithm-details" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- Figure \@ref(fig:dbscanIllustration) depicts an illustration of the DBSCAN algorithm [cite Wikimedia commons]. \hh{XXX get rid of this figure - I'm sure that you can explain the dbscan algorithm as well without giving space to figures that aren't yours. Space is the most valuable resource in a paper :)} -->
+<p>DBSCAN has two parameters: a neighborhood radius <span class="math inline">\(\epsilon\)</span> and a minimum point threshold <span class="math inline">\(Minpts\)</span>.
+<!-- In Figure \@ref(fig:dbscanIllustration), $Minpts = 4$ and $\epsilon$ is arbitrary and represented by the radius of the circles drawn around each point - each circle represents the $\epsilon$-neighborhood for its center point. -->
+First, the algorithm identifies cluster “core” points that contain at least <span class="math inline">\(Minpts\)</span> points within an <span class="math inline">\(\epsilon\)</span> distance.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
+These points form the beginning of a cluster.
+All points within an <span class="math inline">\(\epsilon\)</span>-neighborhood of a core point are included in the associated cluster.
+Clusters whose core points are within each other’s <span class="math inline">\(\epsilon\)</span>-neighborhood are combined into a single cluster.
+Any point outside of the <span class="math inline">\(\epsilon\)</span>-neighborhood of a core point are called “noise points.”
+Unlike other clustering algorithms, the DBSCAN algorithm does not require a specified number of expected clusters as a parameter; any points not belonging to a cluster are “noise.”
+<!-- and are shown in red in Figure \@ref(fig:dbscanIllustration). -->
+<!-- The yellow points $B$ and $C$ are within the $\epsilon$-neighborhood of a core point, but are not themselves core points. -->
+<!-- They are also included in the cluster making the overall cluster size 8. -->
+<!-- Finally, the blue point labelled $N$ is not in any core point's $\epsilon$-neighborhood and is thus classified as a "noise point." --></p>
+<p><strong>[Add image to illustrate DBSCAN?]</strong></p>
+<!-- ```{r,out.width=".7\\textwidth",echo=FALSE,fig.pos="htbp",fig.cap = '\\label{fig:dbscanIllustration} Illustration of the DBSCAN algorithm [cite]. Red and yellow points are part of the same cluster with the former forming the "core" of the cluster. The blue point is not part of a cluster and is classified as a "noise point." Figure by Chire - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=17045963'} -->
+<!-- knitr::include_graphics("images/dbscanIllustration.png") -->
+<!-- ``` -->
+<div id="density-based-feature-distributions" class="section level3 hasAnchor" number="4.8.1">
+<h3><span class="header-section-number">4.8.1</span> Density-Based Feature Distributions<a href="appendix.html#density-based-feature-distributions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Figure <a href="appendix.html#fig:densityDistributions">4.13</a> shows the distributions of the density-based features <span class="math inline">\(C\)</span>, <span class="math inline">\(\Delta_\theta\)</span>, and <span class="math inline">\(\Delta_{\text{trans}}\)</span>.
+The stacked bar chart in the top-left shows the proportion of comparisons where no DBSCAN cluster is identified by outcome (match or non-match).
+We see that the vast majority of comparisons for which no DBSCAN cluster is identified are non-match comparisons. indicating that <span class="math inline">\(C_0\)</span> is a good indicator of ground-truth.
+In fact, there is only one non-match comparison that resulted in a DBSCAN cluster.
+It’s difficult to see in the plots, but the <span class="math inline">\(C\)</span> value for this non-match pair is 5 and the <span class="math inline">\(\Delta_{\text{trans}}\)</span> value is 23.9.
+As expected, <span class="math inline">\(C\)</span> tends to be relatively large for matching comparisons while <span class="math inline">\(\Delta_{\theta}\)</span> and <span class="math inline">\(\Delta_{\text{trans}}\)</span> tends to be small.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:densityDistributions"></span>
+<img src="images/chapter4-images/featureDensity_densityBased.png" alt="Distributions of the density-based features for 21,945 cartridge case pairs. The Cluster Size and Estimated Translation Difference features may be missing (\texttt{NA}) if no DBSCAN cluster is identified, which commonly occurs for non-matching cartridge case pairs as evidenced by the stacked bar chart in the top left. This explains the near absence of non-matching comparisons from Cluster Size and Estimated Translation Difference plots. Whether a cluster is identified for a particular comparison strongly predicts whether it is a match or a non-match, which justifies the inclusion of the cluster indicator feature $C_0$." width="\textwidth" />
+<p class="caption">
+Figure 4.13: Distributions of the density-based features for 21,945 cartridge case pairs. The Cluster Size and Estimated Translation Difference features may be missing () if no DBSCAN cluster is identified, which commonly occurs for non-matching cartridge case pairs as evidenced by the stacked bar chart in the top left. This explains the near absence of non-matching comparisons from Cluster Size and Estimated Translation Difference plots. Whether a cluster is identified for a particular comparison strongly predicts whether it is a match or a non-match, which justifies the inclusion of the cluster indicator feature <span class="math inline">\(C_0\)</span>.
+</p>
+</div>
+</div>
+</div>
+<div id="visual-diagnostic-details" class="section level2 hasAnchor" number="4.9">
+<h2><span class="header-section-number">4.9</span> Visual Diagnostic Details<a href="appendix.html#visual-diagnostic-details" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The Complementary Comparison Plot visualizes the similarities and differences between two scans.
+Figure <a href="appendix.html#fig:fullScanComparisonPlot">4.14</a> shows a Complementary Comparison plot between scan <span class="math inline">\(A\)</span> and <span class="math inline">\(B^*\)</span> defined previously.
+The left column shows Scans <span class="math inline">\(A\)</span> and <span class="math inline">\(B^*\)</span>.
+The middle column shows a filtered element-wise average between <span class="math inline">\(A\)</span> and <span class="math inline">\(B^*\)</span>; namely <span class="math inline">\(\mathcal{F}_{|A - B^*| &lt; \tau}\left(\frac{1}{2}(A + B^*)\right)\)</span>.
+This filtered element-wise average emphasizes similarities between <span class="math inline">\(A\)</span> and <span class="math inline">\(B^*\)</span>.
+The right column shows <span class="math inline">\(\mathcal{F}_{|A - B^*| &gt; \tau}(A)\)</span> and <span class="math inline">\(\mathcal{F}_{|A - B^*| &gt; \tau}(B^*)\)</span> on top and bottom, respectively.
+These plots emphasize the differences between the two scans.
+The complementary comparison plot is a powerful tool for assessing the estimated alignment and identifying similarities and differences between two surface matrices.
+We repeat this in the other comparison direction <span class="math inline">\((d = B)\)</span> to obtain filtered matrices <span class="math inline">\(\mathcal{F}_{|A^* - B| &lt; \tau}\left(\frac{1}{2}(A^* + B)\right)\)</span>, <span class="math inline">\(\mathcal{F}_{|A^* - B| &gt; \tau}(A^*)\)</span> and <span class="math inline">\(\mathcal{F}_{|A^* - B| &gt; \tau}(B)\)</span>.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fullScanComparisonPlot"></span>
+<img src="figures/fullScan_comparisonPlot.png" alt="Full scan comparison plot." width="\textwidth" />
+<p class="caption">
+Figure 4.14: Full scan comparison plot.
+</p>
+</div>
+<p>We make a series of qualitative assumptions related to how a Complementary Comparison Plot will look for matching and non-matching cartridge case pairs.
+We develop a set of features that measure the degree to which these assumptions are met by a particular cartridge case pair.
+<!-- We now describe each feature and their associated assumptions. --></p>
+<div id="visual-diagnostic-feature-distributions" class="section level3 hasAnchor" number="4.9.1">
+<h3><span class="header-section-number">4.9.1</span> Visual Diagnostic Feature Distributions<a href="appendix.html#visual-diagnostic-feature-distributions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Figure <a href="appendix.html#fig:visualDiagnosticDensities">4.15</a> shows the distribution of the six visual diagnostic-based features.
+As expected, matching comparisons at the full-scan and cell-based levels tend to have smaller neighborhood sizes and higher correlation values on average.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:visualDiagnosticDensities"></span>
+<img src="images/chapter4-images/featureDensity_visualDiag.png" alt="Distributions of the visual diagnostic-based features for 21,945 cartridge case pairs. Matching comparisons tend to have smaller neighborhood sizes on average and higher correlation values than non-matches indicating their utility in a classifier." width="\textwidth" />
+<p class="caption">
+Figure 4.15: Distributions of the visual diagnostic-based features for 21,945 cartridge case pairs. Matching comparisons tend to have smaller neighborhood sizes on average and higher correlation values than non-matches indicating their utility in a classifier.
+</p>
+</div>
+</div>
+</div>
+<div id="model-specific-results" class="section level2 hasAnchor" number="4.10">
+<h2><span class="header-section-number">4.10</span> Model-Specific Results<a href="appendix.html#model-specific-results" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Table <a href="#tab:trainDataResults"><strong>??</strong></a> summarizes the accuracy, true positive, and true negative rates based on the training data for the 13 binary classifier models.
+We see that the Logistic Regression (LR) and Random Forest (RF) models perform comparably, particularly having the exact same True Negative rate in the last two rows of the table.
+The CART model performs consistently worse compared to the other two models.</p>
+<p>Table <a href="#tab:testDataResults"><strong>??</strong></a> summarizes the accuracy, true positive, and true negative rates based on the test data for the 13 binary classifier models.
+We see that the Logistic Regression (LR) model performs slightly better than the Random Forest (RF) model in most cases while the CART model consistently lags behind the other two.
+The true positive rates for the test data are noticeably lower to those for the training data summarized in Table <a href="#tab:trainDataResults"><strong>??</strong></a>, although the true negative rates are similar.</p>
+<p><strong>[Write full logistic regression model here]</strong></p>
+<p>Figure Figure <a href="#fig:trainedCART"><strong>??</strong></a> shows the trained CART model.
+For each node, The first line is the predicted class if it were treated as a terminal node.
+The second line is the estimated probability that an observation is a non-match given that it falls into the node.
+The third line is the percentage of all observations that fall into the node.
+We see that splits are made on the three variables that are ranked as most important in Figure Figure <a href="automatic-matching-of-cartridge-case-impressions.html#fig:rfVarImpPlt">4.10</a>; namely, <span class="math inline">\(C_0\)</span>, <span class="math inline">\(\overline{cor}_{\text{cell}}\)</span>, and <span class="math inline">\(s_{m^*}\)</span>.</p>
+<p>[Figure of fitted CART model here.]</p>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div class="csl-entry">
+AFTE Criteria for Identification Committee. 1992. <span>“Theory of Identification, Range Striae Comparison Reports and Modified Glossary Definitions.”</span> <em>AFTE Journal</em> 24 (3): 336–40.
+</div>
+<div class="csl-entry">
+Allaire, JJ, Yihui Xie, R Foundation, Hadley Wickham, Journal of Statistical Software, Ramnath Vaidyanathan, Association for Computing Machinery, et al. 2021. <em>Rticles: Article Formats for r Markdown</em>. <a href="https://CRAN.R-project.org/package=rticles">https://CRAN.R-project.org/package=rticles</a>.
+</div>
+<div class="csl-entry">
+Baldwin, David P., Stanley J. Bajic, Max Morris, and Daniel Zamzow. 2014. <span>“A Study of False-Positive and False-Negative Error Rates in Cartridge Case Comparisons.”</span> Defense Technical Information Center. <a href="https://doi.org/10.21236/ada611807">https://doi.org/10.21236/ada611807</a>.
+</div>
+<div class="csl-entry">
+Barthelme, Simon. 2019. <em>Imager: Image Processing Library Based on ’CImg’</em>. <a href="https://CRAN.R-project.org/package=imager">https://CRAN.R-project.org/package=imager</a>.
+</div>
+<div class="csl-entry">
+Breiman, Leo. 2001. <span>“<span>Random Forests</span>.”</span> <em>Machine Learning</em> 45 (1): 5–32. <a href="https://doi.org/10.1023/a:1010933404324">https://doi.org/10.1023/a:1010933404324</a>.
+</div>
+<div class="csl-entry">
+Brigham, E. Oran. 1988. <em>The Fast Fourier Transform and Its Applications</em>. USA: Prentice-Hall, Inc.
+</div>
+<div class="csl-entry">
+Brinkman, S., and H. Bodschwinna. 2003. <span>“Advanced <span>Gaussian</span> Filters.”</span> In <em>Advanced Techniques for Assessment Surface Topography: Development of a Basis for 3d Surface Texture Standards <span>"</span>SURFSTAND<span>"</span></em>, edited by L. Blunt and X. Jiang. United States: Elsevier Inc. <a href="https://doi.org/10.1016/B978-1-903996-11-9.X5000-2">https://doi.org/10.1016/B978-1-903996-11-9.X5000-2</a>.
+</div>
+<div class="csl-entry">
+Brown, Lisa Gottesfeld. 1992. <span>“A Survey of Image Registration Techniques.”</span> <em><span>ACM</span> Computing Surveys</em> 24 (4): 325–76. <a href="https://doi.org/10.1145/146370.146374">https://doi.org/10.1145/146370.146374</a>.
+</div>
+<div class="csl-entry">
+Chen, Zhe, John Song, Wei Chu, Johannes A. Soons, and Xuezeng Zhao. 2017. <span>“A Convergence Algorithm for Correlation of Breech Face Images Based on the Congruent Matching Cells (<span>CMC</span>) Method.”</span> <em>Forensic Science International</em> 280 (November): 213–23. <a href="https://doi.org/10.1016/j.forsciint.2017.08.033">https://doi.org/10.1016/j.forsciint.2017.08.033</a>.
+</div>
+<div class="csl-entry">
+Chu, Wei, Mingsi Tong, and John Song. 2013. <span>“Validation <span>Tests</span> for the <span>Congruent</span> <span>Matching</span> <span>Cells</span> (<span>CMC</span>) <span>Method</span> <span>Using</span> <span>Cartridge</span> <span>Cases</span> <span>Fired</span> with <span>Consecutively</span> <span>Manufactured</span> <span>Pistol</span> <span>Slides</span>.”</span> <em>Journal of the Association of Firearms and Toolmarks Examiners</em> 45 (4): 6. <a href="https://www.nist.gov/publications/validation-tests-congruent-matching-cells-cmc-method-using-cartridge-cases-fired">https://www.nist.gov/publications/validation-tests-congruent-matching-cells-cmc-method-using-cartridge-cases-fired</a>.
+</div>
+<div class="csl-entry">
+Crawford, Amy. 2020. <span>“Bayesian Hierarchical Modeling for the Forensic Evaluation of Handwritten Documents.”</span> {Ph.D thesis}, Iowa State University. <a href="https://doi.org/10.31274/etd-20200624-257">https://doi.org/10.31274/etd-20200624-257</a>.
+</div>
+<div class="csl-entry">
+Curran, James Michael, Tacha Natalie Hicks Champod, and John S Buckleton, eds. 2000. <em>Forensic Interpretation of Glass Evidence</em>. Boca Raton, FL: CRC Press.
+</div>
+<div class="csl-entry">
+Desai, Deven R., and Joshua A. Kroll. 2017. <span>“Trust but <span>Verify</span>: <span>A</span> <span>Guide</span> to <span>Algorithms</span> and the <span>Law</span>.”</span> <em>Harvard Journal of Law &amp; Technology (Harvard JOLT)</em> 31 (1): 1–64.<a href=" https://ssrn.com/abstract=2959472"> https://ssrn.com/abstract=2959472</a>.
+</div>
+<div class="csl-entry">
+Ester, Martin, Hans-Peter Kriegel, Jörg Sander, and Xiaowei Xu. 1996. <span>“A Density-Based Algorithm for Discovering Clusters in Large Spatial Databases with Noise.”</span> In <em>Proceedings of the Second International Conference on Knowledge Discovery and Data Mining</em>, 226–31. KDD’96. Portland, Oregon: AAAI Press.
+</div>
+<div class="csl-entry">
+Fadul, T., G. Hernandez, S. Stoiloff, and Gulati Sneh. 2011. <span>“An <span>Empirical</span> <span>Study</span> to <span>Improve</span> the <span>Scientific</span> <span>Foundation</span> of <span>Forensic</span> <span>Firearm</span> and <span>Tool</span> <span>Mark</span> <span>Identification</span> <span>Utilizing</span> 10 <span>Consecutively</span> <span>Manufactured</span> <span>Slides</span>.”</span> <a href="https://www.ojp.gov/ncjrs/virtual-library/abstracts/empirical-study-improve-scientific-foundation-forensic-firearm-and">https://www.ojp.gov/ncjrs/virtual-library/abstracts/empirical-study-improve-scientific-foundation-forensic-firearm-and</a>.
+</div>
+<div class="csl-entry">
+Fernández, Alberto, Salvador Garcı́a, Mikel Galar, Ronaldo C. Prati, Bartosz Krawczyk, and Francisco Herrera. 2018. <em>Learning from Imbalanced Data Sets</em>. Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-98074-4">https://doi.org/10.1007/978-3-319-98074-4</a>.
+</div>
+<div class="csl-entry">
+<span>“<span class="nocase">Geometrical product specifications (GPS) — Surface texture: Areal — Part 72: XML file format x3p</span>.”</span> 2017. Standard. Vol. 2014. Geneva, CH: International Organization for Standardization. <a href="https://www.iso.org/standard/62310.html">https://www.iso.org/standard/62310.html</a>.
+</div>
+<div class="csl-entry">
+Goodman, Steven N., Daniele Fanelli, and John P. A. Ioannidis. 2016. <span>“What Does Research Reproducibility Mean?”</span> <em>Science Translational Medicine</em> 8 (341): 341ps12–12. <a href="https://doi.org/10.1126/scitranslmed.aaf5027">https://doi.org/10.1126/scitranslmed.aaf5027</a>.
+</div>
+<div class="csl-entry">
+Goor, Robert, Douglas Hoffman, and George Riley. 2020. <span>“Novel Method for Accurately Assessing Pull-up Artifacts in STR Analysis.”</span> <em>Forensic Science International: Genetics</em> 51 (November): 102410. <a href="https://doi.org/10.1016/j.fsigen.2020.102410">https://doi.org/10.1016/j.fsigen.2020.102410</a>.
+</div>
+<div class="csl-entry">
+Hare, Eric, Heike Hofmann, and Alicia Carriquiry. 2017. <span>“Automatic <span>Matching</span> of <span>Bullet</span> <span>Land</span> <span>Impressions</span>.”</span> <em>The Annals of Applied Statistics</em> 11 (4): 2332–56. <a href="http://arxiv.org/abs/1601.05788">http://arxiv.org/abs/1601.05788</a>.
+</div>
+<div class="csl-entry">
+Hastie, Trevor, Robert Tibshirani, and Jerome Friedman. 2001. <em>The Elements of Statistical Learning</em>. Springer Series in Statistics. New York, NY, USA: Springer New York Inc.
+</div>
+<div class="csl-entry">
+Hesselink, Wim H., Arnold Meijster, and Coenraad Bron. 2001. <span>“Concurrent Determination of Connected Components.”</span> <em>Science of Computer Programming</em> 41 (2): 173–94. <a href="https://doi.org/10.1016/S0167-6423(01)00007-7">https://doi.org/10.1016/S0167-6423(01)00007-7</a>.
+</div>
+<div class="csl-entry">
+Hofmann, Heike, Alicia Carriquiry, and Susan Vanderplas. 2021. <span>“<span class="nocase">Treatment of inconclusives in the AFTE range of conclusions</span>.”</span> <em>Law, Probability and Risk</em> 19 (3-4): 317–64. <a href="https://doi.org/10.1093/lpr/mgab002">https://doi.org/10.1093/lpr/mgab002</a>.
+</div>
+<div class="csl-entry">
+Hofmann, Heike, Susan Vanderplas, Ganesh Krishnan, and Eric Hare. 2020. <em><span class="nocase">x3ptools: Tools for Working with 3D Surface Measurements</span></em>. <a href="https://cran.r-project.org/web/packages/x3ptools/index.html">https://cran.r-project.org/web/packages/x3ptools/index.html</a>.
+</div>
+<div class="csl-entry">
+James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2013. <em>An Introduction to Statistical Learning: With Applications in r</em>. Springer. <a href="https://faculty.marshall.usc.edu/gareth-james/ISL/">https://faculty.marshall.usc.edu/gareth-james/ISL/</a>.
+</div>
+<div class="csl-entry">
+Kuhn, Max. 2022. <em>Caret: Classification and Regression Training</em>. <a href="https://CRAN.R-project.org/package=caret">https://CRAN.R-project.org/package=caret</a>.
+</div>
+<div class="csl-entry">
+Kwong, Katherine. 2017. <span>“The <span>Algorithm</span> <span>Says</span> <span>You</span> <span>Did</span> <span>It</span>: <span>The</span> <span>Use</span> of <span>Black</span> <span>Box</span> <span>Algorithms</span> to <span>Analyze</span> <span>Complex</span> <span>DNA</span> <span>Evidence</span> <span>Notes</span>.”</span> <em>Harvard Journal of Law &amp; Technology (Harvard JOLT)</em> 31 (1): 275–302. <a href="https://jolt.law.harvard.edu/assets/articlePDFs/v31/31HarvJLTech275.pdf">https://jolt.law.harvard.edu/assets/articlePDFs/v31/31HarvJLTech275.pdf</a>.
+</div>
+<div class="csl-entry">
+Leek, Jeffrey T., and Leah R. Jager. 2017. <span>“Is <span>Most</span> <span>Published</span> <span>Research</span> <span>Really</span> <span>False</span>?”</span> <em>Annual Review of Statistics and Its Application</em> 4 (1): 109–22. <a href="https://doi.org/10.1146/annurev-statistics-060116-054104">https://doi.org/10.1146/annurev-statistics-060116-054104</a>.
+</div>
+<div class="csl-entry">
+MacQueen, J. B. 1967. <span>“Some Methods for Classification and Analysis of MultiVariate Observations.”</span> In <em>Proc. Of the Fifth Berkeley Symposium on Mathematical Statistics and Probability</em>, edited by L. M. Le Cam and J. Neyman, 1:281–97. University of California Press.
+</div>
+<div class="csl-entry">
+National Academy of Sciences, Engineering, and Medicine. 2019. <em>Reproducibility and Replicability in Science</em>. National Academies Press. <a href="https://doi.org/10.17226/25303">https://doi.org/10.17226/25303</a>.
+</div>
+<div class="csl-entry">
+National Research Council. 2009. <em>Strengthening <span>Forensic</span> <span>Science</span> in the <span>United</span> <span>States</span>: <span>A</span> <span>Path</span> <span>Forward</span></em>. Washington, DC: The National Academies Press. <a href="https://doi.org/10.17226/12589">https://doi.org/10.17226/12589</a>.
+</div>
+<div class="csl-entry">
+Ott, Daniel, Robert Thompson, and Junfeng Song. 2017. <span>“Applying <span>3d</span> Measurements and Computer Matching Algorithms to Two Firearm Examination Proficiency Tests.”</span> <em>Forensic Science International</em> 271 (February): 98–106. <a href="https://doi.org/10.1016/j.forsciint.2016.12.014">https://doi.org/10.1016/j.forsciint.2016.12.014</a>.
+</div>
+<div class="csl-entry">
+Park, Soyoung, and Alicia Carriquiry. 2020. <span>“An Algorithm to Compare Two-Dimensional Footwear Outsole Images Using Maximum Cliques and Speeded-up Robust Feature.”</span> <em>Statistical Analysis and Data Mining: The ASA Data Science Journal</em> 13 (2): 188–99. <a href="https://doi.org/10.1002/sam.11449">https://doi.org/10.1002/sam.11449</a>.
+</div>
+<div class="csl-entry">
+Park, Soyoung, and Sam Tyner. 2019. <span>“Evaluation and Comparison of Methods for Forensic Glass Source Conclusions.”</span> <em>Forensic Science International</em> 305 (December): 110003. <a href="https://doi.org/10.1016/j.forsciint.2019.110003">https://doi.org/10.1016/j.forsciint.2019.110003</a>.
+</div>
+<div class="csl-entry">
+Peng, Roger D. 2009. <span>“Reproducible Research and <span>Biostatistics</span>.”</span> <em>Biostatistics</em> 10 (3): 405–8. <a href="https://doi.org/10.1093/biostatistics/kxp014">https://doi.org/10.1093/biostatistics/kxp014</a>.
+</div>
+<div class="csl-entry">
+———. 2011. <span>“Reproducible <span>Research</span> in <span>Computational</span> <span>Science</span>.”</span> <em>Science</em> 334 (6060): 1226–27. <a href="https://www.jstor.org/stable/41352177">https://www.jstor.org/stable/41352177</a>.
+</div>
+<div class="csl-entry">
+President’s Council of Advisors on Sci. &amp; Tech. 2016. <span>“Forensic Science in Criminal Courts: Ensuring Scientific Validity of Feature-Comparison Methods.”</span> <a href="https://obamawhitehouse.archives.gov/sites/default/files/microsites/ostp/PCAST/pcast_forensic_science_report_final.pdf">https://obamawhitehouse.archives.gov/sites/default/files/microsites/ostp/PCAST/pcast_forensic_science_report_final.pdf</a>.
+</div>
+<div class="csl-entry">
+R Core Team. 2017. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+</div>
+<div class="csl-entry">
+Song, John. 2013. <span>“Proposed <span>‘<span>NIST</span> <span>Ballistics</span> <span>Identification</span> <span>System</span> (<span>NBIS</span>)’</span> <span>Based</span> on <span>3d</span> <span>Topography</span> <span>Measurements</span> on <span>Correlation</span> <span>Cells</span>.”</span> <em>American Firearm and Tool Mark Examiners Journal</em> 45 (2): 11. <a href="https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=910868">https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=910868</a>.
+</div>
+<div class="csl-entry">
+Song, John, Wei Chu, Mingsi Tong, and Johannes Soons. 2014. <span>“<span>3d</span> Topography Measurements on Correlation Cells—a New Approach to Forensic Ballistics Identifications.”</span> <em>Measurement Science and Technology</em> 25 (6): 064005. <a href="https://doi.org/10.1088/0957-0233/25/6/064005">https://doi.org/10.1088/0957-0233/25/6/064005</a>.
+</div>
+<div class="csl-entry">
+Song, John, Theodore V. Vorburger, Wei Chu, James Yen, Johannes A. Soons, Daniel B. Ott, and Nien Fan Zhang. 2018. <span>“Estimating Error Rates for Firearm Evidence Identifications in Forensic Science.”</span> <em>Forensic Science International</em> 284 (March): 15–32. <a href="https://doi.org/10.1016/j.forsciint.2017.12.013">https://doi.org/10.1016/j.forsciint.2017.12.013</a>.
+</div>
+<div class="csl-entry">
+Stodden, Victoria, Peixuan Guo, and Zhaokun Ma. 2013. <span>“Toward <span>Reproducible</span> <span>Computational</span> <span>Research</span>: <span>An</span> <span>Empirical</span> <span>Analysis</span> of <span>Data</span> and <span>Code</span> <span>Policy</span> <span>Adoption</span> by <span>Journals</span>.”</span> Edited by Dmitri Zaykin. <em>PLoS ONE</em> 8 (6): e67111. <a href="https://doi.org/10.1371/journal.pone.0067111">https://doi.org/10.1371/journal.pone.0067111</a>.
+</div>
+<div class="csl-entry">
+Swofford, H., and C. Champod. 2021. <span>“Implementation of Algorithms in Pattern <span>&amp;</span> Impression Evidence: A Responsible and Practical Roadmap.”</span> <em>Forensic Science International: Synergy</em> 3: 100142. <a href="https://doi.org/10.1016/j.fsisyn.2021.100142">https://doi.org/10.1016/j.fsisyn.2021.100142</a>.
+</div>
+<div class="csl-entry">
+Tai, Xiao Hui. 2021. <em>cartridges3D: Algorithm to Compare Cartridge Case Images</em>. <a href="https://github.com/xhtai/cartridges3D">https://github.com/xhtai/cartridges3D</a>.
+</div>
+<div class="csl-entry">
+Tai, Xiao Hui, and William F. Eddy. 2018. <span>“A <span>Fully</span> <span>Automatic</span> <span>Method</span> for <span>Comparing</span> <span>Cartridge</span> <span>Case</span> <span>Images</span>,”</span> <em>Journal of Forensic Sciences</em> 63 (2): 440–48. <a href="http://doi.wiley.com/10.1111/1556-4029.13577">http://doi.wiley.com/10.1111/1556-4029.13577</a>.
+</div>
+<div class="csl-entry">
+The Linux Foundation. 2017. <span>“<span class="nocase">Using open source software to speed up development and gain business advantage</span>.”</span> <a href="https://www.linuxfoundation.org/blog/using-open-source-software-to-speed-development-and-gain-business-advantage/">https://www.linuxfoundation.org/blog/using-open-source-software-to-speed-development-and-gain-business-advantage/</a>.
+</div>
+<div class="csl-entry">
+Therneau, Terry, and Beth Atkinson. 2022. <em>Rpart: Recursive Partitioning and Regression Trees</em>. <a href="https://CRAN.R-project.org/package=rpart">https://CRAN.R-project.org/package=rpart</a>.
+</div>
+<div class="csl-entry">
+Thompson, Robert. 2017. <em>Firearm Identification in the Forensic Science Laboratory</em>. National District Attorneys Association. <a href="https://doi.org/10.13140/RG.2.2.16250.59846">https://doi.org/10.13140/RG.2.2.16250.59846</a>.
+</div>
+<div class="csl-entry">
+Tong, Mingsi, John Song, and Wei Chu. 2015. <span>“An <span>Improved</span> <span>Algorithm</span> of <span>Congruent</span> <span>Matching</span> <span>Cells</span> (<span>CMC</span>) <span>Method</span> for <span>Firearm</span> <span>Evidence</span> <span>Identifications</span>.”</span> <em>Journal of Research of the National Institute of Standards and Technology</em> 120 (April): 102. <a href="https://doi.org/10.6028/jres.120.008">https://doi.org/10.6028/jres.120.008</a>.
+</div>
+<div class="csl-entry">
+Tong, Mingsi, John Song, Wei Chu, and Robert M. Thompson. 2014. <span>“Fired <span>Cartridge</span> <span>Case</span> <span>Identification</span> <span>Using</span> <span>Optical</span> <span>Images</span> and the <span>Congruent</span> <span>Matching</span> <span>Cells</span> (<span>CMC</span>) <span>Method</span>.”</span> <em>Journal of Research of the National Institute of Standards and Technology</em> 119 (November): 575. <a href="https://doi.org/10.6028/jres.119.023">https://doi.org/10.6028/jres.119.023</a>.
+</div>
+<div class="csl-entry">
+Tvedebrink, Torben, Mikkel Meyer Andersen, and James Michael Curran. 2020. <span>“DNAtools: Tools for Analysing Forensic Genetic DNA Data.”</span> <em>Journal of Open Source Software</em> 5 (45): 1981. <a href="https://doi.org/10.21105/joss.01981">https://doi.org/10.21105/joss.01981</a>.
+</div>
+<div class="csl-entry">
+Tyner, Sam, Soyoung Park, Ganesh Krishnan, Karen Pan, Eric Hare, Amanda Luby, Xiao Hui Tai, Heike Hofmann, and Guillermo Basulto-Elias. 2019. <span>“Sctyner/OpenForSciR: Create DOI for Open Forensic Science in r.”</span> Zenodo. <a href="https://zenodo.org/record/3418141">https://zenodo.org/record/3418141</a>.
+</div>
+<div class="csl-entry">
+Vanderplas, Susan, Melissa Nally, Tylor Klep, Cristina Cadevall, and Heike Hofmann. 2020. <span>“Comparison of Three Similarity Scores for Bullet <span>LEA</span> Matching.”</span> <em>Forensic Science International</em>, January. <a href="https://doi.org/10.1016/j.forsciint.2020.110167">https://doi.org/10.1016/j.forsciint.2020.110167</a>.
+</div>
+<div class="csl-entry">
+Venables, W. N., and B. D. Ripley. 2002. <em>Modern Applied Statistics with s</em>. Fourth. New York: Springer. <a href="http://www.stats.ox.ac.uk/pub/MASS4">http://www.stats.ox.ac.uk/pub/MASS4</a>.
+</div>
+<div class="csl-entry">
+Vorburger, T V, J Song, and N Petraco. 2015. <span>“Topography Measurements and Applications in Ballistics and Tool Mark Identifications.”</span> <em>Surface Topography: Metrology and Properties</em> 4 (1): 013002. <a href="https://doi.org/10.1088/2051-672x/4/1/013002">https://doi.org/10.1088/2051-672x/4/1/013002</a>.
+</div>
+<div class="csl-entry">
+Vorburger, T V, J H Yen, B Bachrach, T B Renegar, J J Filliben, L Ma, H G Rhee, et al. 2007. <span>“Surface Topography Analysis for a Feasibility Assessment of a National Ballistics Imaging Database.”</span> NIST IR 7362. Gaithersburg, MD: National Institute of Standards; Technology. <a href="https://doi.org/10.6028/NIST.IR.7362">https://doi.org/10.6028/NIST.IR.7362</a>.
+</div>
+<div class="csl-entry">
+Weller, Todd J., Alan Zheng, Robert Thompson, and Fred Tulleners. 2012. <span>“Confocal Microscopy Analysis of Breech Face Marks on Fired Cartridge Cases from 10 Consecutively Manufactured Pistol Slides”</span> 57 (4). <a href="https://doi.org/10.1111/j.1556-4029.2012.02072.x">https://doi.org/10.1111/j.1556-4029.2012.02072.x</a>.
+</div>
+<div class="csl-entry">
+Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019. <span>“Welcome to the <span class="nocase">tidyverse</span>.”</span> <em>Journal of Open Source Software</em> 4 (43): 1686.
+</div>
+<div class="csl-entry">
+Xiao Hui Tai. 2018. <span>“Comparing Cartridge Breechface Marks: 2d Versus 3d.”</span> Center for Statistics; Applications in Forensic Evidence. January 31, 2018. <a href="https://forensicstats.org/blog/portfolio/comparing-cartridge-breechface-marks-2d-versus-3d/">https://forensicstats.org/blog/portfolio/comparing-cartridge-breechface-marks-2d-versus-3d/</a>.
+</div>
+<div class="csl-entry">
+Xie, Yihui. 2014. <span>“Knitr: A Comprehensive Tool for Reproducible Research in <span>R</span>.”</span> In <em>Implementing Reproducible Computational Research</em>, edited by Victoria Stodden, Friedrich Leisch, and Roger D. Peng. Chapman; Hall/CRC. <a href="http://www.crcpress.com/product/isbn/9781466561595">http://www.crcpress.com/product/isbn/9781466561595</a>.
+</div>
+<div class="csl-entry">
+———. 2015. <em>Dynamic Documents with <span>R</span> and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>.
+</div>
+<div class="csl-entry">
+Zemmels, Joe, Heike Hofmann, and Susan VanderPlas. 2022. <em>cmcR: An Implementation of the ’Congruent Matching Cells’ Method</em>.
+</div>
+<div class="csl-entry">
+Zemmels, Joseph, Heike Hofmann, and Susan Vanderplas. 2022. <span>“<span class="nocase">Zemmels et al. (2023) Cartridge Case Scans</span>.”</span> Iowa State University. <a href="https://doi.org/10.25380/IASTATE.19686297.V1">https://doi.org/10.25380/IASTATE.19686297.V1</a>.
+</div>
+<div class="csl-entry">
+Zemmels, Joseph, Susan VanderPlas, and Heike Hofmann. 2023. <span>“A Study in Reproducibility: The Congruent Matching Cells Algorithm and <span class="nocase">cmcR</span> Package.”</span> <em>The R Journal</em> 14 (4): 79–102. <a href="https://doi.org/10.32614/rj-2023-014">https://doi.org/10.32614/rj-2023-014</a>.
+</div>
+<div class="csl-entry">
+Zhang, Hao, Jialing Zhu, Rongjing Hong, Hua Wang, Fuzhong Sun, and Anup Malik. 2020. <span>“Convergence-Improved Congruent Matching Cells (<span>CMC</span>) Method for Firing Pin Impression Comparison.”</span> <em>Journal of Forensic Sciences</em> 66 (2): 571–82. <a href="https://doi.org/10.1111/1556-4029.14634">https://doi.org/10.1111/1556-4029.14634</a>.
+</div>
+<div class="csl-entry">
+Zheng, Xiaoyu A., Johannes A. Soons, and Robert M. Thompson. 2016. <span>“<span>NIST Ballistics Toolmark Research Database</span>.”</span> <a href="https://tsapps.nist.gov/NRBTD/">https://tsapps.nist.gov/NRBTD/</a>.
+</div>
+<div class="csl-entry">
+Zheng, X, J Soons, T V Vorburger, J Song, T Renegar, and R Thompson. 2014. <span>“Applications of Surface Metrology in Firearm Identification.”</span> <em>Surface Topography: Metrology and Properties</em> 2 (1): 014012. <a href="https://doi.org/10.1088/2051-672x/2/1/014012">https://doi.org/10.1088/2051-672x/2/1/014012</a>.
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-fft_brigham" class="csl-entry">
+Brigham, E. Oran. 1988. <em>The Fast Fourier Transform and Its Applications</em>. USA: Prentice-Hall, Inc.
+</div>
+<div id="ref-song_proposed_2013" class="csl-entry">
+Song, John. 2013. <span>“Proposed <span>‘<span>NIST</span> <span>Ballistics</span> <span>Identification</span> <span>System</span> (<span>NBIS</span>)’</span> <span>Based</span> on <span>3d</span> <span>Topography</span> <span>Measurements</span> on <span>Correlation</span> <span>Cells</span>.”</span> <em>American Firearm and Tool Mark Examiners Journal</em> 45 (2): 11. <a href="https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=910868">https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=910868</a>.
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="2">
+<li id="fn2"><p>Euclidean distance, in our application<a href="appendix.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>As with the registration-based features, in reality these matrices should be equivalent across the two comparison directions. However, there are slight differences due to the discretely-indexed nature of the surface matrices.<a href="appendix.html#fnref3" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="acknowledgments.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["thesis.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

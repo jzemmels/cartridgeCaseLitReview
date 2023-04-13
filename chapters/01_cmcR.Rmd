@@ -140,7 +140,7 @@ The source code to the full cmcR package is accessible at <https://github.com/CS
 In this section, we examine the process of implementing the CMC pipeline for automatic comparisons of 3D cartridge case scans.
 At each step, we will discuss how we filled in the gaps of the original description during the creation of cmcR.
 
-All of the CMC pipelines can be broken down into three broad stages: (1) pre-processing, (2) cell-based similarity feature extraction, and (3) application of a decision rule as illustrated in \@(fig:overview-flow).
+All of the CMC pipelines can be broken down into three broad stages: (1) pre-processing, (2) cell-based similarity feature extraction, and (3) application of a decision rule as illustrated in \@ref(fig:overview-flow).
 In the following sections we break each of these stages further into a set of modular steps.
 One advantage of modularizing these algorithms is that we can implement an algorithm as a set of sequential procedures.
 This allows us to test new variations against the old implementation in a coherent, unified framework.
@@ -467,6 +467,8 @@ fadul1.1_bpFiltered <- cmcR::preProcess_gaussFilter(x3p = fadul1.1_downsampled,
 ```
 
 ```{r processingPipeline_code, echo = F,warning = F,message = F,cache = F,include=FALSE}
+# bookdown has difficulty with loading the pipe from magrittr
+`%>%` <- magrittr::`%>%`
 
 fadul1.1_original$surface.matrix <- fadul1.1_original$surface.matrix*1e6
 fadul1.1_croppedInt$surface.matrix <- fadul1.1_croppedInt$surface.matrix*1e6
@@ -842,7 +844,7 @@ The code below demonstrates the use of `decision_CMC` on the features `kmCompari
 Conversely, `kmComparisonFeatures_rev` contains the features from a comparison of Fadul 1-2 vs. Fadul 1-1.
 For comparison, we also compute the CMCs under both decision rules for the comparison between the non-match pair Fadul 1-1 and Fadul 2-1 (not shown to avoid redundancy).
 
-```{r,echo=FALSE,cache = T}
+```{r,echo=FALSE,cache = TRUE}
 fadul2.1 <- x3ptools::x3p_read("data/fadul2-1.x3p") %>%
   cmcR::preProcess_crop(region = "exterior",
                         offset = -30) %>%
@@ -924,7 +926,7 @@ The top row shows 18 CMCs in blue and 8 non-CMCs in red when Fadul 1-1 is treate
 The bottom row shows the 17 CMCs and 13 non-CMCs when the roles are reversed.
 There is no discussion in @song_proposed_2013 about combining the results from these two comparison directions, but @tong_improved_2015 propose using the minimum of the two CMC counts (17 in this example).
 
-```{r topVoteCMCPlot-code,echo=FALSE,warning=FALSE,message=FALSE,cache = F}
+```{r topVoteCMCPlot-code,echo=FALSE,warning=FALSE,message=FALSE,cache = TRUE}
 
 library(patchwork)
 

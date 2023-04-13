@@ -1,0 +1,24 @@
+\documentclass{standalone}
+  %% EXTRA_PREAMBLE_CODE %%
+  \usepackage[
+  %% ALGO_CLASSOPTION %%
+linesnumbered,vlined
+  ]{algorithm2e}
+  \begin{document}
+  \begin{algorithm}[H]
+  %% ALGO_CODE %%
+\SetAlgoLined
+\KwIn{interval $[l,u]$ containing $p^\star$, tolerance $\epsilon>0$}
+\KwOut{solution $x$}
+\Repeat{$u-l \leq \epsilon$}{
+  $t \leftarrow (l+u)/2$\
+  Solve the convex feasibility problem\
+  \eIf{feasible}{
+    $u \leftarrow t$ and keep solution $x$
+  } {
+    $l \leftarrow t$
+  }
+}
+  \end{algorithm}
+  \end{document}
+  

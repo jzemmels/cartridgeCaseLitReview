@@ -1,0 +1,22 @@
+\documentclass{standalone}
+  %% EXTRA_PREAMBLE_CODE %%
+  \usepackage[
+  %% ALGO_CLASSOPTION %%
+linesnumbered,vlined
+  ]{algorithm2e}
+  \begin{document}
+  \begin{algorithm}[H]
+  %% ALGO_CODE %%
+\KwData{Source matrix $A$, target matrix $B$, and rotation grid $\pmb{\Theta}$}
+\KwResult{Estimated registration of $B$ to $A$, $(m^*,n^*,\theta^*)$, and cross-correlation function maximum, $CCF_{\max}$}
+\For{$\theta \in \pmb{\Theta}$}{
+Rotate $B$ by $\theta$ to obtain $B_\theta$\;
+Calculate $CCF_{\max, \theta} = \max_{m,n} (a \star b_{\theta})_{mn}$\;
+Calculate translation $[m^*_\theta,n^*_\theta] = \arg \max_{m,n} (a \star b_{\theta})_{mn}$
+}
+Calculate overall maximum correlation $CCF_{\max} = \max_{\theta} \{CCF_{\max,\theta} : \theta \in \pmb{\Theta}\}$\;
+Calculate rotation $\theta^* = \arg \max_{\theta} \{CCF_{\max,\theta} : \theta \in \pmb{\Theta}\}$\;
+\Return{Estimated rotation $\theta^*$, translation $m^* = m^*_{\theta^*}$ and $n^* = n^*_{\theta^*}$, and $CCF_{\max}$}
+  \end{algorithm}
+  \end{document}
+  

@@ -2,11 +2,14 @@
 title: "A Cartridge Case Comparison Pipeline"
 author: "Joseph Zemmels"
 site: bookdown::bookdown_site
-output: bookdown::pdf_book
+output: 
+  bookdown::pdf_book:
+    citation_package: natbib
 documentclass: isuthesis
 fontsize: 11pt
-bibliography: [resources/litReviewBib.bib]
+bibliography: "resources/litReviewBib.bib"
 biblio-style: apa
+link-citations: true
 url: 'https://github.com/jzemmels/cartridgeCaseLitReview'
 github-repo: jzemmels/cartridgeCaseLitReview
 dedicate: true
@@ -15,7 +18,6 @@ level: doctoral
 formal: dissertation
 major: Statistics
 urlcolor: blue
-link-citations: true
 toc-depth: 2
 mprof:
   - Heike Hofmann
@@ -46,6 +48,11 @@ knitr::opts_chunk$set(
 )
 
 library(ggplot2)
+library(cmcR) # remotes::install_github("CSAFE-ISU/cmcR")
+library(tidyverse)
+library(x3ptools) # remotes::install_github("heike/x3ptools")
+library(rgl)
+library(magrittr)
 ```
 
 # Literature Review
@@ -515,7 +522,7 @@ datasets::ChickWeight %>%
        subtitle = "Chick weights over time for two experimental diets")
 ```
 
-The R programming language \citep{r} provides a variety of tools to create visual diagnostics.
+The R programming language [@Rlanguage] provides a variety of tools to create visual diagnostics.
 Among the most robust of these tools is the ggplot2 package \citep{ggplot2}.
 This package extends the "Grammar of Graphics" introduced in \citet{Wilkinson2005} to provide a user-friendly structure to create statistical graphics.
 We use the `+` operator to "layer" features of a statistical graphic (e.g., elements, transformations, guides, labels) on a blank canvas.
@@ -1012,7 +1019,7 @@ It is easier to reason about a function that actually returns an object as outpu
 > Designing a package for humans largely comes down to using consistent, explicit, and descriptive naming schemes for objects and functions.
 
 Conceptualizing the cartridge case comparison procedure as a pipeline makes it easier to understand.
-We go one step further by actually implementing the procedure as a sequence of algorithms that are programatically connected together in the R statistical programming language \citep{r}.
+We go one step further by actually implementing the procedure as a sequence of algorithms that are programatically connected together in the R statistical programming language [@Rlanguage].
 In particular, we utilize the pipe operator \texttt{\%\textgreater{}\%} available from the magrittr R package \citep{magrittr}.
 The pipe operator allows the user to think intuitively in terms of verbs applied to the data.
 Table \@ref(tab:pipelineTable) illustrates two pipelines that utilize the pipe operator.
