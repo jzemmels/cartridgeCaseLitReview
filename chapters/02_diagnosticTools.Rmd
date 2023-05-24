@@ -145,22 +145,18 @@ Note that this introduces structurally missing values into the scan.
 
 Figure \@ref(fig:processedSideBySide) shows the isolated breech face impression regions where the height values of the surface have been mapped to a diverging purple (low) to orange (high) color scale and missing values are shown in gray.
 
-**Note that due to the scanning process the physical location of any measured values is relative, but the relationship of the measurements to each other is fixed. This means that we can, without affecting any structures, translate and even rotate measurements in 3d space. For the purpose of making scans comparable to each other, the scan surfaces are translated into XXXX what is being done exactly?** 
+<!-- **XXX I'm not sure what step in the algorithm you're referring to here. By "translated into," do you mean a horizontal/vertical shift? ** -->
 
-**XXX I'm not sure what step in the algorithm you're referring to here. By "translated into," do you mean a horizontal/vertical shift? **
-
-**Yes, I used translation in a mathematical sense here, so any shift in x, y or z direction. Sometimes we do these steps implicitly rather than in an explicit ... this is a step way. e.g. by changing from a grid to matrix we lose the physical extensions in x and y. Those are replaced by integer values first, and then rescaled into micron measurements later. That is an implicit translation in x and y. shifting a scan into a mean zero is an explicit translation, just as shifting a breech face impression is. I would very much like to use a robust estimate of the 2d breech face surface as the zero plane. their mean and any tilts in xy direction are removed. While those tilts might stem from a small misalignments of the breech face, a bigger source of variability stems from a slight misalignment during the scanning. **
+<!-- **Yes, I used translation in a mathematical sense here, so any shift in x, y or z direction. Sometimes we do these steps implicitly rather than in an explicit ... this is a step way. e.g. by changing from a grid to matrix we lose the physical extensions in x and y. Those are replaced by integer values first, and then rescaled into micron measurements later. That is an implicit translation in x and y. shifting a scan into a mean zero is an explicit translation, just as shifting a breech face impression is. I would very much like to use a robust estimate of the 2d breech face surface as the zero plane. their mean and any tilts in xy direction are removed. While those tilts might stem from a small misalignments of the breech face, a bigger source of variability stems from a slight misalignment during the scanning. ** -->
 
 ```{r referenceAnnotated,fig.cap="(Left) Cartridge case scan K013sA1 with breech face (BF) impressions manually annotated in red, (Middle) Processed surface matrices, (Right) Cartridge case scan K013sA2 with breech face (BF) impressions manually annotated in red. Raw scans (left and right) and processed versions of the surface matrices (in the middle) for a pair of cartridge cases fired by the same handgun (Ruger SR9, Gun A1, SerialNo 331-96383).",out.width = "\\textwidth"}
-knitr::include_graphics(c("images/chapter3-images/topMatchAnnotatedReference.png",
-                          "images/chapter3-images/referenceTargetSideBySide.png",
-                          "images/chapter3-images/topMatchAnnotatedTarget.png"))
+knitr::include_graphics("images/chapter3-images/rawProcessedBF-sideBySide.png")
 ```
 
-**XXX Great! It feels like we have reached the end of the introduction.**
-**todo list: (1) problem statement, (2) outline what this paper is about and order in which we go about it. XXX We probably have to go back to this a couple times.**
+<!-- **XXX Great! It feels like we have reached the end of the introduction.** -->
+<!-- **todo list: (1) problem statement, (2) outline what this paper is about and order in which we go about it. XXX We probably have to go back to this a couple times.** -->
 
-**Problem statement (draft): Can we characterize when a cartridge case alignment fails?**
+<!-- **Problem statement (draft): Can we characterize when a cartridge case alignment fails?** -->
 
 Even among matching cartridge case pairs, we have found results like those shown in Figure \@ref(fig:cmcPlot_match), where only a small number of the total cells are classified as CMCs, to be quite common.
 An underlying assumption of the CMC methodology is that many source cells should find the "correct" registration in a matching target scan.
@@ -283,7 +279,10 @@ Similar to image registration algorithm, we can use cell-based comparison to ali
 We again use a direction subscript $d = A,B$ to refer to the source scan in cell-based comparison.
 For example, the outcome of cell-based comparison using $B$ as source and $A^*$ as target is the set $\pmb{F}_B$ of estimated registrations per cell, $t = 1,...,T_B$, per rotation, $\theta \in \pmb{\Theta}_B'$.
 
-One challenge with using registration algorithms like image registration algorithm and cell-based comparison is understanding when and how they "work" as expected.
+A consequence of the scanning process is that the physical location of any measured values is relative, but the relationship of the measurements to each other is fixed. This means that we can, without affecting any structure in a scan, translate and even rotate measurements in 3d space. For the purpose of making scans comparable to each other during registration, we subtract the mean surface depth value from each scan, making the mean surface value effectively 0.
+This is commonly performed when computing the cross-correlation function in image registration applications.
+
+One challenge with using registration algorithms, such as the image registration and cell-based comparison procedures ,is understanding when and how they "work" as expected.
 For example, we expect for truly matching cartridge cases that these estimated registrations should "agree" across various cells.
 In other words, that $(m^*_{A,t,\theta},n^*_{A,t,\theta}, \theta)$ should be the same for all $t = 1,...T_A$.
 We don't assume such agreement will occur for truly non-matching cartridge cases.
@@ -807,9 +806,12 @@ To compute this, we consider the number of $TRUE$ elements the $cond$ matrices $
 Figure \@ref(fig:similaritiesDifferencesRatio) shows an example of this ratio computed for the matching pair K013sA1 and K013sA2, which results in a value of 2.84 meaning there are almost three times as many similarities as there are differences between the two scans.
 
 Mathematically, the similarities vs. differences ratio is given by
-\begin{align*}
+
+\begin{equation}
 r_{d} = \frac{\pmb{1}^T I(|A - B^*| \leq \tau) \pmb{1}}{\pmb{1}^T I(|A - B^*| > \tau) \pmb{1}}
-\end{align*}
+(\#eq:ratio)
+\end{equation}
+
 where $\pmb{1} \in \mathbb{R}^k$ is a column vector of ones and $I(\cdot)$ is the element-wise, matrix-valued indicator function.
 The inner products in the numerator and denominator act to count the number of TRUE elements in the two complementary $cond$ matrices.
 
@@ -817,7 +819,7 @@ We also compute similarities vs. differences ratios for the results of the cell-
 Specifically, we compute the ratio for a cell from the source matrix and its aligned mate in the target matrix, resulting in the ratio value $r_{d,t}$.
 We expect that the similarities vs. differences ratio will be larger for matching comparisons compared to non-matching comparisons.
 
-```{r filterLabeling-figure, fig.cap='(Left) After aligning two scans, we filter regions that are "different" from each other, meaning the absolute difference between surface values is larger than some threshold. We binarize the scan into different vs. similar regions - shown in white and black, respectively. (Middle) Using a connected components labeling algorithm, we identify connected "neighborhoods" of filtered elements, which are distinguished here by fill color. (Right) Considering the distribution of the region sizes, we see that the vast majority of the regions are relatively small, under 1000 square microns, although there are some outliers. We assume that the average region size will be relatively small for truly matching comparisons.',out.width = "\\textwidth"}
+```{r filterLabeling, fig.cap='(Left) After aligning two scans, we filter regions that are "different" from each other, meaning the absolute difference between surface values is larger than some threshold. We binarize the scan into different vs. similar regions - shown in white and black, respectively. (Middle) Using a connected components labeling algorithm, we identify connected "neighborhoods" of filtered elements, which are distinguished here by fill color. (Right) Considering the distribution of the region sizes, we see that the vast majority of the regions are relatively small, under 1000 square microns, although there are some outliers. We assume that the average region size will be relatively small for truly matching comparisons.',out.width = "\\textwidth"}
 knitr::include_graphics("images/chapter3-images/filterLabeling.png")
 ```
 
@@ -964,9 +966,9 @@ The cell-based average different region correlation, denoted $\overline{cor}_{\t
 The histograms in the first column convey similar information as the density plots, yet emphasize the class imbalance between the matching and non-matching comparisons.
 
 On the other hand, the box plots in the first column provide a more succinct summary of rank statistics and outliers for each feature.
-For example, we see that the full scan average different region size feature, $\overline{|S|}_{\text{full}}$, has an extreme non-match outlier with a value over 700.
-**[More to say about this specific outlier? Look up example and talk about why it's an outlier]**
-We discuss the univariate distribution of features in the "Case Studies" section below.
+For example, we see that the full scan average different region size feature, $\overline{|S|}_{\text{full}}$, has an extreme non-match outlier with a value of 765 pixels.
+We visualize the comparison plot for the associated pair of scans K013sA3 and K015iZ2 in Figure \@ref(fig:K013sA1-K015iZ2-comparisonPlot).
+We further discuss the univariate distribution of features in the "Case Studies" section below.
 
 Barring the first row/column, the off-diagonal visuals show summaries of the pairwise relationships between the 9 features.
 This provides us with intuition on which features "share" information.
@@ -998,7 +1000,7 @@ In the next section, we explore results from fitting and testing binary classifi
 ### Binary Classification Results
 
 Using the 21,945 training comparisons, we train three binary classifier models: based on a decision tree [@Breiman2017; @rpart], random forest [@breiman; @randomForest], and logistic regression [@stats].
-Note that do not intend to present a "final" model recommendation that should be used in forensic casework here - our present goal is merely to explore the discriminatory power of the nine visual diagnostic features when combined.
+Note that do not intend to present a "final" model recommendation that should be used in forensic casework here - our present goal is merely to explore the discriminatory power of these nine visual diagnostic features.
 See Chapter 4 for a broader exploration of cartridge case similarity scoring algorithms.
 
 Using the `caret` R package [@caret], we perform 10-fold cross-validation, repeated three times, to train each model.
@@ -1144,20 +1146,49 @@ For example, the lower-diagonal of the pairs plot in Figure \@ref(fig:visualFeat
 knitr::include_graphics("images/chapter3-images/visualDiag-extremeProb-featureDensities.png")
 ```
 
-In this section, we discuss how sensitive the final similarity scores are to the filter threshold $\tau$ used to partition two cartridge cases into "similarities" and "differences."
+Finally, we consider the non-match cartridge case pair K013sA3 and K015iZ2, which has the largest value for the full scan average different region size feature of 765 pixels.
+We see that the estimated registration of these two scans leads to very little overlap between the non-missing values.
+The observations that do overlap appear to do so because of striated markings that appear on the  two surfaces, although studying these markings reveal that they look quite dissimilar.
+Consequently, the filtering operation leads to only a few neighborhoods of filtered values, although they are each relatively large.
+This explains the large filtered neighborhood feature value associated with this comparison.
+These scan illustrate how the phenomenon of an "obvious" non-match, sometimes observed in firearm and toolmark casework, might appear when applying a registration algorithm.
 
-### Sensitivity to Filter Threshold
+```{r K013sA1-K015iZ2-comparisonPlot,fig.cap='Comparison plot for two non-matching scans K013sA3 and K015iZ2. The estimated registration of these two scans leads to very little overlap betwen the non-missing values of the two scans. This demonstrates how an "obvious" non-match cartridge case pair can appear when applying the image registration algorithm.',out.width = "\\textwidth"}
+knitr::include_graphics("images/chapter3-images/K013sA1-K015iZ2-comparisonPlot.png")
+```
 
-**[Final results don't seem heavily impacted using different multiples of the absolute difference standard deviation. Interestingly, the importance measure of the 9 features rearrange when we use the standard deviation of the "pooled" surface values.]**
 
-### Interactive cartridgeInvestigatR application
+<!-- ### Sensitivity to Filter Threshold -->
+
+<!-- In this section, we discuss how sensitive the final similarity scores are to the filter threshold $\tau$ used to partition two cartridge cases into "similarities" and "differences." -->
+
+<!-- **[Final results don't seem heavily impacted using different multiples of the absolute difference standard deviation. Interestingly, the importance measure of the 9 features rearrange when we use the standard deviation of the "pooled" surface values.]** -->
+
+### Software
 
 We developed an interactive web application called cartridgeInvestigatR to give non-programmers access to the visual diagnostic tools.
 The application is accessible at <https://csafe.shinyapps.io/cartridgeInvestigatR/>.
-In this section, we describe basic functionality of the application.
+For a guide on using the application, visit <https://github.com/jzemmels/cartridgeInvestigatR>.
+
+We also created a package called `impressions` to implement the visual diagnostics in the R programming language.
+You can currently install `impressions` from GitHub at <https://github.com/jzemmels/impressions>, although we plan to submit the package to CRAN soon.
+See <https://jzemmels.github.io/impressions/> for more information.
 
 ## Conclusion
 
-**[Algorithms rarely have built-in mechanisms to determine when they work as expected. Diagnostic tools fill this gap. Visual diagnostics specifically provide intuitive ways to interpret the behavior of the algorithm. The visual diagnostics we developed can be used both as a quick reference to determine whether changes to earlier stages of the pipeline are warranted and as a tool to carefully study the behavior of the algorithm.]**
+Algorithms rarely have built-in mechanisms to determine when they work as expected, so diagnostic tools aid the user in understanding when human intervention into the algorithmic pipeline is needed.
+In this paper, we introduced a suite of diagnostic tools to explore each step of a cartridge case comparison algorithms.
+These visual diagnostics can be used both as a quick reference to determine whether changes to earlier stages of the pipeline are warranted and as a tool to carefully study the behavior of the algorithm.
 
-**[We note that the workflow of dealing with such cartridge cases in practice would be iteratively applying pre-processing steps followed by using the visual diagnostic tools to ensure that the pre-processing removes as much extraneous information from the scans as possible.]**
+We discussed how non-breech face markings that are kept in the scan after pre-processing may be distracting to the full scan or cell-based registration procedures.
+The X3P plot is a particularly useful tool to check for necessary pre-processing because it emphasizes extreme surface values.
+After registering full scans or cells, the Comparison plot is useful to analyze specific regions of the scans for similarities and differences.
+To better understand the output of a similarity scoring algorithm, the visual diagnostic statistics provide a quantitative complement to the qualitative observations drawn from the other diagnostic tools.
+We demonstrated that these features are effective at distinguishing between matches and non-matches under a variety of conditions, which lends further credibility to their use as diagnostic tools and indicates that they could be useful in a statistical classification algorithm.
+We discuss this further in Chapter 4.
+
+We anticipate that these diagnostic tools will be used iteratively to check that each of the three major stages of a comparison algorithm - pre-processing, comparing, and scoring - hasn't obviously gone awry.
+For example, the user might visualize a pre-processed cartridge case using the X3P plot only to realize that further pre-processing is needed to remove extraneous information.
+After applying additional pre-processing, the user can return to the X3P plot to ensure that the extraneous information was removed.
+We recognize that ground-truth is unknown in actual casework, so it may be challenging to differentiate between extraneous markings and genuine breech face impressions.
+As such, we will continue to work with forensic examiners to better understand the nature of the evidence they commonly see and develop the diagnostic tools and cartridgeInvestigatR to better suite their needs.

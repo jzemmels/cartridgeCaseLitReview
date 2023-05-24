@@ -25,7 +25,7 @@ We introduce the Automatic Cartridge Evidence Scoring (ACES) algorithm to compar
 The ACES algorithm pre-processes the scans, extracts numeric features, and returns a similarity score indicating whether two cartridge cases were fired from the same firearm. 
 The numeric features are computed based on a cell-by-cell registration procedure, results from a density-based unsupervised clustering algorithm, and derived from visual diagnostic tools we developed to investigate the performance of cartridge case comparison algorithms. 
 We use scans taken at the Roy J Carver High Resolution Microscopy Facility of cartridge cases collected by @Baldwin2014 to train and test the ACES algorithm. 
-The performance of ACES compares favorably to several other methods, such as random forests on smaller feature sets, logistic regressions, decision trees, and some variants of previous Congruent Matching Cells methods [@song_proposed_2013; @zhang_convergence_2021]. 
+The performance of ACES compares favorably to several other methods, such as logistic regressions on smaller feature sets, random forests, and some variants of previous Congruent Matching Cells methods [@song_proposed_2013; @zhang_convergence_2021]. 
 We implement the ACES algorithm's scoring functionality in a free, open-source R package called `scored`.
 
 ## Introduction
@@ -278,7 +278,7 @@ Due to the presence of (structurally) missing values around the breech face impr
 We use lowercase letters and subscripts to denote a particular value of a matrix: $a_{ij}$ is the value in the $i$-th row and $j$-th column, starting from the top-left corner, of matrix $A$.
 We refer to the two known-match cartridge cases in Figure \@ref(fig:matchPair) as exemplar matrices $A$ and $B$.
 
-To accommodate structurally missing values, we adapt standard matrix algebra as follows: if an element of either matrix $A$ or $B$ is missing, then any element-wise operation including this element is also missing.
+To accommodate structurally missing values, we adapt standard matrix algebra by encoding the notion of "missingness" into the space of real values as follows: if an element of either matrix $A$ or $B$ is missing, then any element-wise operation including this element is also missing.
 Standard matrix algebra holds for non-missing elements.
 For example, the addition operator is defined as:
 \begin{align*}
@@ -290,6 +290,7 @@ NA &\text{otherwise}
 \end{align*}
 Other element-wise operations such as $\ominus_{NA}$ are defined similarly.
 For readability, we will use standard operator notation $+, -, >, <, I(\cdot), ...$ and assume the extended, element-wise operations as defined above.
+Note that this definition of dealing with missing values is consistent with a setting of `na.rm = FALSE` in terms of calculations in R [@Rlanguage].
 
 ```{r matchPair,out.width="\\textwidth",echo=FALSE,fig.pos="htbp",fig.cap="A matching pair of processed cartridge case scans. We measure the similarity between these cartridge cases using the distinguishable breech face impressions on their surfaces."}
 knitr::include_graphics("figures/matchPair.png")
@@ -703,7 +704,10 @@ The final set of features we calculate are based on visual diagnostic tools desc
 These numerical features quantify the qualitative observations one can make from the diagnostics.
 We provide a broad summary of the visual diagnostics features here, but we encourage the reader to see Chapter 3 to learn more.
 
-To create the visual diagnostics, we perform element-wise matrix operations.
+To construct the visual diagnostics, we perform element-wise operations on two matrices.
+For the full scan comparisons, we perform these operations on the matrices $A$ and $B^*$, which is the aligned version of $B$ after applying the image registration algorithm.
+We introduce the visual diagnostics in the context of the full scan comparisons, but they generalize smoothly to the case of cell comparisons as well.
+
 For a matrix $X \in \mathbb{R}^{k \times k}$ and Boolean-valued condition matrix $cond: \mathbb{R}^{k \times k} \to \{TRUE,FALSE\}^{k \times k}$, we define an element-wise filter operation $\mathcal{F}: \mathbb{R}^{k \times k} \to \mathbb{R}^{k \times k}$ as:
 
 \begin{align*}
@@ -715,210 +719,89 @@ NA &\text{otherwise}
 \end{cases}
 \end{align*}
 
-Of particular interest in our application is the (absolute) difference between surface matrices.
 For example, $\mathcal{F}_{|A - B^*| > \tau}(A)$ contains elements of matrix $A$ where the pair of scans $A$ and $B^*$ deviate by at least $\tau > 0$.
 Surface values in $A$ and $B^*$ that are "close," meaning within $\tau$ distance, to each other are replaced with $NA$ in this filtered matrix.
 
-First, we calculate the correlation $cor_{d,\text{full},\text{diff}}$ between the filtered matrices $\mathcal{F}_{|A - B^*| > \tau}(A)$ and $\mathcal{F}_{|A - B^*| > \tau}(B^*)$ for $d = A$ and $\mathcal{F}_{|A^* - B| > \tau}(A^*)$ and $\mathcal{F}_{|A^* - B| > \tau}(B)$ for $d = B$.
-We use the average \textbf{full-scan differences correlation} as a feature:
-\begin{align*}
-cor_{\text{full},\text{diff}} = \frac{1}{2}\left(cor_{A,\text{full},\text{diff}} + cor_{B,\text{full},\text{diff}}\right).
-\end{align*}
+We compute features based on the elements of the $cond$ matrix.
+First, we consider the ratio between the number of $TRUE$ and $FALSE$ elements in the matrix $|A - B^*| \leq \tau$, where $TRUE$ values correspond to elements of $A$ and $B^*$ within $\tau$ distance of each other.
+The definition of this ratio is given by Equation \@ref(eq:ratio).
 
-We assume that $cor_{\text{full},\text{diff}}$ will be large for matching cartridge case pairs relative to non-matching pairs.
-Said another way, we assume that regions of matching cartridge cases that are different will still follow similar trends.
-This can occur due to variability in the amount of contact between a cartridge case and breech face across multiple fires of a single firearm.
-We calculate the correlation by vectorizing the two filtered surface matrices and treating missing values by case-wise deletion.
+Figure \@ref(fig:similaritiesDifferencesRatio) in Chapter 3 shows an example of this ratio for two matching $A = K013sA1$ and $B = K013sA2$.
+The value of the "similarities vs. differences ratio" is 2.84 using a filter threshold of $\tau = 1$ micron
+If we consider the $TRUE$ and $FALSE$ elements of the $|A - B^*| \leq \tau$ matrix as the elements of $A$ and $B^*$ that are most "similar" and "different" then we can interpret this value to mean that there are 2.84 times as similarities as there are differences.
 
-As before, we extend our notation to accommodate cell comparisons $t = 1,...,T_d$ for $d = A,B$ using subscripts: $cor_{d,t,\text{diff}}$.
-For example, $cor_{A,t,\text{diff}}$ is the correlation between cell filtered surface matrices $\mathcal{F}_{|A_t - B_{t,\theta_t^*}^*| > \tau}(A_t)$ and $\mathcal{F}_{|A_t - B_{t,\theta_t^*}^*| > \tau}(B_{t,\theta_t^*}^*)$ where $B_{t,\theta_t^*}^*$ is the matrix extracted from $B^*$ that maximizes the CCF with $A_t$.
-We calculate the **average cell-based differences correlation** across all cells and both directions:
-
-$$
-\overline{cor}_{\text{cell},\text{diff}} = \frac{1}{T_A + T_B} \sum_{d \in \{A,B\}} \sum_{t=1}^{T_d} cor_{d,t,\text{diff}}
-$$
-
-
-Next, we consider features based on the elements of the Boolean $cond$ matrix.
-Consider Figure \@ref(fig:filterLabeling) that shows the filtered element-wise average $\mathcal{F}_{|A - B^*| < \tau}\left(\frac{1}{2}(A + B^*)\right)$ on the left and the associated $cond$ matrix $|A - B^*| > \tau$ visualized in black-and-white in the middle with filtered elements, whose $cond$ value is $TRUE$, shown in white.
-
-We first calculate the ratio between such a $cond$ matrix and its complement.
-For $d = A$, we consider the $cond$ matrices $|A - B^*| \leq \tau$ and $|A - B^*| > \tau$.
-The ratio is given by
-
-$$
-r_{d} = \frac{\pmb{1}^T I(|A - B^*| \leq \tau) \pmb{1}}{\pmb{1}^T I(|A - B^*| > \tau) \pmb{1}}
-$$
-
-where $\pmb{1} \in \mathbb{R}^k$ is a column vector of ones and $I(\cdot)$ is the element-wise, matrix-valued indicator function.
-We consider the average **full-scan similarities vs. differences ratio** across the two comparison directions:
-
+Because we perform comparisons in both directions $d = A,B$, we end up with two similarities vs. differences ratio values.
+We compute the arithmetic mean between these two values to obtain a summary feature for the cartridge case pair as a whole:
 $$
 r_{\text{full}} = \frac{1}{2}(r_A + r_B).
 $$
+We assume that the **full-scan similarities vs. differences ratio** will be larger for matching cartridge case pairs than non-matches.
 
-We expect $r_{\text{full}}$ to be large for matching pairs compared to non-matching pairs.
-That is, truly matching pairs will have more similarities than differences.
+As another source of features, we consider the size of $TRUE$-valued neighborhoods in the $cond$ matrix $|A - B^*| > \tau$, which is the logical complement of the $cond$ matrix used to compute $r_{\text{full}}$.
+An example of one such matrix can be seen on the left side of \@ref(fig:filterLabeling).
+We consider each neighborhood as a set of adjacent elements, $S$, that all have the same value.
+Two elements are "adjacent" if one of their indices differs by 1 (this is a 4-neighbor or "Rook's" scheme).
+We use a connected components labeling algorithm [@hesselink_concurrent_2001] to identify neighborhoods that all have the value $TRUE$ in $|A - B^*| > \tau$.
+The middle of \@ref(fig:filterLabeling) shows an example of neighborhood regions distinguished by fill color.
+Using this procedure in both comparison directions, we obtain multiple neighborhoods that we distinguish notationally using subscripts: $\pmb{S}_d = \{S_{d,1}, S_{d,2}, ..., S_{d, l} : l = 1,...,L_d\}$ where $L_d$ is the total number of labeled $TRUE$-valued regions in direction $d \in \{A,B\}$.
 
-We also calculate features based on the ratio for cell comparisons $t = 1,...,T_d$, $d = A,B$.
-Let $r_{d,t}$ denote the ratio for cell comparison $t$ in direction $d$.
-We consider the **average** and **standard deviation of the cell-based similarities vs. differences ratio**:
+Considering the size of each labeled region on the right side of Figure \@ref(fig:filterLabeling), we see that the distribution is heavily right-skewed with the majority of comparisons being relatively small - less than 1,000 square microns.
+If we associate the $TRUE$ values of $|A - B^*| > \tau$ with elements where $A$ and $B^*$ are the most "different," then it is reasonable to assume that the size of individual $TRUE$-valued regions would be small for a matching pair.
+In other words, that there wouldn't be large regions where $A$ and $B^*$ are different if they truly match.
 
-\begin{align*}
-\bar{r}_{\text{cell}} &= \frac{1}{T_A + T_B} \sum_{d \in \{A,B\}} \sum_{t = 1}^{T_d} r_{d,t} \\
-s_{\text{cell}, r} &= \sqrt{\frac{1}{T_A + T_B - 1} \sum_{d \in \{A,B\}} \sum_{t = 1}^{T_d} (r_{d,t} - \bar{r}_{\text{cell}})^2}.
-\end{align*}
-
-We expect $\bar{r}_{\text{cell}}$ and $s_{\text{cell}, r}$ to be large for matching cartridge case pairs relative to non-match pairs.
-
-Another aspect of the $cond$ matrix we consider is the size of the individual filtered regions.
-For two matching cartridge cases, we expect that there are few differences compared to similarities *and* that the different regions are relatively small.
-We use a connected components labeling algorithm detailed in @hesselink_concurrent_2001 to identify individual "neighborhoods" of filtered elements [@imager].
-More precisely, the algorithm returns a set of sets $\pmb{S}_d = \{S_{d,1},S_{d,2},...,S_{d,L_d}\}$ where each $S_{d,l}$ is a set of indices of the $cond$ matrix that have a value of $TRUE$ and are connected by a chained-together sequence of 4 (Rook's) neighborhoods.
-The right side of Figure \@ref(fig:filterLabeling) shows each $S_{d,l}$ distinguished by different fill colors, $l = 1,...,L_d$.
-
-```{r compDataFullScan,cache=TRUE,include=FALSE}
-if(!file.exists("data/compData_fullScans.RData")){
-  compData_fullScans <- 
-    bind_rows(map_dfr(seq(-30,30,by = 3),
-                      ~ cmcR::comparison_allTogether(reference = reference_eroded,
-                                                     target = target_eroded,
-                                                     theta = .,
-                                                     numCells = c(1,1),
-                                                     maxMissingProp = .99,
-                                                     sideLengthMultiplier = 1.1,
-                                                     returnX3Ps = TRUE)) %>%
-                mutate(direction = "comparison_refToTarget") %>%
-                filter(pairwiseCompCor == max(pairwiseCompCor)),
-              map_dfr(seq(-30,30,by = 3),
-                      ~ cmcR::comparison_allTogether(reference = target_eroded,
-                                                     target = reference_eroded,
-                                                     theta = .,
-                                                     numCells = c(1,1),
-                                                     maxMissingProp = .99,
-                                                     sideLengthMultiplier = 1.1,
-                                                     returnX3Ps = TRUE)) %>%
-                mutate(direction = "comparison_targetToRef") %>%
-                filter(pairwiseCompCor == max(pairwiseCompCor)))
-  
-  save(compData_fullScans,file = "data/compData_fullScans.RData")
-}
-```
-
-```{r scanFilterBinarized,include=FALSE,cache = TRUE}
-load("data/compData_fullScans.RData")
-
-scanA <- compData_fullScans %>%
-  filter(direction == "comparison_refToTarget") %>%
-  pull(cellHeightValues) %>%
-  .[[1]]
-
-scanBStar <- compData_fullScans %>%
-  filter(direction == "comparison_refToTarget") %>%
-  pull(alignedTargetCell) %>%
-  .[[1]]
-
-scanA$surface.matrix <- (scanA$surface.matrix*scanA$cmcR.info$scaleByVal + scanA$cmcR.info$centerByVal)
-
-scanBStar$surface.matrix <- (scanBStar$surface.matrix*scanBStar$cmcR.info$scaleByVal + scanBStar$cmcR.info$centerByVal)
-
-compPlt <- impressions::x3p_comparisonPlot(
-  x3p1 = scanA,
-  x3p2 = scanBStar,
-  plotLabels = c("Scan A","Scan B*","Filtered Element-wise\nAverage",
-                 "Scan A\nFiltered\nDifferences","Scan B*\nFiltered\nDifferences"),
-  labelSize = 2.5,
-  legendLength = grid::unit(4,"in"),
-  legendHoriz = -1.3,
-  legendQuantiles = c(0,.01,.05,.5,.95,.99,1))
-
-plt1 <- ggplot_build(compPlt$patches$plots[[3]])
-
-plt1 <- plt1$data[[2]] %>%
-  ggplot(aes(x=x,y=y,fill=fill)) +
-  geom_raster() +
-  scale_fill_identity() +
-  coord_fixed(expand = FALSE) +
-  theme_void() +
-  geom_path(data = plt1$data[[4]],
-            aes(x=x,y=y,group=group),
-            size = .2,
-            colour = "gray40",
-            inherit.aes = FALSE)
-
-scanFilterBinarized <- scanA %>% 
-  impressions::x3p_elemAverage(scanBStar) %>%
-  impressions::x3p_to_dataFrame() %>%
-  mutate(value = (abs(c({scanA$surface.matrix - scanBStar$surface.matrix})) > impressions::x3p_sd(scanA,scanBStar)))
-
-plt2 <- scanFilterBinarized %>%
-  ggplot(aes(x=x,y=y,fill=value)) +
-  geom_raster() +
-  scale_fill_manual(values = c("black","white"),na.value = "gray65") +
-  coord_fixed(expand = FALSE) +
-  theme_void() +
-  theme(legend.position = "none")
-
-
-scanFilterLabeled <- scanFilterBinarized %>%
-  mutate(x = x + 1,y = y + 1,
-         value = ifelse(!value | is.na(value),0,1)) %>%
-  imager::as.cimg() %>%
-  imager::label() %>%
-  as.data.frame() %>%
-  mutate(value = factor(value))
-
-plt3 <- scanFilterLabeled %>%
-  ggplot(aes(x=x,y=y,fill=value)) +
-  geom_raster() +
-  coord_fixed(expand = FALSE) +
-  theme_void() +
-  theme(legend.position = "none") +
-  scale_fill_manual(values = c("gray65",sample(RColorBrewer::brewer.pal(12,"Paired"),size = length(unique(scanFilterLabeled$value)) - 1,replace = TRUE)))
-
-plt <- (plt1 | plt2 | plt3) & theme(panel.border = element_rect(colour = "black",fill = NA))
-
-ggsave(plot = plt,filename = "figures/filterLabeling.png")
-knitr::plot_crop("figures/filterLabeling.png")
-```
-
-
-```{r filterLabeling,out.width="\\textwidth",echo=FALSE,fig.pos="htbp",fig.cap='(Left) After aligning two scans, we filter regions that are "different" from each other, meaning the absolute difference between surface values is larger than some threshold. (Middle) We binarize the scan into "filtered" or "non-filtered" regions - shown in white and black, respectively. (Right) Using a connected components labeling algorithm, we identify connected "neighborhoods" of filtered elements. We assume that these neighborhoods will be small, on average, if comparing truly matching cartridge cases.'}
-knitr::include_graphics("figures/filterLabeling.png")
-```
-
-We calculate the following features using the full-scan labeled neighborhoods:
+To compute numerical features based on this assumption, we consider the average and standard deviation of the blob sizes across the two comparison directions:
 
 \begin{align*}
 \overline{|S|}_{\text{full}} &= \frac{1}{L_A + L_B} \sum_{d \in \{A,B\}} \sum_{l=1}^{L_d} |S_{d,l}| \\
 s_{\text{full},|S|} &= \sqrt{\frac{1}{L_A + L_B - 1} \sum_{d \in \{A,B\}} \sum_{l=1}^{L_d} (|S_{d,l}| - \overline{|S|}_{\text{full}})^2}
 \end{align*}
 
-where $|S_{d,l}|$ is the cardinality of $S_{d,l}$.
-We assume that the **average** and **standard deviation of the full-scan neighborhood sizes** will be small for matching cartridge case  pairs relative to non-matching pairs.
-That is to say, we assume that the the regions of $A$ and $B$ that are different will all be small, on average, and vary little in size.
-This assumption is appropriate assuming that the breech face leaves consistent markings on fired cartridge cases.
+where $|S_{d,l}|$ is the number of elements (cardinality) in set $S_{d,l}$, $l = 1,...,L_d$ and $d = A,B$.
+We assume that the **average** and **standard deviation of the full-scan neighborhood sizes** will be small for matching pairs compared to non-matching pairs.
 
-Again, we extend our notation to accommodate individual cells.
-Let $\pmb{S}_{d,t} = \{S_{d,t,1},...,S_{d,t,L_{d,t}}\}$ denote the set of labeled neighborhoods for a cell $t = 1,...,T_d$, $d = A,B$.
-We calculate the per-cell average and standard deviation of the labeled neighborhood cell size:
+As a final source of features, we consider the correlation $cor_{d,\text{full},\text{diff}}$ between the elements of the matrices $\mathcal{F}_{|A - B^*| > \tau}(A)$ and $\mathcal{F}_{|A - B^*| > \tau}(B^*)$ for $d = A$ and $\mathcal{F}_{|A^* - B| > \tau}(A^*)$ and $\mathcal{F}_{|A^* - B| > \tau}(B)$ for $d = B$.
+If $A$ and $B$ are truly matching, then we might assume that differences in the height values occur merely because of variability in the amount of contact between the cartridge case and breech face across multiple fires of a single firearm.
+Figure \@ref(fig:matchingCellDifferenceCorrelation) shows an example of the "filtered differences" between two cells $\mathcal{F}_{|A_t - B_t^*| > \tau}(A_t)$ and $\mathcal{F}_{|A_t - B_t^*| > \tau}(B_t^*)$.
+Although the surface values in the cell on the right appear to be shifted up relative to the values from the cell on the left, as evidenced by the generally darker shades of orange, the trends in the surface values are similar.
+This is reflected in the relatively high correlation value of 0.84 between these two filtered cells.
 
+Similar to the other features, we use the average "differences correlation" value $cor_{d,\text{full},\text{diff}}$ across the two comparison directions as a feature:
+
+$$
+cor_{\text{full},\text{diff}} = \frac{1}{2}\left(cor_{A,\text{full},\text{diff}} + cor_{B,\text{full},\text{diff}}\right).
+$$
+
+We assume that the **full-scan differences correlation** will be large for matches compared to non-matches.
+
+So far, we've discussed visual diagnostic features for full scan comparisons.
+We also compute summary features based on the visual diagnostics applied to the cell-based comparisons.
+Letting $A_t$ and $B_t^*$ denote a pair of aligned cells from scans $A$ and $B^*$, respectively, we extend the full scan notation introduced above by adding $t$ subscripts.
+
+We compute the **average** and **standard deviation of the cell-based similarities vs. differences ratio** values:
+\begin{align*}
+\bar{r}_{\text{cell}} &= \frac{1}{T_A + T_B} \sum_{d \in \{A,B\}} \sum_{t = 1}^{T_d} r_{d,t} \\
+s_{\text{cell}, r} &= \sqrt{\frac{1}{T_A + T_B - 1} \sum_{d \in \{A,B\}} \sum_{t = 1}^{T_d} (r_{d,t} - \bar{r}_{\text{cell}})^2},
+\end{align*}
+
+We also calculate the per-cell average and standard deviation labeled neighborhood size:
 \begin{align*}
 \overline{|S|}_{d,t} &= \frac{1}{L_{d,t}} \sum_{l=1}^L |S_{d,t,l}| \\
-s_{d,t,|S|} &= \sqrt{\frac{1}{L_{d,t} - 1} \sum_{l=1}^{L_{d,t}} (|S_{d,t,l}| - \overline{|S|}_{\text{cell},d,t})^2}.
+s_{d,t,|S|} &= \sqrt{\frac{1}{L_{d,t} - 1} \sum_{l=1}^{L_{d,t}} (|S_{d,t,l}| - \overline{|S|}_{\text{cell},d,t})^2},
 \end{align*}
-
-We assume that the cell-based $\overline{|S|}_{d,t}$ and $s_{d,t,|S|}$ will be small, on average, for truly matching cartridge cases.
-Consequently, we use the sample average of these as features:
-
+and average these values to features for the pair as a whole:
 \begin{align*}
 \overline{|S|}_{\text{cell}} &= \frac{1}{T_A + T_B} \sum_{d \in \{A,B\}} \sum_{t=1}^{T_d} \overline{|S|}_{d,t} \\
-\bar{s}_{\text{cell},|S|} &= \frac{1}{T_A + T_B} \sum_{d \in \{A,B\}} \sum_{t=1}^{T_d} s_{d,t,|S|}
+\bar{s}_{\text{cell},|S|} &= \frac{1}{T_A + T_B} \sum_{d \in \{A,B\}} \sum_{t=1}^{T_d} s_{d,t,|S|}.
+\end{align*}
+We assume that the **average cell-wise neighborhood size** and the **average standard deviation of the cell-wise neighborhood sizes** will be small for matching pairs relative to non-match pairs.
+
+Finally, we compute the **average cell-based differences correlation** across all cells in both comparison directions:
+\begin{align*}
+\overline{cor}_{\text{cell},\text{diff}} &= \frac{1}{T_A + T_B} \sum_{d \in \{A,B\}} \sum_{t=1}^{T_d} cor_{d,t,\text{diff}}.
 \end{align*}
 
-We assume that the **average cell-wise neighborhood size** and the **average standard deviation of the cell-wise neighborhood sizes** will be small for matching cartridge case pairs relative to non-match pairs.
-
 Table `r knitr::asis_output(ifelse(knitr::is_html_output(), '\\@ref(tab:visualDiagnosticFeatures-html)', '\\@ref(tab:visualDiagnosticFeatures-latex)'))` summarizes the nine features based on visual diagnostics.
+A deeper exploration of these features can be found in Chapter 3.
 This concludes our explanation of the ACES feature set.
 Next, we use the 19 ACES features to train and test classifier models.
 
@@ -974,6 +857,207 @@ data.frame(x = c("$cor_{\\text{full},\\text{diff}}$",
                format = "html",escape = FALSE)
 ```
 
+<!-- We use the average \textbf{full-scan differences correlation} as a feature: -->
+<!-- \begin{align*} -->
+<!-- cor_{\text{full},\text{diff}} = \frac{1}{2}\left(cor_{A,\text{full},\text{diff}} + cor_{B,\text{full},\text{diff}}\right). -->
+<!-- \end{align*} -->
+<!-- We assume that the "average" and "standard deviation of the full-scan neighborhood sizes" -->
+
+<!-- We assume that $cor_{\text{full},\text{diff}}$ will be large for matching cartridge case pairs relative to non-matching pairs. -->
+<!-- Said another way, we assume that regions of matching cartridge cases that are different will still follow similar trends. -->
+<!-- This can occur due to variability in the amount of contact between a cartridge case and breech face across multiple fires of a single firearm. -->
+<!-- We calculate the correlation by vectorizing the two filtered surface matrices and treating missing values by case-wise deletion. -->
+
+<!-- As before, we extend our notation to accommodate cell comparisons $t = 1,...,T_d$ for $d = A,B$ using subscripts: $cor_{d,t,\text{diff}}$. -->
+<!-- For example, $cor_{A,t,\text{diff}}$ is the correlation between cell filtered surface matrices $\mathcal{F}_{|A_t - B_{t,\theta_t^*}^*| > \tau}(A_t)$ and $\mathcal{F}_{|A_t - B_{t,\theta_t^*}^*| > \tau}(B_{t,\theta_t^*}^*)$ where $B_{t,\theta_t^*}^*$ is the matrix extracted from $B^*$ that maximizes the CCF with $A_t$. -->
+<!-- We calculate the **average cell-based differences correlation** across all cells and both directions: -->
+
+<!-- $$ -->
+<!-- \overline{cor}_{\text{cell},\text{diff}} = \frac{1}{T_A + T_B} \sum_{d \in \{A,B\}} \sum_{t=1}^{T_d} cor_{d,t,\text{diff}} -->
+<!-- $$ -->
+
+
+<!-- Next, we consider features based on the elements of the Boolean $cond$ matrix. -->
+<!-- Consider Figure \@ref(fig:filterLabeling) that shows the filtered element-wise average $\mathcal{F}_{|A - B^*| < \tau}\left(\frac{1}{2}(A + B^*)\right)$ on the left and the associated $cond$ matrix $|A - B^*| > \tau$ visualized in black-and-white in the middle with filtered elements, whose $cond$ value is $TRUE$, shown in white. -->
+
+<!-- We first calculate the ratio between such a $cond$ matrix and its complement. -->
+<!-- For $d = A$, we consider the $cond$ matrices $|A - B^*| \leq \tau$ and $|A - B^*| > \tau$. -->
+<!-- The ratio is given by -->
+
+<!-- $$ -->
+<!-- r_{d} = \frac{\pmb{1}^T I(|A - B^*| \leq \tau) \pmb{1}}{\pmb{1}^T I(|A - B^*| > \tau) \pmb{1}} -->
+<!-- $$ -->
+
+<!-- where $\pmb{1} \in \mathbb{R}^k$ is a column vector of ones and $I(\cdot)$ is the element-wise, matrix-valued indicator function. -->
+<!-- We consider the average **full-scan similarities vs. differences ratio** across the two comparison directions: -->
+
+<!-- $$ -->
+<!-- r_{\text{full}} = \frac{1}{2}(r_A + r_B). -->
+<!-- $$ -->
+
+<!-- We expect $r_{\text{full}}$ to be large for matching pairs compared to non-matching pairs. -->
+<!-- That is, truly matching pairs will have more similarities than differences. -->
+
+<!-- We also calculate features based on the ratio for cell comparisons $t = 1,...,T_d$, $d = A,B$. -->
+<!-- Let $r_{d,t}$ denote the ratio for cell comparison $t$ in direction $d$. -->
+<!-- We consider the **average** and **standard deviation of the cell-based similarities vs. differences ratio**: -->
+
+<!-- \begin{align*} -->
+<!-- \bar{r}_{\text{cell}} &= \frac{1}{T_A + T_B} \sum_{d \in \{A,B\}} \sum_{t = 1}^{T_d} r_{d,t} \\ -->
+<!-- s_{\text{cell}, r} &= \sqrt{\frac{1}{T_A + T_B - 1} \sum_{d \in \{A,B\}} \sum_{t = 1}^{T_d} (r_{d,t} - \bar{r}_{\text{cell}})^2}. -->
+<!-- \end{align*} -->
+
+<!-- We expect $\bar{r}_{\text{cell}}$ and $s_{\text{cell}, r}$ to be large for matching cartridge case pairs relative to non-match pairs. -->
+
+<!-- Another aspect of the $cond$ matrix we consider is the size of the individual filtered regions. -->
+<!-- For two matching cartridge cases, we expect that there are few differences compared to similarities *and* that the different regions are relatively small. -->
+<!-- We use a connected components labeling algorithm detailed in @hesselink_concurrent_2001 to identify individual "neighborhoods" of filtered elements [@imager]. -->
+<!-- More precisely, the algorithm returns a set of sets $\pmb{S}_d = \{S_{d,1},S_{d,2},...,S_{d,L_d}\}$ where each $S_{d,l}$ is a set of indices of the $cond$ matrix that have a value of $TRUE$ and are connected by a chained-together sequence of 4 (Rook's) neighborhoods. -->
+<!-- The right side of Figure \@ref(fig:filterLabeling) shows each $S_{d,l}$ distinguished by different fill colors, $l = 1,...,L_d$. -->
+
+<!-- ```{r compDataFullScan,cache=TRUE,include=FALSE} -->
+<!-- if(!file.exists("data/compData_fullScans.RData")){ -->
+<!--   compData_fullScans <-  -->
+<!--     bind_rows(map_dfr(seq(-30,30,by = 3), -->
+<!--                       ~ cmcR::comparison_allTogether(reference = reference_eroded, -->
+<!--                                                      target = target_eroded, -->
+<!--                                                      theta = ., -->
+<!--                                                      numCells = c(1,1), -->
+<!--                                                      maxMissingProp = .99, -->
+<!--                                                      sideLengthMultiplier = 1.1, -->
+<!--                                                      returnX3Ps = TRUE)) %>% -->
+<!--                 mutate(direction = "comparison_refToTarget") %>% -->
+<!--                 filter(pairwiseCompCor == max(pairwiseCompCor)), -->
+<!--               map_dfr(seq(-30,30,by = 3), -->
+<!--                       ~ cmcR::comparison_allTogether(reference = target_eroded, -->
+<!--                                                      target = reference_eroded, -->
+<!--                                                      theta = ., -->
+<!--                                                      numCells = c(1,1), -->
+<!--                                                      maxMissingProp = .99, -->
+<!--                                                      sideLengthMultiplier = 1.1, -->
+<!--                                                      returnX3Ps = TRUE)) %>% -->
+<!--                 mutate(direction = "comparison_targetToRef") %>% -->
+<!--                 filter(pairwiseCompCor == max(pairwiseCompCor))) -->
+
+<!--   save(compData_fullScans,file = "data/compData_fullScans.RData") -->
+<!-- } -->
+<!-- ``` -->
+
+<!-- ```{r scanFilterBinarized,include=FALSE,cache = TRUE} -->
+<!-- load("data/compData_fullScans.RData") -->
+
+<!-- scanA <- compData_fullScans %>% -->
+<!--   filter(direction == "comparison_refToTarget") %>% -->
+<!--   pull(cellHeightValues) %>% -->
+<!--   .[[1]] -->
+
+<!-- scanBStar <- compData_fullScans %>% -->
+<!--   filter(direction == "comparison_refToTarget") %>% -->
+<!--   pull(alignedTargetCell) %>% -->
+<!--   .[[1]] -->
+
+<!-- scanA$surface.matrix <- (scanA$surface.matrix*scanA$cmcR.info$scaleByVal + scanA$cmcR.info$centerByVal) -->
+
+<!-- scanBStar$surface.matrix <- (scanBStar$surface.matrix*scanBStar$cmcR.info$scaleByVal + scanBStar$cmcR.info$centerByVal) -->
+
+<!-- compPlt <- impressions::x3p_comparisonPlot( -->
+<!--   x3p1 = scanA, -->
+<!--   x3p2 = scanBStar, -->
+<!--   plotLabels = c("Scan A","Scan B*","Filtered Element-wise\nAverage", -->
+<!--                  "Scan A\nFiltered\nDifferences","Scan B*\nFiltered\nDifferences"), -->
+<!--   labelSize = 2.5, -->
+<!--   legendLength = grid::unit(4,"in"), -->
+<!--   legendHoriz = -1.3, -->
+<!--   legendQuantiles = c(0,.01,.05,.5,.95,.99,1)) -->
+
+<!-- plt1 <- ggplot_build(compPlt$patches$plots[[3]]) -->
+
+<!-- plt1 <- plt1$data[[2]] %>% -->
+<!--   ggplot(aes(x=x,y=y,fill=fill)) + -->
+<!--   geom_raster() + -->
+<!--   scale_fill_identity() + -->
+<!--   coord_fixed(expand = FALSE) + -->
+<!--   theme_void() + -->
+<!--   geom_path(data = plt1$data[[4]], -->
+<!--             aes(x=x,y=y,group=group), -->
+<!--             size = .2, -->
+<!--             colour = "gray40", -->
+<!--             inherit.aes = FALSE) -->
+
+<!-- scanFilterBinarized <- scanA %>%  -->
+<!--   impressions::x3p_elemAverage(scanBStar) %>% -->
+<!--   impressions::x3p_to_dataFrame() %>% -->
+<!--   mutate(value = (abs(c({scanA$surface.matrix - scanBStar$surface.matrix})) > impressions::x3p_sd(scanA,scanBStar))) -->
+
+<!-- plt2 <- scanFilterBinarized %>% -->
+<!--   ggplot(aes(x=x,y=y,fill=value)) + -->
+<!--   geom_raster() + -->
+<!--   scale_fill_manual(values = c("black","white"),na.value = "gray65") + -->
+<!--   coord_fixed(expand = FALSE) + -->
+<!--   theme_void() + -->
+<!--   theme(legend.position = "none") -->
+
+
+<!-- scanFilterLabeled <- scanFilterBinarized %>% -->
+<!--   mutate(x = x + 1,y = y + 1, -->
+<!--          value = ifelse(!value | is.na(value),0,1)) %>% -->
+<!--   imager::as.cimg() %>% -->
+<!--   imager::label() %>% -->
+<!--   as.data.frame() %>% -->
+<!--   mutate(value = factor(value)) -->
+
+<!-- plt3 <- scanFilterLabeled %>% -->
+<!--   ggplot(aes(x=x,y=y,fill=value)) + -->
+<!--   geom_raster() + -->
+<!--   coord_fixed(expand = FALSE) + -->
+<!--   theme_void() + -->
+<!--   theme(legend.position = "none") + -->
+<!--   scale_fill_manual(values = c("gray65",sample(RColorBrewer::brewer.pal(12,"Paired"),size = length(unique(scanFilterLabeled$value)) - 1,replace = TRUE))) -->
+
+<!-- plt <- (plt1 | plt2 | plt3) & theme(panel.border = element_rect(colour = "black",fill = NA)) -->
+
+<!-- ggsave(plot = plt,filename = "figures/filterLabeling.png") -->
+<!-- knitr::plot_crop("figures/filterLabeling.png") -->
+<!-- ``` -->
+
+
+<!-- ```{r filterLabeling,out.width="\\textwidth",echo=FALSE,fig.pos="htbp",fig.cap='(Left) After aligning two scans, we filter regions that are "different" from each other, meaning the absolute difference between surface values is larger than some threshold. (Middle) We binarize the scan into "filtered" or "non-filtered" regions - shown in white and black, respectively. (Right) Using a connected components labeling algorithm, we identify connected "neighborhoods" of filtered elements. We assume that these neighborhoods will be small, on average, if comparing truly matching cartridge cases.'} -->
+<!-- knitr::include_graphics("figures/filterLabeling.png") -->
+<!-- ``` -->
+
+<!-- We calculate the following features using the full-scan labeled neighborhoods: -->
+
+<!-- \begin{align*} -->
+<!-- \overline{|S|}_{\text{full}} &= \frac{1}{L_A + L_B} \sum_{d \in \{A,B\}} \sum_{l=1}^{L_d} |S_{d,l}| \\ -->
+<!-- s_{\text{full},|S|} &= \sqrt{\frac{1}{L_A + L_B - 1} \sum_{d \in \{A,B\}} \sum_{l=1}^{L_d} (|S_{d,l}| - \overline{|S|}_{\text{full}})^2} -->
+<!-- \end{align*} -->
+
+<!-- where $|S_{d,l}|$ is the cardinality of $S_{d,l}$. -->
+<!-- We assume that the **average** and **standard deviation of the full-scan neighborhood sizes** will be small for matching cartridge case  pairs relative to non-matching pairs. -->
+<!-- That is to say, we assume that the the regions of $A$ and $B$ that are different will all be small, on average, and vary little in size. -->
+<!-- This assumption is appropriate assuming that the breech face leaves consistent markings on fired cartridge cases. -->
+
+<!-- Again, we extend our notation to accommodate individual cells. -->
+<!-- Let $\pmb{S}_{d,t} = \{S_{d,t,1},...,S_{d,t,L_{d,t}}\}$ denote the set of labeled neighborhoods for a cell $t = 1,...,T_d$, $d = A,B$. -->
+<!-- We calculate the per-cell average and standard deviation of the labeled neighborhood cell size: -->
+
+<!-- \begin{align*} -->
+<!-- \overline{|S|}_{d,t} &= \frac{1}{L_{d,t}} \sum_{l=1}^L |S_{d,t,l}| \\ -->
+<!-- s_{d,t,|S|} &= \sqrt{\frac{1}{L_{d,t} - 1} \sum_{l=1}^{L_{d,t}} (|S_{d,t,l}| - \overline{|S|}_{\text{cell},d,t})^2}. -->
+<!-- \end{align*} -->
+
+<!-- We assume that the cell-based $\overline{|S|}_{d,t}$ and $s_{d,t,|S|}$ will be small, on average, for truly matching cartridge cases. -->
+<!-- Consequently, we use the sample average of these as features: -->
+
+<!-- \begin{align*} -->
+<!-- \overline{|S|}_{\text{cell}} &= \frac{1}{T_A + T_B} \sum_{d \in \{A,B\}} \sum_{t=1}^{T_d} \overline{|S|}_{d,t} \\ -->
+<!-- \bar{s}_{\text{cell},|S|} &= \frac{1}{T_A + T_B} \sum_{d \in \{A,B\}} \sum_{t=1}^{T_d} s_{d,t,|S|} -->
+<!-- \end{align*} -->
+
+<!-- We assume that the **average cell-wise neighborhood size** and the **average standard deviation of the cell-wise neighborhood sizes** will be small for matching cartridge case pairs relative to non-match pairs. -->
+
+
+
 ### Scoring
 
 We use a data set of 510 cartridge cases fired from 25 firearms.
@@ -1027,7 +1111,7 @@ knitr::include_graphics("images/chapter4-images/rocPlot.png")
 Figure \@ref(fig:trainTestAccuracy) summarizes the training and testing accuracy, true negative and true positive rates for five binary classifiers.
 We distinguish between the training and testing results using gray and black points/line segments, respectively, which allows us to assess the generalizability of the various models.
 The conclusions drawn from Figure \@ref(fig:trainTestAccuracy) are intended to primarily be qualitative and comparative across models.
-Table \@ref(tab:trainDataResults) and Table \@ref(tab:testDataResults) in the Appendix provide a numerical summary of these results.
+Table `r knitr::asis_output(ifelse(knitr::is_html_output(), '\\@ref(tab:trainDataResults-html)', '\\@ref(tab:trainDataResults-latex)'))` and Table `r knitr::asis_output(ifelse(knitr::is_html_output(), '\\@ref(tab:testDataResults-html)', '\\@ref(tab:testDataResults-latex)'))` in the Appendix provide a numerical summary of these results.
 
 ```{r trainTestAccuracy,fig.align='center',fig.cap='We summarize classification accuracy, true negative, and true positive rates for both the training and testing results, represented as gray and black points/lines respectively, for five binary classifier models. Our primary interest is the test data results, but visualizing the training data results allows us to assess the generalizability of the models after training. In the first row, we consider a classifier based on a single feature, the Cluster Indicator feature $C_0$, as a baseline. The remaining rows show results from training/testing classifiers based on a random forest (RF) and logistic regression (LR) under various feature sets and optimization critieria. The second row shows results based on a subset of seven features from the ACES feature set while the third row shows results using all 19 ACES features.',fig.pos="htbp",out.width="\\textwidth"}
 knitr::include_graphics("images/chapter4-images/classifResultsPlt_trainTest.png")
@@ -1054,7 +1138,7 @@ Below, we explore this discrepancy by analyzing the contribution of various test
 The third row of Figure \@ref(fig:trainTestAccuracy) summarizes the classification results based on using all 19 ACES features.
 If we compare the "$C_0$ + Registration"-trained models in the second vs. the "All ACES"-trained models in the third row, we see that the addition of the other ACES features leads to improved test true negative and true positive rates (and consequently overall accuracy) with the most noticeable gains observed in the true positive rate.
 Across all five models, the All ACES-trained logistic regression model has the largest overall test accuracy and true positive rates of 97.68% and 95.94%, respectively.
-The All ACES-trained random forest model has the largest overall true negative rate of 97.87%, although the All ACES, logistic regression model is a close second at 97.81% (see Table \@ref(tab:testDataResults) for more details).
+The All ACES-trained random forest model has the largest overall true negative rate of 97.87%, although the All ACES, logistic regression model is a close second at 97.81% (see Table `r knitr::asis_output(ifelse(knitr::is_html_output(), '\\@ref(tab:testDataResults-html)', '\\@ref(tab:testDataResults-latex)'))` for more details).
 
 ### Similarity Score Investigation
 
@@ -1404,34 +1488,10 @@ knitr::include_graphics("figures/estimatedTranslationFaceted.png")
 Figure \@ref(fig:registrationDensities) shows density plots of the registration-based features for 21,945 cartridge case pairs.
 The first two rows show densities for the sample mean and standard deviation of the cell-based registrations, respectively.
 The third row shows densities for the pairwise-complete correlation features.
-The standard deviation of the cell-based registrations discriminate more between match vs. non-match pairs than the sample means, which justifies their inclusion in the final feature set.
-[More to say here?]
 
 ```{r registrationDensities,out.width="\\textwidth",echo=FALSE,fig.pos="htbp",fig.cap = 'Density plots of the Registration-Based features for 21,945 cartridge case pairs. The standard deviation of the cell-based registrations distinguish between match and non-match pairs better than the mean values.'}
 knitr::include_graphics("images/chapter4-images/featureDensity_registration.png")
 ```
-
-## DBSCAN Algorithm Details
-
-<!-- Figure \@ref(fig:dbscanIllustration) depicts an illustration of the DBSCAN algorithm [cite Wikimedia commons]. \hh{XXX get rid of this figure - I'm sure that you can explain the dbscan algorithm as well without giving space to figures that aren't yours. Space is the most valuable resource in a paper :)} -->
-DBSCAN has two parameters: a neighborhood radius $\epsilon$ and a minimum point threshold $Minpts$.
-<!-- In Figure \@ref(fig:dbscanIllustration), $Minpts = 4$ and $\epsilon$ is arbitrary and represented by the radius of the circles drawn around each point - each circle represents the $\epsilon$-neighborhood for its center point. -->
-First, the algorithm identifies cluster "core" points that contain at least $Minpts$ points within an $\epsilon$ distance.^[Euclidean distance, in our application]
-These points form the beginning of a cluster.
-All points within an $\epsilon$-neighborhood of a core point are included in the associated cluster.
-Clusters whose core points are within each other's $\epsilon$-neighborhood are combined into a single cluster.
-Any point outside of the $\epsilon$-neighborhood of a core point are called "noise points."
-Unlike other clustering algorithms, the DBSCAN algorithm does not require a specified number of expected clusters as a parameter; any points not belonging to a cluster are "noise." 
-<!-- and are shown in red in Figure \@ref(fig:dbscanIllustration). -->
-<!-- The yellow points $B$ and $C$ are within the $\epsilon$-neighborhood of a core point, but are not themselves core points. -->
-<!-- They are also included in the cluster making the overall cluster size 8. -->
-<!-- Finally, the blue point labelled $N$ is not in any core point's $\epsilon$-neighborhood and is thus classified as a "noise point." -->
-
-<!-- **[Add image to illustrate DBSCAN?]** -->
-
-<!-- ```{r,out.width=".7\\textwidth",echo=FALSE,fig.pos="htbp",fig.cap = '\\label{fig:dbscanIllustration} Illustration of the DBSCAN algorithm [cite]. Red and yellow points are part of the same cluster with the former forming the "core" of the cluster. The blue point is not part of a cluster and is classified as a "noise point." Figure by Chire - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=17045963'} -->
-<!-- knitr::include_graphics("images/dbscanIllustration.png") -->
-<!-- ``` -->
 
 ### Density-Based Feature Distributions
 
@@ -1446,40 +1506,6 @@ As expected, $C$ tends to be relatively large for matching comparisons while $\D
 knitr::include_graphics("images/chapter4-images/featureDensity_densityBased.png")
 ```
 
-## Visual Diagnostic Details
-
-The Complementary Comparison Plot visualizes the similarities and differences between two scans.
-Figure \@ref(fig:fullScanComparisonPlot) shows a Complementary Comparison plot between scan $A$ and $B^*$ defined previously.
-The left column shows Scans $A$ and $B^*$.
-The middle column shows a filtered element-wise average between $A$ and $B^*$; namely $\mathcal{F}_{|A - B^*| < \tau}\left(\frac{1}{2}(A + B^*)\right)$.
-This filtered element-wise average emphasizes similarities between $A$ and $B^*$.
-The right column shows $\mathcal{F}_{|A - B^*| > \tau}(A)$ and $\mathcal{F}_{|A - B^*| > \tau}(B^*)$ on top and bottom, respectively.
-These plots emphasize the differences between the two scans.
-The complementary comparison plot is a powerful tool for assessing the estimated alignment and identifying similarities and differences between two surface matrices.
-We repeat this in the other comparison direction $(d = B)$ to obtain filtered matrices $\mathcal{F}_{|A^* - B| < \tau}\left(\frac{1}{2}(A^* + B)\right)$, $\mathcal{F}_{|A^* - B| > \tau}(A^*)$ and $\mathcal{F}_{|A^* - B| > \tau}(B)$.^[As with the registration-based features, in reality these matrices should be equivalent across the two comparison directions. However, there are slight differences due to the discretely-indexed nature of the surface matrices.]
-
-```{r fullScan_comparisonPlot_code,cache=TRUE,include=FALSE}
-compPlt <- impressions::x3p_comparisonPlot(
-  x3p1 = scanA,
-  x3p2 = scanBStar,
-  plotLabels = c("Scan A","Scan B*","Filtered Element-wise\nAverage",
-                 "Scan A\nFiltered\nDifferences","Scan B*\nFiltered\nDifferences"),
-  labelSize = 2.5,
-  legendLength = grid::unit(4,"in"),
-  legendHoriz = -1.3,
-  legendQuantiles = c(0,.01,.05,.5,.95,.99,1))
-
-ggsave(plot = compPlt,filename = "figures/fullScan_comparisonPlot.png",dpi = 500)
-knitr::plot_crop("figures/fullScan_comparisonPlot.png")
-```
-
-```{r fullScanComparisonPlot,out.width="\\textwidth",echo=FALSE,fig.pos="htbp",fig.cap="Full scan comparison plot."}
-knitr::include_graphics("figures/fullScan_comparisonPlot.png")
-```
-
-We make a series of qualitative assumptions related to how a Complementary Comparison Plot will look for matching and non-matching cartridge case pairs.
-We develop a set of features that measure the degree to which these assumptions are met by a particular cartridge case pair.
-<!-- We now describe each feature and their associated assumptions. -->
 
 ### Visual Diagnostic Feature Distributions
 
@@ -1493,11 +1519,9 @@ knitr::include_graphics("images/chapter4-images/featureDensity_visualDiag.png")
 
 ## Model-Specific Results
 
-Table \@ref(tab:trainDataResults) summarizes the accuracy, true positive, and true negative rates based on the training data for the 13 binary classifier models.
-We see that the Logistic Regression (LR) and Random Forest (RF) models perform comparably, particularly having the exact same True Negative rate in the last two rows of the table.
-The CART model performs consistently worse compared to the other two models.
+Table `r knitr::asis_output(ifelse(knitr::is_html_output(), '\\@ref(tab:trainDataResults-html)', '\\@ref(tab:trainDataResults-latex)'))` summarizes the accuracy, true positive, and true negative rates based on the training data for the five binary classifier models.
 
-```{r trainResultsTable}
+```{r}
 # from: https://stackoverflow.com/a/65844319/14000041
 linesep<-function(x,y=character()){
   if(!length(x))
@@ -1505,99 +1529,121 @@ linesep<-function(x,y=character()){
   linesep(x[-length(x)], c(rep('',x[length(x)]-1),'\\addlinespace',y))  
 }
 
-structure(list(Model = structure(c(1L, 2L, 2L, 2L, 2L, 3L, 3L, 
-                                   3L, 3L, 4L, 4L, 4L, 4L), levels = c("Baseline", "CART", "RF", 
-                                                                       "LR"), class = "factor"), `Feature Set` = structure(c(1L, 2L, 
-                                                                                                                             2L, 3L, 3L, 2L, 2L, 3L, 3L, 2L, 2L, 3L, 3L), levels = c("$C_0$", 
-                                                                                                                                                                                     "$C_0$ + Registration", "All ACES"), class = "factor"), Criterion = structure(c(1L, 
-                                                                                                                                                                                                                                                                     2L, 3L, 2L, 3L, 2L, 3L, 2L, 3L, 2L, 3L, 2L, 3L), levels = c("", 
-                                                                                                                                                                                                                                                                                                                                 "Max. AUC", "Max. Accuracy"), class = "factor"), Accuracy = c("94.67", 
-                                                                                                                                                                                                                                                                                                                                                                                               "94.32", "98.11", "97.37", "98.56", "97.09", "98.90", "98.34", 
-                                                                                                                                                                                                                                                                                                                                                                                               "99.50", "97.33", "98.93", "98.25", "\\textbf{99.56}"), `True Positive` = c("97.32", 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                           "97.68", "91.09", "87.54", "86.86", "97.09", "93.09", "\\textbf{98.32}", 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                           "95.91", "97.32", "93.59", "98.23", "96.50"), `True Negative` = c("94.37", 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             "93.95", "98.89", "98.47", "99.87", "97.09", "99.55", "98.34", 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             "\\textbf{99.90}", "97.33", "99.53", "98.25", "\\textbf{99.90}")), class = "data.frame", row.names = c(NA, 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    -13L))%>%
-  dplyr::select(`Feature Set`,Criterion,Model,Accuracy,`True Negative`,`True Positive`) %>%
-  arrange(`Feature Set`,Criterion,Model) %>%
-  knitr::kable(caption = "Accuracy, True Positive, and True Negative rates based on the training data for the 13 binary classifier models. This table shows a numeric summary of the results shown in [Figure]. We bold the largest values in each column for emphasis.",
-               label = "trainDataResults",
-               format = "latex",
-               escape = FALSE,
-               align = c("l","l","l",
-                         "r","r","r"),
-               linesep = linesep(c(1,3,3,3,3)),
-               booktabs=TRUE)
 ```
 
 
-
-Table \@ref(tab:testDataResults) summarizes the accuracy, true positive, and true negative rates based on the test data for the 13 binary classifier models.
-We see that the Logistic Regression (LR) model performs slightly better than the Random Forest (RF) model in most cases while the CART model consistently lags behind the other two. 
-The true positive rates for the test data are noticeably lower to those for the training data summarized in Table \@ref(tab:trainDataResults), although the true negative rates are similar.
-
-```{r testResultsTable}
-structure(list(Model = structure(c(1L, 2L, 2L, 2L, 2L, 3L, 3L, 
-                                   3L, 3L, 4L, 4L, 4L, 4L), levels = c("Baseline", "CART", "RF", 
-                                                                       "LR"), class = "factor"), `Feature Set` = structure(c(1L, 2L, 
-                                                                                                                             2L, 3L, 3L, 2L, 2L, 3L, 3L, 2L, 2L, 3L, 3L), levels = c("$C_0$", 
-                                                                                                                                                                                     "$C_0$ + Registration", "All ACES"), class = "factor"), Criterion = structure(c(1L, 
-                                                                                                                                                                                                                                                                     2L, 3L, 2L, 3L, 2L, 3L, 2L, 3L, 2L, 3L, 2L, 3L), levels = c("", 
-                                                                                                                                                                                                                                                                                                                                 "Max. AUC", "Max. Accuracy"), class = "factor"), Accuracy = c("94.20", 
-                                                                                                                                                                                                                                                                                                                                                                                               "93.82", "98.21", "96.80", "98.88", "96.79", "98.81", "97.55", 
-                                                                                                                                                                                                                                                                                                                                                                                               "99.34", "96.97", "98.78", "97.86", "\\textbf{99.38}"), `True Positive` = c("94.73", 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                           "95.16", "88.22", "88.09", "86.73", "93.93", "89.81", "95.42", 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                           "92.44", "94.03", "90.10", "\\textbf{95.59}", "92.63"), `True Negative` = c("94.16", 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       "93.73", "98.94", "97.45", "99.78", "97.00", "99.48", "97.71", "99.85", 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       "97.18", "99.42", "98.03", "\\textbf{99.88}")), class = "data.frame", row.names = c(NA, 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           -13L)) %>%
-  dplyr::select(`Feature Set`,Criterion,Model,Accuracy,`True Negative`,`True Positive`) %>%
-  arrange(`Feature Set`,Criterion,Model) %>%
-  knitr::kable(caption = "Accuracy, True Positive, and True Negative rates based on the test data for the 13 binary classifier models. This table shows a numeric summary of the results shown in [Figure]. We bold the largest values in each column for emphasis.",
-               label = "testDataResults",
-               format = "latex",
+```{r trainDataResults-latex,echo=FALSE,eval=knitr::is_latex_output(),fig.align='center'}
+structure(list(`Feature Set` = structure(c(1L, 2L, 2L, 3L, 3L
+), .Label = c("$C_0$", "$C_0$~+~Registration", "All~ACES"), class = "factor"), 
+    Model = structure(c(1L, 2L, 3L, 2L, 3L), .Label = c("Baseline", 
+    "RF", "LR"), class = "factor"), Accuracy = c("90.47", "97.16", 
+    "97.23", "98.14", "\\textbf{98.3}"), `True Neg.` = c("90.43", 
+    "97.15", "97.23", "98.14", "\\textbf{98.3}"), `True Pos.` = c("90.77", 
+    "97.18", "97.23", "98.14", "\\textbf{98.27}")), row.names = c(NA, 
+-5L), class = c("tbl_df", "tbl", "data.frame"))%>%
+  knitr::kable(format = "latex",
+               caption = "Accuracy, True Positive, and True Negative rates based on the training data for the 13 binary classifier models. This table shows a numeric summary of the results shown in the Results section. We bold the largest values in each column for emphasis.",
                escape = FALSE,
-               align = c("l","l","l",
-                         "r","r","r"),
-               linesep = linesep(c(1,3,3,3,3)),
-               booktabs=TRUE)
+               align = c("l","l",
+                         "r","r","r","r"),
+               linesep = linesep(c(1,2,2)),
+               booktabs = TRUE) %>%
+  kableExtra::kable_styling(full_width = TRUE)
 ```
 
+
+```{r trainDataResults-html,echo=FALSE,eval=knitr::is_html_output(),fig.align='center'}
+structure(list(`Feature Set` = structure(c(1L, 2L, 2L, 3L, 3L
+), .Label = c("$C_0$", "$C_0$~+~Registration", "All~ACES"), class = "factor"), 
+    Model = structure(c(1L, 2L, 3L, 2L, 3L), .Label = c("Baseline", 
+    "RF", "LR"), class = "factor"), Accuracy = c("90.47", "97.16", 
+    "97.23", "98.14", "\\textbf{98.30}"), `True Neg.` = c("90.43", 
+    "97.15", "97.23", "98.14", "\\textbf{98.30}"), `True Pos.` = c("90.77", 
+    "97.18", "97.23", "98.14", "\\textbf{98.27}")), row.names = c(NA, 
+-5L), class = c("tbl_df", "tbl", "data.frame")) %>%
+  knitr::kable(caption = "Accuracy, True Positive, and True Negative rates based on the training data for the 13 binary classifier models. This table shows a numeric summary of the results shown in the Results section. We bold the largest values in each column for emphasis.",
+               format = "html",
+               escape = FALSE,
+               align = c("l","l",
+                         "r","r","r"),
+               linesep = linesep(c(1,2,2)),
+               booktabs = TRUE)
+```
+
+Table `r knitr::asis_output(ifelse(knitr::is_html_output(), '\\@ref(tab:testDataResults-html)', '\\@ref(tab:testDataResults-latex)'))` summarizes the accuracy, true positive, and true negative rates based on the test data for the 13 binary classifier models. 
+
+The true positive rates for the test data are noticeably lower to those for the training data summarized in Table `r knitr::asis_output(ifelse(knitr::is_html_output(), '\\@ref(tab:trainDataResults-html)', '\\@ref(tab:trainDataResults-latex)'))`, although the true negative rates are similar.
+
+```{r testDataResults-latex,echo=FALSE,eval=knitr::is_latex_output(),fig.align='center'}
+structure(list(`Feature Set` = structure(c(1L, 2L, 2L, 3L, 3L
+), .Label = c("$C_0$", "$C_0$~+~Registration", "All~ACES"), class = "factor"), 
+    Model = structure(c(1L, 2L, 3L, 2L, 3L), .Label = c("Baseline", 
+    "RF", "LR"), class = "factor"), Accuracy = c("89.44", "96.91", 
+    "96.98", "97.66", "\\textbf{97.68}"), `True Neg.` = c("89.64", 
+    "97.11", "97.21", "\\textbf{97.87}", "97.81"), `True Pos.` = c("86.82", 
+    "94.22", "93.87", "94.74", "\\textbf{95.94}")), row.names = c(NA, 
+-5L), class = c("tbl_df", "tbl", "data.frame")) %>%
+  knitr::kable(format = "latex",
+               caption = "Accuracy, True Positive, and True Negative rates based on the test data for the 13 binary classifier models. This table shows a numeric summary of the results shown in the Results section. We bold the largest values in each column for emphasis.",
+               escape = FALSE,
+               align = c("l","l",
+                         "r","r","r"),
+               linesep = linesep(c(1,2,2)),
+               booktabs = TRUE) %>%
+  kableExtra::kable_styling(full_width = TRUE)
+```
+
+
+```{r testDataResults-html,echo=FALSE,eval=knitr::is_html_output(),fig.align='center'}
+structure(list(`Feature Set` = structure(c(1L, 2L, 2L, 3L, 3L
+), .Label = c("$C_0$", "$C_0$~+~Registration", "All~ACES"), class = "factor"), 
+    Model = structure(c(1L, 2L, 3L, 2L, 3L), .Label = c("Baseline", 
+    "RF", "LR"), class = "factor"), Accuracy = c("89.44", "96.91", 
+    "96.98", "97.66", "\\textbf{97.68}"), `True Neg.` = c("89.64", 
+    "97.11", "97.21", "\\textbf{97.87}", "97.81"), `True Pos.` = c("86.82", 
+    "94.22", "93.87", "94.74", "\\textbf{95.94}")), row.names = c(NA, 
+-5L), class = c("tbl_df", "tbl", "data.frame")) %>%
+  knitr::kable(caption = "Accuracy, True Positive, and True Negative rates based on the test data for the 13 binary classifier models. This table shows a numeric summary of the results shown in the Results section. We bold the largest values in each column for emphasis.",
+               format = "html",
+               escape = FALSE,
+               align = c("l","l",
+                         "r","r","r"),
+               linesep = linesep(c(1,2,2)))
+```
 
 
 <!-- **[Write full logistic regression model here]** -->
 
-```{r logRegOddsMult,fig.pos="H",fig.align='center',out.extra='',eval=FALSE}
-load("data/logisticRegOddsMultipliers.RData")
+<!-- ```{r logRegOddsMult,fig.pos="H",fig.align='center',out.extra='',eval=FALSE} -->
+<!-- load("data/logisticRegOddsMultipliers.RData") -->
 
-logisticRegOddsFactors %>%
-  slice(1:5) %>%
-  mutate(logistOddsFactor = case_when(varName == "noClusterIndTRUE" ~ "$2.8 \\times 10^{40}$",
-                                      varName == "differenceCor_ave" ~ "9,934.6",
-                                      varName == "cell_theta_sd" ~ "243.7",
-                                      varName == "clustCenterDiff" ~ "1.5",
-                                      varName == "cell_y_sd" ~ "1.1",
-                                      TRUE ~ "")) %>%
-  mutate(varName = case_when(varName == "noClusterIndTRUE" ~ "Cluster Indicator",
-                             varName == "differenceCor_ave" ~ "Full-Scan Differences Correlation",
-                             varName == "cell_theta_sd" ~ "Cell-Based Rotation SD",
-                             varName == "clustCenterDiff" ~ "Estimated Translation Difference",
-                             varName == "cell_y_sd" ~ "Cell-Based Horizontal Translation SD",
-                             TRUE ~ "")) %>%
-  knitr::kable(col.names = c("Feature Name","Odds Multiplier"),
-               align = c("l","r"),label = "logistOddsMult",
-               caption = "Logistic regression-estimated multiplicative increase in the odds that a cartridge case pair is truly matching for a one unit increase in the associated feature, holding all other features constant. For brevity, we consider the top five features in terms of the odds multiplier. Note that the Cluster Indicator feature only takes on values 0 or 1.",
-               format = "latex",booktabs = TRUE,escape = FALSE)
-```
+<!-- logisticRegOddsFactors %>% -->
+<!--   slice(1:5) %>% -->
+<!--   mutate(logistOddsFactor = case_when(varName == "noClusterIndTRUE" ~ "$2.8 \\times 10^{40}$", -->
+<!--                                       varName == "differenceCor_ave" ~ "9,934.6", -->
+<!--                                       varName == "cell_theta_sd" ~ "243.7", -->
+<!--                                       varName == "clustCenterDiff" ~ "1.5", -->
+<!--                                       varName == "cell_y_sd" ~ "1.1", -->
+<!--                                       TRUE ~ "")) %>% -->
+<!--   mutate(varName = case_when(varName == "noClusterIndTRUE" ~ "Cluster Indicator", -->
+<!--                              varName == "differenceCor_ave" ~ "Full-Scan Differences Correlation", -->
+<!--                              varName == "cell_theta_sd" ~ "Cell-Based Rotation SD", -->
+<!--                              varName == "clustCenterDiff" ~ "Estimated Translation Difference", -->
+<!--                              varName == "cell_y_sd" ~ "Cell-Based Horizontal Translation SD", -->
+<!--                              TRUE ~ "")) %>% -->
+<!--   knitr::kable(col.names = c("Feature Name","Odds Multiplier"), -->
+<!--                align = c("l","r"),label = "logistOddsMult", -->
+<!--                caption = "Logistic regression-estimated multiplicative increase in the odds that a cartridge case pair is truly matching for a one unit increase in the associated feature, holding all other features constant. For brevity, we consider the top five features in terms of the odds multiplier. Note that the Cluster Indicator feature only takes on values 0 or 1.", -->
+<!--                format = "latex",booktabs = TRUE,escape = FALSE) -->
+<!-- ``` -->
 
-Figure \@ref(fig:trainedCART) shows the trained CART model.
-For each node, The first line is the predicted class if it were treated as a terminal node.
-The second line is the estimated probability that an observation is a non-match given that it falls into the node.
-The third line is the percentage of all observations that fall into the node.
-We see that splits are made on the three variables that are ranked as most important in Figure \@ref(fig:rfVarImpPlt); namely, $C_0$, $\overline{cor}_{\text{cell}}$, and $s_{m^*}$.
+<!-- Figure \@ref(fig:trainedCART) shows the trained CART model. -->
+<!-- For each node, The first line is the predicted class if it were treated as a terminal node. -->
+<!-- The second line is the estimated probability that an observation is a non-match given that it falls into the node. -->
+<!-- The third line is the percentage of all observations that fall into the node. -->
+<!-- We see that splits are made on the three variables that are ranked as most important in Figure \@ref(fig:rfVarImpPlt); namely, $C_0$, $\overline{cor}_{\text{cell}}$, and $s_{m^*}$. -->
 
-[Figure of fitted CART model here.]
+<!-- [Figure of fitted CART model here.] -->
 
 
 

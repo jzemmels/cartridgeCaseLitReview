@@ -1,0 +1,53 @@
+# Conclusions
+
+In this work, we introduced a novel cartridge case comparison algorithm designed with the explicit intention to be accessible, both in terms of literal acquisition as well as comprehensibility, to fellow researchers and others in the firearm and tool mark community.
+
+In Chapter 2, we discussed and implemented a general pipeline structure for a cartridge case comparison algorithm that adheres to the "tidy" principles of design.
+We demonstrated how this modularized structure makes it easy to experiment with and understand different components of the algorithm.
+We hope that the structure available in the `cmcR` R package can be used in the future to easily improve individual pieces of the pipeline rather than re-inventing the wheel with an entirely new algorithm.
+
+In Chapter 3, we introduced a suite of visual diagnostic statistics to aid the user of the algorithm in exploring its behavior.
+We considered a variety of use-cases in which the diagnostic tools either indicated when a tweak to the algorithm was warranted or illuminated the similarities and differences between two cartridge case surfaces.
+We hope that the diagnostic tools implemented in the `impressions` R package and accompanying `cartridgeInvestigatR` web application will prove useful to both researchers and other stakeholders in understanding the inner-workings of the comparison algorithm.
+
+In Chapter 4, we developed the Automatic Cartridge Evidence Scoring (ACES) algorithm that fuses previously-established sub-procedures of the cartridge case comparison pipeline with novel pre-processing, comparing, and scoring techniques.
+Using a train/test cross-validation procedure, we demonstrated how statistical models can be used to learn associations between numerical features to effectively distinguish between match and non-match comparisons.
+We hope that the foundation laid by the ACES comparison pipeline, and available in the `scored` R package, will be built upon with future feature engineering and model exploration.
+
+
+- Score-based LR approaches
+		- Specific source vs. common source and accounting for "typicality."
+		- Inter- vs. intra- scan features
+			- Intra-scan features
+				- SURF points
+				- Autoencoder/GAN-based features
+		- Hierarchical clustering (a la Tai (2019))
+	- Generalizability of model
+		- Are impressions consistent enough that a single model could be used for a number of makes/models? 
+		- Need more training data with variety of makes/models or 
+	- Characterization of sub-class/class characteristics using visual diagnostics
+		- Distinguishing individual vs. sub-class might be impossible. However, identifying large markings that might unduly affect the comparison procedure is important, so an "automatic" way of identifying such markings would be useful.
+	- Texture models for cartridge case evidence 
+	- Correlation measure that is more "robust" to extreme values
+
+Score clustering across multiple test fires similar to Xiao Hui's method
+
+We do a bang-up job with identifying non-matching comparisons, which is complementary to the behavior of examiners in Baldwin that had a much lower true negative rate. 
+The problem is that we aren't as good at identifying matching comparisons. 
+Sure, this could be solved if we find the "golden" feature that will identify matches. 
+However, a more pressing, and potentially more easily solvable, problem is that matching scans have a lot of ways in which they can "look" different to the algorithm. 
+For example, extreme, non-breech face markings in the scan that aren't removed during pre-processing may "distract" the registration that our pipeline relies so heavily on.
+Other cartridge cases might have unremarkable impressions, leading to a similarity score that doesn't strongly indicate matches or non-matches (what forensic examiners might call an "inconclusive").
+The visual diagnostic tools developed in this work make it easier to manually inspect and identify such extreme values.
+However, we could also develop "automatic" techniques to identify such markings (e.g., bound box Neural Net,). 
+We could also use comparative features that don't depend as much on registration, such as SURF points, or more "descriptive" features computed on individual scans, such as decompositions by orthonormal 2D bases (as in Morrison and company). 
+In the descriptive feature case, we would simply compute the features for two scans and compare the joint feature vector to a reference data base.
+
+By now, we hope that it is clear to the reader that a goal pervading every aspect of this work is transparency.
+Given the gravity of the application, we consider it necessary that tools used in making an evidentiary conclusion that could inform a judicial decision be as transparent and user-friendly as possible.
+As discussed in Chapter 2, this means structuring an algorithm to be flexible and sharing data or code if at all possible.
+As discussed in Chapter 3, this means creating supplementary tools that help the user understand the methods they're applying.
+As discussed in Chapter 4, this means building interpretable and effective features and models.
+Doing so would inevitably lead to stronger collaboration between research teams,  expedited improvements to the underlying methods, and a more equitable and trustworthy justice system.
+We hope that this work stands as a testament to the firearm and tool mark community that algorithms applicable to casework can simultaneously be effective, accessible, *and* approachable if intention is put towards the endeavor.
+

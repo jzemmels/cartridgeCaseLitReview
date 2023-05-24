@@ -74,12 +74,12 @@ Historically, forensic examiners have relied on tools (e.g., microscopes), case 
 More recently, algorithms to automatically compare evidence and provide an objective measure of similarity have been introduced.
 These algorithms can be used in a forensic examination to supplement and inform the examiner's conclusion.
 We propose an automatic, objective solution to the source identification problem; specifically in the context of comparing fired *cartridge cases.*
-Cartridge case comparison is a sub-discipline of Firearm and Toolmark Identification, which is reviewed in the next section.
+Cartridge case comparison is a sub-discipline of Firearm and Tool Mark Identification, which is reviewed in the next section.
 
-### Firearm and Toolmark Identification
+### Firearm and Tool Mark Identification
 
-Firearm and toolmark identification involves studying markings or impressions left by a hard surface such as a firearm or screwdriver on a softer surface [@Thompson2017].
-For example, a barrel's rifling leaves toolmarks on a bullet as it travels out of the gun.
+Firearm and tool mark identification involves studying markings or impressions left by a hard surface such as a firearm or screwdriver on a softer surface [@Thompson2017].
+For example, a barrel's rifling leaves tool marks on a bullet as it travels out of the gun.
 
 #### The Firing Process
 
@@ -137,9 +137,9 @@ knitr::include_graphics("images/realCartridgeCaseImage.jpg")
 <!-- knitr::include_graphics("images/extractorPinDiagram.png") -->
 <!-- ``` -->
 
-#### An Overview of Firearm and Toolmark Examinations
+#### An Overview of Firearm and Tool Mark Examinations
 
-Trained firearm and toolmark examiners use a *comparison microscope* like the one in Figure \@ref(fig:comparisonMicroscope) to examine two pieces of evidence [@Zheng2014].
+Trained firearm and tool mark examiners use a *comparison microscope* like the one in Figure \@ref(fig:comparisonMicroscope) to examine two pieces of evidence [@Zheng2014].
 A comparison microscope combines the view of two compound microscopes into a single view via an *optical bridge*.
 This allows an examiner to view two microscope stages simultaneously under the same eyepiece.
 The right Figure \@ref(fig:comparisonMicroscope) shows the view of two bullets under a comparison microscope.
@@ -169,10 +169,10 @@ For example, breech faces manufactured by the same milling machine may share sim
 It can be difficult to distinguish between individual and subclass characteristics during an examination.
 An examiner's decision process may be affected if the existence of subclass characteristics is suspected.
 
-Many firearm and toolmark examiners in the United States adhere to the Association of Firearm and Toolmark Examiners (AFTE) Range of Conclusions when making their evidentiary conclusions [@AFTE1992].
-According to these guidelines, six possible conclusions can be made in a firearm and toolmark examination:
+Many firearm and tool mark examiners in the United States adhere to the Association of Firearm and Tool Mark Examiners (AFTE) Range of Conclusions when making their evidentiary conclusions [@AFTE1992].
+According to these guidelines, six possible conclusions can be made in a firearm and tool mark examination:
 
-1. **Identification**: Agreement of a combination of individual characteristics and all discernible class characteristics where the extent of agreement exceeds that which can occur in the comparison of toolmarks made by different tools and is consistent with the agreement demonstrated by toolmarks known to have been produced by the same tool.
+1. **Identification**: Agreement of a combination of individual characteristics and all discernible class characteristics where the extent of agreement exceeds that which can occur in the comparison of tool marks made by different tools and is consistent with the agreement demonstrated by tool marks known to have been produced by the same tool.
 
 2. **Inconclusive**: there are three possible inconclusive decisions
 
@@ -186,7 +186,7 @@ According to these guidelines, six possible conclusions can be made in a firearm
 
 4. **Unsuitable**: Unsuitable for examination.
 
-Forensic examinations first involve an examination of a "questioned" bullet or cartridge case for identifiable toolmarks [@Thompson2017].
+Forensic examinations first involve an examination of a "questioned" bullet or cartridge case for identifiable tool marks [@Thompson2017].
 The examiner classifies markings by their class, individual, and subclass characteristics.
 The examiner compares these characteristics to "known source" fires obtained from a suspect's firearm if one is available.
 Otherwise, class characteristics from the questioned bullet can be used to narrow the relevant population and provide potential leads.
@@ -195,15 +195,15 @@ An examiner's decision may be used as part of an ongoing investigation or presen
 Standard operating procedures for assessing and comparing evidence differ between forensic laboratories.
 For example, some labs collapse the three possible inconclusive decisions into a single decision [@Neuman2022] or prohibit examiners from making an elimination based on differences in individual characteristics [@Duez2017].
 
-### Why Should Firearm and Toolmark Identification Change?
+### Why Should Firearm and Tool Mark Identification Change?
 
-In 2009, the National Research Council released a report assessing a number of forensic disciplines including Firearm and Toolmark analysis.
-The report pointed out that firearm and toolmark analysis lacked a precisely defined process and that little research had been done to determine the reliability or repeatability of the methods.
+In 2009, the National Research Council released a report assessing a number of forensic disciplines including Firearm and Tool Mark analysis.
+The report pointed out that firearm and tool mark analysis lacked a precisely defined process and that little research had been done to determine the reliability or repeatability of the methods.
 *Reliability* refers to the ability to correctly classify evidence as originating from the same source or not.
 *Repeatability* refers to the consistency of conclusions; for example, whether an examiner makes the same conclusion if presented with the same evidence on different occasions.
 Two of the recommendations from this study were to establish rigorously-validated laboratory procedures and "develop automated techniques capable of enhancing forensic technologies [@council_strengthening_2009]."
 
-A number of studies assess the reliability and repeatability of a firearm and toolmark examination (non-exhaustively: @DeFrance2003, @Hamby2009, @fadulempirical2011, @Stroman2014, @Baldwin2014, @Smith2016, @MATTIJSSEN2020).
+A number of studies assess the reliability and repeatability of a firearm and tool mark examination (non-exhaustively: @DeFrance2003, @Hamby2009, @fadulempirical2011, @Stroman2014, @Baldwin2014, @Smith2016, @MATTIJSSEN2020).
 These studies indicate that examiners have a low error rate when comparing evidence obtained under controlled conditions (i.e., for which ground-truth is known).
 However, as pointed out in a 2016 report from the President's Council of Advisors on Science and Technology, many of these studies, save @Baldwin2014, were not "appropriately designed to test the foundational validity and estimate reliability [@pcast2016]."
 The report called for more properly-designed studies to establish the scientific validity of the discipline.
@@ -218,7 +218,7 @@ This work focuses on the development of an algorithm for comparing breech face i
 
 ## Forensic Comparison Pipelines
 
-Recent work in many forensic disciplines has focused on the development of algorithms to measure the similarity between pieces of evidence including glass [@Curran2000-hp; @Park2019; @openForSciR], handwriting [@crawford_handwriting_2020], shoe prints [@park_algorithm_2020], ballistics [@hare_automatic_2016; @tai_fully_2018], and toolmarks [@Hadler2017; @Krishnan2018].
+Recent work in many forensic disciplines has focused on the development of algorithms to measure the similarity between pieces of evidence including glass [@Curran2000-hp; @Park2019; @openForSciR], handwriting [@crawford_handwriting_2020], shoe prints [@park_algorithm_2020], ballistics [@hare_automatic_2016; @tai_fully_2018], and tool marks [@Hadler2017; @Krishnan2018].
 These algorithms often result in a numerical score for two pieces of evidence.
 A numerical score can add more nuance to an evidentiary conclusion beyond simply stating whether the evidence originated from the same source as would be the case in binary classification.
 For example, a larger similarity scores implies the evidence is more similar.
@@ -382,7 +382,7 @@ A common recommendation amongst these authors is to establish of rigorous tools 
 This includes making code and data used in a paper easily-accessible to readers.
 
 Infrastructure already exists to ease the process of developing, maintaining, and sharing open-source code and data.
-Data repositories such as the NIST Ballistics Toolmark Research Database [@Zheng2020] provide open access to raw data.
+Data repositories such as the NIST Ballistics Tool Mark Research Database [@Zheng2020] provide open access to raw data.
 @Grning2018 discuss the use of package managers such as Conda ([https://anaconda.org/anaconda/conda](https://anaconda.org/anaconda/conda)), container software such as Docker ([https://www.docker.com/](https://www.docker.com/)), and virtual machine software to preserve the entire data analysis environment in-perpetuity.
 For situations in which VMs or containers aren't available, software such as the `manager` R package allows users to "compare package inventories across machines, users, and time to identify changes in functions and objects [@Rice2020]."
 @Piccolo2016 reference repositories like Bioconductor [@Huber2015] that make it easy to document and distribute code.
@@ -580,7 +580,7 @@ Among other functionality, these applications allow users to upload or create th
 <!-- knitr::include_graphics("images/IPDmadaShinyExample.png") -->
 <!-- ``` -->
 
-Several recently-released software provide interactive diagnostic applications for firarms and toolmarks evidence.
+Several recently-released software provide interactive diagnostic applications for firarms and tool marks evidence.
 Most notable of these software is the Virtual Comparison Microscopy application from Cadre Forensics\texttrademark.
 In contrast to traditional Light Comparison Microscopy (LCM) that uses a comparison microscope, this software displays digital representations of the cartridge case surface on a computer screen.
 Figure \@ref(fig:topMatchAnnotationExample) shows a screenshot of comparing two cartridge case surfaces [@Chapnick2020].
