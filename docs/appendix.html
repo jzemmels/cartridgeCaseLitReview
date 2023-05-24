@@ -283,16 +283,10 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="4.7.1" data-path="appendix.html"><a href="appendix.html#cell-based-registration-details"><i class="fa fa-check"></i><b>4.7.1</b> Cell-Based Registration Details</a></li>
 <li class="chapter" data-level="4.7.2" data-path="appendix.html"><a href="appendix.html#registration-based-feature-distributions"><i class="fa fa-check"></i><b>4.7.2</b> Registration-Based Feature Distributions</a></li>
+<li class="chapter" data-level="4.7.3" data-path="appendix.html"><a href="appendix.html#density-based-feature-distributions"><i class="fa fa-check"></i><b>4.7.3</b> Density-Based Feature Distributions</a></li>
+<li class="chapter" data-level="4.7.4" data-path="appendix.html"><a href="appendix.html#visual-diagnostic-feature-distributions"><i class="fa fa-check"></i><b>4.7.4</b> Visual Diagnostic Feature Distributions</a></li>
 </ul></li>
-<li class="chapter" data-level="4.8" data-path="appendix.html"><a href="appendix.html#dbscan-algorithm-details"><i class="fa fa-check"></i><b>4.8</b> DBSCAN Algorithm Details</a>
-<ul>
-<li class="chapter" data-level="4.8.1" data-path="appendix.html"><a href="appendix.html#density-based-feature-distributions"><i class="fa fa-check"></i><b>4.8.1</b> Density-Based Feature Distributions</a></li>
-</ul></li>
-<li class="chapter" data-level="4.9" data-path="appendix.html"><a href="appendix.html#visual-diagnostic-details"><i class="fa fa-check"></i><b>4.9</b> Visual Diagnostic Details</a>
-<ul>
-<li class="chapter" data-level="4.9.1" data-path="appendix.html"><a href="appendix.html#visual-diagnostic-feature-distributions"><i class="fa fa-check"></i><b>4.9.1</b> Visual Diagnostic Feature Distributions</a></li>
-</ul></li>
-<li class="chapter" data-level="4.10" data-path="appendix.html"><a href="appendix.html#model-specific-results"><i class="fa fa-check"></i><b>4.10</b> Model-Specific Results</a></li>
+<li class="chapter" data-level="4.8" data-path="appendix.html"><a href="appendix.html#model-specific-results"><i class="fa fa-check"></i><b>4.8</b> Model-Specific Results</a></li>
 </ul></li>
 </ul>
 
@@ -367,54 +361,32 @@ Figure <a href="automatic-matching-of-cartridge-case-impressions.html#fig:cellGr
 Each of these source cells will be compared to the “target” matrix, in this case <span class="math inline">\(B^*\)</span>.
 Because <span class="math inline">\(A\)</span> and <span class="math inline">\(B^*\)</span> are already partially aligned based on the course rotation grid <span class="math inline">\(\pmb{\Theta}\)</span>, we compare each source cell to <span class="math inline">\(B^*\)</span> using a new rotation grid of <span class="math inline">\(\pmb{\Theta}&#39;_A = \{\theta^*_A - 2^\circ, \theta^*_A - 1^\circ,\theta^*_A,\theta^*_A + 1^\circ,\theta^*_A + 2^\circ\}\)</span>.</p>
 <p>If two cartridge cases are truly matching, then we assume that multiple cells will “agree” on a particular translation value at the true rotation.
-This agreement phenomenon is illustrated in Figure <a href="appendix.html#fig:estimatedTranslationFaceted">4.14</a> where each point represents the translation that maximizes the CCF for a particular cell and rotation.
+This agreement phenomenon is illustrated in Figure <a href="appendix.html#fig:estimatedTranslationFaceted">4.13</a> where each point represents the translation that maximizes the CCF for a particular cell and rotation.
 The points appear randomly distributed for most of the rotation values except around <span class="math inline">\(\theta = 3\)</span> where a tight cluster of points forms around translation <span class="math inline">\([m,n] \approx [17,-16]\)</span>.
 This is evidence to suggest that a true registration exists for these two cartridge cases, implying that they match.
 The task is to determine when cells reach a registration consensus.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:estimatedTranslationFaceted"></span>
 <img src="figures/estimatedTranslationFaceted.png" alt="A scatterplot where points represent the cell-wise estimated translations faceted by rotation for a matching pair of cartridge cases. As evidenced by the tight cluster in the middle facet, it appears that multiple cells agree on a translation of $[m, n] \approx  [17,-16]$ after rotating by $3^\circ$. Points are jittered for visibility." width="\textwidth" />
 <p class="caption">
-Figure 4.14: A scatterplot where points represent the cell-wise estimated translations faceted by rotation for a matching pair of cartridge cases. As evidenced by the tight cluster in the middle facet, it appears that multiple cells agree on a translation of <span class="math inline">\([m, n] \approx [17,-16]\)</span> after rotating by <span class="math inline">\(3^\circ\)</span>. Points are jittered for visibility.
+Figure 4.13: A scatterplot where points represent the cell-wise estimated translations faceted by rotation for a matching pair of cartridge cases. As evidenced by the tight cluster in the middle facet, it appears that multiple cells agree on a translation of <span class="math inline">\([m, n] \approx [17,-16]\)</span> after rotating by <span class="math inline">\(3^\circ\)</span>. Points are jittered for visibility.
 </p>
 </div>
 </div>
 <div id="registration-based-feature-distributions" class="section level3 hasAnchor" number="4.7.2">
 <h3><span class="header-section-number">4.7.2</span> Registration-Based Feature Distributions<a href="appendix.html#registration-based-feature-distributions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Figure <a href="appendix.html#fig:registrationDensities">4.15</a> shows density plots of the registration-based features for 21,945 cartridge case pairs.
+<p>Figure <a href="appendix.html#fig:registrationDensities">4.14</a> shows density plots of the registration-based features for 21,945 cartridge case pairs.
 The first two rows show densities for the sample mean and standard deviation of the cell-based registrations, respectively.
-The third row shows densities for the pairwise-complete correlation features.
-The standard deviation of the cell-based registrations discriminate more between match vs. non-match pairs than the sample means, which justifies their inclusion in the final feature set.
-[More to say here?]</p>
+The third row shows densities for the pairwise-complete correlation features.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:registrationDensities"></span>
 <img src="images/chapter4-images/featureDensity_registration.png" alt="Density plots of the Registration-Based features for 21,945 cartridge case pairs. The standard deviation of the cell-based registrations distinguish between match and non-match pairs better than the mean values." width="\textwidth" />
 <p class="caption">
-Figure 4.15: Density plots of the Registration-Based features for 21,945 cartridge case pairs. The standard deviation of the cell-based registrations distinguish between match and non-match pairs better than the mean values.
+Figure 4.14: Density plots of the Registration-Based features for 21,945 cartridge case pairs. The standard deviation of the cell-based registrations distinguish between match and non-match pairs better than the mean values.
 </p>
 </div>
 </div>
-</div>
-<div id="dbscan-algorithm-details" class="section level2 hasAnchor" number="4.8">
-<h2><span class="header-section-number">4.8</span> DBSCAN Algorithm Details<a href="appendix.html#dbscan-algorithm-details" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<!-- Figure \@ref(fig:dbscanIllustration) depicts an illustration of the DBSCAN algorithm [cite Wikimedia commons]. \hh{XXX get rid of this figure - I'm sure that you can explain the dbscan algorithm as well without giving space to figures that aren't yours. Space is the most valuable resource in a paper :)} -->
-<p>DBSCAN has two parameters: a neighborhood radius <span class="math inline">\(\epsilon\)</span> and a minimum point threshold <span class="math inline">\(Minpts\)</span>.
-<!-- In Figure \@ref(fig:dbscanIllustration), $Minpts = 4$ and $\epsilon$ is arbitrary and represented by the radius of the circles drawn around each point - each circle represents the $\epsilon$-neighborhood for its center point. -->
-First, the algorithm identifies cluster “core” points that contain at least <span class="math inline">\(Minpts\)</span> points within an <span class="math inline">\(\epsilon\)</span> distance.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
-These points form the beginning of a cluster.
-All points within an <span class="math inline">\(\epsilon\)</span>-neighborhood of a core point are included in the associated cluster.
-Clusters whose core points are within each other’s <span class="math inline">\(\epsilon\)</span>-neighborhood are combined into a single cluster.
-Any point outside of the <span class="math inline">\(\epsilon\)</span>-neighborhood of a core point are called “noise points.”
-Unlike other clustering algorithms, the DBSCAN algorithm does not require a specified number of expected clusters as a parameter; any points not belonging to a cluster are “noise.”
-<!-- and are shown in red in Figure \@ref(fig:dbscanIllustration). -->
-<!-- The yellow points $B$ and $C$ are within the $\epsilon$-neighborhood of a core point, but are not themselves core points. -->
-<!-- They are also included in the cluster making the overall cluster size 8. -->
-<!-- Finally, the blue point labelled $N$ is not in any core point's $\epsilon$-neighborhood and is thus classified as a "noise point." --></p>
-<!-- **[Add image to illustrate DBSCAN?]** -->
-<!-- ```{r,out.width=".7\\textwidth",echo=FALSE,fig.pos="htbp",fig.cap = '\\label{fig:dbscanIllustration} Illustration of the DBSCAN algorithm [cite]. Red and yellow points are part of the same cluster with the former forming the "core" of the cluster. The blue point is not part of a cluster and is classified as a "noise point." Figure by Chire - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=17045963'} -->
-<!-- knitr::include_graphics("images/dbscanIllustration.png") -->
-<!-- ``` -->
-<div id="density-based-feature-distributions" class="section level3 hasAnchor" number="4.8.1">
-<h3><span class="header-section-number">4.8.1</span> Density-Based Feature Distributions<a href="appendix.html#density-based-feature-distributions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Figure <a href="appendix.html#fig:densityDistributions">4.16</a> shows the distributions of the density-based features <span class="math inline">\(C\)</span>, <span class="math inline">\(\Delta_\theta\)</span>, and <span class="math inline">\(\Delta_{\text{trans}}\)</span>.
+<div id="density-based-feature-distributions" class="section level3 hasAnchor" number="4.7.3">
+<h3><span class="header-section-number">4.7.3</span> Density-Based Feature Distributions<a href="appendix.html#density-based-feature-distributions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Figure <a href="appendix.html#fig:densityDistributions">4.15</a> shows the distributions of the density-based features <span class="math inline">\(C\)</span>, <span class="math inline">\(\Delta_\theta\)</span>, and <span class="math inline">\(\Delta_{\text{trans}}\)</span>.
 The stacked bar chart in the top-left shows the proportion of comparisons where no DBSCAN cluster is identified by outcome (match or non-match).
 We see that the vast majority of comparisons for which no DBSCAN cluster is identified are non-match comparisons. indicating that <span class="math inline">\(C_0\)</span> is a good indicator of ground-truth.
 In fact, there is only one non-match comparison that resulted in a DBSCAN cluster.
@@ -423,58 +395,278 @@ As expected, <span class="math inline">\(C\)</span> tends to be relatively large
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:densityDistributions"></span>
 <img src="images/chapter4-images/featureDensity_densityBased.png" alt="Distributions of the density-based features for 21,945 cartridge case pairs. The Cluster Size and Estimated Translation Difference features may be missing (\texttt{NA}) if no DBSCAN cluster is identified, which commonly occurs for non-matching cartridge case pairs as evidenced by the stacked bar chart in the top left. This explains the near absence of non-matching comparisons from Cluster Size and Estimated Translation Difference plots. Whether a cluster is identified for a particular comparison strongly predicts whether it is a match or a non-match, which justifies the inclusion of the cluster indicator feature $C_0$." width="\textwidth" />
 <p class="caption">
-Figure 4.16: Distributions of the density-based features for 21,945 cartridge case pairs. The Cluster Size and Estimated Translation Difference features may be missing () if no DBSCAN cluster is identified, which commonly occurs for non-matching cartridge case pairs as evidenced by the stacked bar chart in the top left. This explains the near absence of non-matching comparisons from Cluster Size and Estimated Translation Difference plots. Whether a cluster is identified for a particular comparison strongly predicts whether it is a match or a non-match, which justifies the inclusion of the cluster indicator feature <span class="math inline">\(C_0\)</span>.
+Figure 4.15: Distributions of the density-based features for 21,945 cartridge case pairs. The Cluster Size and Estimated Translation Difference features may be missing () if no DBSCAN cluster is identified, which commonly occurs for non-matching cartridge case pairs as evidenced by the stacked bar chart in the top left. This explains the near absence of non-matching comparisons from Cluster Size and Estimated Translation Difference plots. Whether a cluster is identified for a particular comparison strongly predicts whether it is a match or a non-match, which justifies the inclusion of the cluster indicator feature <span class="math inline">\(C_0\)</span>.
 </p>
 </div>
 </div>
-</div>
-<div id="visual-diagnostic-details" class="section level2 hasAnchor" number="4.9">
-<h2><span class="header-section-number">4.9</span> Visual Diagnostic Details<a href="appendix.html#visual-diagnostic-details" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The Complementary Comparison Plot visualizes the similarities and differences between two scans.
-Figure <a href="appendix.html#fig:fullScanComparisonPlot">4.17</a> shows a Complementary Comparison plot between scan <span class="math inline">\(A\)</span> and <span class="math inline">\(B^*\)</span> defined previously.
-The left column shows Scans <span class="math inline">\(A\)</span> and <span class="math inline">\(B^*\)</span>.
-The middle column shows a filtered element-wise average between <span class="math inline">\(A\)</span> and <span class="math inline">\(B^*\)</span>; namely <span class="math inline">\(\mathcal{F}_{|A - B^*| &lt; \tau}\left(\frac{1}{2}(A + B^*)\right)\)</span>.
-This filtered element-wise average emphasizes similarities between <span class="math inline">\(A\)</span> and <span class="math inline">\(B^*\)</span>.
-The right column shows <span class="math inline">\(\mathcal{F}_{|A - B^*| &gt; \tau}(A)\)</span> and <span class="math inline">\(\mathcal{F}_{|A - B^*| &gt; \tau}(B^*)\)</span> on top and bottom, respectively.
-These plots emphasize the differences between the two scans.
-The complementary comparison plot is a powerful tool for assessing the estimated alignment and identifying similarities and differences between two surface matrices.
-We repeat this in the other comparison direction <span class="math inline">\((d = B)\)</span> to obtain filtered matrices <span class="math inline">\(\mathcal{F}_{|A^* - B| &lt; \tau}\left(\frac{1}{2}(A^* + B)\right)\)</span>, <span class="math inline">\(\mathcal{F}_{|A^* - B| &gt; \tau}(A^*)\)</span> and <span class="math inline">\(\mathcal{F}_{|A^* - B| &gt; \tau}(B)\)</span>.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fullScanComparisonPlot"></span>
-<img src="figures/fullScan_comparisonPlot.png" alt="Full scan comparison plot." width="\textwidth" />
-<p class="caption">
-Figure 4.17: Full scan comparison plot.
-</p>
-</div>
-<p>We make a series of qualitative assumptions related to how a Complementary Comparison Plot will look for matching and non-matching cartridge case pairs.
-We develop a set of features that measure the degree to which these assumptions are met by a particular cartridge case pair.
-<!-- We now describe each feature and their associated assumptions. --></p>
-<div id="visual-diagnostic-feature-distributions" class="section level3 hasAnchor" number="4.9.1">
-<h3><span class="header-section-number">4.9.1</span> Visual Diagnostic Feature Distributions<a href="appendix.html#visual-diagnostic-feature-distributions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Figure <a href="appendix.html#fig:visualDiagnosticDensities">4.18</a> shows the distribution of the six visual diagnostic-based features.
+<div id="visual-diagnostic-feature-distributions" class="section level3 hasAnchor" number="4.7.4">
+<h3><span class="header-section-number">4.7.4</span> Visual Diagnostic Feature Distributions<a href="appendix.html#visual-diagnostic-feature-distributions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Figure <a href="appendix.html#fig:visualDiagnosticDensities">4.16</a> shows the distribution of the six visual diagnostic-based features.
 As expected, matching comparisons at the full-scan and cell-based levels tend to have smaller neighborhood sizes and higher correlation values on average.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:visualDiagnosticDensities"></span>
 <img src="images/chapter4-images/featureDensity_visualDiag.png" alt="Distributions of the visual diagnostic-based features for 21,945 cartridge case pairs. Matching comparisons tend to have smaller neighborhood sizes on average and higher correlation values than non-matches indicating their utility in a classifier." width="\textwidth" />
 <p class="caption">
-Figure 4.18: Distributions of the visual diagnostic-based features for 21,945 cartridge case pairs. Matching comparisons tend to have smaller neighborhood sizes on average and higher correlation values than non-matches indicating their utility in a classifier.
+Figure 4.16: Distributions of the visual diagnostic-based features for 21,945 cartridge case pairs. Matching comparisons tend to have smaller neighborhood sizes on average and higher correlation values than non-matches indicating their utility in a classifier.
 </p>
 </div>
 </div>
 </div>
-<div id="model-specific-results" class="section level2 hasAnchor" number="4.10">
-<h2><span class="header-section-number">4.10</span> Model-Specific Results<a href="appendix.html#model-specific-results" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Table <a href="#tab:trainDataResults"><strong>??</strong></a> summarizes the accuracy, true positive, and true negative rates based on the training data for the 13 binary classifier models.
-We see that the Logistic Regression (LR) and Random Forest (RF) models perform comparably, particularly having the exact same True Negative rate in the last two rows of the table.
-The CART model performs consistently worse compared to the other two models.</p>
-<p>Table <a href="#tab:testDataResults"><strong>??</strong></a> summarizes the accuracy, true positive, and true negative rates based on the test data for the 13 binary classifier models.
+<div id="model-specific-results" class="section level2 hasAnchor" number="4.8">
+<h2><span class="header-section-number">4.8</span> Model-Specific Results<a href="appendix.html#model-specific-results" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Table <a href="appendix.html#tab:trainDataResults-html">4.6</a> summarizes the accuracy, true positive, and true negative rates based on the training data for the five binary classifier models.</p>
+<table>
+<caption>
+<span id="tab:trainDataResults-html">Table 4.6: </span>Accuracy, True Positive, and True Negative rates based on the training data for the 13 binary classifier models. This table shows a numeric summary of the results shown in the Results section. We bold the largest values in each column for emphasis.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Feature Set
+</th>
+<th style="text-align:left;">
+Model
+</th>
+<th style="text-align:right;">
+Accuracy
+</th>
+<th style="text-align:right;">
+True Neg.
+</th>
+<th style="text-align:right;">
+True Pos.
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(C_0\)</span>
+</td>
+<td style="text-align:left;">
+Baseline
+</td>
+<td style="text-align:right;">
+90.47
+</td>
+<td style="text-align:right;">
+90.43
+</td>
+<td style="text-align:right;">
+90.77
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(C_0\)</span><sub>+</sub>Registration
+</td>
+<td style="text-align:left;">
+RF
+</td>
+<td style="text-align:right;">
+97.16
+</td>
+<td style="text-align:right;">
+97.15
+</td>
+<td style="text-align:right;">
+97.18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(C_0\)</span><sub>+</sub>Registration
+</td>
+<td style="text-align:left;">
+LR
+</td>
+<td style="text-align:right;">
+97.23
+</td>
+<td style="text-align:right;">
+97.23
+</td>
+<td style="text-align:right;">
+97.23
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+All~ACES
+</td>
+<td style="text-align:left;">
+RF
+</td>
+<td style="text-align:right;">
+98.14
+</td>
+<td style="text-align:right;">
+98.14
+</td>
+<td style="text-align:right;">
+98.14
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+All~ACES
+</td>
+<td style="text-align:left;">
+LR
+</td>
+<td style="text-align:right;">
+
+</td>
+<td style="text-align:right;">
+
+</td>
+<td style="text-align:right;">
+
+</td>
+</tr>
+</tbody>
+</table>
+<p>Table <a href="appendix.html#tab:testDataResults-html">4.7</a> summarizes the accuracy, true positive, and true negative rates based on the test data for the 13 binary classifier models.
 We see that the Logistic Regression (LR) model performs slightly better than the Random Forest (RF) model in most cases while the CART model consistently lags behind the other two.
-The true positive rates for the test data are noticeably lower to those for the training data summarized in Table <a href="#tab:trainDataResults"><strong>??</strong></a>, although the true negative rates are similar.</p>
+The true positive rates for the test data are noticeably lower to those for the training data summarized in Table <a href="appendix.html#tab:trainDataResults-html">4.6</a>, although the true negative rates are similar.</p>
+<table>
+<caption>
+<span id="tab:testDataResults-html">Table 4.7: </span>Accuracy, True Positive, and True Negative rates based on the test data for the 13 binary classifier models. This table shows a numeric summary of the results shown in the Results section. We bold the largest values in each column for emphasis.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Feature Set
+</th>
+<th style="text-align:left;">
+Model
+</th>
+<th style="text-align:right;">
+Accuracy
+</th>
+<th style="text-align:right;">
+True Neg.
+</th>
+<th style="text-align:right;">
+True Pos.
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(C_0\)</span>
+</td>
+<td style="text-align:left;">
+Baseline
+</td>
+<td style="text-align:right;">
+89.44
+</td>
+<td style="text-align:right;">
+89.64
+</td>
+<td style="text-align:right;">
+86.82
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(C_0\)</span><sub>+</sub>Registration
+</td>
+<td style="text-align:left;">
+RF
+</td>
+<td style="text-align:right;">
+96.91
+</td>
+<td style="text-align:right;">
+97.11
+</td>
+<td style="text-align:right;">
+94.22
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(C_0\)</span><sub>+</sub>Registration
+</td>
+<td style="text-align:left;">
+LR
+</td>
+<td style="text-align:right;">
+96.98
+</td>
+<td style="text-align:right;">
+97.21
+</td>
+<td style="text-align:right;">
+93.87
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+All~ACES
+</td>
+<td style="text-align:left;">
+RF
+</td>
+<td style="text-align:right;">
+97.66
+</td>
+<td style="text-align:right;">
+
+</td>
+<td style="text-align:right;">
+94.74
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+All~ACES
+</td>
+<td style="text-align:left;">
+LR
+</td>
+<td style="text-align:right;">
+
+</td>
+<td style="text-align:right;">
+97.81
+</td>
+<td style="text-align:right;">
+
+</td>
+</tr>
+</tbody>
+</table>
 <!-- **[Write full logistic regression model here]** -->
-<p>Figure <a href="#fig:trainedCART"><strong>??</strong></a> shows the trained CART model.
-For each node, The first line is the predicted class if it were treated as a terminal node.
-The second line is the estimated probability that an observation is a non-match given that it falls into the node.
-The third line is the percentage of all observations that fall into the node.
-We see that splits are made on the three variables that are ranked as most important in Figure <a href="automatic-matching-of-cartridge-case-impressions.html#fig:rfVarImpPlt">4.11</a>; namely, <span class="math inline">\(C_0\)</span>, <span class="math inline">\(\overline{cor}_{\text{cell}}\)</span>, and <span class="math inline">\(s_{m^*}\)</span>.</p>
-<p>[Figure of fitted CART model here.]</p>
+<!-- ```{r logRegOddsMult,fig.pos="H",fig.align='center',out.extra='',eval=FALSE} -->
+<!-- load("data/logisticRegOddsMultipliers.RData") -->
+<!-- logisticRegOddsFactors %>% -->
+<!--   slice(1:5) %>% -->
+<!--   mutate(logistOddsFactor = case_when(varName == "noClusterIndTRUE" ~ "$2.8 \\times 10^{40}$", -->
+<!--                                       varName == "differenceCor_ave" ~ "9,934.6", -->
+<!--                                       varName == "cell_theta_sd" ~ "243.7", -->
+<!--                                       varName == "clustCenterDiff" ~ "1.5", -->
+<!--                                       varName == "cell_y_sd" ~ "1.1", -->
+<!--                                       TRUE ~ "")) %>% -->
+<!--   mutate(varName = case_when(varName == "noClusterIndTRUE" ~ "Cluster Indicator", -->
+<!--                              varName == "differenceCor_ave" ~ "Full-Scan Differences Correlation", -->
+<!--                              varName == "cell_theta_sd" ~ "Cell-Based Rotation SD", -->
+<!--                              varName == "clustCenterDiff" ~ "Estimated Translation Difference", -->
+<!--                              varName == "cell_y_sd" ~ "Cell-Based Horizontal Translation SD", -->
+<!--                              TRUE ~ "")) %>% -->
+<!--   knitr::kable(col.names = c("Feature Name","Odds Multiplier"), -->
+<!--                align = c("l","r"),label = "logistOddsMult", -->
+<!--                caption = "Logistic regression-estimated multiplicative increase in the odds that a cartridge case pair is truly matching for a one unit increase in the associated feature, holding all other features constant. For brevity, we consider the top five features in terms of the odds multiplier. Note that the Cluster Indicator feature only takes on values 0 or 1.", -->
+<!--                format = "latex",booktabs = TRUE,escape = FALSE) -->
+<!-- ``` -->
+<!-- Figure \@ref(fig:trainedCART) shows the trained CART model. -->
+<!-- For each node, The first line is the predicted class if it were treated as a terminal node. -->
+<!-- The second line is the estimated probability that an observation is a non-match given that it falls into the node. -->
+<!-- The third line is the percentage of all observations that fall into the node. -->
+<!-- We see that splits are made on the three variables that are ranked as most important in Figure \@ref(fig:rfVarImpPlt); namely, $C_0$, $\overline{cor}_{\text{cell}}$, and $s_{m^*}$. -->
+<!-- [Figure of fitted CART model here.] -->
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div class="csl-entry">
@@ -909,8 +1101,6 @@ Zimmerman, Naupaka, Greg Wilson, Raniere Silva, Scott Ritchie, François Michonn
 
 
 
-
-
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-fft_brigham" class="csl-entry">
@@ -919,13 +1109,6 @@ Brigham, E. Oran. 1988. <em>The Fast Fourier Transform and Its Applications</em>
 <div id="ref-song_proposed_2013" class="csl-entry">
 Song, John. 2013. <span>“Proposed <span>‘<span>NIST</span> <span>Ballistics</span> <span>Identification</span> <span>System</span> (<span>NBIS</span>)’</span> <span>Based</span> on <span>3d</span> <span>Topography</span> <span>Measurements</span> on <span>Correlation</span> <span>Cells</span>.”</span> <em>American Firearm and Tool Mark Examiners Journal</em> 45 (2): 11. <a href="https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=910868">https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=910868</a>.
 </div>
-</div>
-<div class="footnotes">
-<hr />
-<ol start="2">
-<li id="fn2"><p>Euclidean distance, in our application<a href="appendix.html#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>As with the registration-based features, in reality these matrices should be equivalent across the two comparison directions. However, there are slight differences due to the discretely-indexed nature of the surface matrices.<a href="appendix.html#fnref3" class="footnote-back">↩︎</a></p></li>
-</ol>
 </div>
             </section>
 

@@ -283,16 +283,10 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="4.7.1" data-path="appendix.html"><a href="appendix.html#cell-based-registration-details"><i class="fa fa-check"></i><b>4.7.1</b> Cell-Based Registration Details</a></li>
 <li class="chapter" data-level="4.7.2" data-path="appendix.html"><a href="appendix.html#registration-based-feature-distributions"><i class="fa fa-check"></i><b>4.7.2</b> Registration-Based Feature Distributions</a></li>
+<li class="chapter" data-level="4.7.3" data-path="appendix.html"><a href="appendix.html#density-based-feature-distributions"><i class="fa fa-check"></i><b>4.7.3</b> Density-Based Feature Distributions</a></li>
+<li class="chapter" data-level="4.7.4" data-path="appendix.html"><a href="appendix.html#visual-diagnostic-feature-distributions"><i class="fa fa-check"></i><b>4.7.4</b> Visual Diagnostic Feature Distributions</a></li>
 </ul></li>
-<li class="chapter" data-level="4.8" data-path="appendix.html"><a href="appendix.html#dbscan-algorithm-details"><i class="fa fa-check"></i><b>4.8</b> DBSCAN Algorithm Details</a>
-<ul>
-<li class="chapter" data-level="4.8.1" data-path="appendix.html"><a href="appendix.html#density-based-feature-distributions"><i class="fa fa-check"></i><b>4.8.1</b> Density-Based Feature Distributions</a></li>
-</ul></li>
-<li class="chapter" data-level="4.9" data-path="appendix.html"><a href="appendix.html#visual-diagnostic-details"><i class="fa fa-check"></i><b>4.9</b> Visual Diagnostic Details</a>
-<ul>
-<li class="chapter" data-level="4.9.1" data-path="appendix.html"><a href="appendix.html#visual-diagnostic-feature-distributions"><i class="fa fa-check"></i><b>4.9.1</b> Visual Diagnostic Feature Distributions</a></li>
-</ul></li>
-<li class="chapter" data-level="4.10" data-path="appendix.html"><a href="appendix.html#model-specific-results"><i class="fa fa-check"></i><b>4.10</b> Model-Specific Results</a></li>
+<li class="chapter" data-level="4.8" data-path="appendix.html"><a href="appendix.html#model-specific-results"><i class="fa fa-check"></i><b>4.8</b> Model-Specific Results</a></li>
 </ul></li>
 </ul>
 
@@ -326,7 +320,7 @@ These tools are useful to both forensic researchers and practitioners.
 Researchers can analyze and correct the (mis)behavior of the algorithm while forensic practitioners can more easily understand and explain the algorithm.
 We develop a collection of tools to diagnose each step of a cartridge case comparison algorithm and implement in in an R package called <code>impressions</code>.
 We then implement these visual diagnostics in an interactive web application called <code>cartridgeInvestigatR</code> to also allow non-programmers to interact with and explore these algorithms.
-we provide both the <code>impressions</code> package and <code>cartridgeInvestigatR</code> as free, open-source software.</p>
+We provide both the <code>impressions</code> package and <code>cartridgeInvestigatR</code> as free, open-source software.</p>
 </div>
 <div id="introduction" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Introduction<a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -626,16 +620,17 @@ Figure 3.12: We compute the ratio between the number of similar and different el
 <p>The first statistic is the ratio between the number of similarities and differences for a pair of scans.
 To compute this, we consider the number of <span class="math inline">\(TRUE\)</span> elements the <span class="math inline">\(cond\)</span> matrices <span class="math inline">\(|A - B^*| \leq \tau\)</span> and <span class="math inline">\(|A - B^*| &gt; \tau\)</span>.
 Figure <a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#fig:similaritiesDifferencesRatio">3.12</a> shows an example of this ratio computed for the matching pair K013sA1 and K013sA2, which results in a value of 2.84 meaning there are almost three times as many similarities as there are differences between the two scans.</p>
-<p>Mathematically, the similarities vs. differences ratio is given by
-<span class="math display">\[\begin{align*}
+<p>Mathematically, the similarities vs. differences ratio is given by</p>
+<p><span class="math display" id="eq:ratio">\[\begin{equation}
 r_{d} = \frac{\pmb{1}^T I(|A - B^*| \leq \tau) \pmb{1}}{\pmb{1}^T I(|A - B^*| &gt; \tau) \pmb{1}}
-\end{align*}\]</span>
-where <span class="math inline">\(\pmb{1} \in \mathbb{R}^k\)</span> is a column vector of ones and <span class="math inline">\(I(\cdot)\)</span> is the element-wise, matrix-valued indicator function.
+\tag{3.1}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\pmb{1} \in \mathbb{R}^k\)</span> is a column vector of ones and <span class="math inline">\(I(\cdot)\)</span> is the element-wise, matrix-valued indicator function.
 The inner products in the numerator and denominator act to count the number of TRUE elements in the two complementary <span class="math inline">\(cond\)</span> matrices.</p>
 <p>We also compute similarities vs. differences ratios for the results of the cell-based comparison procedure outlined in cell-based comparison.
 Specifically, we compute the ratio for a cell from the source matrix and its aligned mate in the target matrix, resulting in the ratio value <span class="math inline">\(r_{d,t}\)</span>.
 We expect that the similarities vs. differences ratio will be larger for matching comparisons compared to non-matching comparisons.</p>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:filterLabeling-figure"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:filterLabeling"></span>
 <img src="images/chapter3-images/filterLabeling.png" alt="(Left) After aligning two scans, we filter regions that are &quot;different&quot; from each other, meaning the absolute difference between surface values is larger than some threshold. We binarize the scan into different vs. similar regions - shown in white and black, respectively. (Middle) Using a connected components labeling algorithm, we identify connected &quot;neighborhoods&quot; of filtered elements, which are distinguished here by fill color. (Right) Considering the distribution of the region sizes, we see that the vast majority of the regions are relatively small, under 1000 square microns, although there are some outliers. We assume that the average region size will be relatively small for truly matching comparisons." width="\textwidth" />
 <p class="caption">
 Figure 3.13: (Left) After aligning two scans, we filter regions that are “different” from each other, meaning the absolute difference between surface values is larger than some threshold. We binarize the scan into different vs. similar regions - shown in white and black, respectively. (Middle) Using a connected components labeling algorithm, we identify connected “neighborhoods” of filtered elements, which are distinguished here by fill color. (Right) Considering the distribution of the region sizes, we see that the vast majority of the regions are relatively small, under 1000 square microns, although there are some outliers. We assume that the average region size will be relatively small for truly matching comparisons.
@@ -644,11 +639,11 @@ Figure 3.13: (Left) After aligning two scans, we filter regions that are “diff
 <p>We assume markings on the surfaces of two aligned, matching cartridge cases will line up with each other.
 This implies that regions that we define as “different” should be relatively small in area.
 We translate this into a numerical feature by considering the <span class="math inline">\(TRUE\)</span> elements of the <span class="math inline">\(cond\)</span> matrix <span class="math inline">\(|A - B^*| &gt; \tau\)</span>, which are elements where the surfaces differ by at least <span class="math inline">\(\tau\)</span>.
-For example, the left side of Figure <a href="automatic-matching-of-cartridge-case-impressions.html#fig:filterLabeling">4.6</a> shows the matrix <span class="math inline">\(|A - B^*| &gt; 1\)</span> for <span class="math inline">\(A\)</span> = K013sA1 and <span class="math inline">\(B\)</span> = K013sA2 with <span class="math inline">\(TRUE\)</span> elements represented in white.
+For example, the left side of Figure <a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#fig:filterLabeling">3.13</a> shows the matrix <span class="math inline">\(|A - B^*| &gt; 1\)</span> for <span class="math inline">\(A\)</span> = K013sA1 and <span class="math inline">\(B\)</span> = K013sA2 with <span class="math inline">\(TRUE\)</span> elements represented in white.
 We then use a connected components labeling algorithm detailed in <span class="citation">Hesselink, Meijster, and Bron (<a href="#ref-hesselink_concurrent_2001" role="doc-biblioref">2001</a>)</span> and implemented in <span class="citation">Barthelme (<a href="#ref-imager" role="doc-biblioref">2019</a>)</span> to identify connected “neighborhoods” of <span class="math inline">\(TRUE\)</span> elements.
 Specifically, the algorithm returns a set of sets <span class="math inline">\(\pmb{S}_d = \{S_{d,1},S_{d,2},...,S_{d,L_d}\}\)</span> where each <span class="math inline">\(S_{d,l}\)</span> is a set of indices of the <span class="math inline">\(cond\)</span> matrix that have a value of <span class="math inline">\(TRUE\)</span> and are connected by a chained-together sequence of 4 (Rook’s) neighborhoods.
-The middle of Figure <a href="automatic-matching-of-cartridge-case-impressions.html#fig:filterLabeling">4.6</a> shows each <span class="math inline">\(S_{d,l}\)</span> distinguished by different fill colors, <span class="math inline">\(l = 1,...,L_d\)</span>.</p>
-<p>The right side of Figure <a href="automatic-matching-of-cartridge-case-impressions.html#fig:filterLabeling">4.6</a> shows a histogram of the region sizes, denoted <span class="math inline">\(|S_{d,l}|\)</span> for <span class="math inline">\(l = 1,...,L_d\)</span>.
+The middle of Figure <a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#fig:filterLabeling">3.13</a> shows each <span class="math inline">\(S_{d,l}\)</span> distinguished by different fill colors, <span class="math inline">\(l = 1,...,L_d\)</span>.</p>
+<p>The right side of Figure <a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#fig:filterLabeling">3.13</a> shows a histogram of the region sizes, denoted <span class="math inline">\(|S_{d,l}|\)</span> for <span class="math inline">\(l = 1,...,L_d\)</span>.
 We see that most of the sizes are relatively small, which agrees with our initial assumption.
 There are a handful of larger regions that, when cross-referenced with the surface values in the original scans (see Figure <a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#fig:complementCompPlot-fullScan">3.9</a>, for example), are clearly different from each other, meaning the visual diagnostic works as intended.
 We assume that the distribution of region sizes for a matching pair will have far fewer extreme values compared to a non-matching pair.
