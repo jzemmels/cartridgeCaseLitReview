@@ -125,9 +125,9 @@ The process by which an examiner arrives at their evidentiary conclusion is larg
 In response, @council_strengthening_2009 pushed to augment subjective decisions made by forensic examiners with automatic, statistically-founded algorithms that objectively assess evidence and can be explained during court testimony.
 These algorithms enable the quantification of an examiner's uncertainty by measuring the probative value of a piece of evidence.
 
-A *cartridge case* (see Figure \@ref(fig:cartridgeCaseBullet)) is the portion of firearm ammunition that encases a projectile (e.g., bullet, shots, or slug) along with the explosive used to propel the projectile through the firearm.
+A *cartridge case* (left of Figure \@ref(fig:cartridgeCaseBullet)) is the portion of firearm ammunition that encases a projectile (e.g., bullet, shots, or slug) along with the explosive used to propel the projectile through the firearm.
 When a firearm is discharged, the projectile is propelled down the barrel of the firearm, while the cartridge case is forced towards the back of the barrel.
-The base of the cartridge case (Figure \@ref(fig:cartridgeCaseBase)) strikes the back wall, known as the *breech face*, of the barrel with considerable force, thereby imprinting any markings on the breech face onto the cartridge case and creating the so-called *breech face impressions* (see Figure \@ref(fig:breechFaceImpressions)).
+The base of the cartridge case (middle of Figure \@ref(fig:cartridgeCaseBullet)) strikes the back wall, known as the *breech face*, of the barrel with considerable force, thereby imprinting any markings on the breech face onto the cartridge case and creating the so-called *breech face impressions* (right of Figure \@ref(fig:cartridgeCaseBullet)).
 These markings have been suggested to be unique to a firearm and are used in forensic examinations to determine whether two cartridge cases have been fired by the same firearm.
 
 ```{r cartridgeCaseBullet,fig.cap="(Left) Fired cartridge case and bullet, (Middle) Base of the cartridge case that comes into contact with the breech face of the firearm, (Right) Zoom into the *primer* region showing breech face impressions.",out.width = "\\textwidth"}
@@ -135,7 +135,7 @@ knitr::include_graphics(c("images/chapter3-images/cartridgeCaseZoomIn.png"))
 ```
 
 We measure the surface of a cartridge case using a TopMatch-3D High-Capacity Scanner by Cadre Forensics$^{\text{TM}}$.
-This scanner collects images under various lighting conditions of a gel pad into which the cartridge case surface is impressed and combines these images into a regular 2D array called a *surface matrix*. Examples of two such surface matrices are shown in Figure \@ref(fig:referenceAnnotated) and Figure \@ref(fig:targetAnnotate)}.
+This scanner collects images under various lighting conditions of a gel pad into which the cartridge case surface is impressed and combines these images into a regular 2D array called a *surface matrix*. Examples of two such surface matrices are shown in the middle of Figure \@ref(fig:referenceAnnotated).
 The physical dimensions of these objects are about 5.5 $mm^2$ captured at a resolution of 1.84 microns per pixel (1000 microns equals 1 mm).
 Each element of the surface matrix corresponds to the height of the impressed gel at that location.
 The nominal resolution for height measurements depends on the viscosity of the gel and is reported to be better than 1 micron.
@@ -143,7 +143,7 @@ The breech face impression regions have been manually annotated (in red).
 Using this manual annotation, we isolate the breech face impression region.
 Note that this introduces structurally missing values into the scan.
 
-Figure \@ref(fig:processedSideBySide) shows the isolated breech face impression regions where the height values of the surface have been mapped to a diverging purple (low) to orange (high) color scale and missing values are shown in gray.
+Figure \@ref(fig:referenceAnnotated) shows the isolated breech face impression regions where the height values of the surface have been mapped to a diverging purple (low) to orange (high) color scale and missing values are shown in gray.
 
 <!-- **XXX I'm not sure what step in the algorithm you're referring to here. By "translated into," do you mean a horizontal/vertical shift? ** -->
 
@@ -170,7 +170,7 @@ We also demonstrate how the numerical diagnostics can be used as features to cla
 As the name implies, surface matrices are two-dimensional arrays whose elements contain relative height values of the corresponding cartridge case surface [@ISO25178-72].
 For notational simplicity, we assume that the matrices are square, i.e. $A \in \mathbb{R}^{k \times k}$ for some matrix $A$ and $k > 0$.
 Note, that any assumption of sizing of matrices are easily enforced by  padding with additional missing values. Due to the presence  of (structural) missing values around the breech face impression, additional padding does not interfere with the structure of the scan.
-We use lowercase letters with subscripts to denote a particular value of a matrix; e.g., $a_{ij}$ is the value in the $i$th row and $j$th column, starting from the top left corner, of $A$.
+We use lowercase letters with subscripts to denote a particular value of a matrix;  e.g., $a_{ij}$ is the value in the $i$th row and $j$th column, starting from the top left corner, of $A$.
 
 For the purpose of dealing with missing values mathematically, we adapt standard matrix algebra as follows: if an element of either matrix $A$ or $B$ is missing, then any element-wise operation including this element is also missing, otherwise standard matrix algebra holds.
 For example, for matrices $A$ and $B \in \mathbb{R}^{k \times k}$ we define the addition operator as:
@@ -185,7 +185,10 @@ Operations $\ominus_{\tiny{NA}}$ as well as all comparisons are defined similarl
 
 ### Registration Procedure
 
-**[Include visual illustrating the full scan and cell-based registrations]**
+```{r aligned-cell-illustration, fig.cap='The process of "registering" a surface matrix to another involves determining the rotation and translation that optimally aligns the two surfaces. We can perform this registration both at the full scan and cell-based (which is illustrated above) scales. In the visualization, we show how three cells in the scan on the left register in the scan on the right.',out.width = "\\textwidth"}
+knitr::include_graphics("images/chapter3-images/cellBasedRegistration_cell1-3.png")
+```
+
 
 A critical step in comparing $A$ and $B$ is to find a transformation of $B$ such that it aligns best to $A$ (or vice versa).
 In image processing, this is called *image registration*. Noting that $A$ and $B$ are essentially grayscale images, we rely on a standard image registration technique [@Brown1992].
@@ -201,7 +204,7 @@ $$
 $$
 
 In practice we consider a discrete grid of rotations $\pmb{\Theta} \subset [-180^\circ,180^\circ]$.
-The registration procedure is outlined in Figure \@ref(alg:registration).
+The registration procedure is outlined in the image registration algorithm.
 We refer to the matrix that is rotated as the "target."
 The result is the estimated registration of the target matrix to the "reference" matrix.
 
@@ -213,17 +216,17 @@ The result is the estimated registration of the target matrix to the "reference"
 
 | **for** $\theta \in \pmb{\Theta}$ **do**
 
-|    Rotate $B$ by $\theta$ to obtain $B_\theta$;
+|    Rotate $B$ by $\theta$ to obtain $B_\theta$; 
 
-|    Calculate $CCF_{\max,\theta} = \max_{m,n} (a \star b)_{mn}$;
+|    Calculate $CCF_{\max,\theta} = \max_{m,n} (a \star b)_{mn}$; 
 
-|    Calculate translation $[m_{\theta}^*, n_{\theta}^*] = \arg \max_{m,n} (a \star b_\theta)_{mn}$;
+|    Calculate translation $[m_{\theta}^*, n_{\theta}^*] = \arg \max_{m,n} (a \star b_\theta)_{mn}$; 
 
 | **end**
 
-| Calculate overall maximum correlation $CCF_{\max} = \max_{\theta} \{CCF_{\max, \theta} : \theta \in \pmb{\Theta}\}$;
+| Calculate overall maximum correlation $CCF_{\max} = \max_{\theta} \{CCF_{\max, \theta} : \theta \in \pmb{\Theta}\}$; 
 
-| Calculate rotation $\theta^* = \arg \max_{\theta} \{CCF_{\max,\theta} : \theta \in \pmb{\Theta}\}$;
+| Calculate rotation $\theta^* = \arg \max_{\theta} \{CCF_{\max,\theta} : \theta \in \pmb{\Theta}\}$; 
 
 | **return** Estimated rotation $\theta^*$, translation $m^* = m_{\theta^*}^*$, and $n^* = n_{\theta^*}^*$, and $CCF_{\max}$
 
@@ -252,19 +255,19 @@ This procedure can be viewed as a generalization of image registration algorithm
 
 | **Result**: Estimated translations and $CCF_{\max}$ values per cell, per rotation
 
-| Partition $A$ into a grid of $R \times C$ cells;
+| Partition $A$ into a grid of $R \times C$ cells; 
 
-| Discard cells containing only missing values, leaving $T_A$ remaining cells;
+| Discard cells containing only missing values, leaving $T_A$ remaining cells; 
 
 | **for** $\theta \in \pmb{\Theta}_{A}'$ **do**
 
-|    Rotate $B^*$ by $\theta$ to obtain $B_{\theta}^*$;
+|    Rotate $B^*$ by $\theta$ to obtain $B_{\theta}^*$; 
 
 |    **for** $t = 1,...,T_A$ **do**
 
-|       Calculate $CCF_{\max,A,t,\theta} = \max_{m,n} (a_t \star b_{\theta}^*)_{mn}$;
+|       Calculate $CCF_{\max,A,t,\theta} = \max_{m,n} (a_t \star b_{\theta}^*)_{mn}$; 
 
-|       Calculate translation $[m_{A,t,\theta}^*, n_{A,t,\theta}^*] = \arg \max_{m,n} (a_t \star b_{\theta}^*)_{mn}$;
+|       Calculate translation $[m_{A,t,\theta}^*, n_{A,t,\theta}^*] = \arg \max_{m,n} (a_t \star b_{\theta}^*)_{mn}$; 
 
 |    **end**
 
@@ -309,7 +312,7 @@ knitr::include_graphics("images/chapter3-images/x3pPlot-colorscheme.png")
 
 To visualize two or more scans using the X3P plot, we map percentiles of the pooled surface values to the same color scale.
 This allows us to compare the relative sizes of impressions across multiple cartridge cases.
-The registration procedure outlined in Figure \@ref(alg:registration) is highly sensitive to extreme values on either surface, so performing a visual comparison of two scans using the X3P plot is useful for identifying whether further processing of either scan is needed.
+The registration procedure outlined in  the image registration algorithm is highly sensitive to extreme values on either surface, so performing a visual comparison of two scans using the X3P plot is useful for identifying whether further processing of either scan is needed.
 
 Figure \@ref(fig:preProcessEffectExample) shows two examples of the registration output for a matching pair of scans labeled K002eG2 and K227iG3.
 In the top plot we see that both scans contain large, extraneous markings that may affect the registration procedure.
@@ -331,8 +334,8 @@ knitr::include_graphics("images/chapter3-images/preProcessEffectExample.png")
 
 The "comparison plot" is a visual diagnostic tool that uses the X3P plot to directly compare the surface values of two scans.
 The comparison plot provides a quick, intuitive assessment by partitioning the surfaces into similarities and differences.
-To construct the comparison plot we first obtain two aligned scans $A$ and $B^*$ using Figure \@ref(alg:registration).
-A comparison plot like the one shown in Figure \@ref(fig:complementCompPlot-fullScan) depicts aligned versions of the two scans $A$ = K013sA1 and $B$ = K013sA2 shown in Figure \@ref(fig:processedSideBySide).
+To construct the comparison plot we first obtain two aligned scans $A$ and $B^*$ using  the image registration algorithm.
+A comparison plot like the one shown in Figure \@ref(fig:complementCompPlot-fullScan) depicts aligned versions of the two scans $A$ = K013sA1 and $B$ = K013sA2 shown in Figure \@ref(fig:referenceAnnotated).
 The first columns shows the scan $A$ and aligned scan $B^*$ in the top left and right, respectively.
 The dark gray (gray40) elements in these two visualizations represent the non-overlapping elements from the other scan.
 Next, we wish to partition these $A$ and $B^*$ into similarities and differences using a filter operation.
@@ -875,7 +878,7 @@ See Chapter 4 for more information on these cartridge case data.
 
 Let $A$ and $B$ denote cartridge case scans.
 We first perform the registration procedure of image registration algorithm in both comparison directions using a rotation grid of $\pmb{\Theta} = \{-30^{\circ} , -27^{\circ}, ..., 27^{\circ}, 30^{\circ}\}$, resulting in estimated full scan registrations $(m_{A}^*, n_{A}^*, \theta_A^*, CCF_{\max,A})$ and $(m_{B}^*, n_{B}^*, \theta_B^*, CCF_{\max,B})$.
-Using these registrations, we obtain the aligned versions of the target scans; $B^*$ for $d = A$ and $A^*$ for $d = B$.
+Using these registrations, we obtain the aligned versions of the target scans;  $B^*$ for $d = A$ and $A^*$ for $d = B$.
 
 Next, we perform the cell-based comparison procedure of cell-based comparison using rotation grids $\pmb{\Theta}_d' = \{\theta_d^* - 2^{\circ}, \theta_d^* - 1^{\circ},\theta_d^*,\theta_d^* + 1^{\circ}, \theta_d^* + 2^{\circ}\}$ for $d = A,B$ in both comparison directions, resulting in cell-wise registration sets $\pmb{F}_A$ and $\pmb{F}_B$.
 For each cell $t = 1,...,T_d$, we compute its estimated registration as:
@@ -954,7 +957,7 @@ We calculate the **average cell-based differences correlation** across all cells
 \overline{cor}_{\text{cell},\text{diff}} &= \frac{1}{T_A + T_B} \sum_{d \in \{A,B\}} \sum_{t=1}^{T_d} cor_{d,t,\text{diff}}.
 \end{align*}
 
-Figure \@ref(fig:visualFeaturePairs) shows a "generalized pairs plot" [@gpp; @ggally] of the 9 visual diagnostic features distinguished by the ground-truth nature of the comparisons for the 21,945 training comparisons.
+Figure \@ref(fig:visualFeaturePairs) shows a "generalized pairs plot" [@gpp;  @ggally] of the 9 visual diagnostic features distinguished by the ground-truth nature of the comparisons for the 21,945 training comparisons.
 The ground truth is represented by the left column/top row of the plot.
 The bar plot in top left corner shows there are 19,756 non-matching comparisons to 2,199 matching comparisons.
 This imbalance is due to the fact that we consider every pairwise comparison between cartridge cases from 10 training firearms.
@@ -999,7 +1002,7 @@ In the next section, we explore results from fitting and testing binary classifi
 
 ### Binary Classification Results
 
-Using the 21,945 training comparisons, we train three binary classifier models: based on a decision tree [@Breiman2017; @rpart], random forest [@breiman; @randomForest], and logistic regression [@stats].
+Using the 21,945 training comparisons, we train three binary classifier models: based on a decision tree [@Breiman2017;  @rpart], random forest [@breiman;  @randomForest], and logistic regression [@stats].
 Note that do not intend to present a "final" model recommendation that should be used in forensic casework here - our present goal is merely to explore the discriminatory power of these nine visual diagnostic features.
 See Chapter 4 for a broader exploration of cartridge case similarity scoring algorithms.
 
@@ -1060,7 +1063,7 @@ knitr::include_graphics("images/chapter3-images/visualDiagProb-density.png")
 ### Case Studies
 
 In this section, we explore specific examples of cartridge case comparisons to understand the relationship between qualitative observations we can make using the visual diagnostic tools and the quantitative measures of similarity we obtain from a binary classifier.
-The phenomenon of classifier models not being as adept at identifying matching comparisons has been observed in many other cartridge evidence scoring methods [@song_proposed_2013;@chen_convergence_2017] and Chapter 4.
+The phenomenon of classifier models not being as adept at identifying matching comparisons has been observed in many other cartridge evidence scoring methods [@song_proposed_2013; @chen_convergence_2017] and Chapter 4.
 There are a variety of factors that may lead to this discrepancy, but one of the most important factors that we've identified is whether extraneous, non-breech face markings are correctly identified and removed during pre-processing.
 We have consistently noted that extreme values in a scan tend to heavily impact the registration procedure.
 For example, when applying the cell-based comparison procedure of cell-based comparison, large markings in the target scan seem to "attract" source cells, even if those cells do not contain similar markings when visually compared.

@@ -25,7 +25,7 @@ We introduce the Automatic Cartridge Evidence Scoring (ACES) algorithm to compar
 The ACES algorithm pre-processes the scans, extracts numeric features, and returns a similarity score indicating whether two cartridge cases were fired from the same firearm. 
 The numeric features are computed based on a cell-by-cell registration procedure, results from a density-based unsupervised clustering algorithm, and derived from visual diagnostic tools we developed to investigate the performance of cartridge case comparison algorithms. 
 We use scans taken at the Roy J Carver High Resolution Microscopy Facility of cartridge cases collected by @Baldwin2014 to train and test the ACES algorithm. 
-The performance of ACES compares favorably to several other methods, such as logistic regressions on smaller feature sets, random forests, and some variants of previous Congruent Matching Cells methods [@song_proposed_2013; @zhang_convergence_2021]. 
+The performance of ACES compares favorably to several other methods, such as logistic regressions on smaller feature sets, random forests, and some variants of previous Congruent Matching Cells methods [@song_proposed_2013;  @zhang_convergence_2021]. 
 We implement the ACES algorithm's scoring functionality in a free, open-source R package called `scored`.
 
 ## Introduction
@@ -35,7 +35,7 @@ When a firearm is discharged and the projectile travels down the barrel, the car
 Markings on the breech face are "stamped" into the surface of the cartridge case leaving so-called *breech face impressions*.
 
 In a traditional examination, forensic examiners use these impressions analogous to a fingerprint to determine whether two cartridge cases were fired from the same firearm.
-The top of Figure \@ref(fig:examinationAlgorithmComparison) illustrates this procedure [@xiaoHui_seminar;@Zheng2014;@Vorburger2015].
+The top of Figure \@ref(fig:examinationAlgorithmComparison) illustrates this procedure [@xiaoHui_seminar;  @Zheng2014;  @Vorburger2015].
 First, two cartridge cases are collected - perhaps one is from a crime scene and the other is collected from a suspect's gun.
 An examiner places the two cartridge cases beneath a "comparison microscope" that merges the views of two compound microscopes into a single split view, similar to the side-by-side cartridge case image in Figure \@ref(fig:examinationAlgorithmComparison).
 The examiner assesses the degree of similarity between the markings on the cartridge cases and chooses one of four conclusions  @AFTE1992:
@@ -52,7 +52,7 @@ The examiner assesses the degree of similarity between the markings on the cartr
 knitr::include_graphics("images/chapter4-images/examination_vs_algorithm_comparison_oneScanSideView.png")
 ```
 
-Critics of traditional forensic examinations cite a lack of "foundational validity" underlying the procedures used by firearm and toolmark examiners [@council_strengthening_2009;@pcast2016].
+Critics of traditional forensic examinations cite a lack of "foundational validity" underlying the procedures used by firearm and toolmark examiners [@council_strengthening_2009; @pcast2016].
 In particular, examiners rely largely on their subjective findings rather than on a well-defined procedure to measure similarity.
 @pcast2016 pushed for "developing and testing image-analysis algorithms" to objectively measure the similarity between cartridge cases.
 An automatic comparison algorithm could supplement, inform, or dictate an examiner's conclusion [@Swofford2021].
@@ -74,7 +74,7 @@ We conclude with our thoughts on how cartridge case comparison algorithms should
 Recent proposals for automatic cartridge case scoring algorithms borrow from image processing and computer vision techniques.
 For example, @vorburger_surface_2007 proposed using the cross-correlation function (CCF) to compare images or scans of cartridge case surfaces.
 The CCF measures the similarity between two matrices for all possible translations of one matrix against the other.
-Calculating the CCF while rotating one of the scans therefore allows for estimation of the optimal translation and rotation, together referred to as the *registration*, between the two scans; simply choose the rotation/translation at which the CCF is maximized.
+Calculating the CCF while rotating one of the scans therefore allows for estimation of the optimal translation and rotation, together referred to as the *registration*, between the two scans;  simply choose the rotation/translation at which the CCF is maximized.
 @hare_automatic_2016 used the CCF, among other features, to compare scans of bullets.
 @tai_fully_2018 developed an open-source cartridge case comparison pipeline that compared cartridge case images using the CCF.
 
@@ -84,7 +84,7 @@ If two cartridge cases are truly matching, then the maximum CCF value between ea
 Furthermore, the cells should "agree" on the registration at which the CCF is maximized.
 @song_proposed_2013 outlined the "Congruent Matching Cells" algorithm to determine the number of cells that agree on a particular registration.
 A cell is classified as a Congruent Matching Cell (CMC) if its estimated registration is within some threshold of the median registration across all cells and its CCF value is above some threshold.
-A number of follow-up papers proposed alterations to the the original CMC method [@tong_improved_2015;@chen_convergence_2017].
+A number of follow-up papers proposed alterations to the the original CMC method [@tong_improved_2015; @chen_convergence_2017].
 @cmcR introduced an open-source implementation of the CMC method in the cmcR R package.
 As an alternative to defining Congruent Matching Cells, @zhang_convergence_2021 proposed using a clustering algorithm from @Ester1996 to determine the number of cells in agreement on a specific registration.
 
@@ -325,17 +325,17 @@ The result is the estimated registration of the target matrix to the "source" ma
 
 | **for** $\theta \in \pmb{\Theta}$ **do**
 
-|    Rotate $B$ by $\theta$ to obtain $B_\theta$;
+|    Rotate $B$ by $\theta$ to obtain $B_\theta$; 
 
-|    Calculate $CCF_{\max,\theta} = \max_{m,n} (a \star b)_{mn}$;
+|    Calculate $CCF_{\max,\theta} = \max_{m,n} (a \star b)_{mn}$; 
 
-|    Calculate translation $[m_{\theta}^*, n_{\theta}^*] = \arg \max_{m,n} (a \star b_\theta)_{mn}$;
+|    Calculate translation $[m_{\theta}^*, n_{\theta}^*] = \arg \max_{m,n} (a \star b_\theta)_{mn}$; 
 
 | **end**
 
-| Calculate overall maximum correlation $CCF_{\max} = \max_{\theta} \{CCF_{\max, \theta} : \theta \in \pmb{\Theta}\}$;
+| Calculate overall maximum correlation $CCF_{\max} = \max_{\theta} \{CCF_{\max, \theta} : \theta \in \pmb{\Theta}\}$; 
 
-| Calculate rotation $\theta^* = \arg \max_{\theta} \{CCF_{\max,\theta} : \theta \in \pmb{\Theta}\}$;
+| Calculate rotation $\theta^* = \arg \max_{\theta} \{CCF_{\max,\theta} : \theta \in \pmb{\Theta}\}$; 
 
 | **return** Estimated rotation $\theta^*$, translation $m^* = m_{\theta^*}^*$, and $n^* = n_{\theta^*}^*$, and $CCF_{\max}$
 
@@ -380,19 +380,19 @@ The cell-based comparison procedure is outlined in Cell-Based Comparison Algorit
 
 | **Result**: Estimated translations and $CCF_{\max}$ values per cell, per rotation
 
-| Partition $A$ into a grid of $R \times C$ cells;
+| Partition $A$ into a grid of $R \times C$ cells; 
 
-| Discard cells containing only missing values, leaving $T_A$ remaining cells;
+| Discard cells containing only missing values, leaving $T_A$ remaining cells; 
 
 | **for** $\theta \in \pmb{\Theta}_{A}'$ **do**
 
-|    Rotate $B^*$ by $\theta$ to obtain $B_{\theta}^*$;
+|    Rotate $B^*$ by $\theta$ to obtain $B_{\theta}^*$; 
 
 |    **for** $t = 1,...,T_A$ **do**
 
-|       Calculate $CCF_{\max,A,t,\theta} = \max_{m,n} (a_t \star b_{\theta}^*)_{mn}$;
+|       Calculate $CCF_{\max,A,t,\theta} = \max_{m,n} (a_t \star b_{\theta}^*)_{mn}$; 
 
-|       Calculate translation $[m_{A,t,\theta}^*, n_{A,t,\theta}^*] = \arg \max_{m,n} (a_t \star b_{\theta}^*)_{mn}$;
+|       Calculate translation $[m_{A,t,\theta}^*, n_{A,t,\theta}^*] = \arg \max_{m,n} (a_t \star b_{\theta}^*)_{mn}$; 
 
 |    **end**
 
@@ -409,7 +409,7 @@ knitr::include_graphics("images/chapter4-images/cellGridExample_nonMatch.png")
 ```
 
 Figure \@ref(fig:cellGridExample) shows the estimated registrations of cells between two non-match cartridge cases.
-We magnify the surface values captured by cell pairs 5, 1 and 7, 7 and note the similarities in the surface values; for example, the dark purple region in the middle of the cell 7, 7 pair.
+We magnify the surface values captured by cell pairs 5, 1 and 7, 7 and note the similarities in the surface values;  for example, the dark purple region in the middle of the cell 7, 7 pair.
 
 Just as with the whole-scan registration, we calculate the pairwise-complete correlation between each cell $A_t$ and a matrix $B_{\theta,t}^*$ of the same size extracted from $B^*_{\theta}$ after translating by $[m^*_{A,\theta},n^*_{A,\theta}]$.
 From this we obtain a set of pairwise-complete correlations for each cell and rotation: $\{cor_{A,t,\theta} : t = 1,...,T_A, \theta \in \pmb{\Theta}'_A\}$.
@@ -1066,7 +1066,7 @@ This resulted in a training data set of 210 cartridge cases, $\binom{210}{2} = 2
 Because we consider every pairwise comparison between these scans, there is a relatively large class imbalance between matches and non-matches in these data sets.
 Specifically, non-matching comparisons make up 19,756 of the 21,945 (90.0%) training comparisons and 41,769 of the 44,850 (93.1%) testing comparisons.
 
-We use 10-fold cross-validation repeated thrice [@caret] to train two binary classifiers based on a logistic regression and a random forest [@breiman; @randomForest].
+We use 10-fold cross-validation repeated thrice [@caret] to train two binary classifiers based on a logistic regression and a random forest [@breiman;  @randomForest].
 These models predict the probability that a pair of cartridge cases match.
 Then, the model classifies the pair as a match or non-match depending on whether the match probability exceeds a set threshold.
 On top of the tunable parameters of each model (e.g., the DBSCAN parameters $\epsilon$ and $minPts$), we treat this threshold as a parameter to be optimized.
@@ -1088,7 +1088,7 @@ The following section details the results of this cross-validation training/test
 First, we consider results from the training procedure.
 \@ref(fig:rocPlot) shows the resulting ROC curves for four classifier models trained on the training data set.
 We consider training the logistic regression (LR) and random forest (RF) models under two feature sets: a subset of the full ACES feature set consisting of the Cluster Indicator feature $C_0$ and the six registration-based features summarized in Table `r knitr::asis_output(ifelse(knitr::is_html_output(), '\\@ref(tab:registrationFeatures-html)', '\\@ref(tab:registrationFeatures-latex)'))` vs. all 19 ACES features.
-We consider the "$C_0$ + Registration" subset of features to represent the features used in Congruent Matching Cells methods [@song_proposed_2013; zhang_convergence_2021].
+We consider the "$C_0$ + Registration" subset of features to represent the features used in Congruent Matching Cells methods [@song_proposed_2013;  zhang_convergence_2021].
 
 The ROC curves allow us to visually compare the behavior of these four classifiers under various score thresholds where
 curves closer to the top-left corner are preferred.
@@ -1130,9 +1130,9 @@ We optimized this $C_0$-based classifier by choosing the DBSCAN parameters $\eps
 The optimized $C_0$-based classifier performs considerably worse across the three measures compared to the other models with test accuracy 89.44%, true negative rate 89.64%, and true positive rate 86.82%.
 
 The second row of Figure \@ref(fig:trainTestAccuracy) summarizes results from training the two classifier models on a subset of the full ACES feature set consisting of the Cluster Indicator feature $C_0$ and the six registration-based features summarized in Table `r knitr::asis_output(ifelse(knitr::is_html_output(), '\\@ref(tab:registrationFeatures-html)', '\\@ref(tab:registrationFeatures-latex)'))`.
-We consider this subset of features to represent the features used in Congruent Matching Cells methods [@song_proposed_2013; @zhang_convergence_2021].
+We consider this subset of features to represent the features used in Congruent Matching Cells methods [@song_proposed_2013;  @zhang_convergence_2021].
 In general, we see that the logistic regression (LR) and random forest (RF) models perform comparable to each other in accuracy, true negative, and true positive rates.
-Despite the fact that the models in the second and third rows were selected based on balancing the training true negative and true positive rates, we note that these rates for the test data are not as well-balanced; namely, the true negative rates still tend to be larger than the true positive rates.
+Despite the fact that the models in the second and third rows were selected based on balancing the training true negative and true positive rates, we note that these rates for the test data are not as well-balanced;  namely, the true negative rates still tend to be larger than the true positive rates.
 Below, we explore this discrepancy by analyzing the contribution of various test firearms towards the true positive rates.
 
 The third row of Figure \@ref(fig:trainTestAccuracy) summarizes the classification results based on using all 19 ACES features.
@@ -1359,7 +1359,7 @@ Before the ACES algorithm can be put into practice, we must devise new stress-te
 There is also an opportunity to optimize additional parameters, such as the number of cells used in cell-based comparison or parameters used in pre-processing, to measure their effects on final results.
 A variety of factors, such as make/model and wear of the evidence or the algorithm parameters used, affect the discriminative power of the 19 features defined in this paper.
 We view the current version of the ACES algorithm as more a foundation for future improvements than a final solution.
-We expect the ACES feature set to evolve over time; for discriminatory features to replace less informative features.
+We expect the ACES feature set to evolve over time;  for discriminatory features to replace less informative features.
 Given the gravity of the application, we stress interpretability as a guiding principle for future feature engineering and model selection.
 A misunderstood feature or result may lead a lay judge or juror to an incorrect conclusion.
 Additionally, we urge future researchers to use a train/test procedure similar to the one outlined in this paper to validate proposed methods.
@@ -1641,7 +1641,7 @@ structure(list(`Feature Set` = structure(c(1L, 2L, 2L, 3L, 3L
 <!-- For each node, The first line is the predicted class if it were treated as a terminal node. -->
 <!-- The second line is the estimated probability that an observation is a non-match given that it falls into the node. -->
 <!-- The third line is the percentage of all observations that fall into the node. -->
-<!-- We see that splits are made on the three variables that are ranked as most important in Figure \@ref(fig:rfVarImpPlt); namely, $C_0$, $\overline{cor}_{\text{cell}}$, and $s_{m^*}$. -->
+<!-- We see that splits are made on the three variables that are ranked as most important in Figure \@ref(fig:rfVarImpPlt);  namely, $C_0$, $\overline{cor}_{\text{cell}}$, and $s_{m^*}$. -->
 
 <!-- [Figure of fitted CART model here.] -->
 

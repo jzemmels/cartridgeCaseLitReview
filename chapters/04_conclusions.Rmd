@@ -14,34 +14,43 @@ In Chapter 4, we developed the Automatic Cartridge Evidence Scoring (ACES) algor
 Using a train/test cross-validation procedure, we demonstrated how statistical models can be used to learn associations between numerical features to effectively distinguish between match and non-match comparisons.
 We hope that the foundation laid by the ACES comparison pipeline, and available in the `scored` R package, will be built upon with future feature engineering and model exploration.
 
+In future work, we plan on exploring methods for computing score-based likelihood ratios (SLRs) as means of measuring the probativity, rather than just the similarity, for two pieces of evidence.
+Likelihood ratio methods take both similarity *and* typicality [@Morrison2018] into account when comparing evidence, which more directly addresses the degree to which the evidence supports the same vs. different source hypotheses.
+For example, suppose a sample of blood from a suspect has the same ABO type as a sample found at a crime scene.
+If we were to only consider blood type as a measure of similarity, then these two samples would be "perfectly" similar.
+Of course, this is not conclusive evidence that the suspect was actually at the crime scene - there is a relatively large probability that any two randomly drawn blood samples from different humans would having matching ABO type.
+That is, it is not atypical to observe this degree of similarity between two randomly drawn, different source samples.
+The same can be extended to cartridge case evidence.
+Even if two cartridge cases receive a relatively high similarity score, say 0.97, we must consider the likelihood that two randomly drawn, different source cartridge cases receive the same similarity score.
+If this value is also large, then the original score is not particularly probative.
+We hope to take a similar approach as @Reinders2022 to explore various SLR computation methods.
 
-- Score-based LR approaches
-		- Specific source vs. common source and accounting for "typicality."
-		- Inter- vs. intra- scan features
-			- Intra-scan features
-				- SURF points
-				- Autoencoder/GAN-based features
-		- Hierarchical clustering (a la Tai (2019))
-	- Generalizability of model
-		- Are impressions consistent enough that a single model could be used for a number of makes/models? 
-		- Need more training data with variety of makes/models or 
-	- Characterization of sub-class/class characteristics using visual diagnostics
-		- Distinguishing individual vs. sub-class might be impossible. However, identifying large markings that might unduly affect the comparison procedure is important, so an "automatic" way of identifying such markings would be useful.
-	- Texture models for cartridge case evidence 
-	- Correlation measure that is more "robust" to extreme values
+An important avenue of exploration is in the generalizability of a model like ACES to other conditions.
+That is, how robust is our currently trained version of ACES to the make/model of the cartridge case or firearm, the scanning tool used, or the degree of wear/degradation on the casing?
+If this current iteration of ACES turns out to be sensitive to these conditions, could it be made more robust by simply training on a more representative sample of cartridge cases, or will we need to individually train one model for each combination of factors?
+Fundamentally, these questions point to whether breech face impressions are consistent enough that we can apply the same procedure to any pair of cartridge cases.
+Although we don't have the answers to these questions, we do have the infrastructure across the various software we've created to start answering them.
 
-Score clustering across multiple test fires similar to Xiao Hui's method
-
-We do a bang-up job with identifying non-matching comparisons, which is complementary to the behavior of examiners in Baldwin that had a much lower true negative rate. 
-The problem is that we aren't as good at identifying matching comparisons. 
-Sure, this could be solved if we find the "golden" feature that will identify matches. 
-However, a more pressing, and potentially more easily solvable, problem is that matching scans have a lot of ways in which they can "look" different to the algorithm. 
-For example, extreme, non-breech face markings in the scan that aren't removed during pre-processing may "distract" the registration that our pipeline relies so heavily on.
+Using ACES, we are able to achieve a much better balance between the true negative and positive classification compared to the examiner decision results reported in @Baldwin2014, which had a much lower true negative rate compared to the true positive.
+In fact, if we use classification accuracy as an optimization during training, our results actually complement the @Baldwin2014 reported results in that we obtain a near-perfect true negative rate (99.9\%) and relatively high true positive rate (92.4\%).
+Through our experimentation, it became clear to us that it is harder to algorithmically identify matching comparisons than non-matches.
+Specifically, it seems to us that there are many more ways in which two scans can appear different to the algorithm than similar.
+As we discussed in Chapter 3, extreme, non-breech face markings in the scan that aren't removed during pre-processing may "distract" the registration procedure on which our pipeline heavily relies.
 Other cartridge cases might have unremarkable impressions, leading to a similarity score that doesn't strongly indicate matches or non-matches (what forensic examiners might call an "inconclusive").
-The visual diagnostic tools developed in this work make it easier to manually inspect and identify such extreme values.
-However, we could also develop "automatic" techniques to identify such markings (e.g., bound box Neural Net,). 
-We could also use comparative features that don't depend as much on registration, such as SURF points, or more "descriptive" features computed on individual scans, such as decompositions by orthonormal 2D bases (as in Morrison and company). 
-In the descriptive feature case, we would simply compute the features for two scans and compare the joint feature vector to a reference data base.
+The visual diagnostic tools developed in this work make it easier to manually inspect and identify these cases.
+However, we are also interested in developing "automatic" techniques to characterize and identify markings.
+For example, we might use texture modelling and segmentation to identify distinctive markings on a surface.
+Alternatively, we could use a correlation measure and/or registration procedure that is more robust to extreme markings.
+
+@Morrison2018 provide a compelling argument that "[p]rocedures based on similarity-only scores do not appropriately account for typicality with respect to the relevant population," which seems to directly oppose the approach we took with ACES.
+However, we believe that the arguments proposed are relevant to specific types of "similarity-only" scores, such as a Euclidean distance or correlation, that are invariant to specific evidence being compared.
+We do not believe that ACES exhibits the same invariance as these simpler scoring procedures and we hope to explore this further in the future.
+
+Nonetheless, we do think that the alternative approaches to measuring probativity presented in @Morrison2018 as well as @Basu2022 have merit.
+Specifically, rather than computing comparative features that map a pair of scans to a number, such as a correlation, these authors propose computing descriptive features independently for each scan and then modeling the joint distribution of these features as a means of computing SLRs.
+For example, @Basu2022 considers decomposing a cartridge case scan using various two-dimensional orthonormal bases as a means of capturing different characteristics of the surface.
+Doing this independently for two cartridge cases allows one to consider the joint likelihood of observing these feature values (or some dimension-reduced mapping of these features) under the same and different source hypotheses, which sidesteps distilling these features into a univariate similarity score as is done in ACES.
+Possible descriptive features could come from sources such as decompositions like those used in @Basu2022, local feature detector methods such as "Speeded Up Robust Features" @Bay2006, or even autoencoding/generative neural network models although these features would be harder to interpret.
 
 By now, we hope that it is clear to the reader that a goal pervading every aspect of this work is transparency.
 Given the gravity of the application, we consider it necessary that tools used in making an evidentiary conclusion that could inform a judicial decision be as transparent and user-friendly as possible.
