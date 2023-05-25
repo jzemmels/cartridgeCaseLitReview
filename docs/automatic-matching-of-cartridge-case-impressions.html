@@ -171,8 +171,8 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#preliminaries-forensic-examinations"><i class="fa fa-check"></i><b>1.1</b> Preliminaries: Forensic Examinations</a>
 <ul>
-<li class="chapter" data-level="1.1.1" data-path="index.html"><a href="index.html#firearm-and-toolmark-identification"><i class="fa fa-check"></i><b>1.1.1</b> Firearm and Toolmark Identification</a></li>
-<li class="chapter" data-level="1.1.2" data-path="index.html"><a href="index.html#why-should-firearm-and-toolmark-identification-change"><i class="fa fa-check"></i><b>1.1.2</b> Why Should Firearm and Toolmark Identification Change?</a></li>
+<li class="chapter" data-level="1.1.1" data-path="index.html"><a href="index.html#firearm-and-tool-mark-identification"><i class="fa fa-check"></i><b>1.1.1</b> Firearm and Tool Mark Identification</a></li>
+<li class="chapter" data-level="1.1.2" data-path="index.html"><a href="index.html#why-should-firearm-and-tool-mark-identification-change"><i class="fa fa-check"></i><b>1.1.2</b> Why Should Firearm and Tool Mark Identification Change?</a></li>
 </ul></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#forensic-comparison-pipelines"><i class="fa fa-check"></i><b>1.2</b> Forensic Comparison Pipelines</a>
 <ul>
@@ -242,8 +242,7 @@ div.csl-indent {
 <li class="chapter" data-level="3.5" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#discussion-1"><i class="fa fa-check"></i><b>3.5</b> Discussion</a>
 <ul>
 <li class="chapter" data-level="3.5.1" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#case-studies"><i class="fa fa-check"></i><b>3.5.1</b> Case Studies</a></li>
-<li class="chapter" data-level="3.5.2" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#sensitivity-to-filter-threshold"><i class="fa fa-check"></i><b>3.5.2</b> Sensitivity to Filter Threshold</a></li>
-<li class="chapter" data-level="3.5.3" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#interactive-cartridgeinvestigatr-application"><i class="fa fa-check"></i><b>3.5.3</b> Interactive cartridgeInvestigatR application</a></li>
+<li class="chapter" data-level="3.5.2" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#software"><i class="fa fa-check"></i><b>3.5.2</b> Software</a></li>
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#conclusion-1"><i class="fa fa-check"></i><b>3.6</b> Conclusion</a></li>
 </ul></li>
@@ -288,6 +287,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="4.8" data-path="appendix.html"><a href="appendix.html#model-specific-results"><i class="fa fa-check"></i><b>4.8</b> Model-Specific Results</a></li>
 </ul></li>
+<li class="chapter" data-level="5" data-path="conclusions.html"><a href="conclusions.html"><i class="fa fa-check"></i><b>5</b> Conclusions</a></li>
 </ul>
 
       </nav>
@@ -319,7 +319,7 @@ We introduce the Automatic Cartridge Evidence Scoring (ACES) algorithm to compar
 The ACES algorithm pre-processes the scans, extracts numeric features, and returns a similarity score indicating whether two cartridge cases were fired from the same firearm.
 The numeric features are computed based on a cell-by-cell registration procedure, results from a density-based unsupervised clustering algorithm, and derived from visual diagnostic tools we developed to investigate the performance of cartridge case comparison algorithms.
 We use scans taken at the Roy J Carver High Resolution Microscopy Facility of cartridge cases collected by <span class="citation">Baldwin et al. (<a href="#ref-Baldwin2014" role="doc-biblioref">2014</a>)</span> to train and test the ACES algorithm.
-The performance of ACES compares favorably to several other methods, such as random forests on smaller feature sets, logistic regressions, decision trees, and some variants of previous Congruent Matching Cells methods <span class="citation">(<a href="#ref-song_proposed_2013" role="doc-biblioref">Song 2013</a>; <a href="#ref-zhang_convergence_2021" role="doc-biblioref">Zhang et al. 2021</a>)</span>.
+The performance of ACES compares favorably to several other methods, such as logistic regressions on smaller feature sets, random forests, and some variants of previous Congruent Matching Cells methods <span class="citation">(<a href="#ref-song_proposed_2013" role="doc-biblioref">Song 2013</a>; <a href="#ref-zhang_convergence_2021" role="doc-biblioref">Zhang et al. 2021</a>)</span>.
 We implement the ACES algorithm’s scoring functionality in a free, open-source R package called <code>scored</code>.</p>
 </div>
 <div id="introduction-1" class="section level2 hasAnchor" number="4.1">
@@ -747,8 +747,8 @@ NA &amp;\text{otherwise}
 Surface values in <span class="math inline">\(A\)</span> and <span class="math inline">\(B^*\)</span> that are “close,” meaning within <span class="math inline">\(\tau\)</span> distance, to each other are replaced with <span class="math inline">\(NA\)</span> in this filtered matrix.</p>
 <p>We compute features based on the elements of the <span class="math inline">\(cond\)</span> matrix.
 First, we consider the ratio between the number of <span class="math inline">\(TRUE\)</span> and <span class="math inline">\(FALSE\)</span> elements in the matrix <span class="math inline">\(|A - B^*| \leq \tau\)</span>, where <span class="math inline">\(TRUE\)</span> values correspond to elements of <span class="math inline">\(A\)</span> and <span class="math inline">\(B^*\)</span> within <span class="math inline">\(\tau\)</span> distance of each other.
-The definition of this ratio is given by <a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#eq:ratio">(3.1)</a>.</p>
-<p><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#fig:similaritiesDifferencesRatio">3.12</a> in Chapter 3 shows an example of this ratio for two matching <span class="math inline">\(A = K013sA1\)</span> and <span class="math inline">\(B = K013sA2\)</span>.
+The definition of this ratio is given by Equation <a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#eq:ratio">(3.1)</a>.</p>
+<p>Figure <a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#fig:similaritiesDifferencesRatio">3.11</a> in Chapter 3 shows an example of this ratio for two matching <span class="math inline">\(A = K013sA1\)</span> and <span class="math inline">\(B = K013sA2\)</span>.
 The value of the “similarities vs. differences ratio” is 2.84 using a filter threshold of <span class="math inline">\(\tau = 1\)</span> micron
 If we consider the <span class="math inline">\(TRUE\)</span> and <span class="math inline">\(FALSE\)</span> elements of the <span class="math inline">\(|A - B^*| \leq \tau\)</span> matrix as the elements of <span class="math inline">\(A\)</span> and <span class="math inline">\(B^*\)</span> that are most “similar” and “different” then we can interpret this value to mean that there are 2.84 times as similarities as there are differences.</p>
 <p>Because we perform comparisons in both directions <span class="math inline">\(d = A,B\)</span>, we end up with two similarities vs. differences ratio values.
@@ -758,13 +758,13 @@ r_{\text{full}} = \frac{1}{2}(r_A + r_B).
 \]</span>
 We assume that the <strong>full-scan similarities vs. differences ratio</strong> will be larger for matching cartridge case pairs than non-matches.</p>
 <p>As another source of features, we consider the size of <span class="math inline">\(TRUE\)</span>-valued neighborhoods in the <span class="math inline">\(cond\)</span> matrix <span class="math inline">\(|A - B^*| &gt; \tau\)</span>, which is the logical complement of the <span class="math inline">\(cond\)</span> matrix used to compute <span class="math inline">\(r_{\text{full}}\)</span>.
-An example of one such matrix can be seen on the left side of <a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#fig:filterLabeling">3.13</a>.
+An example of one such matrix can be seen on the left side of <a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#fig:filterLabeling">3.12</a>.
 We consider each neighborhood as a set of adjacent elements, <span class="math inline">\(S\)</span>, that all have the same value.
 Two elements are “adjacent” if one of their indices differs by 1 (this is a 4-neighbor or “Rook’s” scheme).
 We use a connected components labeling algorithm <span class="citation">(<a href="#ref-hesselink_concurrent_2001" role="doc-biblioref">Hesselink, Meijster, and Bron 2001</a>)</span> to identify neighborhoods that all have the value <span class="math inline">\(TRUE\)</span> in <span class="math inline">\(|A - B^*| &gt; \tau\)</span>.
-The middle of <a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#fig:filterLabeling">3.13</a> shows an example of neighborhood regions distinguished by fill color.
+The middle of <a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#fig:filterLabeling">3.12</a> shows an example of neighborhood regions distinguished by fill color.
 Using this procedure in both comparison directions, we obtain multiple neighborhoods that we distinguish notationally using subscripts: <span class="math inline">\(\pmb{S}_d = \{S_{d,1}, S_{d,2}, ..., S_{d, l} : l = 1,...,L_d\}\)</span> where <span class="math inline">\(L_d\)</span> is the total number of labeled <span class="math inline">\(TRUE\)</span>-valued regions in direction <span class="math inline">\(d \in \{A,B\}\)</span>.</p>
-<p>Considering the size of each labeled region on the right side <a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#fig:filterLabeling">3.13</a>, we see that the distribution is heavily right-skewed with the majority of comparisons being relatively small - less than 1,000 square microns.
+<p>Considering the size of each labeled region on the right side of Figure <a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#fig:filterLabeling">3.12</a>, we see that the distribution is heavily right-skewed with the majority of comparisons being relatively small - less than 1,000 square microns.
 If we associate the <span class="math inline">\(TRUE\)</span> values of <span class="math inline">\(|A - B^*| &gt; \tau\)</span> with elements where <span class="math inline">\(A\)</span> and <span class="math inline">\(B^*\)</span> are the most “different,” then it is reasonable to assume that the size of individual <span class="math inline">\(TRUE\)</span>-valued regions would be small for a matching pair.
 In other words, that there wouldn’t be large regions where <span class="math inline">\(A\)</span> and <span class="math inline">\(B^*\)</span> are different if they truly match.</p>
 <p>To compute numerical features based on this assumption, we consider the average and standard deviation of the blob sizes across the two comparison directions:</p>
@@ -776,7 +776,7 @@ s_{\text{full},|S|} &amp;= \sqrt{\frac{1}{L_A + L_B - 1} \sum_{d \in \{A,B\}} \s
 We assume that the <strong>average</strong> and <strong>standard deviation of the full-scan neighborhood sizes</strong> will be small for matching pairs compared to non-matching pairs.</p>
 <p>As a final source of features, we consider the correlation <span class="math inline">\(cor_{d,\text{full},\text{diff}}\)</span> between the elements of the matrices <span class="math inline">\(\mathcal{F}_{|A - B^*| &gt; \tau}(A)\)</span> and <span class="math inline">\(\mathcal{F}_{|A - B^*| &gt; \tau}(B^*)\)</span> for <span class="math inline">\(d = A\)</span> and <span class="math inline">\(\mathcal{F}_{|A^* - B| &gt; \tau}(A^*)\)</span> and <span class="math inline">\(\mathcal{F}_{|A^* - B| &gt; \tau}(B)\)</span> for <span class="math inline">\(d = B\)</span>.
 If <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are truly matching, then we might assume that differences in the height values occur merely because of variability in the amount of contact between the cartridge case and breech face across multiple fires of a single firearm.
-Figure <a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#fig:matchingCellDifferenceCorrelation">3.14</a> shows an example of the “filtered differences” between two cells <span class="math inline">\(\mathcal{F}_{|A_t - B_t^*| &gt; \tau}(A_t)\)</span> and <span class="math inline">\(\mathcal{F}_{|A_t - B_t^*| &gt; \tau}(B_t^*)\)</span>.
+Figure <a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#fig:matchingCellDifferenceCorrelation">3.13</a> shows an example of the “filtered differences” between two cells <span class="math inline">\(\mathcal{F}_{|A_t - B_t^*| &gt; \tau}(A_t)\)</span> and <span class="math inline">\(\mathcal{F}_{|A_t - B_t^*| &gt; \tau}(B_t^*)\)</span>.
 Although the surface values in the cell on the right appear to be shifted up relative to the values from the cell on the left, as evidenced by the generally darker shades of orange, the trends in the surface values are similar.
 This is reflected in the relatively high correlation value of 0.84 between these two filtered cells.</p>
 <p>Similar to the other features, we use the average “differences correlation” value <span class="math inline">\(cor_{d,\text{full},\text{diff}}\)</span> across the two comparison directions as a feature:</p>

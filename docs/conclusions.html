@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Conclusions | A Cartridge Case Comparison Pipeline</title>
+  <meta name="description" content="5 Conclusions | A Cartridge Case Comparison Pipeline" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Conclusions | A Cartridge Case Comparison Pipeline" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="jzemmels/cartridgeCaseLitReview" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Conclusions | A Cartridge Case Comparison Pipeline" />
+  
+  
+  
+
+<meta name="author" content="Joseph Zemmels" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="appendix.html"/>
+
+<style type="text/css">
+p.abstract{
+  text-align: center;
+  font-weight: bold;
+}
+div.abstract{
+  margin: auto;
+  width: 90%;
+}
+</style>
+<script src="libs/jquery/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Literature Review</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#preliminaries-forensic-examinations"><i class="fa fa-check"></i><b>1.1</b> Preliminaries: Forensic Examinations</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="index.html"><a href="index.html#firearm-and-tool-mark-identification"><i class="fa fa-check"></i><b>1.1.1</b> Firearm and Tool Mark Identification</a></li>
+<li class="chapter" data-level="1.1.2" data-path="index.html"><a href="index.html#why-should-firearm-and-tool-mark-identification-change"><i class="fa fa-check"></i><b>1.1.2</b> Why Should Firearm and Tool Mark Identification Change?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#forensic-comparison-pipelines"><i class="fa fa-check"></i><b>1.2</b> Forensic Comparison Pipelines</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#digital-representations-of-evidence"><i class="fa fa-check"></i><b>1.2.1</b> Digital Representations of Evidence</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#pre-processing-procedures-for-forensic-data"><i class="fa fa-check"></i><b>1.2.2</b> Pre-processing Procedures for Forensic Data</a></li>
+<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#forensic-data-feature-extraction"><i class="fa fa-check"></i><b>1.2.3</b> Forensic Data Feature Extraction</a></li>
+<li class="chapter" data-level="1.2.4" data-path="index.html"><a href="index.html#similarity-scores-classification-rules-for-forensic-data"><i class="fa fa-check"></i><b>1.2.4</b> Similarity Scores &amp; Classification Rules for Forensic Data</a></li>
+<li class="chapter" data-level="1.2.5" data-path="index.html"><a href="index.html#reproducibility-of-comparison-pipelines"><i class="fa fa-check"></i><b>1.2.5</b> Reproducibility of Comparison Pipelines</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#diagnostic-tools"><i class="fa fa-check"></i><b>1.3</b> Diagnostic Tools</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#visual-diagnostics"><i class="fa fa-check"></i><b>1.3.1</b> Visual Diagnostics</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#interactive-diagnostics"><i class="fa fa-check"></i><b>1.3.2</b> Interactive Diagnostics</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#automating-and-improving-the-cartridge-case-comparison-pipeline"><i class="fa fa-check"></i><b>1.4</b> Automating and Improving the Cartridge Case Comparison Pipeline</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="index.html"><a href="index.html#image-processing-techniques"><i class="fa fa-check"></i><b>1.4.1</b> Image Processing Techniques</a></li>
+<li class="chapter" data-level="1.4.2" data-path="index.html"><a href="index.html#density-based-spatial-clustering-of-applications-with-noise"><i class="fa fa-check"></i><b>1.4.2</b> Density-Based Spatial Clustering of Applications with Noise</a></li>
+<li class="chapter" data-level="1.4.3" data-path="index.html"><a href="index.html#implementation-considerations"><i class="fa fa-check"></i><b>1.4.3</b> Implementation Considerations</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><i class="fa fa-check"></i><b>2</b> A Study in Reproducibility: The Congruent Matching Cells Algorithm and cmcR package</a>
+<ul>
+<li class="chapter" data-level="" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#abstract"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="2.1" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#intro"><i class="fa fa-check"></i><b>2.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#repeatability-and-reproducibility"><i class="fa fa-check"></i><b>2.1.1</b> Repeatability and reproducibility</a></li>
+<li class="chapter" data-level="2.1.2" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#the-congruent-matching-cells-algorithm"><i class="fa fa-check"></i><b>2.1.2</b> The Congruent Matching Cells algorithm</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#cmcMethod"><i class="fa fa-check"></i><b>2.2</b> The CMC pipeline</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#initialData"><i class="fa fa-check"></i><b>2.2.1</b> Initial data</a></li>
+<li class="chapter" data-level="2.2.2" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#preProcessing"><i class="fa fa-check"></i><b>2.2.2</b> Pre-processing procedures</a></li>
+<li class="chapter" data-level="2.2.3" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#comparisonProcedure"><i class="fa fa-check"></i><b>2.2.3</b> “Correlation cell” comparison procedure</a></li>
+<li class="chapter" data-level="2.2.4" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#decision-rule"><i class="fa fa-check"></i><b>2.2.4</b> Decision rule</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#discussion"><i class="fa fa-check"></i><b>2.3</b> Discussion</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#ambiguities"><i class="fa fa-check"></i><b>2.3.1</b> Ambiguity in algorithmic descriptions</a></li>
+<li class="chapter" data-level="2.3.2" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#investigation"><i class="fa fa-check"></i><b>2.3.2</b> CMC pattern matching pipeline</a></li>
+<li class="chapter" data-level="2.3.3" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#processing-condition-sensitivity"><i class="fa fa-check"></i><b>2.3.3</b> Processing condition sensitivity</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#conclusion"><i class="fa fa-check"></i><b>2.4</b> Conclusion</a></li>
+<li class="chapter" data-level="2.5" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#acknowledgement"><i class="fa fa-check"></i><b>2.5</b> Acknowledgement</a></li>
+<li class="chapter" data-level="2.6" data-path="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html"><a href="a-study-in-reproducibility-the-congruent-matching-cells-algorithm-and-cmcr-package.html#computational-details"><i class="fa fa-check"></i><b>2.6</b> Computational details</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><i class="fa fa-check"></i><b>3</b> Diagnostic Tools for Cartridge Case Comparison Algorithms</a>
+<ul>
+<li class="chapter" data-level="" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#abstract-1"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="3.1" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#introduction"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#background-and-introduction"><i class="fa fa-check"></i><b>3.2</b> Background and Introduction</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#notational-conventions"><i class="fa fa-check"></i><b>3.2.1</b> Notational Conventions</a></li>
+<li class="chapter" data-level="3.2.2" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#registration-procedure"><i class="fa fa-check"></i><b>3.2.2</b> Registration Procedure</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#visual-diagnostics-1"><i class="fa fa-check"></i><b>3.3</b> Visual Diagnostics</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#the-x3p-plot"><i class="fa fa-check"></i><b>3.3.1</b> The X3P Plot</a></li>
+<li class="chapter" data-level="3.3.2" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#the-comparison-plot"><i class="fa fa-check"></i><b>3.3.2</b> The Comparison Plot</a></li>
+<li class="chapter" data-level="3.3.3" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#visual-diagnostic-statistics"><i class="fa fa-check"></i><b>3.3.3</b> Visual Diagnostic Statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#statistical-learning-from-visual-diagnostics"><i class="fa fa-check"></i><b>3.4</b> Statistical Learning from Visual Diagnostics</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#visual-diagnostic-statistics-as-features"><i class="fa fa-check"></i><b>3.4.1</b> Visual Diagnostic Statistics as Features</a></li>
+<li class="chapter" data-level="3.4.2" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#binary-classification-results"><i class="fa fa-check"></i><b>3.4.2</b> Binary Classification Results</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#discussion-1"><i class="fa fa-check"></i><b>3.5</b> Discussion</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#case-studies"><i class="fa fa-check"></i><b>3.5.1</b> Case Studies</a></li>
+<li class="chapter" data-level="3.5.2" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#software"><i class="fa fa-check"></i><b>3.5.2</b> Software</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="diagnostic-tools-for-cartridge-case-comparison-algorithms.html"><a href="diagnostic-tools-for-cartridge-case-comparison-algorithms.html#conclusion-1"><i class="fa fa-check"></i><b>3.6</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html"><i class="fa fa-check"></i><b>4</b> Automatic Matching of Cartridge Case Impressions</a>
+<ul>
+<li class="chapter" data-level="" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#abstract-2"><i class="fa fa-check"></i>Abstract</a></li>
+<li class="chapter" data-level="4.1" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#previous-work"><i class="fa fa-check"></i><b>4.1.1</b> Previous Work</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#cartridge-case-data"><i class="fa fa-check"></i><b>4.2</b> Cartridge Case Data</a></li>
+<li class="chapter" data-level="4.3" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#methods"><i class="fa fa-check"></i><b>4.3</b> Methods</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#pre-processing"><i class="fa fa-check"></i><b>4.3.1</b> Pre-processing</a></li>
+<li class="chapter" data-level="4.3.2" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#comparing"><i class="fa fa-check"></i><b>4.3.2</b> Comparing</a></li>
+<li class="chapter" data-level="4.3.3" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#scoring"><i class="fa fa-check"></i><b>4.3.3</b> Scoring</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#results"><i class="fa fa-check"></i><b>4.4</b> Results</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#roc-curves"><i class="fa fa-check"></i><b>4.4.1</b> ROC Curves</a></li>
+<li class="chapter" data-level="4.4.2" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#optimized-model-comparison"><i class="fa fa-check"></i><b>4.4.2</b> Optimized Model Comparison</a></li>
+<li class="chapter" data-level="4.4.3" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#similarity-score-investigation"><i class="fa fa-check"></i><b>4.4.3</b> Similarity Score Investigation</a></li>
+<li class="chapter" data-level="4.4.4" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#feature-importance"><i class="fa fa-check"></i><b>4.4.4</b> Feature Importance</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#discussion-2"><i class="fa fa-check"></i><b>4.5</b> Discussion</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#comparison-to-cmc-methodology"><i class="fa fa-check"></i><b>4.5.1</b> Comparison to CMC Methodology</a></li>
+<li class="chapter" data-level="4.5.2" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#sensitivity-to-parameter-choice"><i class="fa fa-check"></i><b>4.5.2</b> Sensitivity to Parameter Choice</a></li>
+<li class="chapter" data-level="4.5.3" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#model-selection-considerations"><i class="fa fa-check"></i><b>4.5.3</b> Model Selection Considerations</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="automatic-matching-of-cartridge-case-impressions.html"><a href="automatic-matching-of-cartridge-case-impressions.html#conclusion-2"><i class="fa fa-check"></i><b>4.6</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="computational-details-1.html"><a href="computational-details-1.html"><i class="fa fa-check"></i>Computational Details</a></li>
+<li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i>Appendix</a>
+<ul>
+<li class="chapter" data-level="4.7" data-path="appendix.html"><a href="appendix.html#registration-procedure-details"><i class="fa fa-check"></i><b>4.7</b> Registration Procedure Details</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="appendix.html"><a href="appendix.html#cell-based-registration-details"><i class="fa fa-check"></i><b>4.7.1</b> Cell-Based Registration Details</a></li>
+<li class="chapter" data-level="4.7.2" data-path="appendix.html"><a href="appendix.html#registration-based-feature-distributions"><i class="fa fa-check"></i><b>4.7.2</b> Registration-Based Feature Distributions</a></li>
+<li class="chapter" data-level="4.7.3" data-path="appendix.html"><a href="appendix.html#density-based-feature-distributions"><i class="fa fa-check"></i><b>4.7.3</b> Density-Based Feature Distributions</a></li>
+<li class="chapter" data-level="4.7.4" data-path="appendix.html"><a href="appendix.html#visual-diagnostic-feature-distributions"><i class="fa fa-check"></i><b>4.7.4</b> Visual Diagnostic Feature Distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="appendix.html"><a href="appendix.html#model-specific-results"><i class="fa fa-check"></i><b>4.8</b> Model-Specific Results</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="conclusions.html"><a href="conclusions.html"><i class="fa fa-check"></i><b>5</b> Conclusions</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Cartridge Case Comparison Pipeline</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="conclusions" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">5</span> Conclusions<a href="conclusions.html#conclusions" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In this work, we introduced a novel cartridge case comparison algorithm designed with the explicit intention to be accessible, both in terms of literal acquisition as well as comprehensibility, to fellow researchers and others in the firearm and tool mark community.</p>
+<p>In Chapter 2, we discussed and implemented a general pipeline structure for a cartridge case comparison algorithm that adheres to the “tidy” principles of design.
+We demonstrated how this modularized structure makes it easy to experiment with and understand different components of the algorithm.
+We hope that the structure available in the <code>cmcR</code> R package can be used in the future to easily improve individual pieces of the pipeline rather than re-inventing the wheel with an entirely new algorithm.</p>
+<p>In Chapter 3, we introduced a suite of visual diagnostic statistics to aid the user of the algorithm in exploring its behavior.
+We considered a variety of use-cases in which the diagnostic tools either indicated when a tweak to the algorithm was warranted or illuminated the similarities and differences between two cartridge case surfaces.
+We hope that the diagnostic tools implemented in the <code>impressions</code> R package and accompanying <code>cartridgeInvestigatR</code> web application will prove useful to both researchers and other stakeholders in understanding the inner-workings of the comparison algorithm.</p>
+<p>In Chapter 4, we developed the Automatic Cartridge Evidence Scoring (ACES) algorithm that fuses previously-established sub-procedures of the cartridge case comparison pipeline with novel pre-processing, comparing, and scoring techniques.
+Using a train/test cross-validation procedure, we demonstrated how statistical models can be used to learn associations between numerical features to effectively distinguish between match and non-match comparisons.
+We hope that the foundation laid by the ACES comparison pipeline, and available in the <code>scored</code> R package, will be built upon with future feature engineering and model exploration.</p>
+<p>In future work, we plan on exploring methods for computing score-based likelihood ratios (SLRs) as means of measuring the probativity, rather than just the similarity, for two pieces of evidence.
+Likelihood ratio methods take both similarity <em>and</em> typicality <span class="citation">(<a href="#ref-Morrison2018" role="doc-biblioref">Morrison and Enzinger 2018</a>)</span> into account when comparing evidence, which more directly addresses the degree to which the evidence supports the same vs. different source hypotheses.
+For example, suppose a sample of blood from a suspect has the same ABO type as a sample found at a crime scene.
+If we were to only consider blood type as a measure of similarity, then these two samples would be “perfectly” similar.
+Of course, this is not conclusive evidence that the suspect was actually at the crime scene - there is a relatively large probability that any two randomly drawn blood samples from different humans would having matching ABO type.
+That is, it is not atypical to observe this degree of similarity between two randomly drawn, different source samples.
+The same can be extended to cartridge case evidence.
+Even if two cartridge cases receive a relatively high similarity score, say 0.97, we must consider the likelihood that two randomly drawn, different source cartridge cases receive the same similarity score.
+If this value is also large, then the original score is not particularly probative.
+We hope to take a similar approach as <span class="citation">Reinders et al. (<a href="#ref-Reinders2022" role="doc-biblioref">2022</a>)</span> to explore various SLR computation methods.</p>
+<p>An important avenue of exploration is in the generalizability of a model like ACES to other conditions.
+That is, how robust is our currently trained version of ACES to the make/model of the cartridge case or firearm, the scanning tool used, or the degree of wear/degradation on the casing?
+If this current iteration of ACES turns out to be sensitive to these conditions, could it be made more robust by simply training on a more representative sample of cartridge cases, or will we need to individually train one model for each combination of factors?
+Fundamentally, these questions point to whether breech face impressions are consistent enough that we can apply the same procedure to any pair of cartridge cases.
+Although we don’t have the answers to these questions, we do have the infrastructure across the various software we’ve created to start answering them.</p>
+<p>Using ACES, we are able to achieve a much better balance between the true negative and positive classification compared to the examiner decision results reported in <span class="citation">Baldwin et al. (<a href="#ref-Baldwin2014" role="doc-biblioref">2014</a>)</span>, which had a much lower true negative rate compared to the true positive.
+In fact, if we use classification accuracy as an optimization during training, our results actually complement the <span class="citation">Baldwin et al. (<a href="#ref-Baldwin2014" role="doc-biblioref">2014</a>)</span> reported results in that we obtain a near-perfect true negative rate (99.9%) and relatively high true positive rate (92.4%).
+Through our experimentation, it became clear to us that it is harder to algorithmically identify matching comparisons than non-matches.
+Specifically, it seems to us that there are many more ways in which two scans can appear different to the algorithm than similar.
+As we discussed in Chapter 3, extreme, non-breech face markings in the scan that aren’t removed during pre-processing may “distract” the registration procedure on which our pipeline heavily relies.
+Other cartridge cases might have unremarkable impressions, leading to a similarity score that doesn’t strongly indicate matches or non-matches (what forensic examiners might call an “inconclusive”).
+The visual diagnostic tools developed in this work make it easier to manually inspect and identify these cases.
+However, we are also interested in developing “automatic” techniques to characterize and identify markings.
+For example, we might use texture modelling and segmentation to identify distinctive markings on a surface.
+Alternatively, we could use a correlation measure and/or registration procedure that is more robust to extreme markings.</p>
+<p><span class="citation">Morrison and Enzinger (<a href="#ref-Morrison2018" role="doc-biblioref">2018</a>)</span> provide a compelling argument that “[p]rocedures based on similarity-only scores do not appropriately account for typicality with respect to the relevant population,” which seems to directly oppose the approach we took with ACES.
+However, we believe that the arguments proposed are relevant to specific types of “similarity-only” scores, such as a Euclidean distance or correlation, that are invariant to specific evidence being compared.
+We do not believe that ACES exhibits the same invariance as these simpler scoring procedures and we hope to explore this further in the future.</p>
+<p>Nonetheless, we do think that the alternative approaches to measuring probativity presented in <span class="citation">Morrison and Enzinger (<a href="#ref-Morrison2018" role="doc-biblioref">2018</a>)</span> as well as <span class="citation">Basu, Bolton-King, and Morrison (<a href="#ref-Basu2022" role="doc-biblioref">2022</a>)</span> have merit.
+Specifically, rather than computing comparative features that map a pair of scans to a number, such as a correlation, these authors propose computing descriptive features independently for each scan and then modeling the joint distribution of these features as a means of computing SLRs.
+For example, <span class="citation">Basu, Bolton-King, and Morrison (<a href="#ref-Basu2022" role="doc-biblioref">2022</a>)</span> considers decomposing a cartridge case scan using various two-dimensional orthonormal bases as a means of capturing different characteristics of the surface.
+Doing this independently for two cartridge cases allows one to consider the joint likelihood of observing these feature values (or some dimension-reduced mapping of these features) under the same and different source hypotheses, which sidesteps distilling these features into a univariate similarity score as is done in ACES.
+Possible descriptive features could come from sources such as decompositions like those used in <span class="citation">Basu, Bolton-King, and Morrison (<a href="#ref-Basu2022" role="doc-biblioref">2022</a>)</span>, local feature detector methods such as “Speeded Up Robust Features” <span class="citation">Bay, Tuytelaars, and Gool (<a href="#ref-Bay2006" role="doc-biblioref">2006</a>)</span>, or even autoencoding/generative neural network models although these features would be harder to interpret.</p>
+<p>By now, we hope that it is clear to the reader that a goal pervading every aspect of this work is transparency.
+Given the gravity of the application, we consider it necessary that tools used in making an evidentiary conclusion that could inform a judicial decision be as transparent and user-friendly as possible.
+As discussed in Chapter 2, this means structuring an algorithm to be flexible and sharing data or code if at all possible.
+As discussed in Chapter 3, this means creating supplementary tools that help the user understand the methods they’re applying.
+As discussed in Chapter 4, this means building interpretable and effective features and models.
+Doing so would inevitably lead to stronger collaboration between research teams, expedited improvements to the underlying methods, and a more equitable and trustworthy justice system.
+We hope that this work stands as a testament to the firearm and tool mark community that algorithms applicable to casework can simultaneously be effective, accessible, <em>and</em> approachable if intention is put towards the endeavor.</p>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div class="csl-entry">
+30 Magazine Clip. 2017. <span>“Calibers Explained.”</span> <em>30 Magazine Clip</em>.
+</div>
+<div class="csl-entry">
+AFTE Criteria for Identification Committee. 1992. <span>“Theory of Identification, Range Striae Comparison Reports and Modified Glossary Definitions.”</span> <em>AFTE Journal</em> 24 (3): 336–40.
+</div>
+<div class="csl-entry">
+Allaire, JJ, Yihui Xie, R Foundation, Hadley Wickham, Journal of Statistical Software, Ramnath Vaidyanathan, Association for Computing Machinery, et al. 2021. <em>Rticles: Article Formats for r Markdown</em>. <a href="https://CRAN.R-project.org/package=rticles">https://CRAN.R-project.org/package=rticles</a>.
+</div>
+<div class="csl-entry">
+American Academy of Forensic Sciences. 2021. <span>“What Is Forensic Science?”</span> American Academy of Forensic Sciences. <a href="https://www.aafs.org/careers-forensic-science/what-forensic-science">https://www.aafs.org/careers-forensic-science/what-forensic-science</a>.
+</div>
+<div class="csl-entry">
+Anscombe, F. J. 1973. <span>“Graphs in Statistical Analysis.”</span> <em>The American Statistician</em> 27 (1): 17. <a href="https://doi.org/10.2307/2682899">https://doi.org/10.2307/2682899</a>.
+</div>
+<div class="csl-entry">
+Aurich, Volker, and Jörg Weule. 1995. <span>“Non-Linear Gaussian Filters Performing Edge Preserving Diffusion.”</span> In <em>Informatik Aktuell</em>, 538–45. Springer Berlin Heidelberg. <a href="https://doi.org/10.1007/978-3-642-79980-8_63">https://doi.org/10.1007/978-3-642-79980-8_63</a>.
+</div>
+<div class="csl-entry">
+Bache, Stefan Milton, and Hadley Wickham. 2022. <em>Magrittr: A Forward-Pipe Operator for r</em>. <a href="https://CRAN.R-project.org/package=magrittr">https://CRAN.R-project.org/package=magrittr</a>.
+</div>
+<div class="csl-entry">
+Baldwin, David P., Stanley J. Bajic, Max Morris, and Daniel Zamzow. 2014. <span>“A Study of False-Positive and False-Negative Error Rates in Cartridge Case Comparisons.”</span> Defense Technical Information Center. <a href="https://doi.org/10.21236/ada611807">https://doi.org/10.21236/ada611807</a>.
+</div>
+<div class="csl-entry">
+Barthelme, Simon. 2019. <em>Imager: Image Processing Library Based on ’CImg’</em>. <a href="https://CRAN.R-project.org/package=imager">https://CRAN.R-project.org/package=imager</a>.
+</div>
+<div class="csl-entry">
+Basu, Nabanita, Rachel S. Bolton-King, and Geoffrey Stewart Morrison. 2022. <span>“Forensic Comparison of Fired Cartridge Cases: Feature-Extraction Methods for Feature-Based Calculation of Likelihood Ratios.”</span> <em>Forensic Science International: Synergy</em> 5: 100272. <a href="https://doi.org/10.1016/j.fsisyn.2022.100272">https://doi.org/10.1016/j.fsisyn.2022.100272</a>.
+</div>
+<div class="csl-entry">
+Bay, Herbert, Tinne Tuytelaars, and Luc Van Gool. 2006. <span>“<span>SURF</span>: Speeded up Robust Features.”</span> In <em>Computer Vision - <span>ECCV</span> 2006</em>, 404–17. Springer Berlin Heidelberg. <a href="https://doi.org/10.1007/11744023_32">https://doi.org/10.1007/11744023_32</a>.
+</div>
+<div class="csl-entry">
+Beeley, Chris, and Shitalkumar R Sukhdeve. 2018. <em>Web Application Development with <span>R</span> Using Shiny</em>. 3rd ed. Birmingham, England: Packt Publishing.
+</div>
+<div class="csl-entry">
+Belle, Vaishak, and Ioannis Papantonis. 2021. <span>“Principles and Practice of Explainable Machine Learning.”</span> <em>Frontiers in Big Data</em> 4.
+</div>
+<div class="csl-entry">
+Berry, Nick, James Taylor, and Felix Baez-Santiago. 2021. <em>Handwriter: Handwriting Analysis in r</em>. <a href="https://CRAN.R-project.org/package=handwriter">https://CRAN.R-project.org/package=handwriter</a>.
+</div>
+<div class="csl-entry">
+Breiman, Leo. 2001. <span>“<span>Random Forests</span>.”</span> <em>Machine Learning</em> 45 (1): 5–32. <a href="https://doi.org/10.1023/a:1010933404324">https://doi.org/10.1023/a:1010933404324</a>.
+</div>
+<div class="csl-entry">
+Breiman, Leo, Jerome H. Friedman, Richard A. Olshen, and Charles J. Stone. 2017. <em>Classification and Regression Trees</em>. Routledge. <a href="https://doi.org/10.1201/9781315139470">https://doi.org/10.1201/9781315139470</a>.
+</div>
+<div class="csl-entry">
+Brigham, E. Oran. 1988. <em>The Fast Fourier Transform and Its Applications</em>. USA: Prentice-Hall, Inc.
+</div>
+<div class="csl-entry">
+Brinkman, S., and H. Bodschwinna. 2003a. <span>“Advanced <span>Gaussian</span> Filters.”</span> In <em>Advanced Techniques for Assessment Surface Topography: Development of a Basis for 3d Surface Texture Standards <span>"</span>SURFSTAND<span>"</span></em>, edited by L. Blunt and X. Jiang. United States: Elsevier Inc. <a href="https://doi.org/10.1016/B978-1-903996-11-9.X5000-2">https://doi.org/10.1016/B978-1-903996-11-9.X5000-2</a>.
+</div>
+<div class="csl-entry">
+———. 2003b. <em>Advanced Techniques for Assessment Surface Topography</em>. Elsevier. <a href="https://doi.org/10.1016/b978-1-903996-11-9.x5000-2">https://doi.org/10.1016/b978-1-903996-11-9.x5000-2</a>.
+</div>
+<div class="csl-entry">
+Brown, Lisa Gottesfeld. 1992. <span>“A Survey of Image Registration Techniques.”</span> <em><span>ACM</span> Computing Surveys</em> 24 (4): 325–76. <a href="https://doi.org/10.1145/146370.146374">https://doi.org/10.1145/146370.146374</a>.
+</div>
+<div class="csl-entry">
+Buja, Andreas, Dianne Cook, Heike Hofmann, Michael Lawrence, Eun-Kyung Lee, Deborah F. Swayne, and Hadley Wickham. 2009. <span>“Statistical Inference for Exploratory Data Analysis and Model Diagnostics.”</span> <em>Philosophical Transactions of the Royal Society A: Mathematical, Physical and Engineering Sciences</em> 367 (1906): 4361–83. <a href="https://doi.org/10.1098/rsta.2009.0120">https://doi.org/10.1098/rsta.2009.0120</a>.
+</div>
+<div class="csl-entry">
+Cadre Forensics. 2019. <span>“Top Match-3d High Capacity: 3d Imaging and Analysis System for Firearm Forensics.”</span> Cadre Forensics.
+</div>
+<div class="csl-entry">
+Chang, Andrew C., and Phillip Li. 2022. <span>“Is Economics Research Replicable? Sixty Published Papers from Thirteen Journals Say <span>“</span>Often Not<span>”</span>.”</span> <em>Critical Finance Review</em> 11 (1): 185–206. <a href="https://doi.org/10.1561/104.00000053">https://doi.org/10.1561/104.00000053</a>.
+</div>
+<div class="csl-entry">
+Chang, Winston, Joe Cheng, JJ Allaire, Carson Sievert, Barret Schloerke, Yihui Xie, Jeff Allen, Jonathan McPherson, Alan Dipert, and Barbara Borges. 2021. <em>Shiny: Web Application Framework for r</em>. <a href="https://CRAN.R-project.org/package=shiny">https://CRAN.R-project.org/package=shiny</a>.
+</div>
+<div class="csl-entry">
+Chapnick, Chad, Todd J. Weller, Pierre Duez, Eric Meschke, John Marshall, and Ryan Lilien. 2020. <span>“Results of the 3d Virtual Comparison Microscopy Error Rate (<span>VCMER</span>) Study for Firearm Forensics.”</span> <em>Journal of Forensic Sciences</em> 66 (2): 557–70. <a href="https://doi.org/10.1111/1556-4029.14602">https://doi.org/10.1111/1556-4029.14602</a>.
+</div>
+<div class="csl-entry">
+Chen, Zhe, John Song, Wei Chu, Johannes A. Soons, and Xuezeng Zhao. 2017. <span>“A Convergence Algorithm for Correlation of Breech Face Images Based on the Congruent Matching Cells (<span>CMC</span>) Method.”</span> <em>Forensic Science International</em> 280 (November): 213–23. <a href="https://doi.org/10.1016/j.forsciint.2017.08.033">https://doi.org/10.1016/j.forsciint.2017.08.033</a>.
+</div>
+<div class="csl-entry">
+Chu, Wei, Mingsi Tong, and John Song. 2013. <span>“Validation <span>Tests</span> for the <span>Congruent</span> <span>Matching</span> <span>Cells</span> (<span>CMC</span>) <span>Method</span> <span>Using</span> <span>Cartridge</span> <span>Cases</span> <span>Fired</span> with <span>Consecutively</span> <span>Manufactured</span> <span>Pistol</span> <span>Slides</span>.”</span> <em>Journal of the Association of Firearms and Toolmarks Examiners</em> 45 (4): 6. <a href="https://www.nist.gov/publications/validation-tests-congruent-matching-cells-cmc-method-using-cartridge-cases-fired">https://www.nist.gov/publications/validation-tests-congruent-matching-cells-cmc-method-using-cartridge-cases-fired</a>.
+</div>
+<div class="csl-entry">
+Cleveland, W. S. 1994. <em>The Elements of Graphing Data</em>. AT&amp;T Bell Laboratories. <a href="https://books.google.com/books?id=KMsZAQAAIAAJ">https://books.google.com/books?id=KMsZAQAAIAAJ</a>.
+</div>
+<div class="csl-entry">
+Crawford, Amy. 2020. <span>“Bayesian Hierarchical Modeling for the Forensic Evaluation of Handwritten Documents.”</span> {Ph.D thesis}, Iowa State University. <a href="https://doi.org/10.31274/etd-20200624-257">https://doi.org/10.31274/etd-20200624-257</a>.
+</div>
+<div class="csl-entry">
+Crowder, M. J., and D. J. Hand. 1990. <em>Analysis of Repeated Measures</em>. Chapman &amp; Hall/CRC Monographs on Statistics &amp; Applied Probability. Taylor &amp; Francis. <a href="https://books.google.com/books?id=XsGX6Jgzo-IC">https://books.google.com/books?id=XsGX6Jgzo-IC</a>.
+</div>
+<div class="csl-entry">
+Curran, James Michael, Tacha Natalie Hicks Champod, and John S Buckleton, eds. 2000a. <em>Forensic Interpretation of Glass Evidence</em>. Boca Raton, FL: CRC Press.
+</div>
+<div class="csl-entry">
+———, eds. 2000b. <em>Forensic Interpretation of Glass Evidence</em>. Boca Raton, FL: CRC Press.
+</div>
+<div class="csl-entry">
+DeFrance, Charles, and MD Arsdale. 2003. <span>“Validation Study of Electrochemical Rifling.”</span> <em>Association of Firearms and Tool Marks Examiners Journal</em> 35 (January): 35–37.
+</div>
+<div class="csl-entry">
+Deng, Houtao. 2018. <span>“Interpreting Tree Ensembles with <span class="nocase">inTrees</span>.”</span> <em>International Journal of Data Science and Analytics</em> 7 (4): 277–87. <a href="https://doi.org/10.1007/s41060-018-0144-8">https://doi.org/10.1007/s41060-018-0144-8</a>.
+</div>
+<div class="csl-entry">
+Desai, Deven R., and Joshua A. Kroll. 2017. <span>“Trust but <span>Verify</span>: <span>A</span> <span>Guide</span> to <span>Algorithms</span> and the <span>Law</span>.”</span> <em>Harvard Journal of Law &amp; Technology (Harvard JOLT)</em> 31 (1): 1–64.<a href=" https://ssrn.com/abstract=2959472"> https://ssrn.com/abstract=2959472</a>.
+</div>
+<div class="csl-entry">
+Duez, Pierre, Todd Weller, Marcus Brubaker, Richard E. Hockensmith, and Ryan Lilien. 2017. <span>“Development and Validation of a Virtual Examination Tool for Firearm Forensics, ,”</span> <em>Journal of Forensic Sciences</em> 63 (4): 1069–84. <a href="https://doi.org/10.1111/1556-4029.13668">https://doi.org/10.1111/1556-4029.13668</a>.
+</div>
+<div class="csl-entry">
+Duvendack, Maren, Richard W. Palmer-Jones, and W. Reed. 2015. <span>“Replications in Economics: A Progress Report.”</span> <em>Econ Journal Watch</em> 12 (2).
+</div>
+<div class="csl-entry">
+Emerson, John W, Walton A Green, Barret Schloerke, Jason Crowley, Dianne Cook, Heike Hofmann, and Hadley Wickham. 2012. <span>“The Generalized Pairs Plot.”</span> <em>Journal of Computational and Graphical Statistics</em> 22 (1): 79–91. <a href="http://www.tandfonline.com/doi/ref/10.1080/10618600.2012.694762">http://www.tandfonline.com/doi/ref/10.1080/10618600.2012.694762</a>.
+</div>
+<div class="csl-entry">
+Ester, Martin, Hans-Peter Kriegel, Jörg Sander, and Xiaowei Xu. 1996. <span>“A Density-Based Algorithm for Discovering Clusters in Large Spatial Databases with Noise.”</span> In <em>Proceedings of the Second International Conference on Knowledge Discovery and Data Mining</em>, 226–31. KDD’96. Portland, Oregon: AAAI Press.
+</div>
+<div class="csl-entry">
+Fadul, T., G. Hernandez, S. Stoiloff, and Gulati Sneh. 2011a. <span>“An <span>Empirical</span> <span>Study</span> to <span>Improve</span> the <span>Scientific</span> <span>Foundation</span> of <span>Forensic</span> <span>Firearm</span> and <span>Tool</span> <span>Mark</span> <span>Identification</span> <span>Utilizing</span> 10 <span>Consecutively</span> <span>Manufactured</span> <span>Slides</span>.”</span> <a href="https://www.ojp.gov/ncjrs/virtual-library/abstracts/empirical-study-improve-scientific-foundation-forensic-firearm-and">https://www.ojp.gov/ncjrs/virtual-library/abstracts/empirical-study-improve-scientific-foundation-forensic-firearm-and</a>.
+</div>
+<div class="csl-entry">
+———. 2011b. <span>“An <span>Empirical</span> <span>Study</span> to <span>Improve</span> the <span>Scientific</span> <span>Foundation</span> of <span>Forensic</span> <span>Firearm</span> and <span>Tool</span> <span>Mark</span> <span>Identification</span> <span>Utilizing</span> 10 <span>Consecutively</span> <span>Manufactured</span> <span>Slides</span>.”</span> <a href="https://www.ojp.gov/ncjrs/virtual-library/abstracts/empirical-study-improve-scientific-foundation-forensic-firearm-and">https://www.ojp.gov/ncjrs/virtual-library/abstracts/empirical-study-improve-scientific-foundation-forensic-firearm-and</a>.
+</div>
+<div class="csl-entry">
+Fernández, Alberto, Salvador Garcı́a, Mikel Galar, Ronaldo C. Prati, Bartosz Krawczyk, and Francisco Herrera. 2018. <em>Learning from Imbalanced Data Sets</em>. Springer International Publishing. <a href="https://doi.org/10.1007/978-3-319-98074-4">https://doi.org/10.1007/978-3-319-98074-4</a>.
+</div>
+<div class="csl-entry">
+Garton, Nathaniel, Danica Ommen, Jarad Niemi, and Alicia Carriquiry. 2020. <span>“Score-Based Likelihood Ratios to Evaluate Forensic Pattern Evidence.”</span> <a href="https://arxiv.org/abs/2002.09470">https://arxiv.org/abs/2002.09470</a>.
+</div>
+<div class="csl-entry">
+<span>“<span class="nocase">Geometrical product specifications (GPS) - Filtration - Part 61: Linear areal filters: Gaussian filters</span>.”</span> 2011. Standard. Vol. 2011. Geneva, CH: International Organization for Standardization.
+</div>
+<div class="csl-entry">
+<span>“<span class="nocase">Geometrical product specifications (GPS) - Filtration - Part 71: Robust areal filters: Gaussian regression filters</span>.”</span> 2014. Standard. Vol. 2014. Geneva, CH: International Organization for Standardization. <a href="https://www.iso.org/standard/60159.html">https://www.iso.org/standard/60159.html</a>.
+</div>
+<div class="csl-entry">
+<span>“<span class="nocase">Geometrical product specifications (GPS) — Surface texture: Areal — Part 72: XML file format x3p</span>.”</span> 2017. Standard. Vol. 2014. Geneva, CH: International Organization for Standardization. <a href="https://www.iso.org/standard/62310.html">https://www.iso.org/standard/62310.html</a>.
+</div>
+<div class="csl-entry">
+Goldstein, E, and James Brockmole. 2016. <em>Sensation and Perception</em>. 10th ed. Mason, OH: CENGAGE Learning Custom Publishing.
+</div>
+<div class="csl-entry">
+Goode, Katherine, and Heike Hofmann. 2021. <span>“Visual Diagnostics of an Explainer Model: Tools for the Assessment of <span>LIME</span> Explanations.”</span> <em>Statistical Analysis and Data Mining: The <span>ASA</span> Data Science Journal</em> 14 (2): 185–200. <a href="https://doi.org/10.1002/sam.11500">https://doi.org/10.1002/sam.11500</a>.
+</div>
+<div class="csl-entry">
+Goodman, Steven N., Daniele Fanelli, and John P. A. Ioannidis. 2016. <span>“What Does Research Reproducibility Mean?”</span> <em>Science Translational Medicine</em> 8 (341): 341ps12–12. <a href="https://doi.org/10.1126/scitranslmed.aaf5027">https://doi.org/10.1126/scitranslmed.aaf5027</a>.
+</div>
+<div class="csl-entry">
+Goor, Robert, Douglas Hoffman, and George Riley. 2020. <span>“Novel Method for Accurately Assessing Pull-up Artifacts in STR Analysis.”</span> <em>Forensic Science International: Genetics</em> 51 (November): 102410. <a href="https://doi.org/10.1016/j.fsigen.2020.102410">https://doi.org/10.1016/j.fsigen.2020.102410</a>.
+</div>
+<div class="csl-entry">
+Grüning, Björn, John Chilton, Johannes Köster, Ryan Dale, Nicola Soranzo, Marius van den Beek, Jeremy Goecks, Rolf Backofen, Anton Nekrutenko, and James Taylor. 2018. <span>“Practical Computational Reproducibility in the Life Sciences.”</span> <em>Cell Systems</em> 6 (6): 631–35. <a href="https://doi.org/10.1016/j.cels.2018.03.014">https://doi.org/10.1016/j.cels.2018.03.014</a>.
+</div>
+<div class="csl-entry">
+Gundersen, Odd Erik, Yolanda Gil, and David W. Aha. 2018. <span>“On Reproducible <span>AI</span>: Towards Reproducible Research, Open Science, and Digital Scholarship in <span>AI</span> Publications.”</span> <em><span>AI</span> Magazine</em> 39 (3): 56–68. <a href="https://doi.org/10.1609/aimag.v39i3.2816">https://doi.org/10.1609/aimag.v39i3.2816</a>.
+</div>
+<div class="csl-entry">
+Hadler, Jeremy R., and Max D. Morris. 2017. <span>“An Improved Version of a Tool Mark Comparison Algorithm.”</span> <em>Journal of Forensic Sciences</em> 63 (3): 849–55. <a href="https://doi.org/10.1111/1556-4029.13640">https://doi.org/10.1111/1556-4029.13640</a>.
+</div>
+<div class="csl-entry">
+Hamby, James E., David J. Brundage, and James W. Thorpe. 2009. <span>“The Identification of Bullets Fired from 10 Consecutively Rifled 9mm Ruger Pistol Barrels: A Research Project Involving 507 Participants from 20 Countries.”</span> In <em>AFTE Journal</em>, 41:99–110.
+</div>
+<div class="csl-entry">
+Hampton, Della. 2016. <span>“Firearms Identification. A Discipline Mainly Concerned with Determining Whether a Bullet or Cartridge Was Fired by a Particular Weapon. - Ppt Download.”</span> <em>SlidePlayer</em>.
+</div>
+<div class="csl-entry">
+Haralick, Robert M., Stanley R. Sternberg, and Xinhua Zhuang. 1987. <span>“Image Analysis Using Mathematical Morphology.”</span> <em><span>IEEE</span> Transactions on Pattern Analysis and Machine Intelligence</em> <span>PAMI</span>-9 (4): 532–50. <a href="https://doi.org/10.1109/tpami.1987.4767941">https://doi.org/10.1109/tpami.1987.4767941</a>.
+</div>
+<div class="csl-entry">
+Hare, Eric, Heike Hofmann, and Alicia Carriquiry. 2017. <span>“Automatic <span>Matching</span> of <span>Bullet</span> <span>Land</span> <span>Impressions</span>.”</span> <em>The Annals of Applied Statistics</em> 11 (4): 2332–56. <a href="http://arxiv.org/abs/1601.05788">http://arxiv.org/abs/1601.05788</a>.
+</div>
+<div class="csl-entry">
+Hastie, Trevor, Robert Tibshirani, and Jerome Friedman. 2001. <em>The Elements of Statistical Learning</em>. Springer Series in Statistics. New York, NY, USA: Springer New York Inc.
+</div>
+<div class="csl-entry">
+Hesselink, Wim H., Arnold Meijster, and Coenraad Bron. 2001. <span>“Concurrent Determination of Connected Components.”</span> <em>Science of Computer Programming</em> 41 (2): 173–94. <a href="https://doi.org/10.1016/S0167-6423(01)00007-7">https://doi.org/10.1016/S0167-6423(01)00007-7</a>.
+</div>
+<div class="csl-entry">
+Hofmann, Heike, Alicia Carriquiry, and Susan Vanderplas. 2021. <span>“<span class="nocase">Treatment of inconclusives in the AFTE range of conclusions</span>.”</span> <em>Law, Probability and Risk</em> 19 (3-4): 317–64. <a href="https://doi.org/10.1093/lpr/mgab002">https://doi.org/10.1093/lpr/mgab002</a>.
+</div>
+<div class="csl-entry">
+Hofmann, Heike, Susan Vanderplas, Ganesh Krishnan, and Eric Hare. 2020. <em><span class="nocase">x3ptools: Tools for Working with 3D Surface Measurements</span></em>. <a href="https://cran.r-project.org/web/packages/x3ptools/index.html">https://cran.r-project.org/web/packages/x3ptools/index.html</a>.
+</div>
+<div class="csl-entry">
+Huber, Wolfgang, Vincent J Carey, Robert Gentleman, Simon Anders, Marc Carlson, Benilton S Carvalho, Hector Corrada Bravo, et al. 2015. <span>“Orchestrating High-Throughput Genomic Analysis with Bioconductor.”</span> <em>Nature Methods</em> 12 (2): 115–21. <a href="https://doi.org/10.1038/nmeth.3252">https://doi.org/10.1038/nmeth.3252</a>.
+</div>
+<div class="csl-entry">
+Indiana County Court of Common Pleas. 2009. <em>Commonwealth of Pennsylvania Vs. Kevin j. Foley</em>.
+</div>
+<div class="csl-entry">
+Iqbal, Shareen A., Joshua D. Wallach, Muin J. Khoury, Sheri D. Schully, and John P. A. Ioannidis. 2016. <span>“Reproducible Research Practices and Transparency Across the Biomedical Literature.”</span> Edited by David L Vaux. <em><span>PLOS</span> Biology</em> 14 (1): e1002333. <a href="https://doi.org/10.1371/journal.pbio.1002333">https://doi.org/10.1371/journal.pbio.1002333</a>.
+</div>
+<div class="csl-entry">
+James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2013. <em>An Introduction to Statistical Learning: With Applications in r</em>. Springer. <a href="https://faculty.marshall.usc.edu/gareth-james/ISL/">https://faculty.marshall.usc.edu/gareth-james/ISL/</a>.
+</div>
+<div class="csl-entry">
+Knowles, Laura, Daniel Hockey, and John Marshall. 2021. <span>“The Validation of 3d Virtual Comparison Microscopy (<span>VCM</span>) in the Comparison of Expended Cartridge Cases.”</span> <em>Journal of Forensic Sciences</em> 67 (2): 516–23. <a href="https://doi.org/10.1111/1556-4029.14942">https://doi.org/10.1111/1556-4029.14942</a>.
+</div>
+<div class="csl-entry">
+Krishnan, Ganesh, and Heike Hofmann. 2018. <span>“Adapting the Chumbley Score to Match Striae on Land Engraved Areas (LEAs) of Bullets,”</span> <em>Journal of Forensic Sciences</em> 64 (3): 728–40. <a href="https://doi.org/10.1111/1556-4029.13950">https://doi.org/10.1111/1556-4029.13950</a>.
+</div>
+<div class="csl-entry">
+Kuhn, Max. 2022. <em>Caret: Classification and Regression Training</em>. <a href="https://CRAN.R-project.org/package=caret">https://CRAN.R-project.org/package=caret</a>.
+</div>
+<div class="csl-entry">
+Kwong, Katherine. 2017. <span>“The <span>Algorithm</span> <span>Says</span> <span>You</span> <span>Did</span> <span>It</span>: <span>The</span> <span>Use</span> of <span>Black</span> <span>Box</span> <span>Algorithms</span> to <span>Analyze</span> <span>Complex</span> <span>DNA</span> <span>Evidence</span> <span>Notes</span>.”</span> <em>Harvard Journal of Law &amp; Technology (Harvard JOLT)</em> 31 (1): 275–302. <a href="https://jolt.law.harvard.edu/assets/articlePDFs/v31/31HarvJLTech275.pdf">https://jolt.law.harvard.edu/assets/articlePDFs/v31/31HarvJLTech275.pdf</a>.
+</div>
+<div class="csl-entry">
+Leek, Jeffrey T., and Leah R. Jager. 2017. <span>“Is <span>Most</span> <span>Published</span> <span>Research</span> <span>Really</span> <span>False</span>?”</span> <em>Annual Review of Statistics and Its Application</em> 4 (1): 109–22. <a href="https://doi.org/10.1146/annurev-statistics-060116-054104">https://doi.org/10.1146/annurev-statistics-060116-054104</a>.
+</div>
+<div class="csl-entry">
+Liaw, Andy, and Matthew Wiener. 2002. <span>“Classification and Regression by randomForest.”</span> <em>R News</em> 2 (3): 18–22. <a href="https://CRAN.R-project.org/doc/Rnews/">https://CRAN.R-project.org/doc/Rnews/</a>.
+</div>
+<div class="csl-entry">
+MacQueen, J. B. 1967. <span>“Some Methods for Classification and Analysis of MultiVariate Observations.”</span> In <em>Proc. Of the Fifth Berkeley Symposium on Mathematical Statistics and Probability</em>, edited by L. M. Le Cam and J. Neyman, 1:281–97. University of California Press.
+</div>
+<div class="csl-entry">
+Mattijssen, Erwin J. A. T., Cilia L. M. Witteman, Charles E. H. Berger, Nicolaas W. Brand, and Reinoud D. Stoel. 2020. <span>“Validity and Reliability of Forensic Firearm Examiners.”</span> <em>Forensic Science International</em> 307: 110112. <a href="https://www.sciencedirect.com/science/article/pii/S0379073819305249">https://www.sciencedirect.com/science/article/pii/S0379073819305249</a>.
+</div>
+<div class="csl-entry">
+Midway, Stephen R. 2020. <span>“Principles of Effective Data Visualization.”</span> <em>Patterns</em> 1 (9): 100141. <a href="https://doi.org/10.1016/j.patter.2020.100141">https://doi.org/10.1016/j.patter.2020.100141</a>.
+</div>
+<div class="csl-entry">
+Morrison, Geoffrey Stewart, and Ewald Enzinger. 2018. <span>“Score Based Procedures for the Calculation of Forensic Likelihood Ratios - Scores Should Take Account of Both Similarity and Typicality.”</span> <em>Science &amp; Justice</em> 58 (1): 47–58. <a href="https://doi.org/10.1016/j.scijus.2017.06.005">https://doi.org/10.1016/j.scijus.2017.06.005</a>.
+</div>
+<div class="csl-entry">
+National Academy of Sciences, Engineering, and Medicine. 2019. <em>Reproducibility and Replicability in Science</em>. National Academies Press. <a href="https://doi.org/10.17226/25303">https://doi.org/10.17226/25303</a>.
+</div>
+<div class="csl-entry">
+National Research Council. 2009. <em>Strengthening <span>Forensic</span> <span>Science</span> in the <span>United</span> <span>States</span>: <span>A</span> <span>Path</span> <span>Forward</span></em>. Washington, DC: The National Academies Press. <a href="https://doi.org/10.17226/12589">https://doi.org/10.17226/12589</a>.
+</div>
+<div class="csl-entry">
+Neuman, Maddisen, Callan Hundl, Aimee Grimaldi, Donna Eudaley, Darrell Stein, and Peter Stout. 2022. <span>“Blind Testing in Firearms: Preliminary Results from a Blind Quality Control Program.”</span> <em>Journal of Forensic Sciences</em> 67 (3): 964–74. <a href="https://doi.org/10.1111/1556-4029.15031">https://doi.org/10.1111/1556-4029.15031</a>.
+</div>
+<div class="csl-entry">
+Ommen, Danica M, and Christopher P Saunders. 2018. <span>“Building a Unified Statistical Framework for the Forensic Identification of Source Problems.”</span> <em>Law, Probability and Risk</em> 17 (2): 179–97. <a href="https://doi.org/10.1093/lpr/mgy008">https://doi.org/10.1093/lpr/mgy008</a>.
+</div>
+<div class="csl-entry">
+OSAC Human Factors Committee. 2020. <span>“Human Factors in Validation and Performance Testing of Forensic Science.”</span> Organization of Scientific Area Committees (<span>OSAC</span>) for Forensic Science. <a href="https://doi.org/10.29325/osac.ts.0004">https://doi.org/10.29325/osac.ts.0004</a>.
+</div>
+<div class="csl-entry">
+Ott, Daniel, Robert Thompson, and Junfeng Song. 2017. <span>“Applying <span>3d</span> Measurements and Computer Matching Algorithms to Two Firearm Examination Proficiency Tests.”</span> <em>Forensic Science International</em> 271 (February): 98–106. <a href="https://doi.org/10.1016/j.forsciint.2016.12.014">https://doi.org/10.1016/j.forsciint.2016.12.014</a>.
+</div>
+<div class="csl-entry">
+Park, Soyoung, and Alicia Carriquiry. 2020. <span>“An Algorithm to Compare Two-Dimensional Footwear Outsole Images Using Maximum Cliques and Speeded-up Robust Feature.”</span> <em>Statistical Analysis and Data Mining: The ASA Data Science Journal</em> 13 (2): 188–99. <a href="https://doi.org/10.1002/sam.11449">https://doi.org/10.1002/sam.11449</a>.
+</div>
+<div class="csl-entry">
+Park, Soyoung, and Sam Tyner. 2019. <span>“Evaluation and Comparison of Methods for Forensic Glass Source Conclusions.”</span> <em>Forensic Science International</em> 305 (December): 110003. <a href="https://doi.org/10.1016/j.forsciint.2019.110003">https://doi.org/10.1016/j.forsciint.2019.110003</a>.
+</div>
+<div class="csl-entry">
+Peng, Roger D. 2009. <span>“Reproducible Research and <span>Biostatistics</span>.”</span> <em>Biostatistics</em> 10 (3): 405–8. <a href="https://doi.org/10.1093/biostatistics/kxp014">https://doi.org/10.1093/biostatistics/kxp014</a>.
+</div>
+<div class="csl-entry">
+———. 2011. <span>“Reproducible <span>Research</span> in <span>Computational</span> <span>Science</span>.”</span> <em>Science</em> 334 (6060): 1226–27. <a href="https://www.jstor.org/stable/41352177">https://www.jstor.org/stable/41352177</a>.
+</div>
+<div class="csl-entry">
+Piccolo, Stephen R., and Michael B. Frampton. 2016. <span>“Tools and Techniques for Computational Reproducibility.”</span> <em><span>GigaScience</span></em> 5 (1). <a href="https://doi.org/10.1186/s13742-016-0135-4">https://doi.org/10.1186/s13742-016-0135-4</a>.
+</div>
+<div class="csl-entry">
+President’s Council of Advisors on Sci. &amp; Tech. 2016. <span>“Forensic Science in Criminal Courts: Ensuring Scientific Validity of Feature-Comparison Methods.”</span> <a href="https://obamawhitehouse.archives.gov/sites/default/files/microsites/ostp/PCAST/pcast_forensic_science_report_final.pdf">https://obamawhitehouse.archives.gov/sites/default/files/microsites/ostp/PCAST/pcast_forensic_science_report_final.pdf</a>.
+</div>
+<div class="csl-entry">
+Puiutta, Erika, and Eric M. S. P. Veith. 2020. <span>“Explainable Reinforcement Learning: A Survey.”</span> In <em>Lecture Notes in Computer Science</em>, 77–95. Springer International Publishing. <a href="https://doi.org/10.1007/978-3-030-57321-8_5">https://doi.org/10.1007/978-3-030-57321-8_5</a>.
+</div>
+<div class="csl-entry">
+R Core Team. 2017. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+</div>
+<div class="csl-entry">
+———. 2023. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+</div>
+<div class="csl-entry">
+Rattenbury, Richard C. 2015. <span>“Semiautomatic Pistol.”</span> <em>Encyclopædia Britannica</em>. Encyclopædia Britannica, inc.
+</div>
+<div class="csl-entry">
+Reinders, Stephanie, Yong Guan, Danica Ommen, and Jennifer Newman. 2022. <span>“Source-Anchored, Trace-Anchored, and General Match Score-Based Likelihood Ratios for Camera Device Identification.”</span> <em>Journal of Forensic Sciences</em> 67 (3): 975–88. <a href="https://doi.org/10.1111/1556-4029.14991">https://doi.org/10.1111/1556-4029.14991</a>.
+</div>
+<div class="csl-entry">
+Ribeiro, Marco Tulio, Sameer Singh, and Carlos Guestrin. 2016. <span>“"Why Should i Trust You?": Explaining the Predictions of Any Classifier.”</span> In <em>Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</em>, 1135–44. KDD ’16. New York, NY, USA: Association for Computing Machinery. <a href="https://doi.org/10.1145/2939672.2939778">https://doi.org/10.1145/2939672.2939778</a>.
+</div>
+<div class="csl-entry">
+Rice, Kiegan E. 2020. <span>“A Framework for Statistical and Computational Reproducibility in Large-Scale Data Analysis Projects with a Focus on Automated Forensic Bullet Evidence Comparison.”</span> <em>ProQuest Dissertations and Theses</em>. PhD thesis.
+</div>
+<div class="csl-entry">
+Riva, Fabiano, and Christophe Champod. 2014. <span>“Automatic Comparison and Evaluation of Impressions Left by a Firearm on Fired Cartridge Cases.”</span> <em>Journal of Forensic Sciences</em> 59 (3): 637–47. <a href="https://doi.org/10.1111/1556-4029.12382">https://doi.org/10.1111/1556-4029.12382</a>.
+</div>
+<div class="csl-entry">
+Riva, Fabiano, Rob Hermsen, Erwin Mattijssen, Pascal Pieper, and Christophe Champod. 2016. <span>“Objective Evaluation of Subclass Characteristics on Breech Face Marks.”</span> <em>Journal of Forensic Sciences</em> 62 (2): 417–22. <a href="https://doi.org/10.1111/1556-4029.13274">https://doi.org/10.1111/1556-4029.13274</a>.
+</div>
+<div class="csl-entry">
+Riva, Fabiano, Erwin J. A. T. Mattijssen, Rob Hermsen, Pascal Pieper, W. Kerkhoff, and Christophe Champod. 2020. <span>“Comparison and Interpretation of Impressed Marks Left by a Firearm on Cartridge Cases <span></span> Towards an Operational Implementation of a Likelihood Ratio Based Technique.”</span> <em>Forensic Science International</em> 313 (August): 110363. <a href="https://doi.org/10.1016/j.forsciint.2020.110363">https://doi.org/10.1016/j.forsciint.2020.110363</a>.
+</div>
+<div class="csl-entry">
+Roth, Joseph, Andrew Carriveau, Xiaoming Liu, and Anil K. Jain. 2015. <span>“Learning-Based Ballistic Breech Face Impression Image Matching.”</span> In <em>2015 IEEE 7th International Conference on Biometrics Theory, Applications and Systems (BTAS)</em>, 1–8. <a href="https://doi.org/10.1109/BTAS.2015.7358774">https://doi.org/10.1109/BTAS.2015.7358774</a>.
+</div>
+<div class="csl-entry">
+Schloerke, Barret, Di Cook, Joseph Larmarange, Francois Briatte, Moritz Marbach, Edwin Thoen, Amos Elberg, and Jason Crowley. 2021. <em>GGally: Extension to ’Ggplot2’</em>. <a href="https://CRAN.R-project.org/package=GGally">https://CRAN.R-project.org/package=GGally</a>.
+</div>
+<div class="csl-entry">
+Smith, Tasha P., G. Andrew Smith, and Jeffrey B. Snipes. 2016. <span>“A Validation Study of Bullet and Cartridge Case Comparisons Using Samples Representative of Actual Casework.”</span> <em>Journal of Forensic Sciences</em> 61 (4): 939–46. <a href="https://doi.org/10.1111/1556-4029.13093">https://doi.org/10.1111/1556-4029.13093</a>.
+</div>
+<div class="csl-entry">
+Song, John. 2013. <span>“Proposed <span>‘<span>NIST</span> <span>Ballistics</span> <span>Identification</span> <span>System</span> (<span>NBIS</span>)’</span> <span>Based</span> on <span>3d</span> <span>Topography</span> <span>Measurements</span> on <span>Correlation</span> <span>Cells</span>.”</span> <em>American Firearm and Tool Mark Examiners Journal</em> 45 (2): 11. <a href="https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=910868">https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=910868</a>.
+</div>
+<div class="csl-entry">
+Song, John, Wei Chu, Mingsi Tong, and Johannes Soons. 2014. <span>“<span>3d</span> Topography Measurements on Correlation Cells—a New Approach to Forensic Ballistics Identifications.”</span> <em>Measurement Science and Technology</em> 25 (6): 064005. <a href="https://doi.org/10.1088/0957-0233/25/6/064005">https://doi.org/10.1088/0957-0233/25/6/064005</a>.
+</div>
+<div class="csl-entry">
+Song, John, Theodore V. Vorburger, Wei Chu, James Yen, Johannes A. Soons, Daniel B. Ott, and Nien Fan Zhang. 2018. <span>“Estimating Error Rates for Firearm Evidence Identifications in Forensic Science.”</span> <em>Forensic Science International</em> 284 (March): 15–32. <a href="https://doi.org/10.1016/j.forsciint.2017.12.013">https://doi.org/10.1016/j.forsciint.2017.12.013</a>.
+</div>
+<div class="csl-entry">
+Stodden, Victoria, Peixuan Guo, and Zhaokun Ma. 2013. <span>“Toward <span>Reproducible</span> <span>Computational</span> <span>Research</span>: <span>An</span> <span>Empirical</span> <span>Analysis</span> of <span>Data</span> and <span>Code</span> <span>Policy</span> <span>Adoption</span> by <span>Journals</span>.”</span> Edited by Dmitri Zaykin. <em>PLoS ONE</em> 8 (6): e67111. <a href="https://doi.org/10.1371/journal.pone.0067111">https://doi.org/10.1371/journal.pone.0067111</a>.
+</div>
+<div class="csl-entry">
+Stodden, Victoria, Matthew S. Krafczyk, and Adhithya Bhaskar. 2018. <span>“Enabling the Verification of Computational Results.”</span> In <em>Proceedings of the First International Workshop on Practical Reproducible Evaluation of Computer Systems</em>. <span>ACM</span>. <a href="https://doi.org/10.1145/3214239.3214242">https://doi.org/10.1145/3214239.3214242</a>.
+</div>
+<div class="csl-entry">
+Stodden, Victoria, Jennifer Seiler, and Zhaokun Ma. 2018. <span>“An Empirical Analysis of Journal Policy Effectiveness for Computational Reproducibility.”</span> <em>Proceedings of the National Academy of Sciences</em> 115 (11): 2584–89. <a href="https://doi.org/10.1073/pnas.1708290115">https://doi.org/10.1073/pnas.1708290115</a>.
+</div>
+<div class="csl-entry">
+Stroman, A. 2014. <span>“Empirically Determined Frequency of Error in Cartridge Case Examinations Using a Declared Double-Blind Format.”</span> <em>AFTE Journal</em> 46 (January): 157–75.
+</div>
+<div class="csl-entry">
+Swofford, H., and C. Champod. 2021. <span>“Implementation of Algorithms in Pattern <span>&amp;</span> Impression Evidence: A Responsible and Practical Roadmap.”</span> <em>Forensic Science International: Synergy</em> 3: 100142. <a href="https://doi.org/10.1016/j.fsisyn.2021.100142">https://doi.org/10.1016/j.fsisyn.2021.100142</a>.
+</div>
+<div class="csl-entry">
+Tai, Xiao Hui. 2019. <span>“Matching Problems in Forensics.”</span> PhD thesis, Carnegie Mellon University. <a href="https://kilthub.cmu.edu/articles/Matching_Problems_in_Forensics/9963596/1">https://kilthub.cmu.edu/articles/Matching_Problems_in_Forensics/9963596/1</a>.
+</div>
+<div class="csl-entry">
+———. 2021. <em>cartridges3D: Algorithm to Compare Cartridge Case Images</em>. <a href="https://github.com/xhtai/cartridges3D">https://github.com/xhtai/cartridges3D</a>.
+</div>
+<div class="csl-entry">
+Tai, Xiao Hui, and William F. Eddy. 2018. <span>“A <span>Fully</span> <span>Automatic</span> <span>Method</span> for <span>Comparing</span> <span>Cartridge</span> <span>Case</span> <span>Images</span>,”</span> <em>Journal of Forensic Sciences</em> 63 (2): 440–48. <a href="http://doi.wiley.com/10.1111/1556-4029.13577">http://doi.wiley.com/10.1111/1556-4029.13577</a>.
+</div>
+<div class="csl-entry">
+Telea, Alexandru C. 2014. <em>Data Visualization: Principles and Practice</em>. CRC Press.
+</div>
+<div class="csl-entry">
+The Linux Foundation. 2017. <span>“<span class="nocase">Using open source software to speed up development and gain business advantage</span>.”</span> <a href="https://www.linuxfoundation.org/blog/using-open-source-software-to-speed-development-and-gain-business-advantage/">https://www.linuxfoundation.org/blog/using-open-source-software-to-speed-development-and-gain-business-advantage/</a>.
+</div>
+<div class="csl-entry">
+Therneau, Terry, and Beth Atkinson. 2022. <em>Rpart: Recursive Partitioning and Regression Trees</em>. <a href="https://CRAN.R-project.org/package=rpart">https://CRAN.R-project.org/package=rpart</a>.
+</div>
+<div class="csl-entry">
+Thompson, Robert. 2017. <em>Firearm Identification in the Forensic Science Laboratory</em>. National District Attorneys Association. <a href="https://doi.org/10.13140/RG.2.2.16250.59846">https://doi.org/10.13140/RG.2.2.16250.59846</a>.
+</div>
+<div class="csl-entry">
+Tong, Mingsi, John Song, and Wei Chu. 2015. <span>“An <span>Improved</span> <span>Algorithm</span> of <span>Congruent</span> <span>Matching</span> <span>Cells</span> (<span>CMC</span>) <span>Method</span> for <span>Firearm</span> <span>Evidence</span> <span>Identifications</span>.”</span> <em>Journal of Research of the National Institute of Standards and Technology</em> 120 (April): 102. <a href="https://doi.org/10.6028/jres.120.008">https://doi.org/10.6028/jres.120.008</a>.
+</div>
+<div class="csl-entry">
+Tong, Mingsi, John Song, Wei Chu, and Robert M. Thompson. 2014. <span>“Fired <span>Cartridge</span> <span>Case</span> <span>Identification</span> <span>Using</span> <span>Optical</span> <span>Images</span> and the <span>Congruent</span> <span>Matching</span> <span>Cells</span> (<span>CMC</span>) <span>Method</span>.”</span> <em>Journal of Research of the National Institute of Standards and Technology</em> 119 (November): 575. <a href="https://doi.org/10.6028/jres.119.023">https://doi.org/10.6028/jres.119.023</a>.
+</div>
+<div class="csl-entry">
+Tvedebrink, Torben, Mikkel Meyer Andersen, and James Michael Curran. 2020. <span>“DNAtools: Tools for Analysing Forensic Genetic DNA Data.”</span> <em>Journal of Open Source Software</em> 5 (45): 1981. <a href="https://doi.org/10.21105/joss.01981">https://doi.org/10.21105/joss.01981</a>.
+</div>
+<div class="csl-entry">
+Tyner, Sam, Soyoung Park, Ganesh Krishnan, Karen Pan, Eric Hare, Amanda Luby, Xiao Hui Tai, Heike Hofmann, and Guillermo Basulto-Elias. 2019. <span>“Sctyner/OpenForSciR: Create DOI for Open Forensic Science in r.”</span> Zenodo. <a href="https://zenodo.org/record/3418141">https://zenodo.org/record/3418141</a>.
+</div>
+<div class="csl-entry">
+Ulery, Bradford T., R. Austin Hicklin, JoAnn Buscaglia, and Maria Antonia Roberts. 2011. <span>“Accuracy and Reliability of Forensic Latent Fingerprint Decisions.”</span> <em>Proceedings of the National Academy of Sciences</em> 108 (19): 7733–38. <a href="https://doi.org/10.1073/pnas.1018707108">https://doi.org/10.1073/pnas.1018707108</a>.
+</div>
+<div class="csl-entry">
+———. 2012. <span>“Repeatability and Reproducibility of Decisions by Latent Fingerprint Examiners.”</span> Edited by Chuhsing Kate Hsiao. <em><span>PLoS</span> <span>ONE</span></em> 7 (3): e32800. <a href="https://doi.org/10.1371/journal.pone.0032800">https://doi.org/10.1371/journal.pone.0032800</a>.
+</div>
+<div class="csl-entry">
+Ulery, Bradford T., R. Austin Hicklin, Maria Antonia Roberts, and JoAnn Buscaglia. 2014. <span>“Measuring What Latent Fingerprint Examiners Consider Sufficient Information for Individualization Determinations.”</span> Edited by Francesco Pappalardo. <em><span>PLoS</span> <span>ONE</span></em> 9 (11): e110179. <a href="https://doi.org/10.1371/journal.pone.0110179">https://doi.org/10.1371/journal.pone.0110179</a>.
+</div>
+<div class="csl-entry">
+Vanderplas, Susan, Melissa Nally, Tylor Klep, Cristina Cadevall, and Heike Hofmann. 2020. <span>“Comparison of Three Similarity Scores for Bullet <span>LEA</span> Matching.”</span> <em>Forensic Science International</em>, January. <a href="https://doi.org/10.1016/j.forsciint.2020.110167">https://doi.org/10.1016/j.forsciint.2020.110167</a>.
+</div>
+<div class="csl-entry">
+Venables, W. N., and B. D. Ripley. 2002. <em>Modern Applied Statistics with s</em>. Fourth. New York: Springer. <a href="http://www.stats.ox.ac.uk/pub/MASS4">http://www.stats.ox.ac.uk/pub/MASS4</a>.
+</div>
+<div class="csl-entry">
+Vorburger, T V, J Song, and N Petraco. 2015. <span>“Topography Measurements and Applications in Ballistics and Tool Mark Identifications.”</span> <em>Surface Topography: Metrology and Properties</em> 4 (1): 013002. <a href="https://doi.org/10.1088/2051-672x/4/1/013002">https://doi.org/10.1088/2051-672x/4/1/013002</a>.
+</div>
+<div class="csl-entry">
+Vorburger, T V, J H Yen, B Bachrach, T B Renegar, J J Filliben, L Ma, H G Rhee, et al. 2007. <span>“Surface Topography Analysis for a Feasibility Assessment of a National Ballistics Imaging Database.”</span> NIST IR 7362. Gaithersburg, MD: National Institute of Standards; Technology. <a href="https://doi.org/10.6028/NIST.IR.7362">https://doi.org/10.6028/NIST.IR.7362</a>.
+</div>
+<div class="csl-entry">
+Weller, Todd J., Alan Zheng, Robert Thompson, and Fred Tulleners. 2012. <span>“Confocal Microscopy Analysis of Breech Face Marks on Fired Cartridge Cases from 10 Consecutively Manufactured Pistol Slides”</span> 57 (4). <a href="https://doi.org/10.1111/j.1556-4029.2012.02072.x">https://doi.org/10.1111/j.1556-4029.2012.02072.x</a>.
+</div>
+<div class="csl-entry">
+Weller, Todd, Marcus Brubaker, Pierre Duez, and Ryan Lilien. 2015. <span>“Introduction and Initial Evaluation of a Novel Three-Dimensional Imaging and Analysis System for Firearm Forensics.”</span> <em>AFTE Journal</em> 47 (January): 198.
+</div>
+<div class="csl-entry">
+Werner, Denis, Romain Berthod, Damien Rhumorbarbe, and Alain Gallusser. 2021. <span>“Manufacturing of Firearms Parts: Relevant Sources of Information and Contribution in a Forensic Context.”</span> <em>WIREs Forensic Science</em> 3 (3): e1401. <a href="https://wires.onlinelibrary.wiley.com/doi/abs/10.1002/wfs2.1401">https://wires.onlinelibrary.wiley.com/doi/abs/10.1002/wfs2.1401</a>.
+</div>
+<div class="csl-entry">
+Wickham, Hadley. 2009. <em>Ggplot2: Elegant Graphics for Data Analysis</em>. Springer-Verlag New York. <a href="http://ggplot2.org">http://ggplot2.org</a>.
+</div>
+<div class="csl-entry">
+———. 2014. <span>“Tidy Data.”</span> <em>The Journal of Statistical Software</em> 59. <a href="http://www.jstatsoft.org/v59/i10/">http://www.jstatsoft.org/v59/i10/</a>.
+</div>
+<div class="csl-entry">
+Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019. <span>“Welcome to the <span class="nocase">tidyverse</span>.”</span> <em>Journal of Open Source Software</em> 4 (43): 1686.
+</div>
+<div class="csl-entry">
+Wilkinson, Leland. 2005. <em>The Grammar of Graphics</em>. Berlin, Heidelberg: Springer-Verlag.
+</div>
+<div class="csl-entry">
+Xiao Hui Tai. 2018. <span>“Comparing Cartridge Breechface Marks: 2d Versus 3d.”</span> Center for Statistics; Applications in Forensic Evidence. January 31, 2018. <a href="https://forensicstats.org/blog/portfolio/comparing-cartridge-breechface-marks-2d-versus-3d/">https://forensicstats.org/blog/portfolio/comparing-cartridge-breechface-marks-2d-versus-3d/</a>.
+</div>
+<div class="csl-entry">
+Xie, Yihui. 2014a. <span>“Knitr: A Comprehensive Tool for Reproducible Research in <span>R</span>.”</span> In <em>Implementing Reproducible Computational Research</em>, edited by Victoria Stodden, Friedrich Leisch, and Roger D. Peng. Chapman; Hall/CRC. <a href="http://www.crcpress.com/product/isbn/9781466561595">http://www.crcpress.com/product/isbn/9781466561595</a>.
+</div>
+<div class="csl-entry">
+———. 2014b. <span>“Knitr: A Comprehensive Tool for Reproducible Research in <span>R</span>.”</span> In <em>Implementing Reproducible Computational Research</em>, edited by Victoria Stodden, Friedrich Leisch, and Roger D. Peng. Chapman; Hall/CRC. <a href="http://www.crcpress.com/product/isbn/9781466561595">http://www.crcpress.com/product/isbn/9781466561595</a>.
+</div>
+<div class="csl-entry">
+———. 2015. <em>Dynamic Documents with <span>R</span> and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>.
+</div>
+<div class="csl-entry">
+Zemmels, Joe, Heike Hofmann, and Susan VanderPlas. 2022. <em>cmcR: An Implementation of the ’Congruent Matching Cells’ Method</em>.
+</div>
+<div class="csl-entry">
+Zemmels, Joseph, Heike Hofmann, and Susan Vanderplas. 2022. <span>“<span class="nocase">Zemmels et al. (2023) Cartridge Case Scans</span>.”</span> Iowa State University. <a href="https://doi.org/10.25380/IASTATE.19686297.V1">https://doi.org/10.25380/IASTATE.19686297.V1</a>.
+</div>
+<div class="csl-entry">
+Zemmels, Joseph, Susan VanderPlas, and Heike Hofmann. 2023. <span>“A Study in Reproducibility: The Congruent Matching Cells Algorithm and <span class="nocase">cmcR</span> Package.”</span> <em>The R Journal</em> 14 (4): 79–102. <a href="https://doi.org/10.32614/rj-2023-014">https://doi.org/10.32614/rj-2023-014</a>.
+</div>
+<div class="csl-entry">
+Zhang, Hao, Jialing Zhu, Rongjing Hong, Hua Wang, Fuzhong Sun, and Anup Malik. 2021. <span>“Convergence-Improved Congruent Matching Cells (<span>CMC</span>) Method for Firing Pin Impression Comparison.”</span> <em>Journal of Forensic Sciences</em> 66 (2): 571–82. <a href="https://doi.org/10.1111/1556-4029.14634">https://doi.org/10.1111/1556-4029.14634</a>.
+</div>
+<div class="csl-entry">
+Zheng, Xiaoyu A., Johannes A. Soons, and Robert M. Thompson. 2016. <span>“<span>NIST Ballistics Toolmark Research Database</span>.”</span> <a href="https://tsapps.nist.gov/NRBTD/">https://tsapps.nist.gov/NRBTD/</a>.
+</div>
+<div class="csl-entry">
+Zheng, Xiaoyu, Johannes Soons, Robert Thompson, Sushama Singh, and Cerasela Constantin. 2020. <span>“<span>NIST</span> Ballistics Toolmark Research Database.”</span> <em>Journal of Research of the National Institute of Standards and Technology</em> 125 (January). <a href="https://doi.org/10.6028/jres.125.004">https://doi.org/10.6028/jres.125.004</a>.
+</div>
+<div class="csl-entry">
+Zheng, X, J Soons, T V Vorburger, J Song, T Renegar, and R Thompson. 2014. <span>“Applications of Surface Metrology in Firearm Identification.”</span> <em>Surface Topography: Metrology and Properties</em> 2 (1): 014012. <a href="https://doi.org/10.1088/2051-672x/2/1/014012">https://doi.org/10.1088/2051-672x/2/1/014012</a>.
+</div>
+<div class="csl-entry">
+Zimmerman, Naupaka, Greg Wilson, Raniere Silva, Scott Ritchie, François Michonneau, Jeffrey Oliver, Harriet Dashnow, et al. 2019. <span>“Swcarpentry/r-Novice-Gapminder: Software Carpentry: R for Reproducible Scientific Analysis, June 2019.”</span> Zenodo. <a href="https://zenodo.org/record/3265164">https://zenodo.org/record/3265164</a>.
+</div>
+</div>
+</div>
+
+
+
+
+
+
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Baldwin2014" class="csl-entry">
+Baldwin, David P., Stanley J. Bajic, Max Morris, and Daniel Zamzow. 2014. <span>“A Study of False-Positive and False-Negative Error Rates in Cartridge Case Comparisons.”</span> Defense Technical Information Center. <a href="https://doi.org/10.21236/ada611807">https://doi.org/10.21236/ada611807</a>.
+</div>
+<div id="ref-Basu2022" class="csl-entry">
+Basu, Nabanita, Rachel S. Bolton-King, and Geoffrey Stewart Morrison. 2022. <span>“Forensic Comparison of Fired Cartridge Cases: Feature-Extraction Methods for Feature-Based Calculation of Likelihood Ratios.”</span> <em>Forensic Science International: Synergy</em> 5: 100272. <a href="https://doi.org/10.1016/j.fsisyn.2022.100272">https://doi.org/10.1016/j.fsisyn.2022.100272</a>.
+</div>
+<div id="ref-Bay2006" class="csl-entry">
+Bay, Herbert, Tinne Tuytelaars, and Luc Van Gool. 2006. <span>“<span>SURF</span>: Speeded up Robust Features.”</span> In <em>Computer Vision - <span>ECCV</span> 2006</em>, 404–17. Springer Berlin Heidelberg. <a href="https://doi.org/10.1007/11744023_32">https://doi.org/10.1007/11744023_32</a>.
+</div>
+<div id="ref-Morrison2018" class="csl-entry">
+Morrison, Geoffrey Stewart, and Ewald Enzinger. 2018. <span>“Score Based Procedures for the Calculation of Forensic Likelihood Ratios - Scores Should Take Account of Both Similarity and Typicality.”</span> <em>Science &amp; Justice</em> 58 (1): 47–58. <a href="https://doi.org/10.1016/j.scijus.2017.06.005">https://doi.org/10.1016/j.scijus.2017.06.005</a>.
+</div>
+<div id="ref-Reinders2022" class="csl-entry">
+Reinders, Stephanie, Yong Guan, Danica Ommen, and Jennifer Newman. 2022. <span>“Source-Anchored, Trace-Anchored, and General Match Score-Based Likelihood Ratios for Camera Device Identification.”</span> <em>Journal of Forensic Sciences</em> 67 (3): 975–88. <a href="https://doi.org/10.1111/1556-4029.14991">https://doi.org/10.1111/1556-4029.14991</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="appendix.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook/js/app.min.js"></script>
+<script src="libs/gitbook/js/clipboard.min.js"></script>
+<script src="libs/gitbook/js/plugin-search.js"></script>
+<script src="libs/gitbook/js/plugin-sharing.js"></script>
+<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook/js/jquery.highlight.js"></script>
+<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["thesis.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
